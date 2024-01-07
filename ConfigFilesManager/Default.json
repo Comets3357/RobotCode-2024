@@ -1,0 +1,113 @@
+{
+    "SparkMaxPositionConfigs": [
+      {
+        "AbsolutePositionConversionFactor": 1,
+        "AbsoluteVelocityConversionFactor": 1,
+        "AbsoluteZeroOffset": 0,
+        "CurrentLimit": 20,
+        "DefaultRunMode": "ABSOLUTE",
+        "ID": 0,
+        "IdleMode": "Brake",
+        "InvertedAbsolute": false,
+        "InvertedRelative": false,
+        "MaxSpeed": 1,
+        "MinSpeed": -1,
+        "Name": "SparkMaxPosition",
+        "Follow": "NONE",
+        "PositionPID": {
+          "D": 0,
+          "FF": 0,
+          "I": 0,
+          "P": 0
+        },
+        "PositionPIDWrappingEnabled": false,
+        "RelativePositionConversionFactor": 1,
+        "RelativeVelocityConversionFactor": 1,
+        "TurningEncoderPositionPIDMaxInput": 0,
+        "TurningEncoderPositionPIDMinInput": 0,
+        "VelocityPID": {
+          "D": 0,
+          "FF": 0,
+          "I": 0,
+          "P": 0
+        },
+        "ForwardSoftLimitEnabled": false,
+        "ReverseSoftLimitEnabled": false,
+        "ForwardSoftLimit": 0,
+        "ReverseSoftLimit": 0,
+        "Positions":
+        {
+          
+        }
+      }
+    ],
+    "SparkMaxPercentConfigs": [
+      {
+        "Name": "RollerMotor",
+        "ID": 0,
+        "InvertedRelative": false,
+        "CurrentLimit": 40,
+        "IdleMode": "Brake",
+        "Follow": "NONE",
+        "Percents":
+        {
+
+        }
+      }
+    ],
+    "SwerveConfigs": [
+      {
+        "BackLeftModule": "Module3",
+        "BackRightModule": "Module4",
+        "DirectionSlewRate": 1.2,
+        "FrontLeftModule": "Module1",
+        "FrontRightModule": "Module2",
+        "MagnitudeSlewRate": 1.8,
+        "MaxSpeed": 3,
+        "MaxTurnSpeed": 3.1419999999999999,
+        "Name": "Swerve",
+        "RotationalSlewRate": 2,
+        "TrackWidth": 0.67310000000000003,
+        "WheelBase": 0.67310000000000003
+      }
+    ],
+    "SwerveModuleConfigs": [
+      {
+        "AngularOffset": 1,
+        "Azimuth": "AzimuthMotor1",
+        "Drive": "DriveMotor1",
+        "Name": "Module1"
+      }
+    ],
+    "SparkMaxVelocityConfigs": [
+      {
+        "CurrentLimit": 20,
+        "ID": 0,
+        "IdleMode": "Brake",
+        "InvertedRelative": false,
+        "Name": "SparkMaxVelocity",
+        "RelativePositionConversionFactor": 1,
+        "RelativeVelocityConversionFactor": 1,
+        "Follow": "NONE",
+        "VelocityPID": {
+          "D": 0,
+          "FF": 0,
+          "I": 0,
+          "P": 0
+        },
+        "Velocities":
+        {
+          "Velocity1": 10
+        }
+      }
+    ],
+    "SparkMaxPWMConfigs":
+    [
+      {
+        "ID": 0,
+        "Name": "SparkMaxPWM",
+        "Inverted": false
+      }
+    ]
+  }
+    
