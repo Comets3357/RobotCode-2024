@@ -1,6 +1,6 @@
 #pragma once
 
-#include <frc2/command/CommandBase.h>
+#include <frc2/command/Command.h>
 #include <frc2/command/CommandHelper.h>
 #include <frc/Timer.h>
 #include <memory>
@@ -10,7 +10,7 @@
 #include "COMETS3357/pathplanner/lib/PathPlannerTrajectory.h"
 
 namespace pathplanner {
-class FollowPathWithEvents: public frc2::CommandHelper<frc2::CommandBase,
+class FollowPathWithEvents: public frc2::CommandHelper<frc2::Command,
 		FollowPathWithEvents> {
 public:
 	FollowPathWithEvents(std::unique_ptr<frc2::Command> &&pathFollowingCommand,

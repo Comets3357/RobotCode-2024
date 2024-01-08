@@ -12,7 +12,7 @@
 #include <frc/geometry/Pose2d.h>
 #include <frc/kinematics/ChassisSpeeds.h>
 #include <frc/kinematics/MecanumDriveKinematics.h>
-#include <frc2/command/CommandBase.h>
+#include <frc2/command/Command.h>
 #include <frc2/command/CommandHelper.h>
 #include <units/angle.h>
 #include <units/length.h>
@@ -35,7 +35,7 @@ namespace pathplanner {
  * teams without a great deal of controls expertise.
  *
  */
-class PPMecanumControllerCommand: public frc2::CommandHelper<frc2::CommandBase,
+class PPMecanumControllerCommand: public frc2::CommandHelper<frc2::Command,
 		PPMecanumControllerCommand> {
 public:
 	/**

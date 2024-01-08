@@ -15,7 +15,7 @@
 #include <units/voltage.h>
 #include <frc/smartdashboard/Field2d.h>
 
-#include <frc2/command/CommandBase.h>
+#include <frc2/command/Command.h>
 #include <frc2/command/CommandHelper.h>
 
 #include "COMETS3357/pathplanner/lib/PathPlannerTrajectory.h"
@@ -40,7 +40,7 @@ namespace pathplanner {
  * @see RamseteController
  * @see Trajectory
  */
-class PPRamseteCommand: public frc2::CommandHelper<frc2::CommandBase,
+class PPRamseteCommand: public frc2::CommandHelper<frc2::Command,
 		PPRamseteCommand> {
 public:
 	/**

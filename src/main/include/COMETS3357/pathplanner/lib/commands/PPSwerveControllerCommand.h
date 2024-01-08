@@ -1,6 +1,6 @@
 #pragma once
 
-#include <frc2/command/CommandBase.h>
+#include <frc2/command/Command.h>
 #include <frc2/command/CommandHelper.h>
 #include <frc/Timer.h>
 #include <frc/geometry/Pose2d.h>
@@ -12,7 +12,7 @@
 #include <span>
 
 namespace pathplanner {
-class PPSwerveControllerCommand: public frc2::CommandHelper<frc2::CommandBase,
+class PPSwerveControllerCommand: public frc2::CommandHelper<frc2::Command,
 		PPSwerveControllerCommand> {
 public:
 	/**
