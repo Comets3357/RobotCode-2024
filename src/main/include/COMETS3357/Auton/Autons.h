@@ -5,9 +5,9 @@
 #include <frc/trajectory/TrajectoryUtil.h>
 #include "COMETS3357/Subsystems/Chassis/SwerveSubsystem.h"
 #include <frc2/command/WaitCommand.h>
-#include "COMETS3357/pathplanner/lib/commands/PPSwerveControllerCommand.h"
-#include "COMETS3357/pathplanner/lib/auto/SwerveAutoBuilder.h"
-#include "COMETS3357/pathplanner/lib/PathPlanner.h"
+#include <pathplanner/lib/commands/PPSwerveControllerCommand.h>
+#include <pathplanner/lib/auto/SwerveAutoBuilder.h>
+#include <pathplanner/lib/PathPlanner.h>
 #include <map>
 #include <string>
 #include <vector>
