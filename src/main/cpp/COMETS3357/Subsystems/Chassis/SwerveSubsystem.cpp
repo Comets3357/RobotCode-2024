@@ -381,7 +381,7 @@ void SwerveSubsystem::ZeroHeading() { }//m_gyro.Reset(); }
 
 double SwerveSubsystem::GetTurnRate() { return -gyroSubsystemData->GetEntry("angleRate").GetDouble(0); }
 
-frc::Pose2d SwerveSubsystem::GetPose() { return m_odometry.GetPose(); }
+frc::Pose2d SwerveSubsystem::GetPose() { return m_odometry.GetEstimatedPosition(); }
 
 void SwerveSubsystem::ResetOdometry(frc::Pose2d pose) {
   m_odometry.ResetPosition(
@@ -430,4 +430,6 @@ void SwerveSubsystem::DriveCornerTurning(units::meters_per_second_t xSpeed, unit
   }
 
   Drive(xSpeed, ySpeed, rot, true, true, corner);
+
+  
 }
