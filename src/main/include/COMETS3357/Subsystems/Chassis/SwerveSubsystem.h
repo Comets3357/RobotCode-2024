@@ -68,6 +68,8 @@ namespace COMETS3357
      */
     void ResetEncoders();
 
+    frc::ChassisSpeeds getSpeeds();
+
     /**
      * Sets the drive MotorControllers to a power from -1 to 1.
      */

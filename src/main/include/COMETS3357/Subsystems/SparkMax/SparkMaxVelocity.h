@@ -76,8 +76,8 @@ namespace COMETS3357
         */
         void RobotInit();
 
-        rev::SparkMaxRelativeEncoder encoder;
-        rev::SparkMaxPIDController PIDController;
+        rev::SparkRelativeEncoder encoder;
+        rev::SparkPIDController PIDController;
         COMETS3357::PID pid;
 
     };

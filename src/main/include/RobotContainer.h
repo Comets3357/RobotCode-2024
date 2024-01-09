@@ -59,13 +59,13 @@ class RobotContainer {
 
   };
 
-  std::unordered_map<std::string, std::shared_ptr<frc2::Command>> autonActionMap
+  std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionMap
   {
 
   };
 
   COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap", };
-  COMETS3357::Autons autos{&swerve, buttonActionMap};
+  COMETS3357::Autons autos{&swerve, autonActionMap};
 
   void ConfigureBindings();
 };

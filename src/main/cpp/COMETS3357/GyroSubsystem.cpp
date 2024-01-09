@@ -4,7 +4,7 @@
 
 using namespace COMETS3357;
 
-GyroSubsystem::GyroSubsystem() : COMETS3357::Subsystem("GyroSubsystem") , m_navx{frc::SPI::Port::kMXP}
+GyroSubsystem::GyroSubsystem() : COMETS3357::Subsystem("GyroSubsystem"), m_navx{frc::SPI::Port::kMXP}
 {
     m_navx.Calibrate();
 }
