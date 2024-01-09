@@ -170,9 +170,9 @@ namespace COMETS3357
         COMETS3357::SparkMaxPositionRunMode runModeRequest = runMode;
         bool requestRunMode = false;
         COMETS3357::SparkMaxPositionRunMode defaultRunMode = POSITION_SPARK_MAX_ABSOLUTE;
-        rev::SparkMaxPIDController PIDController;
-        rev::SparkMaxRelativeEncoder relativeEncoder;
-        rev::SparkMaxAbsoluteEncoder absoluteEncoder;
+        rev::SparkPIDController PIDController;
+        rev::SparkRelativeEncoder relativeEncoder;
+        rev::SparkAbsoluteEncoder absoluteEncoder;
         int absAttempts = 0;
         double lastPosition;
         bool setAbsPos = true;

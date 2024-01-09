@@ -2,7 +2,7 @@
 
 
 #define COMMAND_START(name) \
-class name##Command : public frc2::CommandHelper<frc2::CommandBase, name##Command> { \
+class name##Command : public frc2::CommandHelper<frc2::Command, name##Command> { \
 public: \
     void Initialize() override; \
     void Execute() override; \

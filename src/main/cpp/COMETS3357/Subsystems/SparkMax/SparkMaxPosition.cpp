@@ -9,7 +9,7 @@ SparkMaxPosition::SparkMaxPosition(std::string configName)
     : config{ConfigFiles::getInstance().GetConfigFiles().sparkMaxPositionConfigs[configName]},
      motor{config.ID, rev::CANSparkMax::MotorType::kBrushless},
     PIDController{motor.GetPIDController()},
-    relativeEncoder{motor.GetEncoder()},
+    relativeEncoder{motor.GetEncoder(rev::SparkRelativeEncoder::Type::kHallSensor, 1)},
     absoluteEncoder{motor.GetAbsoluteEncoder(rev::SparkMaxAbsoluteEncoder::Type::kDutyCycle)}
 {
     defaultRunMode = config.defaultMode;
@@ -26,7 +26,7 @@ SparkMaxPosition::SparkMaxPosition(std::string configName, bool setAbsoluteOffse
     : config{ConfigFiles::getInstance().GetConfigFiles().sparkMaxPositionConfigs[configName]},
      motor{config.ID, rev::CANSparkMax::MotorType::kBrushless},
     PIDController{motor.GetPIDController()},
-    relativeEncoder{motor.GetEncoder()},
+    relativeEncoder{motor.GetEncoder(rev::SparkRelativeEncoder::Type::kHallSensor, 1)},
     absoluteEncoder{motor.GetAbsoluteEncoder(rev::SparkMaxAbsoluteEncoder::Type::kDutyCycle)}
 {
     defaultRunMode = config.defaultMode;

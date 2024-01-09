@@ -7,7 +7,7 @@
 #include <frc2/command/CommandHelper.h>
 #include <units/length.h>
 
-class ChangeModeCommand : public frc2::CommandHelper<frc2::CommandBase, ChangeModeCommand>
+class ChangeModeCommand : public frc2::CommandHelper<frc2::Command, ChangeModeCommand>
 {
 public:
 

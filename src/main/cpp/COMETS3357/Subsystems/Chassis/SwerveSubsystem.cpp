@@ -244,6 +244,11 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
   m_rearRight.SetDesiredState(br);
 }
 
+frc::ChassisSpeeds SwerveSubsystem::getSpeeds()
+{
+  return kDriveKinematics.ToChassisSpeeds({m_frontLeft.GetState(), m_frontRight.GetState(), m_rearLeft.GetState(), m_rearRight.GetState()});
+}
+
 void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
                            units::meters_per_second_t ySpeed,
                            units::radians_per_second_t rot, bool fieldRelative,

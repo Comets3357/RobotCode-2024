@@ -6,7 +6,7 @@
 #include <frc/geometry/Rotation2d.h>
 #include <frc/SPI.h>
 #include <COMETS3357/Subsystems/Subsystem.h>
-#include "AHRS.h"
+#include <AHRS.h>
 
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableInstance.h>

@@ -5,9 +5,10 @@
 #include <frc/trajectory/TrajectoryUtil.h>
 #include "COMETS3357/Subsystems/Chassis/SwerveSubsystem.h"
 #include <frc2/command/WaitCommand.h>
-#include "COMETS3357/pathplanner/lib/commands/PPSwerveControllerCommand.h"
-#include "COMETS3357/pathplanner/lib/auto/SwerveAutoBuilder.h"
-#include "COMETS3357/pathplanner/lib/PathPlanner.h"
+// #include "COMETS3357/pathplanner/lib/commands/PPSwerveControllerCommand.h"
+// #include "COMETS3357/pathplanner/lib/auto/SwerveAutoBuilder.h"
+#include "COMETS3357/pathplanner/lib/auto/AutoBuilder.h"
+#include "COMETS3357/pathplanner/lib/util/PathPlannerLogging.h"
 #include <map>
 #include <string>
 #include <vector>
@@ -29,7 +30,7 @@ namespace COMETS3357
      *
      * @param chassis A pointer to the Chassis subsystem that will be performing the auton
      */
-        Autons(SwerveSubsystem* chassis, std::unordered_map<std::string, std::shared_ptr<frc2::Command>> &actionMap);
+        Autons(SwerveSubsystem* chassis, std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> &actionMap);
 
         /**
      * Runs a selected auton with the auton name
@@ -58,7 +59,7 @@ namespace COMETS3357
         std::map<std::string, std::unique_ptr<frc2::CommandPtr>> autons;
         COMETS3357::SwerveSubsystem* swerveSubsystem;
         frc::SendableChooser<std::string> autoChooser;
-        pathplanner::SwerveAutoBuilder autoBuilder;
+        pathplanner::AutoBuilder autoBuilder;
 
     };
 
