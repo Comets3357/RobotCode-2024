@@ -5,7 +5,7 @@
 using namespace COMETS3357;
 
 SparkMaxVelocity::SparkMaxVelocity(std::string configName) : config{ConfigFiles::getInstance().GetConfigFiles().sparkMaxVelocityConfigs[configName]},
-motor{config.ID, rev::CANSparkMax::MotorType::kBrushless}, encoder{motor.GetEncoder(rev::SparkRelativeEncoder::Type::kHallSensor, 1)}, PIDController{motor.GetPIDController()}
+motor{config.ID, rev::CANSparkMax::MotorType::kBrushless}, encoder{motor.GetEncoder(rev::SparkRelativeEncoder::Type::kHallSensor)}, PIDController{motor.GetPIDController()}
 {
     config.motor = this;
     COMETS3357::SubsystemManager::GetInstance().AddInit([this]{RobotInit();});

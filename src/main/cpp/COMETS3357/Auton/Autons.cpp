@@ -55,13 +55,17 @@ void Autons::LoadAutons()
         if (entry.is_regular_file())
         {
             std::string autonName = entry.path().stem().string();
-            autoChooser.AddOption(autonName, autonName);
+            if (autonName != "navgrid")
+            {
+                   autoChooser.AddOption(autonName, autonName);
             // std::vector<pathplanner::PathPlannerTrajectory> pathGroup = pathplanner::PathPlanner::loadPathGroup(autonName, {pathplanner::PathConstraints{5_mps, 3.5_mps_sq}});
 
 
             autons[autonName] = std::make_unique<frc2::CommandPtr>(pathplanner::AutoBuilder::buildAuto(autonName));
 
             // autons[autonName] = std::make_unique<frc2::CommandPtr>(autoBuilder.fullAuto(pathGroup));
+            }
+         
         }
     }
 

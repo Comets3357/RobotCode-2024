@@ -25,6 +25,8 @@
 
 #include <frc2/command/SequentialCommandGroup.h>
 
+#include "Subsystems/VisionSystemSubsystem.h"
+
 /**
  * This class is where the bulk of the robot should be declared.  Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -44,6 +46,8 @@ class RobotContainer {
   COMETS3357::GyroSubsystem gyro{};
   COMETS3357::LimelightSubsystem limelight{};
   COMETS3357::SwerveSubsystem swerve{"Swerve"};
+
+  // VisionSystemSubsystem visionSystem{&swerve};
 
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
