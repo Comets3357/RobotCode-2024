@@ -3,6 +3,8 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <COMETS3357/Subsystems/SubsystemManager.h>
 
+#define FORCEINIT
+
 using namespace COMETS3357;
 
 SparkMaxPosition::SparkMaxPosition(std::string configName)

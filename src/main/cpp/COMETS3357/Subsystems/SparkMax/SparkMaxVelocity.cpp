@@ -2,6 +2,8 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <COMETS3357/Subsystems/SubsystemManager.h>
 
+#define FORCEINIT
+
 using namespace COMETS3357;
 
 SparkMaxVelocity::SparkMaxVelocity(std::string configName) : config{ConfigFiles::getInstance().GetConfigFiles().sparkMaxVelocityConfigs[configName]},
