@@ -24,8 +24,11 @@
 #include "COMETS3357/Subsystems/Vision/LimelightSubsystem.h"
 
 #include <frc2/command/SequentialCommandGroup.h>
+#include <frc2/command/InstantCommand.h>
 
 #include "Subsystems/VisionSystemSubsystem.h"
+
+#include "Subsystems/IntakeSubsystem.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -48,11 +51,25 @@ class RobotContainer {
   COMETS3357::SwerveSubsystem swerve{"Swerve"};
 
   // VisionSystemSubsystem visionSystem{&swerve};
+  IntakeSubsystem intake {}; 
+
+  // Instance command
+
+  frc2::InstantCommand stopIntake{[this](){intake.SetPercent(0);}, {&intake}}; 
+
+  frc2::InstantCommand startIntake{[this](){intake.SetPercent("Intake Speed");}, {&intake}}; 
+
+  frc2::InstantCommand ejectIntake{[this](){intake.SetPercent("Eject Speed");}, {&intake}}; 
+
+
+  
 
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
-
+      {"Intake", std::make_shared<frc2::InstantCommand>(startIntake)},
+      {"Eject", std::make_shared<frc2::InstantCommand>(ejectIntake)},
+      {"Stop", std::make_shared<frc2::InstantCommand>(stopIntake)}
   };
 
 
