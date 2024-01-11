@@ -35,7 +35,7 @@ namespace COMETS3357
         void Periodic() override;
 
     private:
-        AHRS m_navx;
+        // AHRS m_navx;
         std::shared_ptr<nt::NetworkTable> driveTable;
 
         void CalculatePositions();

@@ -30,6 +30,12 @@ namespace COMETS3357
     SwerveConfig configuration;
     std::shared_ptr<nt::NetworkTable> gyroSubsystemData;
 
+    
+    COMETS3357::MAXSwerveModule m_frontLeft;
+    COMETS3357::MAXSwerveModule m_rearLeft;
+    COMETS3357::MAXSwerveModule m_frontRight;
+    COMETS3357::MAXSwerveModule m_rearRight;
+
     void Initialize() override;
 
     /**
@@ -176,10 +182,6 @@ namespace COMETS3357
     // Components (e.g. motor controllers and sensors) should generally be
     // declared private and exposed only through public methods.
 
-    COMETS3357::MAXSwerveModule m_frontLeft;
-    COMETS3357::MAXSwerveModule m_rearLeft;
-    COMETS3357::MAXSwerveModule m_frontRight;
-    COMETS3357::MAXSwerveModule m_rearRight;
 
 
     // Slew rate filter variables for controlling lateral acceleration
@@ -208,7 +210,7 @@ namespace COMETS3357
 
     bool pickedCorner = false;
 
-    frc::SwerveDriveKinematics<4U>* corner;
+    frc::SwerveDriveKinematics<4U>* currentKinematic;
 
     
   };

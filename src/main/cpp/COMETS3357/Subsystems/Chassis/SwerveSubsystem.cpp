@@ -79,7 +79,7 @@ SwerveSubsystem::SwerveSubsystem(std::string configFileName)
                   m_rearLeft.GetPosition(), m_rearRight.GetPosition()},
                  frc::Pose2d{}}
 {
-  
+    currentKinematic = &kDriveKinematics;
 }
 
 void SwerveSubsystem::Initialize()
@@ -227,14 +227,14 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
   units::radians_per_second_t rotDelivered =
       m_currentRotation * configuration.maxTurnSpeed;
 
-  auto states = kDriveKinematics.ToSwerveModuleStates(
+  auto states = currentKinematic->ToSwerveModuleStates(
       fieldRelative
           ? frc::ChassisSpeeds::FromFieldRelativeSpeeds(
                 xSpeedDelivered, ySpeedDelivered, rotDelivered,
                 frc::Rotation2d(units::radian_t{gyroSubsystemData->GetEntry("angle").GetDouble(0)}))
           : frc::ChassisSpeeds{xSpeedDelivered, ySpeedDelivered, rotDelivered});
 
-  kDriveKinematics.DesaturateWheelSpeeds(&states, configuration.maxSpeed);
+  currentKinematic->DesaturateWheelSpeeds(&states, configuration.maxSpeed);
 
   auto [fl, fr, bl, br] = states;
 
@@ -246,7 +246,7 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
 
 frc::ChassisSpeeds SwerveSubsystem::getSpeeds()
 {
-  return kDriveKinematics.ToChassisSpeeds({m_frontLeft.GetState(), m_frontRight.GetState(), m_rearLeft.GetState(), m_rearRight.GetState()});
+  return currentKinematic->ToChassisSpeeds({m_frontLeft.GetState(), m_frontRight.GetState(), m_rearLeft.GetState(), m_rearRight.GetState()});
 }
 
 void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
@@ -350,7 +350,7 @@ void SwerveSubsystem::SetX() {
 
 void SwerveSubsystem::SetModuleStates(
     wpi::array<frc::SwerveModuleState, 4> desiredStates) {
-  kDriveKinematics.DesaturateWheelSpeeds(&desiredStates,
+  currentKinematic->DesaturateWheelSpeeds(&desiredStates,
                                          configuration.maxSpeed);
   m_frontLeft.SetDesiredState(desiredStates[0]);
   m_frontRight.SetDesiredState(desiredStates[1]);
@@ -367,7 +367,7 @@ void SwerveSubsystem::ResetEncoders() {
 
 void SwerveSubsystem::SetChassisSpeed(frc::ChassisSpeeds chassisSpeed)
 {
-    wpi::array<frc::SwerveModuleState, 4> desiredStates = kDriveKinematics.ToSwerveModuleStates(chassisSpeed);
+    wpi::array<frc::SwerveModuleState, 4> desiredStates = currentKinematic->ToSwerveModuleStates(chassisSpeed);
 
     SetModuleStates(desiredStates);
 
@@ -393,12 +393,14 @@ void SwerveSubsystem::ResetOdometry(frc::Pose2d pose) {
 
 void SwerveSubsystem::DriveXRotate(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot)
 {
+  currentKinematic = &kDriveKinematics;
   Drive(xSpeed, ySpeed, rot, true, true, &kDriveKinematics);
   pickedCorner = false;
 }
 
 void SwerveSubsystem::DriveDirectionalRotate(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, double directionX, double directionY)
 {
+  currentKinematic = &kDriveKinematics;
   Drive(xSpeed, ySpeed, directionX, directionY, true, true);
   pickedCorner = false;
 }
@@ -412,24 +414,24 @@ void SwerveSubsystem::DriveCornerTurning(units::meters_per_second_t xSpeed, unit
     double angleYPortion = cos(angleOnDrivebase);
     if (angleXPortion <= 0 && angleYPortion >= 0)
     {
-      corner = &kDriveKinematicsFrontLeft;
+      currentKinematic = &kDriveKinematicsFrontLeft;
     }
     else if (angleXPortion >= 0 && angleYPortion >= 0)
     {
-      corner = &kDriveKinematicsFrontRight;
+      currentKinematic = &kDriveKinematicsFrontRight;
     }
     else if (angleXPortion <= 0 && angleYPortion <= 0)
     {
-      corner = &kDriveKinematicsBackLeft;
+      currentKinematic = &kDriveKinematicsBackLeft;
     }
     else if (angleXPortion >= 0 && angleYPortion <= 0)
     {
-      corner = &kDriveKinematicsBackRight;
+      currentKinematic = &kDriveKinematicsBackRight;
     }
     pickedCorner = true;
   }
 
-  Drive(xSpeed, ySpeed, rot, true, true, corner);
+  Drive(xSpeed, ySpeed, rot, true, true, currentKinematic);
 
   
 }

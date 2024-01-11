@@ -47,7 +47,7 @@ class RobotContainer {
   COMETS3357::LimelightSubsystem limelight{};
   COMETS3357::SwerveSubsystem swerve{"Swerve"};
 
-  VisionSystemSubsystem visionSystem{&swerve};
+  // VisionSystemSubsystem visionSystem{&swerve};
 
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
