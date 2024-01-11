@@ -407,9 +407,8 @@ void SwerveSubsystem::DriveDirectionalRotate(units::meters_per_second_t xSpeed, 
 
 void SwerveSubsystem::DriveCornerTurning(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot)
 {
-  if (!pickedCorner)
-  {
-    double angleOnDrivebase = atan2(ySpeed.value(), xSpeed.value()) - gyroSubsystemData->GetEntry("angle").GetDouble(0);
+
+  double angleOnDrivebase = atan2(ySpeed.value(), xSpeed.value()) - gyroSubsystemData->GetEntry("angle").GetDouble(0);
     double angleXPortion = sin(angleOnDrivebase);
     double angleYPortion = cos(angleOnDrivebase);
     if (angleXPortion <= 0 && angleYPortion >= 0)
@@ -428,8 +427,6 @@ void SwerveSubsystem::DriveCornerTurning(units::meters_per_second_t xSpeed, unit
     {
       currentKinematic = &kDriveKinematicsBackRight;
     }
-    pickedCorner = true;
-  }
 
   Drive(xSpeed, ySpeed, rot, true, true, currentKinematic);
 

@@ -14,7 +14,6 @@ SUBSYSTEM_START(VisionSystem)
 
     std::shared_ptr<nt::NetworkTable>* driveTable;
 
-    
 
     COMETS3357::SwerveSubsystem* swerveSubsystem;
     double lastTimestamp = 0;
