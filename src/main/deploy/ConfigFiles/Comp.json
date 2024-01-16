@@ -227,7 +227,7 @@
       "ID": 1,
       "IdleMode": "Brake",
       "InvertedRelative": false,
-      "Name": "KickerMotor",
+      "Name": "KickerWheel",
       "RelativePositionConversionFactor": 1,
       "RelativeVelocityConversionFactor": 1,
       "Follow": "NONE",

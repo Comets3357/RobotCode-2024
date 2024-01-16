@@ -29,6 +29,7 @@
 #include "Subsystems/VisionSystemSubsystem.h"
 
 #include "Subsystems/IntakeSubsystem.h"
+#include "Subsystems/ShooterSubsystem.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -52,6 +53,8 @@ class RobotContainer {
 
   // VisionSystemSubsystem visionSystem{&swerve};
   IntakeSubsystem intake {}; 
+  ShooterSubsystem KickerWheel {}; 
+  ShooterSubsystem FlyWheel {}; 
 
   // Instance command
 
@@ -77,7 +80,9 @@ class RobotContainer {
   {
    {"SwerveDefaultCommand", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.DriveCornerTurning(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX});}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"SwerveDefaultCommandDirectional", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.DriveXRotate(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX});}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
-  {"ManualIntake", {[this](auto leftX, auto leftY, auto rightX, auto rightY){intake.SetPercent(leftY);}, &intake, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"ManualIntake", {[this](auto leftX, auto leftY, auto rightX, auto rightY){intake.SetPercent(leftY);}, &intake, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"KickerWheel", {[this](auto leftX, auto leftY, auto rightX, auto rightY){KickerWheel.SetPercentKickerWheel(rightY);}, &KickerWheel, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"FlyWheel", {[this](auto leftX, auto leftY, auto rightX, auto rightY){FlyWheel.SetPercentKickerWheel(rightY);}, &FlyWheel, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
 
   };
 

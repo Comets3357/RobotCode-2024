@@ -11,11 +11,15 @@ void SetVelocityFlyWheel(double percent);
 
 void SetVelocityFlyWheel(std::string percent); 
 
-void SetVelocityKSickerWheel(double percent); 
+void SetVelocityKickerWheel(double percent); 
 
 void SetVelocityKickerWheel(std::string percent);
 
-COMETS3357::SparkMaxVelocity KickerWheelMotor{"KickerMotor"}; 
-COMETS3357::SparkMaxVelocity FlyMotor{"FlyMotor"}; 
+void SetPercentKickerWheel(double percent); 
+
+void SetPercentFlyWheel(double percent); 
+
+COMETS3357::SparkMaxVelocity KickerWheel{"KickerWheel"}; 
+COMETS3357::SparkMaxVelocity FlyWheel{"FlyWheel"}; 
 
 SUBSYSTEM_END
