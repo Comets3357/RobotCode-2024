@@ -179,17 +179,17 @@ double SparkMaxPosition::GetPosition()
 
 void SparkMaxPosition::SetVelocity(double velocity)
 {
-    PIDController.SetReference(velocity, rev::CANSparkMax::ControlType::kVelocity, 0);
+    commandVelocityError = PIDController.SetReference(velocity, rev::CANSparkMax::ControlType::kVelocity, 0);
 }
 
 void SparkMaxPosition::SetPosition(double position)
 {
-    PIDController.SetReference(position, rev::CANSparkMax::ControlType::kPosition, 1, feedForwardFunction(absoluteEncoderPosition));
+    commandPositionError = PIDController.SetReference(position, rev::CANSparkMax::ControlType::kPosition, 1, feedForwardFunction(absoluteEncoderPosition));
 }
 
 void SparkMaxPosition::SetPosition(std::string position)
 {
-    PIDController.SetReference(config.positions[position], rev::CANSparkMax::ControlType::kPosition, 1, feedForwardFunction(absoluteEncoderPosition));
+    commandPositionError = PIDController.SetReference(config.positions[position], rev::CANSparkMax::ControlType::kPosition, 1, feedForwardFunction(absoluteEncoderPosition));
 }
 
 double SparkMaxPosition::GetRelativePosition()
@@ -225,7 +225,29 @@ void SparkMaxPosition::Periodic()
     {
         ZeroRelativeEncoder();
     }
+    if (motor.GetLastError() != rev::REVLibError::kOk)
+    {
+        std::cout << "Motor ID: " << config.ID << " " << ConvertError((int)motor.GetLastError()) << std::endl;
+    }
+    if (motor.GetOutputCurrent() < 1 & relativeEncoder.GetVelocity() == 0) 
+    // Tweak output current
+    {
+        // std::cout << "Motor ID: " << config.id << " is recieving power but nothing is happening" << std::endl;
+    }
+    if (commandPositionError != rev::REVLibError::kOk)
+    {
+        std::cout << "Motor ID: " << config.ID << " " << ConvertError((int)motor.GetLastError()) << " | Position Error" << std::endl;
+    }
+    if (commandVelocityError != rev::REVLibError::kOk)
+    {
+        std::cout << "Motor ID: " << config.ID << " " << ConvertError((int)motor.GetLastError()) << " | Velocity Error" << std::endl;
+    }
+    if (motor.GetOutputCurrent() > outputCurrentLimit)
+    {
+        std::cout << "Motor ID: " << config.ID << " Output Current Exceeding Limit of " << outputCurrentLimit << std::endl;
+    }
     
+
 }
 
 void SparkMaxPosition::changeRunMode(SparkMaxPositionRunMode mode)
@@ -234,12 +256,37 @@ void SparkMaxPosition::changeRunMode(SparkMaxPositionRunMode mode)
     ChangeFeedBackDevice(runMode);
 }
 
-
 void SparkMaxPosition::SetFeedForward(std::function<double(double)> feedforward)
 {
     feedForwardFunction = feedforward;
 }
 
+std::string SparkMaxPosition::ConvertError(int error)
+{
+    switch (error)
+        {
+            case 1: return ("kError: General error condition"); break;
+            case 2: return ("kTimeout: Operation or task exceeded the allowed time limit"); break;
+            case 3: return ("kNotImplemented: The functionality or feature is not implemented yet"); break;
+            case 4: return ("kHALError: Error related to High Availability (HA) functionality"); break;
+            case 5: return ("kCantFindFirmware: Unable to locate or load required firmware"); break;
+            case 6: return ("kFirmwareTooOld: The firmware version is too old to be compatible"); break;
+            case 7: return ("kFirmwareTooNew: The firmware version is too new to be compatible"); break;
+            case 8: return ("kParamInvalidID: Invalid parameter ID"); break;
+            case 9: return ("kParamMismatchType: Parameter type mismatch"); break;
+            case 10: return ("kParamAccessMode: Invalid parameter access mode"); break;
+            case 11: return ("kParamInvalid: Invalid parameter"); break;
+            case 12: return ("kParamNotImplementedDeprecated: Parameter not implemented or deprecated"); break;
+            case 13: return ("kFollowConfigMismatch: Configuration mismatch for follower device"); break;
+            case 14: return ("kInvalid: Generic invalid state or condition"); break;
+            case 15: return ("kSetpointOutOfRange: Setpoint value is out of the allowed range"); break;
+            case 16: return ("kUnknown: Unknown or unspecified error"); break;
+            case 17: return ("kCANDisconnected: Disconnected from Controller Area Network (CAN)"); break;
+            case 18: return ("kDuplicateCANId: Duplicate Controller Area Network (CAN) identifier"); break;
+            case 19: return ("kInvalidCANId: Invalid Controller Area Network (CAN) identifier"); break;
+            case 20: return ("kSparkMaxDataPortAlreadyConfiguredDifferently: Configuration conflict for a data port on Spark MAX device"); break;
+        }
+}
 
 
 void SparkMaxPosition::CheckAbsoluteEncoder()

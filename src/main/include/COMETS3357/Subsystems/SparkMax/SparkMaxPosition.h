@@ -158,6 +158,11 @@ namespace COMETS3357
          */
         void CheckAbsoluteEncoder();
 
+        std::string ConvertError(int error);
+        /**
+         * Converts Motor Errors
+        */
+
         rev::CANSparkMax motor;
         COMETS3357::PID positionPID{};
         COMETS3357::PID velocityPID{};
@@ -176,6 +181,9 @@ namespace COMETS3357
         int absAttempts = 0;
         double lastPosition;
         bool setAbsPos = true;
+        rev::REVLibError commandPositionError;
+        rev::REVLibError commandVelocityError;
+        int outputCurrentLimit = 60;
 
         std::function<double(double)> feedForwardFunction = NULL;
 

@@ -22,6 +22,8 @@ namespace COMETS3357
         void SetPower(double power);
         void SetPower(std::string power);
 
+        void Periodic();
+
         double GetOutputCurrent();
 
         COMETS3357::SparkMaxPercentConfig config;
@@ -33,6 +35,8 @@ namespace COMETS3357
          * @brief This is the initialization method for the Motor. This is already called in the constructor
         */
         void RobotInit();
+
+        int outputCurrentLimit = 60;
         
 
     };

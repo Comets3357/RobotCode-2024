@@ -45,6 +45,14 @@ void SparkMaxPercent::RobotInit()
     }
 }
 
+void SparkMaxPercent::Periodic()
+{
+    if (motor.GetOutputCurrent() > outputCurrentLimit)
+    {
+        std::cout << "Motor ID: " << config.ID << " Output Current Exceeding Limit of " << outputCurrentLimit << std::endl;
+    }
+}
+
 
 double SparkMaxPercent::GetOutputCurrent()
 {
