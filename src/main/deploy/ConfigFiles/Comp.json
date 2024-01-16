@@ -227,15 +227,35 @@
       "ID": 1,
       "IdleMode": "Brake",
       "InvertedRelative": false,
-      "Name": "DriveMotor1",
-      "RelativePositionConversionFactor": 0.0485273613,
-      "RelativeVelocityConversionFactor": 0.00084632602091900004,
+      "Name": "KickerMotor",
+      "RelativePositionConversionFactor": 1,
+      "RelativeVelocityConversionFactor": 1,
       "Follow": "NONE",
       "VelocityPID": {
         "D": 0,
-        "FF": 0.20817085187419279,
+        "FF": 1,
         "I": 0,
-        "P": 0.040000000000000001
+        "P": 0
+      },
+      "Velocities":
+      {
+
+      }
+    },
+    {
+      "CurrentLimit": 60,
+      "ID": 1,
+      "IdleMode": "Brake",
+      "InvertedRelative": false,
+      "Name": "FlyMotor",
+      "RelativePositionConversionFactor": 1,
+      "RelativeVelocityConversionFactor": 1,
+      "Follow": "NONE",
+      "VelocityPID": {
+        "D": 0,
+        "FF": 1,
+        "I": 1,
+        "P": 1
       },
       "Velocities":
       {
