@@ -50,19 +50,14 @@ class RobotContainer {
   COMETS3357::LimelightSubsystem limelight{};
   COMETS3357::SwerveSubsystem swerve{"Swerve"};
 
-  // VisionSystemSubsystem visionSystem{&swerve};
+  VisionSystemSubsystem visionSystem{&swerve};
   IntakeSubsystem intake {}; 
 
   // Instance command
 
   frc2::InstantCommand stopIntake{[this](){intake.SetPercent(0);}, {&intake}}; 
-
   frc2::InstantCommand startIntake{[this](){intake.SetPercent("Intake Speed");}, {&intake}}; 
-
   frc2::InstantCommand ejectIntake{[this](){intake.SetPercent("Eject Speed");}, {&intake}}; 
-
-
-  
 
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
@@ -82,7 +77,7 @@ class RobotContainer {
 
   std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionMap
   {
-
+    {"Intake", std::make_shared<frc2::InstantCommand>(startIntake)}
   };
 
   COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap", };

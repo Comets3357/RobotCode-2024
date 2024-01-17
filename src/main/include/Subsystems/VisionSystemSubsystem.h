@@ -5,6 +5,7 @@
 
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableInstance.h>
+#include <networktables/DoubleTopic.h>
 #include <units/length.h>
 #include <frc/geometry/Pose2d.h>
 
@@ -17,5 +18,10 @@ SUBSYSTEM_START(VisionSystem)
 
     COMETS3357::SwerveSubsystem* swerveSubsystem;
     double lastTimestamp = 0;
+
+    nt::DoubleSubscriber xSub;
+    int i = 0;
+    nt::DoubleSubscriber ySub;
+    nt::DoubleSubscriber timestampSub;
 
 SUBSYSTEM_END

@@ -8,36 +8,36 @@ using namespace COMETS3357;
 
 Autons::Autons(SwerveSubsystem* drivebase, std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> &actionMap) : swerveSubsystem{drivebase}
 {
-    LoadAutons();
+    // LoadAutons();
 
-    pathplanner::HolonomicPathFollowerConfig pathFollowerConfig = pathplanner::HolonomicPathFollowerConfig(
-        pathplanner::PIDConstants(5.0, 0.0, 0.0), // Translation constants 
-        pathplanner::PIDConstants(5.0, 0.0, 0.0), // Rotation constants 
-        5_mps,
-        0.57_m, // Drive base radius (distance from center to furthest module) 
-        pathplanner::ReplanningConfig()
-    );
+    // pathplanner::HolonomicPathFollowerConfig pathFollowerConfig = pathplanner::HolonomicPathFollowerConfig(
+    //     pathplanner::PIDConstants(5.0, 0.0, 0.0), // Translation constants 
+    //     pathplanner::PIDConstants(5.0, 0.0, 0.0), // Rotation constants 
+    //     5_mps,
+    //     0.57_m, // Drive base radius (distance from center to furthest module) 
+    //     pathplanner::ReplanningConfig()
+    // );
 
-    pathplanner::AutoBuilder::configureHolonomic(
-        [this]() {return swerveSubsystem->GetPose();},
-        [this](frc::Pose2d pose){swerveSubsystem->ResetOdometry(pose);},
-        [this]() {return swerveSubsystem->getSpeeds();},
-        [this](frc::ChassisSpeeds robotSpeed){swerveSubsystem->SetChassisSpeed(robotSpeed);},
-        pathFollowerConfig,
-        [this](){return true;},
-        swerveSubsystem
-    );
+    // pathplanner::AutoBuilder::configureHolonomic(
+    //     [this]() {return swerveSubsystem->GetPose();},
+    //     [this](frc::Pose2d pose){swerveSubsystem->ResetOdometry(pose);},
+    //     [this]() {return swerveSubsystem->getSpeeds();},
+    //     [this](frc::ChassisSpeeds robotSpeed){swerveSubsystem->SetChassisSpeed(robotSpeed);},
+    //     pathFollowerConfig,
+    //     [this](){return true;},
+    //     swerveSubsystem
+    // );
 
-    for (int i = 0; i < actionMap.size(); i++)
-    {
-        pathplanner::NamedCommands::registerCommand(actionMap[i].first, actionMap[i].second);
-    }
+    // for (int i = 0; i < actionMap.size(); i++)
+    // {
+    //     pathplanner::NamedCommands::registerCommand(actionMap[i].first, actionMap[i].second);
+    // }
 }
 
 void Autons::RunAuton(std::string autonName)
 {
-    if (autons.contains(autonName))
-    autons[autonName]->Schedule();
+    // if (autons.contains(autonName))
+    // autons[autonName]->Schedule();
 }
 
 void Autons::AutonomousInit()

@@ -32,6 +32,9 @@ namespace COMETS3357
             SetName(name);
             subsystemData = nt::NetworkTableInstance::GetDefault().GetTable(name);
 
+            auto inst = nt::NetworkTableInstance::GetDefault();
+            inst.Sub
+
         }
 
         /**
