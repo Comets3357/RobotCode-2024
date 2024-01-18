@@ -67,6 +67,9 @@ class RobotContainer {
   frc2::InstantCommand shootIndexer{[this](){indexer.SetVelocity("IndexerShootSpeed");}, {&indexer}}; 
   frc2::InstantCommand ejectIndexer{[this](){indexer.SetVelocity("IndexerEjectSpeed");}, {&indexer}}; 
 
+  frc2::InstantCommand shooterSpeedKickerWheel{[this](){KickerWheel.SetPercentKickerWheel(0);}, {&KickerWheel}}; 
+  frc2::InstantCommand shooterSpeedFlyWheel{[this](){FlyWheel.SetPercentFlyWheel(0);}, {&FlyWheel}}; 
+
   frc2::InstantCommand stopIntake{[this](){intake.SetPercent(0);}, {&intake}}; 
 
   frc2::InstantCommand startIntake{[this](){intake.SetPercent("Intake Speed");}, {&intake}}; 
