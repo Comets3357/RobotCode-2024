@@ -3,7 +3,6 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 
-
 VisionSystemSubsystem::VisionSystemSubsystem(COMETS3357::SwerveSubsystem* swerve) : COMETS3357::Subsystem("VisionSubsystem")
 {
     swerveSubsystem = swerve;
@@ -31,10 +30,5 @@ void VisionSystemSubsystem::Periodic()
 
         swerveSubsystem->m_odometry.AddVisionMeasurement(robotPosition, units::second_t{currentTimestamp});
     }
-
-    nt::DoublePublisher xPub;
-    frc::SmartDashboard::PutNumber("Robot X", xSub.Get());
-    frc::SmartDashboard::PutNumber("Robot Y", ySub.Get());
-    frc::SmartDashboard::PutNumber("ASD HEHE", i++);
 
 }
