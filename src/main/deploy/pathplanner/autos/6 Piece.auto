@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.3591152429580688,
-      "y": 6.857634544372559
+      "x": 1.5082825422286987,
+      "y": 6.970529556274414
     },
-    "rotation": 61.858418295454534
+    "rotation": -1.7651053186942613e-27
   },
   "command": {
     "type": "sequential",
@@ -14,7 +14,13 @@
         {
           "type": "named",
           "data": {
-            "name": "Shoot"
+            "name": "Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Path turn"
           }
         },
         {
@@ -30,12 +36,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "Shoot"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "Path 2"
@@ -45,12 +45,6 @@
           "type": "named",
           "data": {
             "name": "Intake"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Shoot"
           }
         },
         {
@@ -66,21 +60,9 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "Shoot"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "Path 4"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Intake"
           }
         },
         {
@@ -92,7 +74,7 @@
         {
           "type": "named",
           "data": {
-            "name": "Shoot"
+            "name": "Intake"
           }
         },
         {
@@ -102,21 +84,9 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "Intake"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "Path 7"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Shoot"
           }
         }
       ]

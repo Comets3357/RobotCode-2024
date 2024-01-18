@@ -2,19 +2,19 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.438956618309021,
-      "y": 6.671562194824219
+      "x": 2,
+      "y": 2
     },
-    "rotation": 1.2189222056998286e-32
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "New Path"
+            "name": "Intake"
           }
         }
       ]

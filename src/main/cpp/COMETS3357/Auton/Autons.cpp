@@ -28,10 +28,13 @@ Autons::Autons(SwerveSubsystem* drivebase, std::vector<std::pair<std::string, st
         swerveSubsystem
     );
 
+
     for (int i = 0; i < actionMap.size(); i++)
     {
         pathplanner::NamedCommands::registerCommand(actionMap[i].first, actionMap[i].second);
     }
+
+    frc::SmartDashboard::PutNumber("INTAKE RAN", 0);
 
         LoadAutons();
 }

@@ -1,0 +1,49 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.5082825422286987,
+      "y": 6.970529556274414
+    },
+    "rotation": -1.7651053186942613e-27
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Path turn"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Path 1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Path 2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Path 3"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": true
+}
