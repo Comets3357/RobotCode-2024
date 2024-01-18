@@ -5,6 +5,7 @@
 #include <string>
 #include <units/time.h>
 #include <vector>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 using namespace pathplanner;
 

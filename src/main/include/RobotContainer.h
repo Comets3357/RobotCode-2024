@@ -82,7 +82,7 @@ class RobotContainer {
 
   std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionMap
   {
-
+    {"Intake", std::make_shared<frc2::InstantCommand>(startIntake)}
   };
 
   COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap", };

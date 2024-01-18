@@ -166,15 +166,15 @@
   "SparkMaxPercentConfigs": [
     {
       "Name": "IntakeMotor",
-      "ID": 0,
+      "ID": 11,
       "InvertedRelative": false,
       "CurrentLimit": 40,
       "IdleMode": "Brake",
       "Follow": "NONE",
       "Percents":
       {
-        "Intake Speed" : 0.5, 
-        "Eject Speed" : -0.5
+        "Intake Speed" : -0.85, 
+        "Eject Speed" : 0.85
       }
     }
   ],
