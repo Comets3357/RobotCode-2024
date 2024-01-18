@@ -30,6 +30,9 @@
 
 #include "Subsystems/IntakeSubsystem.h"
 #include "Subsystems/ShooterSubsystem.h"
+#include "Subsystems/IndexerSubsytem.h"
+
+#include "Commands/IntakeIndexerCommand.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -55,15 +58,20 @@ class RobotContainer {
   IntakeSubsystem intake {}; 
   ShooterSubsystem KickerWheel {}; 
   ShooterSubsystem FlyWheel {}; 
+  IndexerSubsystem indexer {}; 
+
+  IntakeIndexerCommand intakeIndexer {&indexer}; 
 
   // Instance command
+
+  frc2::InstantCommand shootIndexer{[this](){indexer.SetVelocity("IndexerShootSpeed");}, {&indexer}}; 
+  frc2::InstantCommand ejectIndexer{[this](){indexer.SetVelocity("IndexerEjectSpeed");}, {&indexer}}; 
 
   frc2::InstantCommand stopIntake{[this](){intake.SetPercent(0);}, {&intake}}; 
 
   frc2::InstantCommand startIntake{[this](){intake.SetPercent("Intake Speed");}, {&intake}}; 
 
   frc2::InstantCommand ejectIntake{[this](){intake.SetPercent("Eject Speed");}, {&intake}}; 
-
 
   
 

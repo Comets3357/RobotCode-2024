@@ -227,6 +227,29 @@
       "ID": 1,
       "IdleMode": "Brake",
       "InvertedRelative": false,
+      "Name": "Indexer",
+      "RelativePositionConversionFactor": 1,
+      "RelativeVelocityConversionFactor": 1,
+      "Follow": "NONE",
+      "VelocityPID": {
+        "D": 0,
+        "FF": 1,
+        "I": 0,
+        "P": 0
+      },
+      "Velocities":
+      {
+        "IndexerSpeed" : 10,
+        "IndexerShootSpeed" : 10,
+        "IndexerEjectSpeed" : 10
+
+      }
+    },
+    {
+      "CurrentLimit": 60,
+      "ID": 1,
+      "IdleMode": "Brake",
+      "InvertedRelative": false,
       "Name": "KickerWheel",
       "RelativePositionConversionFactor": 1,
       "RelativeVelocityConversionFactor": 1,
@@ -239,7 +262,7 @@
       },
       "Velocities":
       {
-
+        
       }
     },
     {
