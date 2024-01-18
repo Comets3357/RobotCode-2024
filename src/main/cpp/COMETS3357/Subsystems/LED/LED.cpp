@@ -3,6 +3,8 @@
 
 AddressableLED::AddressableLED()
 {
+    m_led.SetLength(kLength);
+
     for (int i = 0; i < kLength; i++) 
     {
    comets_ledBuffer[i].SetRGB(0,0,255);
@@ -11,7 +13,6 @@ AddressableLED::AddressableLED()
 
 
 
-    m_led.SetLength(kLength);
-    m_led.SetData(m_ledBuffer);
+    m_led.SetData(comets_ledBuffer);
     m_led.Start();
 }
