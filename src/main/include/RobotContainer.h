@@ -76,9 +76,9 @@ class RobotContainer {
 
   frc2::InstantCommand stopIntake{[this](){intake.SetPercent(0);}, {&intake}}; 
 
-  frc2::InstantCommand startIntake{[this](){intake.SetPercent("Intake Speed"); intakeIndexer.Schedule();}, {&intake}}; 
+  frc2::InstantCommand startIntake{[this](){intake.SetPercent("IntakeSpeed"); intakeIndexer.Schedule();}, {&intake}}; 
 
-  frc2::InstantCommand ejectIntake{[this](){intake.SetPercent("Eject Speed");}, {&intake}}; 
+  frc2::InstantCommand ejectIntake{[this](){intake.SetPercent("EjectSpeed");}, {&intake}}; 
 
   frc2::InstantCommand stopIndex{[this](){indexer.SetVelocity(0);}, {&indexer}}; 
 
@@ -109,7 +109,7 @@ class RobotContainer {
 
   };
 
-  COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap", };
+  // COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap", };
   COMETS3357::Autons autos{&swerve, autonActionMap};
 
   void ConfigureBindings();

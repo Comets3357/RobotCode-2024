@@ -13,7 +13,7 @@ void SetVelocity(double velocity);
 
 void SetVelocity(std::string velocity); 
 
-void IndexerSubsystem::SetPercent(double percent);
+void SetPercent(double percent);
 
 COMETS3357::SparkMaxVelocity IndexerMotor{"IndexerMotor"}; 
 bool IsDetected(); 

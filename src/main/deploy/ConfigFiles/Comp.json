@@ -173,8 +173,8 @@
       "Follow": "NONE",
       "Percents":
       {
-        "Intake Speed" : 0.5, 
-        "Eject Speed" : -0.5
+        "IntakeSpeed" : 0.5, 
+        "EjectSpeed" : -0.5
       }
     }
   ],
@@ -256,13 +256,13 @@
       "Follow": "NONE",
       "VelocityPID": {
         "D": 0,
-        "FF": 1,
+        "FF": 0,
         "I": 0,
         "P": 0
       },
       "Velocities":
       {
-        
+        "ShooterSpeed": 5000
       }
     },
     {
@@ -270,19 +270,19 @@
       "ID": 1,
       "IdleMode": "Brake",
       "InvertedRelative": false,
-      "Name": "FlyMotor",
+      "Name": "FlyWheel",
       "RelativePositionConversionFactor": 1,
       "RelativeVelocityConversionFactor": 1,
       "Follow": "NONE",
       "VelocityPID": {
         "D": 0,
-        "FF": 1,
-        "I": 1,
-        "P": 1
+        "FF": 0,
+        "I": 0,
+        "P": 0
       },
       "Velocities":
       {
-
+        "ShooterSpeed": 5000
       }
     },
     {

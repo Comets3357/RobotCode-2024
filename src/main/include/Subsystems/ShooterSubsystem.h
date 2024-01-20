@@ -24,8 +24,6 @@ double GetVelocityKickerWheel();
 
 double GetVelocityFlyWheel();
 
-double StopShooting();
-
 void SetVelocityIndexer();
 
 COMETS3357::SparkMaxVelocity KickerWheel{"KickerWheel"}; 
