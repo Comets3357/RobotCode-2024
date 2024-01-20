@@ -8,6 +8,8 @@
 #include <networktables/DoubleTopic.h>
 #include <units/length.h>
 #include <frc/geometry/Pose2d.h>
+#include <frc/smartdashboard/Field2d.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 SUBSYSTEM_START(VisionSystem)
 
@@ -23,5 +25,9 @@ SUBSYSTEM_START(VisionSystem)
     int i = 0;
     nt::DoubleSubscriber ySub;
     nt::DoubleSubscriber timestampSub;
+
+    frc::Field2d m_field;
+
+    frc::Pose2d lastPose;
 
 SUBSYSTEM_END

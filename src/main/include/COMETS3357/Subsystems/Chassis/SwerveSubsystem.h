@@ -101,6 +101,8 @@ namespace COMETS3357
      */
     double GetTurnRate();
 
+    wpi::array<frc::SwerveModulePosition, 4U> GetPositions();
+
     /**
      * Returns the currently-estimated pose of the robot.
      *
