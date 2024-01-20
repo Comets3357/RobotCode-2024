@@ -42,3 +42,13 @@ void ShooterSubsystem::SetPercentKickerWheel (double percent)
 {
     KickerWheel.SetPercent(percent);
 }
+
+double ShooterSubsystem::GetVelocityKickerWheel()
+{
+    return KickerWheel.GetRelativeVelocity();
+}
+
+double ShooterSubsystem::GetVelocityFlyWheel()
+{
+    return FlyWheel.GetRelativeVelocity();
+}

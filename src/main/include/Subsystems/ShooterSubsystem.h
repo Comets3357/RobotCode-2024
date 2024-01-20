@@ -17,7 +17,11 @@ void SetVelocityKickerWheel(std::string percent);
 
 void SetPercentKickerWheel(double percent); 
 
-void SetPercentFlyWheel(double percent); 
+void SetPercentFlyWheel(double percent);
+
+double GetVelocityKickerWheel();
+
+double GetVelocityFlyWheel();
 
 COMETS3357::SparkMaxVelocity KickerWheel{"KickerWheel"}; 
 COMETS3357::SparkMaxVelocity FlyWheel{"FlyWheel"}; 
