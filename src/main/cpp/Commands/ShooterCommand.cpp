@@ -1,32 +1,26 @@
 
 #include "Commands/ShooterCommand.h"
 
-ShooterCommand::ShooterCommand(ShooterSubsystem *shooter) {
-    ShooterSubsytem = shooter; 
-    AddRequirements({shooter}); 
+
+ShooterCommand::ShooterCommand(ShooterSubsystem *shooter, IndexerSubsystem* indexer) {
+    shooterSubsystem = shooter;
+    indexerSubsystem = indexer; 
+    AddRequirements({shooter, indexer}); 
 }
 
 void ShooterCommand::Initialize()
 {
-    ShooterSubsytem->SetVelocityFlyWheel("ShooterSpeed"); 
-    ShooterSubsytem->SetVelocityKickerWheel("ShooterSpeed"); 
+    shooterSubsystem->SetVelocityFlyWheel("ShooterSpeed"); 
+    shooterSubsystem->SetVelocityKickerWheel("ShooterSpeed"); 
 
 }
 
 void ShooterCommand::Execute()
 {
-    if (ShooterSubsytem->GetVelocityKickerWheel() > ShooterSubsytem->KickerWheel.config.velocities["ShooterSpeed"] - 20 && ShooterSubsytem->GetVelocityFlyWheel() > ShooterSubsytem->FlyWheel.config.velocities["ShooterSpeed"] - 20)
+    if (shooterSubsystem->GetVelocityKickerWheel() > shooterSubsystem->KickerWheel.config.velocities["ShooterSpeed"] - 20 && shooterSubsystem->GetVelocityFlyWheel() > shooterSubsystem->FlyWheel.config.velocities["ShooterSpeed"] - 20)
     {
-        ShooterSubsytem->SetVelocityFlyWheel(1);
-        ShooterSubsytem->SetVelocityKickerWheel(1);
-        ShooterSubsytem->SetVelocityFlyWheel("ShooterSpeed");
-        ShooterSubsytem->SetVelocityKickerWheel("ShooterSpeed"); 
-        
-    }
-    else
-    {
-        ShooterSubsytem->SetVelocityFlyWheel(0);
-        ShooterSubsytem->SetVelocityKickerWheel(0);
+            indexerSubsystem->SetVelocity("ShooterSpeed");
+
     }
 
 }
@@ -38,5 +32,5 @@ bool ShooterCommand::IsFinished()
 
 void ShooterCommand::End(bool interrupted)
 {
-    ShooterSubsytem->SetVelocityFlyWheel(0); 
+    shooterSubsystem->SetVelocityFlyWheel(0); 
 }

@@ -8,8 +8,10 @@ IntakeIndexerCommand::IntakeIndexerCommand(IndexerSubsystem *indexer) {
 
 void IntakeIndexerCommand::Initialize()
 {
-    indexerSubsytem->SetVelocity("IndexerSpeed"); 
-
+    if (!indexerSubsytem->IsDetected())
+    {
+        indexerSubsytem->SetVelocity("IndexerSpeed"); 
+    }
 }
 
 void IntakeIndexerCommand::Execute()

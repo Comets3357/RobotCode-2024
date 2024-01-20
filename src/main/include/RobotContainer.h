@@ -31,8 +31,10 @@
 #include "Subsystems/IntakeSubsystem.h"
 #include "Subsystems/ShooterSubsystem.h"
 #include "Subsystems/IndexerSubsytem.h"
+#include "Subsystems/ShooterSubsystem.h"
 
 #include "Commands/IntakeIndexerCommand.h"
+#include "Commands/ShooterCommand.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -59,8 +61,10 @@ class RobotContainer {
   ShooterSubsystem KickerWheel {}; 
   ShooterSubsystem FlyWheel {}; 
   IndexerSubsystem indexer {}; 
+  ShooterSubsystem shooter {};
 
   IntakeIndexerCommand intakeIndexer {&indexer}; 
+  ShooterCommand shooterCommand {&shooter, &indexer};
 
   // Instance command
 
@@ -72,18 +76,22 @@ class RobotContainer {
 
   frc2::InstantCommand stopIntake{[this](){intake.SetPercent(0);}, {&intake}}; 
 
-  frc2::InstantCommand startIntake{[this](){intake.SetPercent("Intake Speed");}, {&intake}}; 
+  frc2::InstantCommand startIntake{[this](){intake.SetPercent("Intake Speed"); intakeIndexer.Schedule();}, {&intake}}; 
 
   frc2::InstantCommand ejectIntake{[this](){intake.SetPercent("Eject Speed");}, {&intake}}; 
 
-  
+  frc2::InstantCommand stopIndex{[this](){indexer.SetVelocity(0);}, {&indexer}}; 
+
+  frc2::InstantCommand stopShoot{[this](){shooter.SetVelocityKickerWheel(0); indexer.SetPercent(0);}, {&shooter}}; 
 
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
-      {"Intake", std::make_shared<frc2::InstantCommand>(startIntake)},
-      {"Eject", std::make_shared<frc2::InstantCommand>(ejectIntake)},
-      {"Stop", std::make_shared<frc2::InstantCommand>(stopIntake)}
+      {"StartIntake", std::make_shared<frc2::InstantCommand>(startIntake)},
+      {"EjectIntake", std::make_shared<frc2::InstantCommand>(ejectIntake)},
+      {"StopIntake", std::make_shared<frc2::InstantCommand>(stopIntake)},
+      {"StartShoot", std::make_shared<ShooterCommand>(shooterCommand)},
+      {"StopShoot", std::make_shared<frc2::InstantCommand>(stopShoot)}
   };
 
 
@@ -92,9 +100,8 @@ class RobotContainer {
    {"SwerveDefaultCommand", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.DriveCornerTurning(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX});}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"SwerveDefaultCommandDirectional", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.DriveXRotate(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX});}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualIntake", {[this](auto leftX, auto leftY, auto rightX, auto rightY){intake.SetPercent(leftY);}, &intake, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
-   {"KickerWheel", {[this](auto leftX, auto leftY, auto rightX, auto rightY){KickerWheel.SetPercentKickerWheel(rightY);}, &KickerWheel, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
-   {"FlyWheel", {[this](auto leftX, auto leftY, auto rightX, auto rightY){FlyWheel.SetPercentKickerWheel(rightY);}, &FlyWheel, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
-
+   {"KickerWheel", {[this](auto leftX, auto leftY, auto rightX, auto rightY){KickerWheel.SetPercentKickerWheel(leftY); FlyWheel.SetPercentKickerWheel(rightY);}, &KickerWheel, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"ManualIndexer", {[this](auto leftX, auto leftY, auto rightX, auto rightY){indexer.SetPercent(rightY);}, &FlyWheel, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}}
   };
 
   std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionMap

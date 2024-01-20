@@ -55,5 +55,5 @@ double ShooterSubsystem::GetVelocityFlyWheel()
 
 double ShooterSubsystem::StopShooting()
 {
-    
+
 }
