@@ -58,8 +58,6 @@ class RobotContainer {
 
   // VisionSystemSubsystem visionSystem{&swerve};
   IntakeSubsystem intake {}; 
-  ShooterSubsystem KickerWheel {}; 
-  ShooterSubsystem FlyWheel {}; 
   IndexerSubsystem indexer {}; 
   ShooterSubsystem shooter {};
 
@@ -70,9 +68,6 @@ class RobotContainer {
 
   frc2::InstantCommand shootIndexer{[this](){indexer.SetVelocity("IndexerShootSpeed");}, {&indexer}}; 
   frc2::InstantCommand ejectIndexer{[this](){indexer.SetVelocity("IndexerEjectSpeed");}, {&indexer}}; 
-
-  frc2::InstantCommand shooterSpeedKickerWheel{[this](){KickerWheel.SetPercentKickerWheel(0);}, {&KickerWheel}}; 
-  frc2::InstantCommand shooterSpeedFlyWheel{[this](){FlyWheel.SetPercentFlyWheel(0);}, {&FlyWheel}}; 
 
   frc2::InstantCommand stopIntake{[this](){intake.SetPercent(0);}, {&intake}}; 
 
@@ -100,8 +95,8 @@ class RobotContainer {
    {"SwerveDefaultCommand", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.DriveCornerTurning(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX});}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"SwerveDefaultCommandDirectional", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.DriveXRotate(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX});}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualIntake", {[this](auto leftX, auto leftY, auto rightX, auto rightY){intake.SetPercent(leftY);}, &intake, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
-   {"KickerWheel", {[this](auto leftX, auto leftY, auto rightX, auto rightY){KickerWheel.SetPercentKickerWheel(leftY); FlyWheel.SetPercentKickerWheel(rightY);}, &KickerWheel, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
-   {"ManualIndexer", {[this](auto leftX, auto leftY, auto rightX, auto rightY){indexer.SetPercent(rightY);}, &FlyWheel, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}}
+   {"KickerWheel", {[this](auto leftX, auto leftY, auto rightX, auto rightY){shooter.SetPercentKickerWheel(leftY); shooter.SetPercentKickerWheel(rightY);}, &shooter, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"ManualIndexer", {[this](auto leftX, auto leftY, auto rightX, auto rightY){indexer.SetPercent(rightY);}, &shooter, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}}
   };
 
   std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionMap

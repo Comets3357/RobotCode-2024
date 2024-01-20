@@ -15,7 +15,7 @@ void SetVelocity(std::string velocity);
 
 void SetPercent(double percent);
 
-COMETS3357::SparkMaxVelocity IndexerMotor{"IndexerMotor"}; 
+COMETS3357::SparkMaxVelocity IndexerMotor{"Indexer"}; 
 bool IsDetected(); 
 frc::DigitalInput noteDetector{0}; 
 

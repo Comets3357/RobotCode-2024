@@ -224,7 +224,7 @@
   "SparkMaxVelocityConfigs": [
     {
       "CurrentLimit": 60,
-      "ID": 1,
+      "ID": 48,
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "Indexer",
@@ -247,7 +247,7 @@
     },
     {
       "CurrentLimit": 60,
-      "ID": 1,
+      "ID": 49,
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "KickerWheel",
@@ -256,7 +256,27 @@
       "Follow": "NONE",
       "VelocityPID": {
         "D": 0,
-        "FF": 0,
+        "FF": 1,
+        "I": 0,
+        "P": 0
+      },
+      "Velocities":
+      {
+        "ShooterSpeed": 5000
+      }
+    },
+    {
+      "CurrentLimit": 60,
+      "ID": 50,
+      "IdleMode": "Brake",
+      "InvertedRelative": false,
+      "Name": "FlyWheel",
+      "RelativePositionConversionFactor": 1,
+      "RelativeVelocityConversionFactor": 1,
+      "Follow": "NONE",
+      "VelocityPID": {
+        "D": 0,
+        "FF": 1,
         "I": 0,
         "P": 0
       },
@@ -270,19 +290,19 @@
       "ID": 1,
       "IdleMode": "Brake",
       "InvertedRelative": false,
-      "Name": "FlyWheel",
-      "RelativePositionConversionFactor": 1,
-      "RelativeVelocityConversionFactor": 1,
+      "Name": "DriveMotor1",
+      "RelativePositionConversionFactor": 0.0485273613,
+      "RelativeVelocityConversionFactor": 0.00084632602091900004,
       "Follow": "NONE",
       "VelocityPID": {
         "D": 0,
-        "FF": 0,
+        "FF": 0.20817085187419279,
         "I": 0,
-        "P": 0
+        "P": 0.040000000000000001
       },
       "Velocities":
       {
-        "ShooterSpeed": 5000
+        
       }
     },
     {
