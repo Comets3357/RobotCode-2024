@@ -23,6 +23,8 @@ double GetVelocityKickerWheel();
 
 double GetVelocityFlyWheel();
 
+double StopShooting();
+
 COMETS3357::SparkMaxVelocity KickerWheel{"KickerWheel"}; 
 COMETS3357::SparkMaxVelocity FlyWheel{"FlyWheel"}; 
 

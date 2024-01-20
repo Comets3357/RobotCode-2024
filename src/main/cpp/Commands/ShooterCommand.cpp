@@ -9,19 +9,26 @@ ShooterCommand::ShooterCommand(ShooterSubsystem *shooter) {
 void ShooterCommand::Initialize()
 {
     ShooterSubsytem->SetVelocityFlyWheel("ShooterSpeed"); 
+    ShooterSubsytem->SetVelocityKickerWheel("ShooterSpeed"); 
 
 }
 
 void ShooterCommand::Execute()
 {
-    if (ShooterSubsytem->GetVelocityKickerWheel() > ShooterSubsytem->KickerWheel.config.velocities["ShooterSpeed"] - 20)
+    if (ShooterSubsytem->GetVelocityKickerWheel() > ShooterSubsytem->KickerWheel.config.velocities["ShooterSpeed"] - 20 && ShooterSubsytem->GetVelocityFlyWheel() > ShooterSubsytem->FlyWheel.config.velocities["ShooterSpeed"] - 20)
     {
+        ShooterSubsytem->SetVelocityFlyWheel(1);
+        ShooterSubsytem->SetVelocityKickerWheel(1);
         ShooterSubsytem->SetVelocityFlyWheel("ShooterSpeed");
+        ShooterSubsytem->SetVelocityKickerWheel("ShooterSpeed"); 
+        
     }
-    if (ShooterSubsytem->GetVelocityFlyWheel() > ShooterSubsytem->FlyWheel.config.velocities["ShooterSpeed"] - 20)
+    else
     {
-        ShooterSubsytem->SetVelocityFlyWheel("ShooterSpeed");
+        ShooterSubsytem->SetVelocityFlyWheel(0);
+        ShooterSubsytem->SetVelocityKickerWheel(0);
     }
+
 }
 
 bool ShooterCommand::IsFinished()

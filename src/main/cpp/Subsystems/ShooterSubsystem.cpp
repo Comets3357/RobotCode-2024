@@ -52,3 +52,8 @@ double ShooterSubsystem::GetVelocityFlyWheel()
 {
     return FlyWheel.GetRelativeVelocity();
 }
+
+double ShooterSubsystem::StopShooting()
+{
+    
+}
