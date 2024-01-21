@@ -36,6 +36,9 @@
 #include "Commands/IntakeIndexerCommand.h"
 #include "Commands/ShooterCommand.h"
 
+#include "COMETS3357/LookupTable.h"
+
+
 /**
  * This class is where the bulk of the robot should be declared.  Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -55,6 +58,8 @@ class RobotContainer {
   COMETS3357::GyroSubsystem gyro{};
   COMETS3357::LimelightSubsystem limelight{};
   COMETS3357::SwerveSubsystem swerve{"Swerve"};
+
+  COMETS3357::LookupTable table{"idk"};
 
   // VisionSystemSubsystem visionSystem{&swerve};
   IntakeSubsystem intake {}; 

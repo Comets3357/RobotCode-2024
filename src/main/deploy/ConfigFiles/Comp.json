@@ -1,5 +1,17 @@
 {
   "ControllerMap": "CompControllerMap",
+  "LookupTableConfigs":
+  [
+    {
+      "Name": "idk",
+      "Data":
+      [
+        [10, 20],
+        [30, 10],
+        [2, 3]
+      ]
+    }
+  ],
   "SparkMaxPositionConfigs": [
     {
       "AbsolutePositionConversionFactor": 6.2831853072000001,
