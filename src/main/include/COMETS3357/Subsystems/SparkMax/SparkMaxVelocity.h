@@ -4,6 +4,9 @@
 
 #include "COMETS3357/PID.h"
 #include "COMETS3357/Configs/ConfigFiles.h"
+#include <rev/SparkAbsoluteEncoder.h>
+#include <rev/SparkRelativeEncoder.h>
+#include <rev/SparkPIDController.h>
 
 namespace COMETS3357
 {
@@ -35,7 +38,7 @@ namespace COMETS3357
          * @param velocity The target velocity
         */
         void SetVelocity(std::string velocity);
-
+ 
         /**
          * @brief Returns the velocity from the relative encoder
          * @return Relative Velocity

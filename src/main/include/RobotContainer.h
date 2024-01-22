@@ -24,6 +24,11 @@
 #include "COMETS3357/Subsystems/Vision/LimelightSubsystem.h"
 
 #include <frc2/command/SequentialCommandGroup.h>
+#include <frc2/command/InstantCommand.h>
+
+#include "Subsystems/VisionSystemSubsystem.h"
+
+#include "Subsystems/IntakeSubsystem.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -45,23 +50,39 @@ class RobotContainer {
   COMETS3357::LimelightSubsystem limelight{};
   COMETS3357::SwerveSubsystem swerve{"Swerve"};
 
+  // VisionSystemSubsystem visionSystem{&swerve};
+  IntakeSubsystem intake {}; 
+
+  // Instance command
+
+  frc2::InstantCommand stopIntake{[this](){intake.SetPercent(0);}, {&intake}}; 
+
+  frc2::InstantCommand startIntake{[this](){intake.SetPercent("Intake Speed");}, {&intake}}; 
+
+  frc2::InstantCommand ejectIntake{[this](){intake.SetPercent("Eject Speed");}, {&intake}}; 
+
+
+  
+
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
-
+      {"Intake", std::make_shared<frc2::InstantCommand>(startIntake)},
+      {"Eject", std::make_shared<frc2::InstantCommand>(ejectIntake)},
+      {"Stop", std::make_shared<frc2::InstantCommand>(stopIntake)}
   };
 
 
   std::unordered_map<std::string, std::tuple<std::function<void(double, double, double, double)>, frc2::Subsystem*, COMETS3357::Controller::JoystickCommandMode>> joystickActionMap
   {
-   {"SwerveDefaultCommand", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.DriveDirectionalRotate(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -rightX, rightY);}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"SwerveDefaultCommand", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.DriveCornerTurning(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX});}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"SwerveDefaultCommandDirectional", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.DriveXRotate(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX});}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
 
   };
 
   std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionMap
   {
-
+    {"Intake", std::make_shared<frc2::InstantCommand>(startIntake)}
   };
 
   COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap", };

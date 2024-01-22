@@ -1,10 +1,182 @@
 {
   "ControllerMap": "CompControllerMap",
   "SparkMaxPositionConfigs": [
-   
+    
+    {
+      "AbsolutePositionConversionFactor": 6.2831853072000001,
+      "AbsoluteVelocityConversionFactor": 0.104719755,
+      "AbsoluteZeroOffset": 0,
+      "CurrentLimit": 10,
+      "DefaultRunMode": "ABSOLUTE",
+      "ID": 2,
+      "IdleMode": "Brake",
+      "InvertedAbsolute": true,
+      "InvertedRelative": false,
+      "MaxSpeed": 1,
+      "MinSpeed": -1,
+      "Name": "AzimuthMotor1",
+      "Follow": "NONE",
+      "PositionPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 1
+      },
+      "PositionPIDWrappingEnabled": true,
+      "RelativePositionConversionFactor": 1,
+      "RelativeVelocityConversionFactor": 1,
+      "TurningEncoderPositionPIDMaxInput": 6.2831853072000001,
+      "TurningEncoderPositionPIDMinInput": 0,
+      "VelocityPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 0
+      },
+      "ForwardSoftLimitEnabled": false,
+      "ReverseSoftLimitEnabled": false,
+      "ForwardSoftLimit": 0,
+      "ReverseSoftLimit": 0,
+      "Positions":
+      {
+        
+      }
+    },
+    {
+      "AbsolutePositionConversionFactor": 6.2831853072000001,
+      "AbsoluteVelocityConversionFactor": 0.104719755,
+      "AbsoluteZeroOffset": 0,
+      "CurrentLimit": 10,
+      "DefaultRunMode": "ABSOLUTE",
+      "ID": 4,
+      "IdleMode": "Brake",
+      "InvertedAbsolute": true,
+      "InvertedRelative": false,
+      "MaxSpeed": 1,
+      "MinSpeed": -1,
+      "Name": "AzimuthMotor2",
+      "Follow": "NONE",
+      "PositionPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 1
+      },
+      "PositionPIDWrappingEnabled": true,
+      "RelativePositionConversionFactor": 1,
+      "RelativeVelocityConversionFactor": 1,
+      "TurningEncoderPositionPIDMaxInput": 6.2831853072000001,
+      "TurningEncoderPositionPIDMinInput": 0,
+      "VelocityPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 0
+      },
+      "ForwardSoftLimitEnabled": false,
+      "ReverseSoftLimitEnabled": false,
+      "ForwardSoftLimit": 0,
+      "ReverseSoftLimit": 0,
+      "Positions":
+      {
+        
+      }
+    },
+    {
+      "AbsolutePositionConversionFactor": 6.2831853072000001,
+      "AbsoluteVelocityConversionFactor": 0.104719755,
+      "AbsoluteZeroOffset": 0,
+      "CurrentLimit": 10,
+      "DefaultRunMode": "ABSOLUTE",
+      "ID": 6,
+      "IdleMode": "Brake",
+      "InvertedAbsolute": true,
+      "InvertedRelative": false,
+      "MaxSpeed": 1,
+      "MinSpeed": -1,
+      "Name": "AzimuthMotor3",
+      "Follow": "NONE",
+      "PositionPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 1
+      },
+      "PositionPIDWrappingEnabled": true,
+      "RelativePositionConversionFactor": 1,
+      "RelativeVelocityConversionFactor": 1,
+      "TurningEncoderPositionPIDMaxInput": 6.2831853072000001,
+      "TurningEncoderPositionPIDMinInput": 0,
+      "VelocityPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 0
+      },
+      "ForwardSoftLimitEnabled": false,
+      "ReverseSoftLimitEnabled": false,
+      "ForwardSoftLimit": 0,
+      "ReverseSoftLimit": 0,
+      "Positions":
+      {
+        
+      }
+    },
+    {
+      "AbsolutePositionConversionFactor": 6.2831853072000001,
+      "AbsoluteVelocityConversionFactor": 0.104719755,
+      "AbsoluteZeroOffset": 0,
+      "CurrentLimit": 10,
+      "DefaultRunMode": "ABSOLUTE",
+      "ID": 8,
+      "IdleMode": "Brake",
+      "InvertedAbsolute": true,
+      "InvertedRelative": false,
+      "MaxSpeed": 1,
+      "MinSpeed": -1,
+      "Name": "AzimuthMotor4",
+      "Follow": "NONE",
+      "PositionPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 1
+      },
+      "PositionPIDWrappingEnabled": true,
+      "RelativePositionConversionFactor": 1,
+      "RelativeVelocityConversionFactor": 1,
+      "TurningEncoderPositionPIDMaxInput": 6.2831853072000001,
+      "TurningEncoderPositionPIDMinInput": 0,
+      "VelocityPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 0
+      },
+      "ForwardSoftLimitEnabled": false,
+      "ReverseSoftLimitEnabled": false,
+      "ForwardSoftLimit": 0,
+      "ReverseSoftLimit": 0,
+      "Positions":
+      {
+        
+      }
+    }
   ],
   "SparkMaxPercentConfigs": [
-    
+    {
+      "Name": "IntakeMotor",
+      "ID": 11,
+      "InvertedRelative": false,
+      "CurrentLimit": 40,
+      "IdleMode": "Brake",
+      "Follow": "NONE",
+      "Percents":
+      {
+        "Intake Speed" : -0.85, 
+        "Eject Speed" : 0.85
+      }
+    }
   ],
   "SparkMaxPWMConfigs": [],
   "SwerveConfigs": [

@@ -3,13 +3,15 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <COMETS3357/Subsystems/SubsystemManager.h>
 
+#define FORCEINIT
+
 using namespace COMETS3357;
 
 SparkMaxPosition::SparkMaxPosition(std::string configName)
     : config{ConfigFiles::getInstance().GetConfigFiles().sparkMaxPositionConfigs[configName]},
      motor{config.ID, rev::CANSparkMax::MotorType::kBrushless},
     PIDController{motor.GetPIDController()},
-    relativeEncoder{motor.GetEncoder(rev::SparkRelativeEncoder::Type::kHallSensor, 1)},
+    relativeEncoder{motor.GetEncoder(rev::SparkRelativeEncoder::Type::kHallSensor)},
     absoluteEncoder{motor.GetAbsoluteEncoder(rev::SparkMaxAbsoluteEncoder::Type::kDutyCycle)}
 {
     defaultRunMode = config.defaultMode;
@@ -26,7 +28,7 @@ SparkMaxPosition::SparkMaxPosition(std::string configName, bool setAbsoluteOffse
     : config{ConfigFiles::getInstance().GetConfigFiles().sparkMaxPositionConfigs[configName]},
      motor{config.ID, rev::CANSparkMax::MotorType::kBrushless},
     PIDController{motor.GetPIDController()},
-    relativeEncoder{motor.GetEncoder(rev::SparkRelativeEncoder::Type::kHallSensor, 1)},
+    relativeEncoder{motor.GetEncoder(rev::SparkRelativeEncoder::Type::kHallSensor)},
     absoluteEncoder{motor.GetAbsoluteEncoder(rev::SparkMaxAbsoluteEncoder::Type::kDutyCycle)}
 {
     defaultRunMode = config.defaultMode;
