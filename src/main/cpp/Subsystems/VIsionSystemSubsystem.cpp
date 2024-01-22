@@ -3,16 +3,16 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 
-VisionSystemSubsystem::VisionSystemSubsystem(COMETS3357::SwerveSubsystem* swerve) : COMETS3357::Subsystem("VisionSubsystem")
+VisionSystemSubsystem::VisionSystemSubsystem(COMETS3357::SwerveSubsystem* swerve) : COMETS3357::Subsystem("VisionSubsystem"),  poseEstimator{&swerve->m_odometry}
 {
-    swerveSubsystem = swerve;
+    
 
     frc::Translation2d position{units::meter_t{subsystemData->GetEntry("X").GetDouble(0)}, units::meter_t{subsystemData->GetEntry("Y").GetDouble(0)}};
     frc::Rotation2d rotation{units::radian_t{GetSubsystemData("GyroSubsystem")->GetEntry("angle").GetDouble(0)}};
     frc::Pose2d robotPosition{position, rotation};
-    swerveSubsystem->m_odometry.ResetPosition(frc::Rotation2d{units::radian_t{GetSubsystemData("GyroSubsystem")->GetEntry("angle").GetDouble(0)}}, swerveSubsystem->GetPositions(), robotPosition );
 
-    swerveSubsystem->m_odometry.SetVisionMeasurementStdDevs({0.01, 0.01, 0.01});
+
+    // swerveSubsystem->m_odometry.SetVisionMeasurementStdDevs({0.01, 0.01, 0.01});
 }
 
 void VisionSystemSubsystem::Initialize()
@@ -52,6 +52,10 @@ void VisionSystemSubsystem::Periodic()
     frc::SmartDashboard::PutData("Field", &m_field);
 
     // Do this in either robot periodic or subsystem periodic
-    m_field.SetRobotPose(swerveSubsystem->m_odometry.GetEstimatedPosition());
+
+    poseEstimator.Periodic();
+    poseEstimator.AddPose(frc::Pose2d{frc::Translation2d{units::meter_t{10}, units::meter_t{10}}, frc::Rotation2d{units::radian_t{0}}}, nt::Now()-10);
+    m_field.SetRobotPose(poseEstimator.GetPose(0));
+    frc::Pose2d k =poseEstimator.GetPose(0);
 
 }
