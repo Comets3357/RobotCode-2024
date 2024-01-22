@@ -52,3 +52,16 @@ double ShooterSubsystem::GetVelocityFlyWheel()
 {
     return FlyWheel.GetRelativeVelocity();
 }
+
+std::pair<double, double> calculateDistanceTravelled(std::pair<double, double> velocity, double time)
+{
+    double x, y;
+    x = velocity.first * (time + .1);
+    y = velocity.second * (time + .1);
+    return {x,y};
+}
+
+std::pair<double, double> calculateFinalPosition(std::pair<double, double> initial, std::pair<double, double> travel)
+{
+    return {travel.first - initial.first, travel.second - initial.first};
+}

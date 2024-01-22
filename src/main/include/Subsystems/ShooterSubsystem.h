@@ -26,6 +26,11 @@ double GetVelocityFlyWheel();
 
 void SetVelocityIndexer();
 
+
+std::pair<double, double> calculateDistanceTravelled(std::pair<double, double> velocity, double time); 
+
+std::pair<double, double> calculateFinalPosition(std::pair<double, double> initial, std::pair<double, double> travel); 
+
 COMETS3357::SparkMaxVelocity KickerWheel{"KickerWheel"}; 
 COMETS3357::SparkMaxVelocity FlyWheel{"FlyWheel"}; 
 
