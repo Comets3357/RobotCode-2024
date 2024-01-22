@@ -13,7 +13,7 @@ void GyroSubsystem::Periodic()
 {
     if (!m_navx.IsCalibrating())
     {
-        subsystemData->GetEntry("angle").SetDouble(-m_navx.GetAngle() * 3.14159 / 180);
+        subsystemData->GetEntry("angle").SetDouble((-m_navx.GetAngle() * 3.14159 / 180) + angleOffset);
         subsystemData->GetEntry("angleRate").SetDouble(m_navx.GetRate() * 3.14159 / 180);
     }
   
@@ -22,4 +22,9 @@ void GyroSubsystem::Periodic()
     frc::SmartDashboard::PutNumber("Robot Displacement X", m_navx.GetDisplacementX());
     frc::SmartDashboard::PutNumber("Robot Displacement Y", m_navx.GetDisplacementY());
     frc::SmartDashboard::PutNumber("Robot Displacement Z", m_navx.GetDisplacementZ());
+}
+
+void GyroSubsystem::ZeroGyro()
+{
+    angleOffset = m_navx.GetAngle() * 3.14159 / 180;
 }

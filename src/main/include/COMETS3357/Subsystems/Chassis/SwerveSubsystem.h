@@ -178,6 +178,7 @@ namespace COMETS3357
       
     frc::SwerveDrivePoseEstimator<4> m_odometry;
 
+
   private:
     // Components (e.g. motor controllers and sensors) should generally be
     // declared private and exposed only through public methods.
@@ -197,8 +198,6 @@ namespace COMETS3357
     // 4 defines the number of modules
     // frc::SwerveDriveOdometry<4> m_odometry;
 
-
-    
 
     double actualAngle = 0; 
     double lastAngle = 0; 

@@ -79,10 +79,11 @@ class RobotContainer {
 
   frc2::InstantCommand stopShoot{[this](){shooter.SetVelocityKickerWheel(0); indexer.SetPercent(0);}, {&shooter}}; 
 
+  frc2::InstantCommand zeroGyro{[this](){gyro.ZeroGyro();}, {&gyro}};
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
-      {"StartIntake", std::make_shared<frc2::InstantCommand>(startIntake)},
+      {"ZeroGyro", std::make_shared<frc2::InstantCommand>(zeroGyro)},
       {"EjectIntake", std::make_shared<frc2::InstantCommand>(ejectIntake)},
       {"StopIntake", std::make_shared<frc2::InstantCommand>(stopIntake)},
       {"StartShoot", std::make_shared<ShooterCommand>(shooterCommand)},

@@ -224,7 +224,7 @@
   "SparkMaxVelocityConfigs": [
     {
       "CurrentLimit": 60,
-      "ID": 48,
+      "ID": 21,
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "Indexer",
@@ -247,7 +247,7 @@
     },
     {
       "CurrentLimit": 60,
-      "ID": 49,
+      "ID": 22,
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "KickerWheel",
@@ -267,7 +267,7 @@
     },
     {
       "CurrentLimit": 60,
-      "ID": 50,
+      "ID": 23,
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "FlyWheel",
