@@ -154,6 +154,8 @@ namespace COMETS3357
 
         std::unordered_map<std::string, double> positions;
 
+        void printNotContains(std::string deviceName, std::string missingComponent);
+
     private:
 
         bool initialized = false;

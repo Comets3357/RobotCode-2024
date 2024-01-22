@@ -133,6 +133,20 @@ void ConfigFiles::LoadConfigFiles(std::string fileName)
     {
     
         SparkMaxVelocityConfig motorConfig;
+
+        if (!config.contains("Name")) std::cerr << "SparkMaxVelocity Config Does not containe \"Name\"" << std::endl;
+        if (!config.contains("InvertedRelative")) printNotContains(config.get("Name").get<std::string>(), "InvertedRelative");
+        if (!config.contains("CurrentLimit")) printNotContains(config.get("Name").get<std::string>(), "CurrentLimit");
+        if (!config.contains("RelativePositionConversionFactor")) printNotContains(config.get("Name").get<std::string>(), "RelativePositionConversionFactor");
+        if (!config.contains("RelativeVelocityConversionFactor")) printNotContains(config.get("Name").get<std::string>(), "RelativeVelocityConversionFactor");
+        if (!config.contains("IdleMode")) printNotContains(config.get("Name").get<std::string>(), "IdleMode");
+        if (!config.contains("Follow")) printNotContains(config.get("Name").get<std::string>(), "Follow");
+        if (!config.contains("VelocityPID")) printNotContains(config.get("Name").get<std::string>(), "VelocityPID");
+        if (!config.get("VelocityPID").contains("P")) printNotContains(config.get("Name").get<std::string>(), "VelocityPID / P");
+        if (!config.get("VelocityPID").contains("I")) printNotContains(config.get("Name").get<std::string>(), "VelocityPID / I");
+        if (!config.get("VelocityPID").contains("D")) printNotContains(config.get("Name").get<std::string>(), "VelocityPID / D");
+        if (!config.get("VelocityPID").contains("FF")) printNotContains(config.get("Name").get<std::string>(), "VelocityPID / FF");
+
         motorConfig.ID = (int)config.get("ID").get<double>();
         motorConfig.invertedRelative = config.get("InvertedRelative").get<bool>();
         motorConfig.currentLimit = config.get("CurrentLimit").get<double>();
@@ -173,4 +187,9 @@ void ConfigFiles::LoadConfigFiles(std::string fileName)
 
         robotConfig.sparkMaxPercentConfigs[config.get("Name").get<std::string>()] = motorConfig;
     }
+}
+
+void ConfigFiles::printNotContains(std::string deviceName, std::string missingComponent)
+{
+    std::cerr << "Device " << deviceName << " Does not contain a \"" << missingComponent << "\" in the Config File. The code will crash" << std::endl;
 }
