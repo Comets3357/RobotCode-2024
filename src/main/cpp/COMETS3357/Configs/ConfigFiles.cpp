@@ -39,6 +39,7 @@ void ConfigFiles::LoadConfigFiles(std::string fileName)
     picojson::array swerveConfigs = jsonValue.get("SwerveConfigs").get<picojson::array>();
     picojson::array swerveModuleConfigs = jsonValue.get("SwerveModuleConfigs").get<picojson::array>();
     picojson::array sparkMaxPWMConfigs = jsonValue.get("SparkMaxPWMConfigs").get<picojson::array>();
+    picojson::array lookupTableConfigs = jsonValue.get("LookupTableConfigs").get<picojson::array>();
 
     for (auto& config : swerveModuleConfigs)
     {
@@ -172,5 +173,18 @@ void ConfigFiles::LoadConfigFiles(std::string fileName)
         }
 
         robotConfig.sparkMaxPercentConfigs[config.get("Name").get<std::string>()] = motorConfig;
+    }
+
+    for (auto& config : lookupTableConfigs)
+    {
+        LookupTableConfig lookupTableConfig;
+        picojson::array dataArray = config.get("Data").get<picojson::array>();
+        for (auto& point : dataArray)
+        {
+            picojson::array pairData = point.get<picojson::array>();
+            std::pair<double, double> pairPoint = {pairData.at(0).get<double>(), pairData.at(1).get<double>()};
+            lookupTableConfig.lookupTableData.emplace(pairPoint);
+        }
+        robotConfig.lookupTableConfigs[config.get("Name").get<std::string>()] = lookupTableConfig;
     }
 }

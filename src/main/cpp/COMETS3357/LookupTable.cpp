@@ -1,20 +1,21 @@
 #include "COMETS3357/LookupTable.h"
 
-LookupTable::LookupTable()
-{
+using namespace COMETS3357;
 
-}
-
-void LookupTable::AddValues(std::set<std::pair<double, double>> table)
+LookupTable::LookupTable(std::string configName) : config{ConfigFiles::getInstance().GetConfigFiles().lookupTableConfigs[configName]}
 {
-    lookupTable = table;
+    lookupTable = config.lookupTableData;
 }
 
 double LookupTable::GetValue(double value)
 {
 
-    double above = lookupTable.upper_bound({value, std::numeric_limits<double>::lowest()})->second;
-    double below = std::prev(lookupTable.lower_bound({value, std::numeric_limits<double>::lowest()}))->second;
+    std::pair<double, double> above = *lookupTable.upper_bound({value, std::numeric_limits<double>::lowest()});
+    std::pair<double, double> below = *std::prev(lookupTable.lower_bound({value, std::numeric_limits<double>::lowest()}));
+ 
+    double slope = (above.second - below.second)/(above.first - below.second);
+    double angle = ((value - below.first) * slope) + below.second;
+ 
+    return angle;
 
-    return std::lerp(value, below, above);
 }

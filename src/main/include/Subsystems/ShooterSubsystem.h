@@ -3,6 +3,7 @@
 #include "COMETS3357/Subsystems/Subsystem.h"
 #include "COMETS3357/Subsystems/SparkMax/SparkMaxVelocity.h"
 #include "Subsystems/IndexerSubsytem.h"
+#include "COMETS3357/Subsystems/SparkMax/SparkMaxPosition.h"
 #include "COMETS3357/LookupTable.h"
 
 SUBSYSTEM_START(Shooter)
@@ -27,6 +28,12 @@ double GetVelocityFlyWheel();
 
 void SetVelocityIndexer();
 
+void SetPositionPivot(double position); 
+
+void SetPercentPivot(double percent); 
+
+void SetPositionPivot(std::string position); 
+
 
 std::pair<double, double> calculateDistanceTravelled(std::pair<double, double> velocity, double time); 
 
@@ -36,5 +43,7 @@ double getLaunchAngle(double distance);
 
 COMETS3357::SparkMaxVelocity KickerWheel{"KickerWheel"}; 
 COMETS3357::SparkMaxVelocity FlyWheel{"FlyWheel"}; 
+COMETS3357::SparkMaxPosition Pivot{"Pivot"}; 
+
 
 SUBSYSTEM_END

@@ -53,6 +53,23 @@ double ShooterSubsystem::GetVelocityFlyWheel()
     return FlyWheel.GetRelativeVelocity();
 }
 
+void ShooterSubsystem::SetPercentPivot(double percent) 
+{
+    Pivot.SetPosition(percent);
+}
+
+void ShooterSubsystem::SetPositionPivot(double position)
+{
+    Pivot.SetPosition(position); 
+}
+
+void ShooterSubsystem::SetPositionPivot(std::string position)
+{
+    Pivot.SetPosition(position); 
+}
+
+
+
 std::pair<double, double> calculateDistanceTravelled(std::pair<double, double> velocity, double time)
 {
     double x, y;

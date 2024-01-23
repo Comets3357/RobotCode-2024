@@ -1,6 +1,58 @@
 {
   "ControllerMap": "CompControllerMap",
+  "LookupTableConfigs":
+  [
+    {
+      "Name": "idk",
+      "Data":
+      [
+        [10, 20],
+        [30, 10],
+        [2, 3]
+      ]
+    }
+  ],
   "SparkMaxPositionConfigs": [
+    {
+      "AbsolutePositionConversionFactor": 6.2831853072000001,
+      "AbsoluteVelocityConversionFactor": 0.104719755,
+      "AbsoluteZeroOffset": 0,
+      "CurrentLimit": 10,
+      "DefaultRunMode": "ABSOLUTE",
+      "ID": 70,
+      "IdleMode": "Brake",
+      "InvertedAbsolute": true,
+      "InvertedRelative": false,
+      "MaxSpeed": 1,
+      "MinSpeed": -1,
+      "Name": "Pivot",
+      "Follow": "NONE",
+      "PositionPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 1
+      },
+      "PositionPIDWrappingEnabled": true,
+      "RelativePositionConversionFactor": 1,
+      "RelativeVelocityConversionFactor": 1,
+      "TurningEncoderPositionPIDMaxInput": 6.2831853072000001,
+      "TurningEncoderPositionPIDMinInput": 0,
+      "VelocityPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 0
+      },
+      "ForwardSoftLimitEnabled": false,
+      "ReverseSoftLimitEnabled": false,
+      "ForwardSoftLimit": 0,
+      "ReverseSoftLimit": 0,
+      "Positions":
+      {
+        
+      }
+    },
     
     {
       "AbsolutePositionConversionFactor": 6.2831853072000001,
