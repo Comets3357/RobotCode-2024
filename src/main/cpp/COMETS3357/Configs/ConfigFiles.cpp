@@ -85,39 +85,45 @@ void ConfigFiles::LoadConfigFiles(std::string fileName)
 
     for (auto& config : sparkMaxPositionConfigs) {
         SparkMaxPositionConfig motorConfig;
-        motorConfig.ID = (int)config.get("ID").get<double>();
-        motorConfig.defaultMode = config.get("DefaultRunMode").get<std::string>()=="ABSOLUTE" ? SparkMaxPositionRunMode::POSITION_SPARK_MAX_ABSOLUTE : SparkMaxPositionRunMode::POSITION_SPARK_MAX_RELATIVE;
-        motorConfig.invertedAbsolute = config.get("InvertedAbsolute").get<bool>();
-        motorConfig.invertedRelative = config.get("InvertedRelative").get<bool>();
-        motorConfig.currentLimit = config.get("CurrentLimit").get<double>();
-        motorConfig.relativePositionConversionFactor = config.get("RelativePositionConversionFactor").get<double>();
-        motorConfig.relativeVelocityConversionFactor = config.get("RelativeVelocityConversionFactor").get<double>();
-        motorConfig.absolutePositionConversionFactor = config.get("AbsolutePositionConversionFactor").get<double>();
-        motorConfig.absoluteVelocityConversionFactor = config.get("AbsoluteVelocityConversionFactor").get<double>();
-        motorConfig.absoluteZeroOffset = config.get("AbsoluteZeroOffset").get<double>();
-        motorConfig.maxSpeed = config.get("MaxSpeed").get<double>();
-        motorConfig.minSpeed = config.get("MinSpeed").get<double>();
-        motorConfig.idleMode = config.get("IdleMode").get<std::string>() == "Brake" ? rev::CANSparkMax::IdleMode::kBrake : rev::CANSparkMax::IdleMode::kCoast;
-        motorConfig.follow = config.get("Follow").get<std::string>();
 
-        motorConfig.velocityPID.P = config.get("VelocityPID").get("P").get<double>();
-        motorConfig.velocityPID.I = config.get("VelocityPID").get("I").get<double>();
-        motorConfig.velocityPID.D = config.get("VelocityPID").get("D").get<double>();
-        motorConfig.velocityPID.FF = config.get("VelocityPID").get("FF").get<double>();
-
-        motorConfig.positionPID.P = config.get("PositionPID").get("P").get<double>();
-        motorConfig.positionPID.I = config.get("PositionPID").get("I").get<double>();
-        motorConfig.positionPID.D = config.get("PositionPID").get("D").get<double>();
-        motorConfig.positionPID.FF = config.get("PositionPID").get("FF").get<double>();
-
-        motorConfig.positionPIDWrappingEnabled = config.get("PositionPIDWrappingEnabled").get<bool>();
-        motorConfig.turningEncoderPositionPIDMinInput = config.get("TurningEncoderPositionPIDMinInput").get<double>();
-        motorConfig.turningEncoderPositionPIDMaxInput = config.get("TurningEncoderPositionPIDMaxInput").get<double>();
-
-        motorConfig.forwardSoftLimitEnabled = config.get("ForwardSoftLimitEnabled").get<bool>();
-        motorConfig.reverseSoftLimitEnabled = config.get("ReverseSoftLimitEnabled").get<bool>();
-        motorConfig.forwardSoftLimit = config.get("ForwardSoftLimit").get<double>();
-        motorConfig.reverseSoftLimit = config.get("ReverseSoftLimit").get<double>();
+        if (!config.contains("Name")) std::cerr << "SparkMaxVelocity Config Does not containe \"Name\"" << std::endl;
+        std::string deviceName = config.get("Name").get<std::string>();
+        SetConfigValue<int>(config, deviceName, "ID", motorConfig.ID, 0);
+        std::string runModeString;
+        SetConfigValue<std::string>(config, deviceName, "DefaultRunMode", runModeString, "NONE");
+        motorConfig.defaultMode = (runModeString == "Absolute") ? COMETS3357::SparkMaxPositionRunMode::POSITION_SPARK_MAX_ABSOLUTE : COMETS3357::SparkMaxPositionRunMode::POSITION_SPARK_MAX_RELATIVE;
+        if (runModeString == "NONE") motorConfig.defaultMode = COMETS3357::SparkMaxPositionRunMode::POSITION_SPARK_MAX_NONE;
+        SetConfigValue<bool>(config, deviceName, "InvertedAbsolute", motorConfig.invertedAbsolute, false);
+        SetConfigValue<bool>(config, deviceName, "InvertedRelative", motorConfig.invertedRelative, false);
+        SetConfigValue<double>(config, deviceName, "CurrentLimit", motorConfig.currentLimit, 0);
+        SetConfigValue<double>(config, deviceName, "RelativePositionConversionFactor", motorConfig.relativePositionConversionFactor, 1);
+        SetConfigValue<double>(config, deviceName, "RelativeVelocityConversionFactor", motorConfig.relativeVelocityConversionFactor, 1);
+        SetConfigValue<double>(config, deviceName, "AbsolutePositionConversionFactor", motorConfig.absolutePositionConversionFactor, 1);
+        SetConfigValue<double>(config, deviceName, "AbsoluteVelocityConversionFactor", motorConfig.absoluteVelocityConversionFactor, 1);
+        SetConfigValue<double>(config, deviceName, "AbsoluteZeroOffset", motorConfig.absoluteZeroOffset, 0);
+        SetConfigValue<double>(config, deviceName, "MaxSpeed", motorConfig.maxSpeed, 0);
+        SetConfigValue<double>(config, deviceName, "MinSpeed", motorConfig.minSpeed, 0);
+        std::string idleModeString;
+        SetConfigValue<std::string>(config, deviceName, "IdleMode", idleModeString, "Brake");
+        motorConfig.idleMode = (idleModeString == "Brake") ? rev::CANSparkMax::IdleMode::kBrake : rev::CANSparkMax::IdleMode::kCoast;
+        SetConfigValue<std::string>(config, deviceName, "IdleMode", motorConfig.follow, "NONE");
+        if (!config.contains("VelocityPID")) printNotContains(config.get("Name").get<std::string>(), "VelocityPID");
+        SetConfigValue<double>(config, deviceName, "VelocityPID", "P", motorConfig.velocityPID.P, 0);
+        SetConfigValue<double>(config, deviceName, "VelocityPID", "I", motorConfig.velocityPID.I, 0);
+        SetConfigValue<double>(config, deviceName, "VelocityPID", "D", motorConfig.velocityPID.D, 0);
+        SetConfigValue<double>(config, deviceName, "VelocityPID", "FF", motorConfig.velocityPID.FF, 0);
+        if (!config.contains("PositionPID")) printNotContains(config.get("Name").get<std::string>(), "VelocityPID");
+        SetConfigValue<double>(config, deviceName, "PositionPID", "P", motorConfig.positionPID.P, 0);
+        SetConfigValue<double>(config, deviceName, "PositionPID", "I", motorConfig.positionPID.I, 0);
+        SetConfigValue<double>(config, deviceName, "PositionPID", "D", motorConfig.positionPID.D, 0);
+        SetConfigValue<double>(config, deviceName, "PositionPID", "FF", motorConfig.positionPID.FF, 0);
+        SetConfigValue<bool>(config, deviceName, "PositionPIDWrappingEnabled", motorConfig.positionPIDWrappingEnabled, false);
+        SetConfigValue<double>(config, deviceName, "TurningEncoderPositionPIDMinInput", motorConfig.turningEncoderPositionPIDMinInput, 0);
+        SetConfigValue<double>(config, deviceName, "TurningEncoderPositionPIDMaxInput", motorConfig.turningEncoderPositionPIDMaxInput, 0);
+        SetConfigValue<bool>(config, deviceName, "ForwardSoftLimitEnabled", motorConfig.forwardSoftLimitEnabled, false);
+        SetConfigValue<bool>(config, deviceName, "ReverseSoftLimitEnabled", motorConfig.reverseSoftLimitEnabled, false);
+        SetConfigValue<double>(config, deviceName, "ForwardSoftLimit", motorConfig.forwardSoftLimit, 0);
+        SetConfigValue<double>(config, deviceName, "ReverseSoftLimit", motorConfig.reverseSoftLimit, 0);
 
         picojson::object positions = config.get("Positions").get<picojson::object>();
         for (auto& position : positions)
@@ -135,32 +141,22 @@ void ConfigFiles::LoadConfigFiles(std::string fileName)
         SparkMaxVelocityConfig motorConfig;
 
         if (!config.contains("Name")) std::cerr << "SparkMaxVelocity Config Does not containe \"Name\"" << std::endl;
-        if (!config.contains("InvertedRelative")) printNotContains(config.get("Name").get<std::string>(), "InvertedRelative");
-        if (!config.contains("CurrentLimit")) printNotContains(config.get("Name").get<std::string>(), "CurrentLimit");
-        if (!config.contains("RelativePositionConversionFactor")) printNotContains(config.get("Name").get<std::string>(), "RelativePositionConversionFactor");
-        if (!config.contains("RelativeVelocityConversionFactor")) printNotContains(config.get("Name").get<std::string>(), "RelativeVelocityConversionFactor");
-        if (!config.contains("IdleMode")) printNotContains(config.get("Name").get<std::string>(), "IdleMode");
-        if (!config.contains("Follow")) printNotContains(config.get("Name").get<std::string>(), "Follow");
+        std::string deviceName = config.get("Name").get<std::string>();
+        SetConfigValue<int>(config, deviceName, "ID", motorConfig.ID, 0);
+        SetConfigValue<bool>(config, deviceName, "InvertedRelative", motorConfig.invertedRelative, false);
+        SetConfigValue<double>(config, deviceName, "CurrentLimit", motorConfig.currentLimit, 20);
+        SetConfigValue<double>(config, deviceName, "RelativePositionConversionFactor", motorConfig.relativePositionConversionFactor, 1);
+        SetConfigValue<double>(config, deviceName, "RelativeVelocityConversionFactor", motorConfig.relativeVelocityConversionFactor, 1);
+        std::string idleModeString;
+        SetConfigValue<std::string>(config, deviceName, "IdleMode", idleModeString, "Brake");
+        motorConfig.idleMode = (idleModeString == "Brake") ? rev::CANSparkMax::IdleMode::kBrake : rev::CANSparkMax::IdleMode::kCoast;
+        SetConfigValue<std::string>(config, deviceName, "Follow", motorConfig.follow, "NONE");
         if (!config.contains("VelocityPID")) printNotContains(config.get("Name").get<std::string>(), "VelocityPID");
-        if (!config.get("VelocityPID").contains("P")) printNotContains(config.get("Name").get<std::string>(), "VelocityPID / P");
-        if (!config.get("VelocityPID").contains("I")) printNotContains(config.get("Name").get<std::string>(), "VelocityPID / I");
-        if (!config.get("VelocityPID").contains("D")) printNotContains(config.get("Name").get<std::string>(), "VelocityPID / D");
-        if (!config.get("VelocityPID").contains("FF")) printNotContains(config.get("Name").get<std::string>(), "VelocityPID / FF");
-
-        motorConfig.ID = (int)config.get("ID").get<double>();
-        motorConfig.invertedRelative = config.get("InvertedRelative").get<bool>();
-        motorConfig.currentLimit = config.get("CurrentLimit").get<double>();
-        motorConfig.relativePositionConversionFactor = config.get("RelativePositionConversionFactor").get<double>();
-        motorConfig.relativeVelocityConversionFactor = config.get("RelativeVelocityConversionFactor").get<double>();
-        motorConfig.idleMode = config.get("IdleMode").get<std::string>() == "Brake" ? rev::CANSparkMax::IdleMode::kBrake : rev::CANSparkMax::IdleMode::kCoast;
-
-        motorConfig.velocityPID.P = config.get("VelocityPID").get("P").get<double>();
-        motorConfig.velocityPID.I = config.get("VelocityPID").get("I").get<double>();
-        motorConfig.velocityPID.D = config.get("VelocityPID").get("D").get<double>();
-        motorConfig.velocityPID.FF = config.get("VelocityPID").get("FF").get<double>();
-
-        motorConfig.follow = config.get("Follow").get<std::string>();
-
+        SetConfigValue<double>(config, deviceName, "VelocityPID", "P", motorConfig.velocityPID.P, 0);
+        SetConfigValue<double>(config, deviceName, "VelocityPID", "I", motorConfig.velocityPID.I, 0);
+        SetConfigValue<double>(config, deviceName, "VelocityPID", "D", motorConfig.velocityPID.D, 0);
+        SetConfigValue<double>(config, deviceName, "VelocityPID", "FF", motorConfig.velocityPID.FF, 0);
+        
         picojson::object velocities = config.get("Velocities").get<picojson::object>();
         for (auto& velocity : velocities)
         {
@@ -189,7 +185,38 @@ void ConfigFiles::LoadConfigFiles(std::string fileName)
     }
 }
 
+template <typename T>
+void ConfigFiles::SetConfigValue(picojson::value& config, std::string deviceName, std::string key, T& setValue, T defaultValue)
+{
+    if constexpr  (std::is_same<T, int>::value)
+    {
+        if (!config.contains(key)) {printNotContains(deviceName, key); setValue = defaultValue;}
+        else setValue = (T)config.get(key).get<double>();
+        
+    }
+    else
+    {
+        if (!config.contains(key)) {printNotContains(deviceName, key); setValue = defaultValue;}
+        else setValue = config.get(key).get<T>();
+    }
+}
+
+template <typename T>
+void ConfigFiles::SetConfigValue(picojson::value& config, std::string deviceName, std::string key1, std::string key2, T& setValue, T defaultValue)
+{
+    if constexpr (std::is_same<T, int>::value)
+    {
+        if (!config.get(key1).contains(key2)) {printNotContains(deviceName, key2); setValue = defaultValue;}
+        else setValue = (T)config.get(key1).get(key2).get<double>();
+    }
+    else
+    {
+        if (!config.get(key1).contains(key2)) {printNotContains(deviceName, key2); setValue = defaultValue;}
+        else setValue = config.get(key2).get(key2).get<T>();
+    }
+}
+
 void ConfigFiles::printNotContains(std::string deviceName, std::string missingComponent)
 {
-    std::cerr << "Device " << deviceName << " Does not contain a \"" << missingComponent << "\" in the Config File. The code will crash" << std::endl;
+    std::cerr << "Device " << deviceName << " Does not contain a \"" << missingComponent << "\" in the Config File." << std::endl;
 }

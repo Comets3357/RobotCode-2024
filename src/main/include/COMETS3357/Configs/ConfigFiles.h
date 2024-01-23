@@ -16,7 +16,7 @@
 #include <frc/Filesystem.h>
 #include <rev/CANSparkMax.h>
 #include <frc/motorcontrol/PWMSparkMax.h>
-
+#include <type_traits>
 
 
 
@@ -128,6 +128,11 @@ namespace COMETS3357
     class ConfigFiles
     {
     public:
+
+        template <typename T>
+        void SetConfigValue(picojson::value& config, std::string deviceName, std::string key, T& setValue, T defaultValue);
+        template <typename T>
+        void SetConfigValue(picojson::value& config, std::string deviceName, std::string key1, std::string key2, T& setValue, T defaultValue);
 
         /**
          * Returns a static instance of the ConfigFiles which is used
