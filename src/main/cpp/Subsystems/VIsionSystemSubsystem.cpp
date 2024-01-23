@@ -11,8 +11,6 @@ VisionSystemSubsystem::VisionSystemSubsystem(COMETS3357::SwerveSubsystem* swerve
     frc::Rotation2d rotation{units::radian_t{GetSubsystemData("GyroSubsystem")->GetEntry("angle").GetDouble(0)}};
     frc::Pose2d robotPosition{position, rotation};
 
-
-    // swerveSubsystem->m_odometry.SetVisionMeasurementStdDevs({0.01, 0.01, 0.01});
 }
 
 void VisionSystemSubsystem::Initialize()
@@ -24,6 +22,7 @@ void VisionSystemSubsystem::Initialize()
 
 void VisionSystemSubsystem::Periodic()
 {
+    poseEstimator.Periodic();
     double currentTimestamp = subsystemData->GetEntry("Timestamp").GetDouble(0);
     if (currentTimestamp != lastTimestamp)
     {
@@ -37,6 +36,9 @@ void VisionSystemSubsystem::Periodic()
 
 
         frc::Pose2d robot = swerveSubsystem->GetPose();
+
+        poseEstimator.AddPose(robotPosition, nt::Now()-10);
+
 
         // if (sqrt(pow((float)(robotPosition.X() - robot.X()), 2.0f) + pow((float)(robotPosition.Y() + robot.Y()), 2)) < 1)
         // {
@@ -53,9 +55,7 @@ void VisionSystemSubsystem::Periodic()
 
     // Do this in either robot periodic or subsystem periodic
 
-    poseEstimator.Periodic();
-    poseEstimator.AddPose(frc::Pose2d{frc::Translation2d{units::meter_t{10}, units::meter_t{10}}, frc::Rotation2d{units::radian_t{0}}}, nt::Now()-10);
-    m_field.SetRobotPose(poseEstimator.GetPose(0));
-    frc::Pose2d k =poseEstimator.GetPose(0);
+    
+    m_field.SetRobotPose(poseEstimator.GetPose(GetSubsystemData("GyroSubsystem")->GetEntry("angle").GetDouble(0)));
 
 }
