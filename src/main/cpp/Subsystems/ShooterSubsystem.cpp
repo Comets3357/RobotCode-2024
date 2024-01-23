@@ -65,3 +65,8 @@ std::pair<double, double> calculateFinalPosition(std::pair<double, double> initi
 {
     return {travel.first - initial.first, travel.second - initial.first};
 }
+
+double getLaunchAngle(double position)
+{
+    return 1.0; // will return the look up table value from posiiton p 
+}
