@@ -101,6 +101,8 @@ namespace COMETS3357
      */
     double GetTurnRate();
 
+    wpi::array<frc::SwerveModulePosition, 4U> GetPositions();
+
     /**
      * Returns the currently-estimated pose of the robot.
      *
@@ -176,7 +178,7 @@ namespace COMETS3357
       void SetChassisSpeed(frc::ChassisSpeeds chassisSpeed);
 
       
-    frc::SwerveDrivePoseEstimator<4> m_odometry;
+    frc::SwerveDriveOdometry<4> m_odometry;
 
   private:
     // Components (e.g. motor controllers and sensors) should generally be

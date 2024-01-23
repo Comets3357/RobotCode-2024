@@ -5,8 +5,12 @@
 
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableInstance.h>
+#include <networktables/DoubleTopic.h>
 #include <units/length.h>
 #include <frc/geometry/Pose2d.h>
+#include <frc/smartdashboard/Field2d.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include "COMETS3357/PoseEstimator.h"
 
 SUBSYSTEM_START(VisionSystem)
 
@@ -17,5 +21,16 @@ SUBSYSTEM_START(VisionSystem)
 
     COMETS3357::SwerveSubsystem* swerveSubsystem;
     double lastTimestamp = 0;
+
+    nt::DoubleSubscriber xSub;
+    int i = 0;
+    nt::DoubleSubscriber ySub;
+    nt::DoubleSubscriber timestampSub;
+
+    frc::Field2d m_field;
+
+    frc::Pose2d lastPose;
+
+    COMETS3357::PoseEstimator poseEstimator;
 
 SUBSYSTEM_END

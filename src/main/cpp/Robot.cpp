@@ -6,7 +6,7 @@ void Robot::RobotInit()
 {
 // ConfigFiles::getInstance().LoadConfigFiles("Comp");
 //m_container.timerSubsystem.ResetAndBeginTimer();
-// COMETS3357::SubsystemManager::GetInstance().Init();
+COMETS3357::SubsystemManager::GetInstance().Init();
 }
 
 /**

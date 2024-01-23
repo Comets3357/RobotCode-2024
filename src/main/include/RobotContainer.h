@@ -59,9 +59,7 @@ class RobotContainer {
   COMETS3357::LimelightSubsystem limelight{};
   COMETS3357::SwerveSubsystem swerve{"Swerve"};
 
-  COMETS3357::LookupTable table{"idk"};
-
-  // VisionSystemSubsystem visionSystem{&swerve};
+  VisionSystemSubsystem visionSystem{&swerve};
   IntakeSubsystem intake {}; 
   IndexerSubsystem indexer {}; 
   ShooterSubsystem shooter {};
@@ -106,7 +104,7 @@ class RobotContainer {
 
   std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionMap
   {
-
+    {"Intake", std::make_shared<frc2::InstantCommand>(startIntake)}
   };
 
   // COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap", };

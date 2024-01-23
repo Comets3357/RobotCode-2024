@@ -356,6 +356,12 @@ void SwerveSubsystem::SetModuleStates(
   m_frontRight.SetDesiredState(desiredStates[1]);
   m_rearLeft.SetDesiredState(desiredStates[2]);
   m_rearRight.SetDesiredState(desiredStates[3]);
+
+}
+
+wpi::array<frc::SwerveModulePosition, 4U> SwerveSubsystem::GetPositions()
+{
+  return {m_frontLeft.GetPosition(), m_frontRight.GetPosition(), m_rearLeft.GetPosition(), m_rearRight.GetPosition()};
 }
 
 void SwerveSubsystem::ResetEncoders() {
@@ -381,7 +387,7 @@ void SwerveSubsystem::ZeroHeading() { }//m_gyro.Reset(); }
 
 double SwerveSubsystem::GetTurnRate() { return -gyroSubsystemData->GetEntry("angleRate").GetDouble(0); }
 
-frc::Pose2d SwerveSubsystem::GetPose() { return m_odometry.GetEstimatedPosition(); }
+frc::Pose2d SwerveSubsystem::GetPose() { return m_odometry.GetPose(); }
 
 void SwerveSubsystem::ResetOdometry(frc::Pose2d pose) {
   m_odometry.ResetPosition(
