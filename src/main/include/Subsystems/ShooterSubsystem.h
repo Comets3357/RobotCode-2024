@@ -44,6 +44,7 @@ double getLaunchAngle(double distance);
 COMETS3357::SparkMaxVelocity KickerWheel{"KickerWheel"}; 
 COMETS3357::SparkMaxVelocity FlyWheel{"FlyWheel"}; 
 COMETS3357::SparkMaxPosition Pivot{"Pivot"}; 
+COMETS3357::LookupTable Table{"AngleLookUp"}; 
 
 
 SUBSYSTEM_END

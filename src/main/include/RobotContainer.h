@@ -67,7 +67,7 @@ class RobotContainer {
   ShooterSubsystem shooter {};
 
   IntakeIndexerCommand intakeIndexer {&indexer}; 
-  ShooterCommand shooterCommand {&shooter, &indexer};
+  ShooterCommand shooterCommand {&shooter, &indexer, &swerve};
 
   // Instance command
 
