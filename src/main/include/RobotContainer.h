@@ -71,7 +71,6 @@ class RobotContainer {
 
   // Instance command
 
-  frc2::InstantCommand shootIndexer{[this](){indexer.SetVelocity("IndexerShootSpeed");}, {&indexer}}; 
   frc2::InstantCommand ejectIndexer{[this](){indexer.SetVelocity("IndexerEjectSpeed");}, {&indexer}}; 
 
   frc2::InstantCommand stopIntake{[this](){intake.SetPercent(0);}, {&intake}}; 
@@ -82,7 +81,7 @@ class RobotContainer {
 
   frc2::InstantCommand stopIndex{[this](){indexer.SetVelocity(0);}, {&indexer}}; 
 
-  frc2::InstantCommand stopShoot{[this](){shooter.SetVelocityKickerWheel(0); indexer.SetPercent(0);}, {&shooter}}; 
+  frc2::InstantCommand stopShoot{[this](){shooter.SetVelocityKickerWheel("IdleSpeed"); shooter.SetVelocityFlyWheel("IdleSpeed"); indexer.SetPercent(0);}, {&shooter}}; 
 
   frc2::InstantCommand zeroGyro{[this](){gyro.ZeroGyro();}, {&gyro}};
 
@@ -90,6 +89,7 @@ class RobotContainer {
   {
       {"ZeroGyro", std::make_shared<frc2::InstantCommand>(zeroGyro)},
       {"EjectIntake", std::make_shared<frc2::InstantCommand>(ejectIntake)},
+      {"StartIntake", std::make_shared<frc2::InstantCommand>(startIntake)},
       {"StopIntake", std::make_shared<frc2::InstantCommand>(stopIntake)},
       {"StartShoot", std::make_shared<ShooterCommand>(shooterCommand)},
       {"StopShoot", std::make_shared<frc2::InstantCommand>(stopShoot)}
@@ -101,8 +101,9 @@ class RobotContainer {
    {"SwerveDefaultCommand", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.DriveCornerTurning(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX});}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"SwerveDefaultCommandDirectional", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.DriveXRotate(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX});}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualIntake", {[this](auto leftX, auto leftY, auto rightX, auto rightY){intake.SetPercent(leftY);}, &intake, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
-   {"KickerWheel", {[this](auto leftX, auto leftY, auto rightX, auto rightY){shooter.SetPercentKickerWheel(leftY); shooter.SetPercentKickerWheel(rightY);}, &shooter, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
-   {"ManualIndexer", {[this](auto leftX, auto leftY, auto rightX, auto rightY){indexer.SetPercent(rightY);}, &shooter, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}}
+   {"ManualShoot", {[this](auto leftX, auto leftY, auto rightX, auto rightY){shooter.SetPercentKickerWheel(leftY); shooter.SetPercentFlyWheel(leftX);}, &shooter, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"ManualIndexer", {[this](auto leftX, auto leftY, auto rightX, auto rightY){indexer.SetPercent(rightY);}, &shooter, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"ManualPivot", {[this](auto leftX, auto leftY, auto rightX, auto rightY){shooter.SetPercentPivot(rightY);}, &shooter, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}}
   };
 
   std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionMap

@@ -9,7 +9,7 @@
 #include <frc/DriverStation.h>
 COMMAND_START(Shooter)
 
-ShooterCommand(ShooterSubsystem *shooter, IndexerSubsystem* indexer, COMETS3357::SwerveSubsystem* swerve); 
+ShooterCommand(ShooterSubsystem *shooter, IndexerSubsystem* indexer, COMETS3357::SwerveSubsystem* swerveSubsystem); 
 
 ShooterSubsystem * shooterSubsystem; 
 IndexerSubsystem * indexerSubsystem;

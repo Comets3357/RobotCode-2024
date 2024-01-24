@@ -26,8 +26,6 @@ double GetVelocityKickerWheel();
 
 double GetVelocityFlyWheel();
 
-void SetVelocityIndexer();
-
 void SetPositionPivot(double position); 
 
 void SetPercentPivot(double percent); 
@@ -39,7 +37,6 @@ std::pair<double, double> calculateDistanceTravelled(std::pair<double, double> v
 
 std::pair<double, double> calculateFinalPosition(std::pair<double, double> initial, std::pair<double, double> travel); 
 
-double getLaunchAngle(double distance); 
 
 COMETS3357::SparkMaxVelocity KickerWheel{"KickerWheel"}; 
 COMETS3357::SparkMaxVelocity FlyWheel{"FlyWheel"}; 

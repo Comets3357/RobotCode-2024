@@ -2,10 +2,10 @@
 #include "Commands/ShooterCommand.h"
 
 
-ShooterCommand::ShooterCommand(ShooterSubsystem *shooter, IndexerSubsystem* indexer, COMETS3357::SwerveSubsystem* swerve) {
+ShooterCommand::ShooterCommand(ShooterSubsystem *shooter, IndexerSubsystem* indexer, COMETS3357::SwerveSubsystem* swerveSubsystem) {
     shooterSubsystem = shooter;
     indexerSubsystem = indexer; 
-    swerve = swerve; 
+    swerve = swerveSubsystem; 
     AddRequirements({shooter, indexer, swerve}); 
 }
 
@@ -25,11 +25,10 @@ void ShooterCommand::Initialize()
 
 void ShooterCommand::Execute()
 {
-    // frc::Pose2d pos = swerve->GetPose(); 
-    // double distance = sqrt(pow(targetPos.X() - pos.X(), 2) + pow(targetPos.Y() - pos.Y(), 2)); 
-    // double angle = shooterSubsystem->Table.GetValue(distance); 
-    // shooterSubsystem->SetPositionPivot(angle); 
-
+    frc::Pose2d pos = swerve->GetPose(); 
+    double distance = sqrt(pow((double)(targetPos.X() - pos.X()), 2) + pow((double)(targetPos.Y() - pos.Y()), 2)); 
+    double angle = shooterSubsystem->Table.GetValue(distance); 
+    shooterSubsystem->SetPositionPivot(angle); 
 }
 
 bool ShooterCommand::IsFinished()
@@ -45,5 +44,5 @@ bool ShooterCommand::IsFinished()
 
 void ShooterCommand::End(bool interrupted)
 {
-    shooterSubsystem->SetVelocityFlyWheel(0); 
+    
 }

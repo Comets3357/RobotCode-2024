@@ -31,7 +31,7 @@ void ShooterSubsystem::SetVelocityKickerWheel(std::string velocity)
     KickerWheel.SetVelocity(velocity);
 }
 
-// Manuel // 
+// Manual // 
 
 void ShooterSubsystem::SetPercentFlyWheel(double percent) 
 {
@@ -70,7 +70,7 @@ void ShooterSubsystem::SetPositionPivot(std::string position)
 
 
 
-std::pair<double, double> calculateDistanceTravelled(std::pair<double, double> velocity, double time)
+std::pair<double, double> ShooterSubsystem::calculateDistanceTravelled(std::pair<double, double> velocity, double time)
 {
     double x, y;
     x = velocity.first * (time + .1);
@@ -78,12 +78,7 @@ std::pair<double, double> calculateDistanceTravelled(std::pair<double, double> v
     return {x,y};
 }
 
-std::pair<double, double> calculateFinalPosition(std::pair<double, double> initial, std::pair<double, double> travel)
+std::pair<double, double> ShooterSubsystem::calculateFinalPosition(std::pair<double, double> initial, std::pair<double, double> travel)
 {
     return {travel.first - initial.first, travel.second - initial.first};
-}
-
-double getLaunchAngle(double position)
-{
-    return 1.0; // will return the look up table value from posiiton p 
 }

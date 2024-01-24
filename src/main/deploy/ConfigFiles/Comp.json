@@ -314,7 +314,8 @@
       },
       "Velocities":
       {
-        "ShooterSpeed": 5000
+        "ShooterSpeed": 5000,
+        "IdleSpeed" : 1000
       }
     },
     {
@@ -334,7 +335,8 @@
       },
       "Velocities":
       {
-        "ShooterSpeed": 5000
+        "ShooterSpeed": 5000,
+        "IdleSpeed" : 1000
       }
     },
     {
