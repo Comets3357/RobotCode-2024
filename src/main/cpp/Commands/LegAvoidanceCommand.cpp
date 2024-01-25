@@ -35,6 +35,11 @@ void LegAvoidanceCommand::Execute()
     double degreeOffset = 1.0;
     double bottomHypotenuse = 27.4;
 
+    double xPosBottom1 = xPos + sin(robotDirection + degreeOffset) * bottomHypotenuse;
+    double yPosBottom1 = yPos + cos(robotDirection + degreeOffset) * bottomHypotenuse;
+    double xPosBottom2 = xPos + sin(robotDirection - degreeOffset) * bottomHypotenuse;
+    double yPosBottom2 = yPos + cos(robotDirection - degreeOffset) * bottomHypotenuse;
+
 
 
 
@@ -45,8 +50,9 @@ void LegAvoidanceCommand::Execute()
 
     
     frc::Translation2d triangleTip = frc::Translation2d{units::meter_t{xPos + cos(robotDirection) * kConstant * magnitude}, units::meter_t{yPos + sin(robotDirection) * kConstant * magnitude}}; 
-    frc::Translation2d bottom1 = frc::Translation2d{units::meter_t{xPos + sin(robotDirection + degreeOffset) * bottomHypotenuse}, units::meter_t{yPos + cos(robotDirection + degreeOffset) * bottomHypotenuse}};
-    frc::Translation2d bottom2 = frc::Translation2d{units::meter_t{xPos + sin(robotDirection - degreeOffset) * bottomHypotenuse}, units::meter_t{yPos + cos(robotDirection - degreeOffset) * bottomHypotenuse}};
+    frc::Translation2d bottom1 = frc::Translation2d{units::meter_t{xPosBottom1}, units::meter_t{yPosBottom1}};
+    frc::Translation2d bottom2 = frc::Translation2d{units::meter_t{xPosBottom2}, units::meter_t{yPosBottom2}};
+    frc::Translation2d bottom1extension = frc::Translation2d{}
 
 
     
