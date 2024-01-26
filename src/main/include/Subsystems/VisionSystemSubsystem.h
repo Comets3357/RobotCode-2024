@@ -28,6 +28,7 @@ SUBSYSTEM_START(VisionSystem)
     nt::DoubleSubscriber timestampSub;
 
     frc::Field2d m_field;
+    frc::Field2d m_field2;
 
     frc::Pose2d lastPose;
 

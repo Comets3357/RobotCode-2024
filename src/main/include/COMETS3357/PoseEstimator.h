@@ -36,7 +36,7 @@ namespace COMETS3357
         void AddPose(frc::Pose2d pose, double timestamp);
 
         void Periodic();
-
+bool startup = true;
         frc::SwerveDriveOdometry<4>* m_odometry;
 
         RobotPose poseZero{0.0, 0.0, 0.0};
@@ -48,6 +48,6 @@ namespace COMETS3357
 
         std::shared_ptr<nt::NetworkTable> gyroSubsystemData;
         RobotPose lastPoseDelta{0.0, 0.0, 0.0};
-
+        RobotPose offset{0.0, 0.0, 0.0};
     };
 };
