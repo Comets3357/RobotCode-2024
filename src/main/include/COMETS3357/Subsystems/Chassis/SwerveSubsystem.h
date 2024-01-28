@@ -180,6 +180,13 @@ namespace COMETS3357
       
     frc::SwerveDriveOdometry<4> m_odometry;
 
+        bool controllingSwerveRotation = true;
+    bool controllingSwerveMovement = true;
+
+    units::meters_per_second_t overrideVelocityX{0};
+    units::meters_per_second_t overrideVelocityY{0};
+    units::radians_per_second_t overrideRotation{0};
+
   private:
     // Components (e.g. motor controllers and sensors) should generally be
     // declared private and exposed only through public methods.
@@ -200,7 +207,7 @@ namespace COMETS3357
     // frc::SwerveDriveOdometry<4> m_odometry;
 
 
-    
+
 
     double actualAngle = 0; 
     double lastAngle = 0; 

@@ -21,6 +21,11 @@ void LegAvoidanceCommand::Initialize()
 
 }
 
+double HeronsFormula (double semiperimeter, double a, double b, double c) {
+  return sqrt(semiperimeter * (semiperimeter - a) * (semiperimeter - b) * (semiperimeter - c)); 
+}
+
+
 void LegAvoidanceCommand::Execute()
 {
     double xSpeed = (double)swerveSubsystem->getSpeeds().vx;
@@ -41,14 +46,6 @@ void LegAvoidanceCommand::Execute()
     double xPosBottom2 = xPos + sin(robotDirection - degreeOffset) * bottomHypotenuse;
     double yPosBottom2 = yPos + cos(robotDirection - degreeOffset) * bottomHypotenuse;
 
-
-
-
-
-
-
-
-
     double kConstant = 0.2; 
     double magnitude = sqrt(xSpeedSquared + ySpeedSquared);
   
@@ -56,28 +53,65 @@ void LegAvoidanceCommand::Execute()
     frc::Translation2d triangleTip = frc::Translation2d{units::meter_t{xPos + cos(robotDirection) * kConstant * magnitude}, units::meter_t{yPos + sin(robotDirection) * kConstant * magnitude}}; 
     frc::Translation2d bottom1 = frc::Translation2d{units::meter_t{xPosBottom1}, units::meter_t{yPosBottom1}};
     frc::Translation2d bottom2 = frc::Translation2d{units::meter_t{xPosBottom2}, units::meter_t{yPosBottom2}};
+
+    //frc::Translation2d const points [6]; 
     
-    frc::Translation2d redA = frc::Translation2d{units::meter_t{13.25}, units::meter_t{4.1}};
-    frc::Translation2d redB = frc::Translation2d{units::meter_t{10.93}, units::meter_t{5.41}};
-    frc::Translation2d redC = frc::Translation2d{units::meter_t{10.93}, units::meter_t{2.8}};
-    frc::Translation2d blueA = frc::Translation2d{units::meter_t{3.3}, units::meter_t{4.1}};
-    frc::Translation2d blueB = frc::Translation2d{units::meter_t{5.63}, units::meter_t{5.41}};
-    frc::Translation2d blueC = frc::Translation2d{units::meter_t{5.63}, units::meter_t{2.80}};
+    frc::Translation2d const redA =  frc::Translation2d{units::meter_t{13.25}, units::meter_t{4.1}};
+    frc::Translation2d const redB =  frc::Translation2d{units::meter_t{10.93}, units::meter_t{5.41}};
+    frc::Translation2d const redC = frc::Translation2d{units::meter_t{10.93}, units::meter_t{2.8}};
+    frc::Translation2d const blueA = frc::Translation2d{units::meter_t{3.3}, units::meter_t{4.1}};
+    frc::Translation2d const blueB = frc::Translation2d{units::meter_t{5.63}, units::meter_t{5.41}};
+    frc::Translation2d const blueC = frc::Translation2d{units::meter_t{5.63}, units::meter_t{2.80}};
+
+    frc::Translation2d const points[] = {redA, redB, redC, blueA, blueB, blueC}; 
+
+    double sideLengthA = (double)bottom1.Distance(bottom2); 
+    double sideLengthB = (double)bottom1.Distance(triangleTip); 
+    double sideLengthC = (double)bottom2.Distance(triangleTip); 
+
+    bool isClear; 
+    bool starboardSide; 
+
+    for(int i = 0; i < 6; i++) {
+      double distanceTip = (double)points[i].Distance(triangleTip);  // distane from the point to the tip of the triangle
+      double distance1 = (double)points[i].Distance(bottom1);     // 
+      double distance2 = (double)points[i].Distance(bottom2);     // 
 
 
+      double semiperimeterTriangle = (sideLengthA + sideLengthB + sideLengthC) / 2.0; 
+      double semiperimeterAlpha = (distance1 + distance2 + sideLengthA) / 2.0; 
+      double semiperimeterBeta = (distance1 + distanceTip + sideLengthB) / 2.0;
+      double semiperimeterGamma = (distanceTip + distance2 + sideLengthC) / 2.0; 
 
+      double bigTriArea = HeronsFormula(semiperimeterTriangle, sideLengthA, sideLengthB, sideLengthC); 
+      double areaA = HeronsFormula(semiperimeterAlpha, distance1, distance2, sideLengthA); 
+      double areaB = HeronsFormula(semiperimeterBeta, distance1, distanceTip, sideLengthB); 
+      double areaC = HeronsFormula(semiperimeterGamma, distanceTip, distance2, sideLengthC); 
 
+      double alpha, beta, gamma; 
+      alpha = areaA / bigTriArea; 
+      beta = areaB / bigTriArea; 
+      gamma = areaC / bigTriArea; 
 
+      if (alpha + beta + gamma != 1) {
+          isClear = false; 
+          if (areaC > areaB) {
+            starboardSide = false; 
+          }
+      }
 
-    double sideLengthA = sqrt(pow(0.7,2) + pow(kConstant * magnitude, 2));
-    double sideLengthA2 = sqrt(pow(1,2));
+      
+          
+        
+    }
+    
+    
   
 
-    std::tuple <double, double, double> alphaSides = {1,1,1};
-    
-    
-  //  if (magnitude >= 2.5 &&  frey likes dudes(children))
-  
+
+  swerveSubsystem->controllingSwerveMovement = true;
+  swerveSubsystem->overrideVelocityX = units::meters_per_second_t{0};
+  swerveSubsystem->overrideVelocityY = units::meters_per_second_t{0};
   
      
 }
