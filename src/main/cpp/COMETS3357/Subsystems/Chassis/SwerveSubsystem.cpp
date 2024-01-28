@@ -257,6 +257,8 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
   double xSpeedCommanded;
   double ySpeedCommanded;
 
+  
+
   if (rateLimit) {
     // Convert XY to polar for rate limiting
     double inputTranslationDir = atan2(ySpeed.value(), xSpeed.value());
@@ -393,6 +395,15 @@ void SwerveSubsystem::ResetOdometry(frc::Pose2d pose) {
 
 void SwerveSubsystem::DriveXRotate(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot)
 {
+  if (!controllingSwerveRotation )
+  {
+    rot = overrideRotation;
+  }
+  if (!controllingSwerveMovement)
+  {
+    xSpeed = overrideXSpeed;
+    ySpeed = overrideYSpeed;
+  }
   currentKinematic = &kDriveKinematics;
   Drive(xSpeed, ySpeed, rot, true, true, &kDriveKinematics);
   pickedCorner = false;
@@ -400,6 +411,7 @@ void SwerveSubsystem::DriveXRotate(units::meters_per_second_t xSpeed, units::met
 
 void SwerveSubsystem::DriveDirectionalRotate(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, double directionX, double directionY)
 {
+  
   currentKinematic = &kDriveKinematics;
   Drive(xSpeed, ySpeed, directionX, directionY, true, true);
   pickedCorner = false;

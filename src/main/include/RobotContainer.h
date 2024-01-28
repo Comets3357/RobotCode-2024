@@ -111,7 +111,7 @@ class RobotContainer {
 
   };
 
-  // COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap", };
+  COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap", };
   COMETS3357::Autons autos{&swerve, autonActionMap};
 
   void ConfigureBindings();

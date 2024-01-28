@@ -177,7 +177,12 @@ namespace COMETS3357
 
       
     frc::SwerveDrivePoseEstimator<4> m_odometry;
+bool controllingSwerveRotation = true;
+bool controllingSwerveMovement = true;
 
+units::radian_t overrideRotation{0};
+units::meter_t overrideXSpeed{0};
+units::meter_t overrideYSpeed{0};
 
   private:
     // Components (e.g. motor controllers and sensors) should generally be

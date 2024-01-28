@@ -3,7 +3,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <COMETS3357/Subsystems/SubsystemManager.h>
 
-#define FORCEINIT
+// #define FORCEINIT
 
 using namespace COMETS3357;
 
@@ -66,6 +66,7 @@ void SparkMaxPosition::RobotInit()
         #endif
    )
     {
+        double zero = absoluteEncoder.GetZeroOffset();
         motor.RestoreFactoryDefaults();
         motor.SetInverted(config.invertedRelative);
         motor.SetSmartCurrentLimit(config.currentLimit);
@@ -81,6 +82,10 @@ void SparkMaxPosition::RobotInit()
         if (setAbsPos)
         {
             absoluteEncoder.SetZeroOffset(config.absoluteZeroOffset);
+        }
+        else
+        {
+            absoluteEncoder.SetZeroOffset(zero);
         }
 
 
