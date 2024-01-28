@@ -33,7 +33,8 @@ void LegAvoidanceCommand::Execute()
     double robotDirection = (double)swerveSubsystem->GetPose().Rotation().Radians();
 
     double degreeOffset = 1.0;
-    double bottomHypotenuse = 0.7; 
+    double bottomHypotenuse = 27.4;
+
 
     double xPosBottom1 = xPos + sin(robotDirection + degreeOffset) * bottomHypotenuse;
     double yPosBottom1 = yPos + cos(robotDirection + degreeOffset) * bottomHypotenuse;
@@ -45,33 +46,34 @@ void LegAvoidanceCommand::Execute()
 
 
 
-    double kConstant = .5; 
+
+
+
+    double kConstant = 0.2; 
     double magnitude = sqrt(xSpeedSquared + ySpeedSquared);
-
-
-    double sideLengthB = sqrt(0.7 * 0.7 + pow(magnitude * kConstant,2)); 
-    double sideLengthC = sideLengthB; 
-
-    frc::Translation2d redA = frc::Translation2d{units::meter_t{3.3}, units::meter_t{3.05}}; 
-    frc::Translation2d redB = frc::Translation2d{units::meter_t{3.3}, units::meter_t{3.05}}; 
-    frc::Translation2d redC = frc::Translation2d{units::meter_t{3.3}, units::meter_t{3.05}}; 
-
-    frc::Translation2d blueA = frc::Translation2d{units::meter_t{3.3}, units::meter_t{3.05}}; 
-    frc::Translation2d blueB = frc::Translation2d{units::meter_t{3.3}, units::meter_t{3.05}}; 
-    frc::Translation2d blueC = frc::Translation2d{units::meter_t{3.3}, units::meter_t{3.05}}; 
+  
     
     frc::Translation2d triangleTip = frc::Translation2d{units::meter_t{xPos + cos(robotDirection) * kConstant * magnitude}, units::meter_t{yPos + sin(robotDirection) * kConstant * magnitude}}; 
     frc::Translation2d bottom1 = frc::Translation2d{units::meter_t{xPosBottom1}, units::meter_t{yPosBottom1}};
     frc::Translation2d bottom2 = frc::Translation2d{units::meter_t{xPosBottom2}, units::meter_t{yPosBottom2}};
-    frc::Translation2d bottom1extension = frc::Translation2d{}; 
-
-
-
     
-    
+    frc::Translation2d redA = frc::Translation2d{units::meter_t{13.25}, units::meter_t{4.1}};
+    frc::Translation2d redB = frc::Translation2d{units::meter_t{10.93}, units::meter_t{5.41}};
+    frc::Translation2d redC = frc::Translation2d{units::meter_t{10.93}, units::meter_t{2.8}};
+    frc::Translation2d blueA = frc::Translation2d{units::meter_t{3.3}, units::meter_t{4.1}};
+    frc::Translation2d blueB = frc::Translation2d{units::meter_t{5.63}, units::meter_t{5.41}};
+    frc::Translation2d blueC = frc::Translation2d{units::meter_t{5.63}, units::meter_t{2.80}};
 
 
 
+
+
+
+    double sideLengthA = sqrt(pow(0.7,2) + pow(kConstant * magnitude, 2));
+    double sideLengthA2 = sqrt(pow(1,2));
+  
+
+    std::tuple <double, double, double> alphaSides = {1,1,1};
     
     
   //  if (magnitude >= 2.5 &&  frey likes dudes(children))
