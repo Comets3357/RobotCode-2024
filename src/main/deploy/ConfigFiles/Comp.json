@@ -345,7 +345,7 @@
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "DriveMotor1",
-      "RelativePositionConversionFactor": 0.0485273613,
+      "RelativePositionConversionFactor": 0.06383706666,
       "RelativeVelocityConversionFactor": 0.00084632602091900004,
       "Follow": "NONE",
       "VelocityPID": {
@@ -365,7 +365,7 @@
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "DriveMotor2",
-      "RelativePositionConversionFactor": 0.0485273613,
+      "RelativePositionConversionFactor": 0.06383706666,
       "RelativeVelocityConversionFactor": 0.00084632602091900004,
       "Follow": "NONE",
       "VelocityPID": {
@@ -385,7 +385,7 @@
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "DriveMotor3",
-      "RelativePositionConversionFactor": 0.0485273613,
+      "RelativePositionConversionFactor": 0.06383706666,
       "RelativeVelocityConversionFactor": 0.00084632602091900004,
       "Follow": "NONE",
       "VelocityPID": {
@@ -405,7 +405,7 @@
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "DriveMotor4",
-      "RelativePositionConversionFactor": 0.0485273613,
+      "RelativePositionConversionFactor": 0.06383706666,
       "RelativeVelocityConversionFactor": 0.00084632602091900004,
       "Follow": "NONE",
       "VelocityPID": {

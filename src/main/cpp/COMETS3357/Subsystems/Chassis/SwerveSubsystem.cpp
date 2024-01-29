@@ -358,6 +358,12 @@ void SwerveSubsystem::SetModuleStates(
   m_frontRight.SetDesiredState(desiredStates[1]);
   m_rearLeft.SetDesiredState(desiredStates[2]);
   m_rearRight.SetDesiredState(desiredStates[3]);
+
+}
+
+wpi::array<frc::SwerveModulePosition, 4U> SwerveSubsystem::GetPositions()
+{
+  return {m_frontLeft.GetPosition(), m_frontRight.GetPosition(), m_rearLeft.GetPosition(), m_rearRight.GetPosition()};
 }
 
 void SwerveSubsystem::ResetEncoders() {
