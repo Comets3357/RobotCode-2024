@@ -178,7 +178,7 @@ namespace COMETS3357
       void SetChassisSpeed(frc::ChassisSpeeds chassisSpeed);
 
       
-    frc::SwerveDriveOdometry<4> m_odometry;
+    frc::SwerveDrivePoseEstimator<4> m_odometry;
 
   private:
     // Components (e.g. motor controllers and sensors) should generally be
