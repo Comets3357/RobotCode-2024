@@ -66,44 +66,44 @@ void SparkMaxPosition::RobotInit()
         #endif
    )
     {
-        double zero = absoluteEncoder.GetZeroOffset();
-        motor.RestoreFactoryDefaults();
-        motor.SetInverted(config.invertedRelative);
-        motor.SetSmartCurrentLimit(config.currentLimit);
-        motor.SetIdleMode(config.idleMode);
-        PIDController.SetOutputRange(config.minSpeed, config.maxSpeed, 1);
-        SetVelocityPID(config.velocityPID);
-        SetPositionPID(config.positionPID);
-        relativeEncoder.SetPositionConversionFactor(config.relativePositionConversionFactor);
-        relativeEncoder.SetVelocityConversionFactor(config.relativeVelocityConversionFactor);
-        absoluteEncoder.SetInverted(config.invertedAbsolute);
-        absoluteEncoder.SetPositionConversionFactor(config.absolutePositionConversionFactor);
-        absoluteEncoder.SetVelocityConversionFactor(config.absoluteVelocityConversionFactor);
-        if (setAbsPos)
-        {
-            absoluteEncoder.SetZeroOffset(config.absoluteZeroOffset);
-        }
-        else
-        {
-            absoluteEncoder.SetZeroOffset(zero);
-        }
+        // double zero = absoluteEncoder.GetZeroOffset();
+        // motor.RestoreFactoryDefaults();
+        // motor.SetInverted(config.invertedRelative);
+        // motor.SetSmartCurrentLimit(config.currentLimit);
+        // motor.SetIdleMode(config.idleMode);
+        // PIDController.SetOutputRange(config.minSpeed, config.maxSpeed, 1);
+        // SetVelocityPID(config.velocityPID);
+        // SetPositionPID(config.positionPID);
+        // relativeEncoder.SetPositionConversionFactor(config.relativePositionConversionFactor);
+        // relativeEncoder.SetVelocityConversionFactor(config.relativeVelocityConversionFactor);
+        // absoluteEncoder.SetInverted(config.invertedAbsolute);
+        // absoluteEncoder.SetPositionConversionFactor(config.absolutePositionConversionFactor);
+        // absoluteEncoder.SetVelocityConversionFactor(config.absoluteVelocityConversionFactor);
+        // if (setAbsPos)
+        // {
+        //     absoluteEncoder.SetZeroOffset(config.absoluteZeroOffset);
+        // }
+        // else
+        // {
+        //     absoluteEncoder.SetZeroOffset(zero);
+        // }
 
 
-        PIDController.SetPositionPIDWrappingEnabled(config.positionPIDWrappingEnabled);
-        PIDController.SetPositionPIDWrappingMinInput(config.turningEncoderPositionPIDMinInput);
-        PIDController.SetPositionPIDWrappingMaxInput(config.turningEncoderPositionPIDMaxInput);
+        // PIDController.SetPositionPIDWrappingEnabled(config.positionPIDWrappingEnabled);
+        // PIDController.SetPositionPIDWrappingMinInput(config.turningEncoderPositionPIDMinInput);
+        // PIDController.SetPositionPIDWrappingMaxInput(config.turningEncoderPositionPIDMaxInput);
 
-        motor.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, config.forwardSoftLimitEnabled);
-        motor.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, config.reverseSoftLimitEnabled);
-        motor.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, config.forwardSoftLimit);
-        motor.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, config.reverseSoftLimit);
+        // motor.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, config.forwardSoftLimitEnabled);
+        // motor.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, config.reverseSoftLimitEnabled);
+        // motor.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, config.forwardSoftLimit);
+        // motor.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, config.reverseSoftLimit);
         
 
-        // if (config.follow != "NONE")
-        // {
-        //     motor.Follow(COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPositionConfigs[config.follow].motor->motor);
-        // }
-        motor.BurnFlash();
+        // // if (config.follow != "NONE")
+        // // {
+        // //     motor.Follow(COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPositionConfigs[config.follow].motor->motor);
+        // // }
+        // motor.BurnFlash();
         
     }
 
@@ -226,10 +226,10 @@ void SparkMaxPosition::Periodic()
     
 
     CheckAbsoluteEncoder();
-    if (runMode == POSITION_SPARK_MAX_ABSOLUTE && std::abs(absoluteEncoderPosition - relativeEncoderPosition) < 10)
-    {
-        ZeroRelativeEncoder();
-    }
+    // if (runMode == POSITION_SPARK_MAX_ABSOLUTE && std::abs(absoluteEncoderPosition - relativeEncoderPosition) < 10)
+    // {
+    //     ZeroRelativeEncoder();
+    // }
     
 }
 

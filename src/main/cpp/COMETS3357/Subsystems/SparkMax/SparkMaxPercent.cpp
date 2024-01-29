@@ -3,6 +3,8 @@
 
 using namespace COMETS3357;
 
+#define FORCEINIT
+
 SparkMaxPercent::SparkMaxPercent(std::string configName) : config{ConfigFiles::getInstance().GetConfigFiles().sparkMaxPercentConfigs[configName]}, motor{config.ID, rev::CANSparkMax::MotorType::kBrushless}
 {
     config.motor = this;

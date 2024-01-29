@@ -73,15 +73,15 @@ class RobotContainer {
 
   frc2::InstantCommand ejectIndexer{[this](){indexer.SetVelocity("IndexerEjectSpeed");}, {&indexer}}; 
 
-  frc2::InstantCommand stopIntake{[this](){intake.SetPercent(0);}, {&intake}}; 
+  frc2::InstantCommand stopIntake{[this](){intake.SetPercent(0); indexer.SetPercent(0);}, {&intake, &indexer}}; 
 
   frc2::InstantCommand startIntake{[this](){intake.SetPercent("IntakeSpeed"); intakeIndexer.Schedule();}, {&intake}}; 
 
-  frc2::InstantCommand ejectIntake{[this](){intake.SetPercent("EjectSpeed");}, {&intake}}; 
+  frc2::InstantCommand ejectIntake{[this](){intake.SetPercent("EjectSpeed"); indexer.SetVelocity("IndexerEjectSpeed");}, {&intake}}; 
 
   frc2::InstantCommand stopIndex{[this](){indexer.SetVelocity(0);}, {&indexer}}; 
 
-  frc2::InstantCommand stopShoot{[this](){shooter.SetVelocityKickerWheel("IdleSpeed"); shooter.SetVelocityFlyWheel("IdleSpeed"); indexer.SetPercent(0);}, {&shooter}}; 
+  frc2::InstantCommand stopShoot{[this](){shooter.SetVelocityKickerWheel(0); shooter.SetVelocityFlyWheel(0); indexer.SetPercent(0);}, {&shooter}}; 
 
   frc2::InstantCommand zeroGyro{[this](){gyro.ZeroGyro();}, {&gyro}};
 

@@ -404,6 +404,15 @@ void SwerveSubsystem::DriveXRotate(units::meters_per_second_t xSpeed, units::met
     xSpeed = overrideXSpeed;
     ySpeed = overrideYSpeed;
   }
+  if (addingSwerveRotation)
+  {
+    rot += addingRot;
+  }
+  if (addingSwerveMovement)
+  {
+    xSpeed += addingXSpeed;
+    ySpeed += addingYSpeed;
+  }
   currentKinematic = &kDriveKinematics;
   Drive(xSpeed, ySpeed, rot, true, true, &kDriveKinematics);
   pickedCorner = false;

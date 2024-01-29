@@ -1,6 +1,6 @@
-#pragma once
-#include "Commands/ShooterCommand.h"
 
+#include "Commands/ShooterCommand.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
 ShooterCommand::ShooterCommand(ShooterSubsystem *shooter, IndexerSubsystem* indexer, COMETS3357::SwerveSubsystem* swerveSubsystem) {
     shooterSubsystem = shooter;
@@ -29,11 +29,18 @@ void ShooterCommand::Execute()
     double distance = sqrt(pow((double)(targetPos.X() - pos.X()), 2) + pow((double)(targetPos.Y() - pos.Y()), 2)); 
     double angle = shooterSubsystem->Table.GetValue(distance); 
     shooterSubsystem->SetPositionPivot(angle); 
+
+    if (shooterSubsystem->KickerWheel.config.velocities["ShooterSpeed"] - 20 && shooterSubsystem->GetVelocityFlyWheel() > shooterSubsystem->FlyWheel.config.velocities["ShooterSpeed"] - 20)
+    {
+
+            indexerSubsystem->SetVelocity("ShooterSpeed");
+            // return true;
+    }
 }
 
 bool ShooterCommand::IsFinished()
 {
-    if (shooterSubsystem->GetVelocityKickerWheel() > shooterSubsystem->KickerWheel.config.velocities["ShooterSpeed"] - 20 && shooterSubsystem->GetVelocityFlyWheel() > shooterSubsystem->FlyWheel.config.velocities["ShooterSpeed"] - 20)
+    if (shooterSubsystem->KickerWheel.config.velocities["ShooterSpeed"] - 20 && shooterSubsystem->GetVelocityFlyWheel() > shooterSubsystem->FlyWheel.config.velocities["ShooterSpeed"] - 20)
     {
             indexerSubsystem->SetVelocity("ShooterSpeed");
             return true;

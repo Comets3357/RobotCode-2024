@@ -1,4 +1,5 @@
 #include "Subsystems/ShooterSubsystem.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
 ShooterSubsystem::ShooterSubsystem() : COMETS3357::Subsystem("ShooterSubsystem") {
 
@@ -9,7 +10,7 @@ ShooterSubsystem::ShooterSubsystem() : COMETS3357::Subsystem("ShooterSubsystem")
     }
 
 void ShooterSubsystem::Periodic(){
-
+    frc::SmartDashboard::PutNumber("Velocity wheels ", FlyWheel.GetRelativeVelocity());
 }
 
 void ShooterSubsystem::SetVelocityFlyWheel(double velocity)

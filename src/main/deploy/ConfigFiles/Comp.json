@@ -19,7 +19,7 @@
       "AbsoluteZeroOffset": 0,
       "CurrentLimit": 10,
       "DefaultRunMode": "ABSOLUTE",
-      "ID": 70,
+      "ID": 31,
       "IdleMode": "Brake",
       "InvertedAbsolute": true,
       "InvertedRelative": false,
@@ -220,13 +220,13 @@
       "Name": "IntakeMotor",
       "ID": 11,
       "InvertedRelative": false,
-      "CurrentLimit": 40,
+      "CurrentLimit": 55,
       "IdleMode": "Brake",
       "Follow": "NONE",
       "Percents":
       {
-        "IntakeSpeed" : 0.5, 
-        "EjectSpeed" : -0.5
+        "IntakeSpeed" : -0.8, 
+        "EjectSpeed" : 0.8
       }
     }
   ],
@@ -291,9 +291,9 @@
       },
       "Velocities":
       {
-        "IndexerSpeed" : 10,
-        "IndexerShootSpeed" : 10,
-        "IndexerEjectSpeed" : 10
+        "IndexerSpeed" : -0.35,
+        "IndexerShootSpeed" : -7,
+        "IndexerEjectSpeed" : 5
 
       }
     },
@@ -308,14 +308,14 @@
       "Follow": "NONE",
       "VelocityPID": {
         "D": 0,
-        "FF": 1,
+        "FF": 0.00025,
         "I": 0,
         "P": 0
       },
       "Velocities":
       {
-        "ShooterSpeed": 5000,
-        "IdleSpeed" : 1000
+        "ShooterSpeed": -0.5,
+        "IdleSpeed" : -0.5
       }
     },
     {
@@ -329,14 +329,14 @@
       "Follow": "NONE",
       "VelocityPID": {
         "D": 0,
-        "FF": 1,
+        "FF": 0.00025,
         "I": 0,
         "P": 0
       },
       "Velocities":
       {
-        "ShooterSpeed": 5000,
-        "IdleSpeed" : 1000
+        "ShooterSpeed": 0.2,
+        "IdleSpeed" : 0.2
       }
     },
     {

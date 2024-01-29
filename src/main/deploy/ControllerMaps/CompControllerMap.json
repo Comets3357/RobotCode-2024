@@ -166,7 +166,7 @@
             {
                 "D-padLeft": "NONE",
                 "D-padRight": "NONE",
-                "D-padUp": "XBOXManual",
+                "D-padUp": "NONE",
                 "D-padDown": "NONE",
                 "LeftStickY": "NONE",
                 "LeftStickX": "NONE",
@@ -187,7 +187,7 @@
                 "RightTrigger": "NONE",
                 "D-padLeftPressed": "NONE",
                 "D-padRightPressed": "NONE",
-                "D-padUpPressed": "NONE",
+                "D-padUpPressed": "XBOXManual",
                 "D-padDownPressed": "NONE",
                 "LeftStickButtonPressed": "NONE",
                 "RightStickButtonPressed": "NONE",

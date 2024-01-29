@@ -180,9 +180,16 @@ namespace COMETS3357
 bool controllingSwerveRotation = true;
 bool controllingSwerveMovement = true;
 
-units::radian_t overrideRotation{0};
-units::meter_t overrideXSpeed{0};
-units::meter_t overrideYSpeed{0};
+bool addingSwerveRotation = false;
+bool addingSwerveMovement = false;
+
+units::radians_per_second_t overrideRotation{0};
+units::meters_per_second_t overrideXSpeed{0};
+units::meters_per_second_t overrideYSpeed{0};
+
+units::radians_per_second_t addingRot{0};
+units::meters_per_second_t addingXSpeed{0};
+units::meters_per_second_t addingYSpeed{0};
 
   private:
     // Components (e.g. motor controllers and sensors) should generally be
