@@ -428,7 +428,24 @@ void SwerveSubsystem::DriveDirectionalRotate(units::meters_per_second_t xSpeed, 
 
 void SwerveSubsystem::DriveCornerTurning(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot)
 {
-
+  if (!controllingSwerveRotation )
+  {
+    rot = overrideRotation;
+  }
+  if (!controllingSwerveMovement)
+  {
+    xSpeed = overrideXSpeed;
+    ySpeed = overrideYSpeed;
+  }
+  if (addingSwerveRotation)
+  {
+    rot += addingRot;
+  }
+  if (addingSwerveMovement)
+  {
+    xSpeed += addingXSpeed;
+    ySpeed += addingYSpeed;
+  }
   double angleOnDrivebase = atan2(ySpeed.value(), xSpeed.value()) - gyroSubsystemData->GetEntry("angle").GetDouble(0);
     double angleXPortion = sin(angleOnDrivebase);
     double angleYPortion = cos(angleOnDrivebase);
