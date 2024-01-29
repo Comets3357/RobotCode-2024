@@ -73,6 +73,7 @@ void Controller::SetJoysticks(std::map<std::string, frc2::Trigger>& joystickTrig
             std::function<void(double, double, double, double)> function = std::get<0>(joystickActionMap[joystickTrigger.first]);
             if (type == "XBOX")
             {
+                
                 (joystickTrigger.second && modeTriggers[mode.first]).WhileTrue(new frc2::RunCommand{[this, sub, function]{function(controller.GetLeftX(),controller.GetLeftY(),controller.GetRightX(),controller.GetRightY());},{sub}});
             }
             else
@@ -93,7 +94,7 @@ void Controller::SetJoysticks(std::map<std::string, frc2::Trigger>& joystickTrig
             modeTriggers[mode.first].OnTrue(new frc2::InstantCommand{[this, sub, function]{sub->SetDefaultCommand(frc2::RunCommand{[this, function]{function(controller.GetLeftX(), controller.GetLeftY(), controller.GetRightX(), controller.GetRightY());},{sub}});},{}});
             if (type == "XBOX")
             {
-                            sub->SetDefaultCommand(frc2::RunCommand{[this, function]{function(controller.GetLeftX(), controller.GetLeftY(), controller.GetRightX(), controller.GetRightY());},{sub}});
+                sub->SetDefaultCommand(frc2::RunCommand{[this, function]{function(controller.GetLeftX(), controller.GetLeftY(), controller.GetRightX(), controller.GetRightY());},{sub}});
 
             }
             else
@@ -139,6 +140,8 @@ void Controller::LoadConfig(picojson::value &controllers)
 
 bool Controller::LoadControls(picojson::value &controllers)
 {
+
+    
     
     if (true)//controller.IsConnected())
     {
