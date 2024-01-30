@@ -17,6 +17,9 @@
 #include <rev/CANSparkMax.h>
 #include <frc/motorcontrol/PWMSparkMax.h>
 #include <set>
+#include <frc2/command/button/Trigger.h>
+#include <functional>
+#include <frc/DriverStation.h>
 
 
 

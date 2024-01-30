@@ -12,6 +12,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include "COMETS3357/PoseEstimator.h"
 
+
 SUBSYSTEM_START(VisionSystem)
 
     VisionSystemSubsystem(COMETS3357::SwerveSubsystem* swerve);
@@ -26,11 +27,14 @@ SUBSYSTEM_START(VisionSystem)
     int i = 0;
     nt::DoubleSubscriber ySub;
     nt::DoubleSubscriber timestampSub;
+    nt::DoublePublisher timePublisher;
 
     frc::Field2d m_field;
+    frc::Field2d m_field2;
 
     frc::Pose2d lastPose;
+    bool ResetPose = true;
 
-    COMETS3357::PoseEstimator poseEstimator;
+    // COMETS3357::PoseEstimator poseEstimator;
 
 SUBSYSTEM_END

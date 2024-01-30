@@ -34,6 +34,8 @@ namespace COMETS3357
         */
         void Periodic() override;
 
+        void ZeroGyro();
+
     private:
         AHRS m_navx;
         std::shared_ptr<nt::NetworkTable> driveTable;
@@ -41,6 +43,8 @@ namespace COMETS3357
         void CalculatePositions();
 
         float robotX, rototY; // experimental
+
+        double angleOffset;
 
     };
 };

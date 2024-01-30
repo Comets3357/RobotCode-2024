@@ -1,4 +1,5 @@
 #include "Subsystems/ShooterSubsystem.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
 ShooterSubsystem::ShooterSubsystem() : COMETS3357::Subsystem("ShooterSubsystem") {
 
@@ -9,7 +10,7 @@ ShooterSubsystem::ShooterSubsystem() : COMETS3357::Subsystem("ShooterSubsystem")
     }
 
 void ShooterSubsystem::Periodic(){
-
+    frc::SmartDashboard::PutNumber("Velocity wheels ", FlyWheel.GetRelativeVelocity());
 }
 
 void ShooterSubsystem::SetVelocityFlyWheel(double velocity)
@@ -31,7 +32,7 @@ void ShooterSubsystem::SetVelocityKickerWheel(std::string velocity)
     KickerWheel.SetVelocity(velocity);
 }
 
-// Manuel // 
+// Manual // 
 
 void ShooterSubsystem::SetPercentFlyWheel(double percent) 
 {
@@ -69,3 +70,16 @@ void ShooterSubsystem::SetPositionPivot(std::string position)
 }
 
 
+
+std::pair<double, double> ShooterSubsystem::calculateDistanceTravelled(std::pair<double, double> velocity, double time)
+{
+    double x, y;
+    x = velocity.first * (time + .1);
+    y = velocity.second * (time + .1);
+    return {x,y};
+}
+
+std::pair<double, double> ShooterSubsystem::calculateFinalPosition(std::pair<double, double> initial, std::pair<double, double> travel)
+{
+    return {travel.first - initial.first, travel.second - initial.first};
+}

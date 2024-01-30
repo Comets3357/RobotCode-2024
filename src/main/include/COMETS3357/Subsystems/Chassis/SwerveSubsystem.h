@@ -178,14 +178,20 @@ namespace COMETS3357
       void SetChassisSpeed(frc::ChassisSpeeds chassisSpeed);
 
       
-    frc::SwerveDriveOdometry<4> m_odometry;
+    frc::SwerveDrivePoseEstimator<4> m_odometry;
+bool controllingSwerveRotation = true;
+bool controllingSwerveMovement = true;
 
-        bool controllingSwerveRotation = true;
-    bool controllingSwerveMovement = true;
+bool addingSwerveRotation = false;
+bool addingSwerveMovement = false;
 
-    units::meters_per_second_t overrideVelocityX{0};
-    units::meters_per_second_t overrideVelocityY{0};
-    units::radians_per_second_t overrideRotation{0};
+units::radians_per_second_t overrideRotation{0};
+units::meters_per_second_t overrideXSpeed{0};
+units::meters_per_second_t overrideYSpeed{0};
+
+units::radians_per_second_t addingRot{0};
+units::meters_per_second_t addingXSpeed{0};
+units::meters_per_second_t addingYSpeed{0};
 
   private:
     // Components (e.g. motor controllers and sensors) should generally be
@@ -205,8 +211,6 @@ namespace COMETS3357
     // Odometry class for tracking robot pose
     // 4 defines the number of modules
     // frc::SwerveDriveOdometry<4> m_odometry;
-
-
 
 
     double actualAngle = 0; 

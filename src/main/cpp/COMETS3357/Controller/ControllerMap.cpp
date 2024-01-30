@@ -2,7 +2,7 @@
 
 using namespace COMETS3357;
 
-ControllerMap::ControllerMap(std::unordered_map<std::string, std::shared_ptr<frc2::Command>> &buttonActionMap, std::unordered_map<std::string, std::tuple<std::function<void(double, double, double, double)>, frc2::Subsystem*, Controller::JoystickCommandMode>>& joystickActionMap, std::string fileName) : primary{0, buttonActionMap, joystickActionMap, "Taranus"}, secondary{1, buttonActionMap, joystickActionMap, "XBOX"}, test{2, buttonActionMap, joystickActionMap, "XBOX"}
+ControllerMap::ControllerMap(std::unordered_map<std::string, std::shared_ptr<frc2::Command>> &buttonActionMap, std::unordered_map<std::string, std::tuple<std::function<void(double, double, double, double)>, frc2::Subsystem*, Controller::JoystickCommandMode>>& joystickActionMap, std::string fileName) : primary{0, buttonActionMap, joystickActionMap, "XBOX"}, secondary{1, buttonActionMap, joystickActionMap, "XBOX"}, test{2, buttonActionMap, joystickActionMap, "XBOX"}
 {
     LoadControllerMap(fileName);
 }

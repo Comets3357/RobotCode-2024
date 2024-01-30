@@ -17,13 +17,14 @@ void SparkMaxVelocity::RobotInit()
 {
 
     if (
-         #ifdef FORCEINIT
+        #ifdef FORCEINIT
         true
         #else
         motor.GetInverted() != config.invertedRelative || 
         motor.GetIdleMode() != config.idleMode || 
         encoder.GetPositionConversionFactor() != config.relativePositionConversionFactor ||
-        encoder.GetVelocityConversionFactor() != config.relativeVelocityConversionFactor
+        encoder.GetVelocityConversionFactor() != config.relativeVelocityConversionFactor || 
+        motor.IsFollower() != (config.follow == "NONE")
         #endif
     )
     {

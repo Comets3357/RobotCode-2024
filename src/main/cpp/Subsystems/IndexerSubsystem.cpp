@@ -1,5 +1,5 @@
 #include "Subsystems/IndexerSubsytem.h"
-
+#include <frc/smartdashboard/SmartDashboard.h>
 IndexerSubsystem::IndexerSubsystem() : COMETS3357::Subsystem("IndexerSubsystem") {
 
 }
@@ -10,7 +10,7 @@ void IndexerSubsystem::Initialize()
 }
 
 void IndexerSubsystem::Periodic() {
-
+    frc::SmartDashboard::PutBoolean("ISDETECTED", IsDetected());
 }
 
 void IndexerSubsystem::SetPercent(double percent)

@@ -257,6 +257,8 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
   double xSpeedCommanded;
   double ySpeedCommanded;
 
+  
+
   if (rateLimit) {
     // Convert XY to polar for rate limiting
     double inputTranslationDir = atan2(ySpeed.value(), xSpeed.value());
@@ -387,7 +389,7 @@ void SwerveSubsystem::ZeroHeading() { }//m_gyro.Reset(); }
 
 double SwerveSubsystem::GetTurnRate() { return -gyroSubsystemData->GetEntry("angleRate").GetDouble(0); }
 
-frc::Pose2d SwerveSubsystem::GetPose() { return m_odometry.GetPose(); }
+frc::Pose2d SwerveSubsystem::GetPose() { return m_odometry.GetEstimatedPosition(); }
 
 void SwerveSubsystem::ResetOdometry(frc::Pose2d pose) {
   m_odometry.ResetPosition(
@@ -399,14 +401,23 @@ void SwerveSubsystem::ResetOdometry(frc::Pose2d pose) {
 
 void SwerveSubsystem::DriveXRotate(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot)
 {
-  if (!controllingSwerveRotation)
+  if (!controllingSwerveRotation )
   {
     rot = overrideRotation;
   }
   if (!controllingSwerveMovement)
   {
-    xSpeed += overrideVelocityX;
-    ySpeed += overrideVelocityY;
+    xSpeed = overrideXSpeed;
+    ySpeed = overrideYSpeed;
+  }
+  if (addingSwerveRotation)
+  {
+    rot += addingRot;
+  }
+  if (addingSwerveMovement)
+  {
+    xSpeed += addingXSpeed;
+    ySpeed += addingYSpeed;
   }
   currentKinematic = &kDriveKinematics;
   Drive(xSpeed, ySpeed, rot, true, true, &kDriveKinematics);
@@ -415,6 +426,7 @@ void SwerveSubsystem::DriveXRotate(units::meters_per_second_t xSpeed, units::met
 
 void SwerveSubsystem::DriveDirectionalRotate(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, double directionX, double directionY)
 {
+  
   currentKinematic = &kDriveKinematics;
   Drive(xSpeed, ySpeed, directionX, directionY, true, true);
   pickedCorner = false;
@@ -422,7 +434,24 @@ void SwerveSubsystem::DriveDirectionalRotate(units::meters_per_second_t xSpeed, 
 
 void SwerveSubsystem::DriveCornerTurning(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot)
 {
-
+  if (!controllingSwerveRotation )
+  {
+    rot = overrideRotation;
+  }
+  if (!controllingSwerveMovement)
+  {
+    xSpeed = overrideXSpeed;
+    ySpeed = overrideYSpeed;
+  }
+  if (addingSwerveRotation)
+  {
+    rot += addingRot;
+  }
+  if (addingSwerveMovement)
+  {
+    xSpeed += addingXSpeed;
+    ySpeed += addingYSpeed;
+  }
   double angleOnDrivebase = atan2(ySpeed.value(), xSpeed.value()) - gyroSubsystemData->GetEntry("angle").GetDouble(0);
     double angleXPortion = sin(angleOnDrivebase);
     double angleYPortion = cos(angleOnDrivebase);

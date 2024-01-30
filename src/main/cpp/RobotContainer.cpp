@@ -1,5 +1,6 @@
 #include "RobotContainer.h"
 #include <frc2/command/RunCommand.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/button/Trigger.h>
 
 RobotContainer::RobotContainer() 
@@ -43,6 +44,7 @@ void RobotContainer::ConfigureBindings()
 void RobotContainer::Periodic()
 {
   legAvoidance.Schedule();
+  frc::SmartDashboard::PutString("MODE", controllerMap.secondary.currentMode);
 }
 
 // frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
