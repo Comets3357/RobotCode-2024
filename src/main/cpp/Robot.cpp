@@ -22,6 +22,8 @@ void Robot::RobotPeriodic()
 {
   frc2::CommandScheduler::GetInstance().Run();
   m_container.Periodic();
+
+  
 }
 
 /**
@@ -31,25 +33,25 @@ void Robot::RobotPeriodic()
  */
 void Robot::DisabledInit() {
 
-  for (auto motor : COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPositionConfigs)
-  {
-    if (motor.second.motor)
-    motor.second.motor->SetPower(0);
-  }
+  // for (auto motor : COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPositionConfigs)
+  // {
+  //   if (motor.second.motor)
+  //   motor.second.motor->SetPower(0);
+  // }
 
 
-  for (auto motor : COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPercentConfigs)
-  {
-    if(motor.second.motor)
-    motor.second.motor->SetPower(0);
-  }
+  // for (auto motor : COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPercentConfigs)
+  // {
+  //   if(motor.second.motor)
+  //   motor.second.motor->SetPower(0);
+  // }
 
 
-  for (auto motor : COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxVelocityConfigs)
-  {
-    if(motor.second.motor)
-    motor.second.motor->SetPercent(0);
-  }
+  // for (auto motor : COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxVelocityConfigs)
+  // {
+  //   if(motor.second.motor)
+  //   motor.second.motor->SetPercent(0);
+  // }
 
 }
 

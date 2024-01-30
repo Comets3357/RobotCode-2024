@@ -10,6 +10,8 @@ COMMAND_START(LegAvoidance)
 
 LegAvoidanceCommand(COMETS3357::SwerveSubsystem *swerve);
 
+
+
 COMETS3357::SwerveSubsystem* swerveSubsystem;
 
 COMMAND_END

@@ -22,8 +22,12 @@ void LegAvoidanceCommand::Initialize()
 
 }
 
-double HeronsFormula (double semiperimeter, double a, double b, double c) {
-  return sqrt(semiperimeter * (semiperimeter - a) * (semiperimeter - b) * (semiperimeter - c)); 
+// double HeronsFormula (double semiperimeter, double a, double b, double c) {
+//   return sqrt(semiperimeter * (semiperimeter - a) * (semiperimeter - b) * (semiperimeter - c)); 
+// }
+
+float area(double x1, double y1, double x2, double y2, double x3, double y3) {
+  return std::abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
 }
 
 
@@ -66,7 +70,7 @@ void LegAvoidanceCommand::Execute()
     // frc::Translation2d const blueA = frc::Translation2d{units::meter_t{3.3}, units::meter_t{4.1}};
     // frc::Translation2d const blueB = frc::Translation2d{units::meter_t{5.63}, units::meter_t{5.41}};
     // frc::Translation2d const blueC = frc::Translation2d{units::meter_t{5.63}, units::meter_t{2.80}};
-    frc::Translation2d const testPoint = frc::Translation2d{units::meter_t{10.75}, units::meter_t{6.8}}; 
+    frc::Translation2d const testPoint = frc::Translation2d{units::meter_t{13.75}, units::meter_t{6.8}}; 
     frc::Translation2d const points [] = {testPoint}; 
 
     //frc::Translation2d const points[] = {redA, redB, redC, blueA, blueB, blueC}; 
@@ -79,27 +83,35 @@ void LegAvoidanceCommand::Execute()
     bool starboardSide; 
 
     for(int i = 0; i < sizeof(points) / sizeof(frc::Translation2d); i++) {
-      double distanceTip = (double)points[i].Distance(triangleTip);  // distane from the point to the tip of the triangle
-      double distance1 = (double)points[i].Distance(bottom1);     // 
-      double distance2 = (double)points[i].Distance(bottom2);     // 
+      // double distanceTip = (double)points[i].Distance(triangleTip);  // distane from the point to the tip of the triangle
+      // double distance1 = (double)points[i].Distance(bottom1);     // 
+      // double distance2 = (double)points[i].Distance(bottom2);     // 
 
 
-      double semiperimeterTriangle = (sideLengthA + sideLengthB + sideLengthC) / 2.0; 
-      double semiperimeterAlpha = (distance1 + distance2 + sideLengthA) / 2.0; 
-      double semiperimeterBeta = (distance1 + distanceTip + sideLengthB) / 2.0;
-      double semiperimeterGamma = (distanceTip + distance2 + sideLengthC) / 2.0; 
+      // double semiperimeterTriangle = (sideLengthA + sideLengthB + sideLengthC) / 2.0; 
+      // double semiperimeterAlpha = (distance1 + distance2 + sideLengthA) / 2.0; 
+      // double semiperimeterBeta = (distance1 + distanceTip + sideLengthB) / 2.0;
+      // double semiperimeterGamma = (distanceTip + distance2 + sideLengthC) / 2.0; 
 
-      double bigTriArea = HeronsFormula(semiperimeterTriangle, sideLengthA, sideLengthB, sideLengthC); 
-      double areaA = HeronsFormula(semiperimeterAlpha, distance1, distance2, sideLengthA); 
-      double areaB = HeronsFormula(semiperimeterBeta, distance1, distanceTip, sideLengthB); 
-      double areaC = HeronsFormula(semiperimeterGamma, distanceTip, distance2, sideLengthC); 
+      // double bigTriArea = HeronsFormula(semiperimeterTriangle, sideLengthA, sideLengthB, sideLengthC); 
+      // double areaA = HeronsFormula(semiperimeterAlpha, distance1, distance2, sideLengthA); 
+      // double areaB = HeronsFormula(semiperimeterBeta, distance1, distanceTip, sideLengthB); 
+      // double areaC = HeronsFormula(semiperimeterGamma, distanceTip, distance2, sideLengthC); 
+
+      double bigTriArea = area((double)triangleTip.X(), (double)triangleTip.Y(), (double)bottom1.X(), (double)bottom1.Y(), (double)bottom2.X(), (double)bottom2.Y()); 
+
+      double areaA = area((double)points[i].X(), (double)points[i].Y(), (double)triangleTip.X(), (double)triangleTip.Y(), (double)bottom1.X(), (double)bottom1.Y());
+      double areaB = area((double)points[i].X(), (double)points[i].Y(), (double)triangleTip.X(), (double)triangleTip.Y(), (double)bottom2.X(), (double)bottom2.Y());
+      double areaC = area((double)points[i].X(), (double)points[i].Y(), (double)bottom2.X(), (double)bottom2.Y(), (double)bottom1.X(), (double)bottom1.Y());
 
       double alpha, beta, gamma; 
       alpha = areaA / bigTriArea; 
       beta = areaB / bigTriArea; 
       gamma = areaC / bigTriArea; 
 
-      if (alpha + beta + gamma != 1) {
+      double k = alpha + beta + gamma;
+
+      if ((int)(1000 * (alpha + beta + gamma)) != 1000) {
           isClear = false; 
           if (areaC > areaB) {
             starboardSide = false; 
@@ -109,11 +121,11 @@ void LegAvoidanceCommand::Execute()
         swerveSubsystem->addingSwerveMovement = true;
   swerveSubsystem->addingXSpeed = units::meters_per_second_t{6};
   swerveSubsystem->addingYSpeed = units::meters_per_second_t{9};
-  frc::SmartDashboard::PutBoolean("Is not in Triangle", isClear); 
+  
       }
 
     }
-    
+    frc::SmartDashboard::PutBoolean("Is not in Triangle", isClear); 
     
   
   
@@ -125,7 +137,7 @@ void LegAvoidanceCommand::Execute()
 
 bool LegAvoidanceCommand::IsFinished()
 {
-
+  return false;
 }
 
 void LegAvoidanceCommand::End(bool interrupted)

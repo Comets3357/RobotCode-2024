@@ -45,6 +45,7 @@ void RobotContainer::Periodic()
 {
   legAvoidance.Schedule();
   frc::SmartDashboard::PutString("MODE", controllerMap.secondary.currentMode);
+  
 }
 
 // frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
