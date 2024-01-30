@@ -142,7 +142,7 @@
                 "BackButtonPressed": "NONE",
                 "StartButtonPressed": "NONE",
                 "XboxButtonPressed": "NONE",
-                "LeftTriggerPressed": "NONE",
+                "LeftTriggerPressed": "AVOIDLEG",
                 "RightTriggerPressed": "NONE",
                 "D-padLeftReleased": "NONE",
                 "D-padRightReleased": "NONE",

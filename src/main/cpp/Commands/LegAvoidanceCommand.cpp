@@ -6,7 +6,7 @@ LegAvoidanceCommand::LegAvoidanceCommand(COMETS3357::SwerveSubsystem *swerve) {
 
     frc::Pose2d pos = swerveSubsystem->GetPose();
     swerveSubsystem = swerve;
-    AddRequirements(swerve);
+    // AddRequirements(swerve);
 
     pos.X();
     pos.Y();
@@ -56,14 +56,16 @@ void LegAvoidanceCommand::Execute()
 
     //frc::Translation2d const points [6]; 
     
-    frc::Translation2d const redA =  frc::Translation2d{units::meter_t{13.25}, units::meter_t{4.1}};
-    frc::Translation2d const redB =  frc::Translation2d{units::meter_t{10.93}, units::meter_t{5.41}};
-    frc::Translation2d const redC = frc::Translation2d{units::meter_t{10.93}, units::meter_t{2.8}};
-    frc::Translation2d const blueA = frc::Translation2d{units::meter_t{3.3}, units::meter_t{4.1}};
-    frc::Translation2d const blueB = frc::Translation2d{units::meter_t{5.63}, units::meter_t{5.41}};
-    frc::Translation2d const blueC = frc::Translation2d{units::meter_t{5.63}, units::meter_t{2.80}};
+    // frc::Translation2d const redA =  frc::Translation2d{units::meter_t{13.25}, units::meter_t{4.1}}; 
+    // frc::Translation2d const redB =  frc::Translation2d{units::meter_t{10.93}, units::meter_t{5.41}};
+    // frc::Translation2d const redC = frc::Translation2d{units::meter_t{10.93}, units::meter_t{2.8}};
+    // frc::Translation2d const blueA = frc::Translation2d{units::meter_t{3.3}, units::meter_t{4.1}};
+    // frc::Translation2d const blueB = frc::Translation2d{units::meter_t{5.63}, units::meter_t{5.41}};
+    // frc::Translation2d const blueC = frc::Translation2d{units::meter_t{5.63}, units::meter_t{2.80}};
+    frc::Translation2d const testPoint = frc::Translation2d{units::meter_t{8.4}, units::meter_t{7}}; 
+    frc::Translation2d const points [] = {testPoint}; 
 
-    frc::Translation2d const points[] = {redA, redB, redC, blueA, blueB, blueC}; 
+    //frc::Translation2d const points[] = {redA, redB, redC, blueA, blueB, blueC}; 
 
     double sideLengthA = (double)bottom1.Distance(bottom2); 
     double sideLengthB = (double)bottom1.Distance(triangleTip); 
@@ -72,7 +74,7 @@ void LegAvoidanceCommand::Execute()
     bool isClear; 
     bool starboardSide; 
 
-    for(int i = 0; i < 6; i++) {
+    for(int i = 0; i < sizeof(points) / sizeof(frc::Translation2d); i++) {
       double distanceTip = (double)points[i].Distance(triangleTip);  // distane from the point to the tip of the triangle
       double distance1 = (double)points[i].Distance(bottom1);     // 
       double distance2 = (double)points[i].Distance(bottom2);     // 
@@ -100,14 +102,11 @@ void LegAvoidanceCommand::Execute()
           }
       }
 
-      
-          
-        
     }
     
     
   
-
+  frc::SmartDashboard::PutBoolean("Is not in Triangle", isClear); 
 
   swerveSubsystem->controllingSwerveMovement = true;
   swerveSubsystem->overrideVelocityX = units::meters_per_second_t{0};
