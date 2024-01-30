@@ -51,10 +51,13 @@ void LegAvoidanceCommand::Execute()
     double magnitude = sqrt(xSpeedSquared + ySpeedSquared);
   
     
-    frc::Translation2d triangleTip = frc::Translation2d{units::meter_t{xPos + cos(robotDirection) * kConstant * magnitude}, units::meter_t{yPos + sin(robotDirection) * kConstant * magnitude}}; 
-    frc::Translation2d bottom1 = frc::Translation2d{units::meter_t{xPosBottom1}, units::meter_t{yPosBottom1}};
-    frc::Translation2d bottom2 = frc::Translation2d{units::meter_t{xPosBottom2}, units::meter_t{yPosBottom2}};
+    //frc::Translation2d triangleTip = frc::Translation2d{units::meter_t{xPos + cos(robotDirection) * kConstant * magnitude}, units::meter_t{yPos + sin(robotDirection) * kConstant * magnitude}}; 
+    //frc::Translation2d bottom1 = frc::Translation2d{units::meter_t{xPosBottom1}, units::meter_t{yPosBottom1}};
+    //frc::Translation2d bottom2 = frc::Translation2d{units::meter_t{xPosBottom2}, units::meter_t{yPosBottom2}};
 
+    frc::Translation2d triangleTip = frc::Translation2d{units::meter_t{9.68}, units::meter_t{6.88}}; 
+    frc::Translation2d bottom1 = frc::Translation2d{units::meter_t{11.30}, units::meter_t{7.68}};
+    frc::Translation2d bottom2 = frc::Translation2d{units::meter_t{11.38}, units::meter_t{6.33}};
     //frc::Translation2d const points [6]; 
     
     // frc::Translation2d const redA =  frc::Translation2d{units::meter_t{13.25}, units::meter_t{4.1}}; 
@@ -63,7 +66,7 @@ void LegAvoidanceCommand::Execute()
     // frc::Translation2d const blueA = frc::Translation2d{units::meter_t{3.3}, units::meter_t{4.1}};
     // frc::Translation2d const blueB = frc::Translation2d{units::meter_t{5.63}, units::meter_t{5.41}};
     // frc::Translation2d const blueC = frc::Translation2d{units::meter_t{5.63}, units::meter_t{2.80}};
-    frc::Translation2d const testPoint = frc::Translation2d{units::meter_t{8.4}, units::meter_t{7}}; 
+    frc::Translation2d const testPoint = frc::Translation2d{units::meter_t{10.75}, units::meter_t{6.8}}; 
     frc::Translation2d const points [] = {testPoint}; 
 
     //frc::Translation2d const points[] = {redA, redB, redC, blueA, blueB, blueC}; 
@@ -102,16 +105,20 @@ void LegAvoidanceCommand::Execute()
             starboardSide = false; 
           }
       }
+      if (!isClear) {
+        swerveSubsystem->addingSwerveMovement = true;
+  swerveSubsystem->addingXSpeed = units::meters_per_second_t{6};
+  swerveSubsystem->addingYSpeed = units::meters_per_second_t{9};
+  frc::SmartDashboard::PutBoolean("Is not in Triangle", isClear); 
+      }
 
     }
     
     
   
-  frc::SmartDashboard::PutBoolean("Is not in Triangle", isClear); 
+  
 
-  swerveSubsystem->addingSwerveMovement = true;
-  swerveSubsystem->addingXSpeed = units::meters_per_second_t{0};
-  swerveSubsystem->addingYSpeed = units::meters_per_second_t{0};
+  
   
      
 }
