@@ -4,8 +4,9 @@
 
 LegAvoidanceCommand::LegAvoidanceCommand(COMETS3357::SwerveSubsystem *swerve) {
 
+swerveSubsystem = swerve;
     frc::Pose2d pos = swerveSubsystem->GetPose();
-    swerveSubsystem = swerve;
+    
     // AddRequirements(swerve);
 
     pos.X();
@@ -108,9 +109,9 @@ void LegAvoidanceCommand::Execute()
   
   frc::SmartDashboard::PutBoolean("Is not in Triangle", isClear); 
 
-  swerveSubsystem->controllingSwerveMovement = true;
-  swerveSubsystem->overrideVelocityX = units::meters_per_second_t{0};
-  swerveSubsystem->overrideVelocityY = units::meters_per_second_t{0};
+  swerveSubsystem->addingSwerveMovement = true;
+  swerveSubsystem->addingXSpeed = units::meters_per_second_t{0};
+  swerveSubsystem->addingYSpeed = units::meters_per_second_t{0};
   
      
 }
