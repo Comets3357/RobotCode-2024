@@ -31,29 +31,26 @@ void Robot::RobotPeriodic()
  */
 void Robot::DisabledInit() {
 
-if (COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPositionConfigs.size() != 0)
-{
   for (auto motor : COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPositionConfigs)
   {
+    if (motor.second.motor)
     motor.second.motor->SetPower(0);
   }
-}
 
-if (COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPercentConfigs.size() != 0)
-{
+
   for (auto motor : COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPercentConfigs)
   {
+    if(motor.second.motor)
     motor.second.motor->SetPower(0);
   }
-}
 
-if (COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxVelocityConfigs.size() != 0)
-{
+
   for (auto motor : COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxVelocityConfigs)
   {
+    if(motor.second.motor)
     motor.second.motor->SetPercent(0);
   }
-}
+
 }
 
 void Robot::DisabledPeriodic() 
