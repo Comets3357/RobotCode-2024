@@ -82,6 +82,9 @@ void LegAvoidanceCommand::Execute()
     bool isClear; 
     bool starboardSide; 
 
+    swerveSubsystem->addingXSpeed = units::meters_per_second_t{0};
+    swerveSubsystem->addingYSpeed = units::meters_per_second_t{0};
+
     for(int i = 0; i < sizeof(points) / sizeof(frc::Translation2d); i++) {
       // double distanceTip = (double)points[i].Distance(triangleTip);  // distane from the point to the tip of the triangle
       // double distance1 = (double)points[i].Distance(bottom1);     // 
@@ -109,8 +112,6 @@ void LegAvoidanceCommand::Execute()
       beta = areaB / bigTriArea; 
       gamma = areaC / bigTriArea; 
 
-      double k = alpha + beta + gamma;
-
       if ((int)(1000 * (alpha + beta + gamma)) != 1000) {
           isClear = false; 
           if (areaC > areaB) {
@@ -119,14 +120,9 @@ void LegAvoidanceCommand::Execute()
       }
       if (!isClear) {
         swerveSubsystem->addingSwerveMovement = true;
-        swerveSubsystem->addingXSpeed = units::meters_per_second_t{6};
-        swerveSubsystem->addingYSpeed = units::meters_per_second_t{9};
+        swerveSubsystem->addingXSpeed += units::meters_per_second_t{6};
+        swerveSubsystem->addingYSpeed += units::meters_per_second_t{9};
   
-      }
-      else
-      {
-        swerveSubsystem->addingXSpeed = units::meters_per_second_t{0};
-        swerveSubsystem->addingYSpeed = units::meters_per_second_t{0};
       }
 
     }
