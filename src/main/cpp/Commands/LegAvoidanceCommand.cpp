@@ -119,9 +119,14 @@ void LegAvoidanceCommand::Execute()
       }
       if (!isClear) {
         swerveSubsystem->addingSwerveMovement = true;
-  swerveSubsystem->addingXSpeed = units::meters_per_second_t{6};
-  swerveSubsystem->addingYSpeed = units::meters_per_second_t{9};
+        swerveSubsystem->addingXSpeed = units::meters_per_second_t{6};
+        swerveSubsystem->addingYSpeed = units::meters_per_second_t{9};
   
+      }
+      else
+      {
+        swerveSubsystem->addingXSpeed = units::meters_per_second_t{0};
+        swerveSubsystem->addingYSpeed = units::meters_per_second_t{0};
       }
 
     }
