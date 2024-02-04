@@ -291,9 +291,9 @@
       },
       "Velocities":
       {
-        "IndexerSpeed" : -0.35,
-        "IndexerShootSpeed" : -7,
-        "IndexerEjectSpeed" : 5
+        "IndexerSpeed" : 0.35,
+        "IndexerShootSpeed" : 7,
+        "IndexerEjectSpeed" : -5
 
       }
     },
@@ -314,8 +314,8 @@
       },
       "Velocities":
       {
-        "ShooterSpeed": -0.5,
-        "IdleSpeed" : -0.5
+        "ShooterSpeed": 2500,
+        "IdleSpeed" : 0
       }
     },
     {
@@ -335,8 +335,8 @@
       },
       "Velocities":
       {
-        "ShooterSpeed": 0.2,
-        "IdleSpeed" : 0.2
+        "ShooterSpeed": -2500,
+        "IdleSpeed" : 0
       }
     },
     {

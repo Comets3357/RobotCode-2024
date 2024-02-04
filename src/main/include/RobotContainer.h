@@ -41,6 +41,8 @@
 #include "commands/LegAvoidanceCommand.h"
 
 
+
+
 /**
  * This class is where the bulk of the robot should be declared.  Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -87,6 +89,7 @@ class RobotContainer {
   frc2::InstantCommand stopShoot{[this](){shooter.SetVelocityKickerWheel(0); shooter.SetVelocityFlyWheel(0); indexer.SetPercent(0);}, {&shooter}}; 
 
   frc2::InstantCommand zeroGyro{[this](){gyro.ZeroGyro();}, {&gyro}};
+  frc2::InstantCommand shoot{[this](){indexer.SetPercent(0.35);}, {&indexer}};
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
@@ -95,8 +98,9 @@ class RobotContainer {
       {"EjectIntake", std::make_shared<frc2::InstantCommand>(ejectIntake)},
       {"StartIntake", std::make_shared<frc2::InstantCommand>(startIntake)},
       {"StopIntake", std::make_shared<frc2::InstantCommand>(stopIntake)},
-      //{"StartShoot", std::make_shared<ShooterCommand>(shooterCommand)},
-      //{"StopShoot", std::make_shared<frc2::InstantCommand>(stopShoot)}
+      {"StartShoot", std::make_shared<ShooterCommand>(shooterCommand)},
+      {"StopShoot", std::make_shared<frc2::InstantCommand>(stopShoot)},
+      {"Shoot", std::make_shared<frc2::InstantCommand>(shoot)}
   };
 
 
@@ -107,7 +111,7 @@ class RobotContainer {
    {"ManualIntake", {[this](auto leftX, auto leftY, auto rightX, auto rightY){intake.SetPercent(leftY);}, &intake, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualShoot", {[this](auto leftX, auto leftY, auto rightX, auto rightY){shooter.SetPercentKickerWheel(leftY); shooter.SetPercentFlyWheel(leftX);}, &shooter, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualIndexer", {[this](auto leftX, auto leftY, auto rightX, auto rightY){indexer.SetPercent(rightY);}, &shooter, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
-   {"ManualPivot", {[this](auto leftX, auto leftY, auto rightX, auto rightY){shooter.SetPercentPivot(rightY);}, &shooter, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}}
+   {"ManualPivot", {[this](auto leftX, auto leftY, auto rightX, auto rightY){shooter.SetPercentPivot(leftY * 0.2); frc::SmartDashboard::PutNumber("PIVOT ANGLE", shooter.GetPivotRelativePosition()); frc::SmartDashboard::PutNumber("PIVOT ANGLE Absolute", shooter.GetPivotAbsolutePosition());}, &shooter, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}}
   };
 
   std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionMap

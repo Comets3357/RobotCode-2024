@@ -5,6 +5,8 @@
 #include "Subsystems/IndexerSubsytem.h"
 #include "COMETS3357/Subsystems/SparkMax/SparkMaxPosition.h"
 #include "COMETS3357/LookupTable.h"
+#include <frc/AnalogInput.h>
+
 
 SUBSYSTEM_START(Shooter)
 
@@ -30,6 +32,8 @@ void SetPositionPivot(double position);
 
 void SetPercentPivot(double percent); 
 
+double GetPivotRelativePosition();
+double GetPivotAbsolutePosition();
 void SetPositionPivot(std::string position); 
 
 
@@ -43,5 +47,6 @@ COMETS3357::SparkMaxVelocity FlyWheel{"FlyWheel"};
 COMETS3357::SparkMaxPosition Pivot{"Pivot"}; 
 COMETS3357::LookupTable Table{"AngleLookUp"}; 
 
+frc::AnalogInput pivotEncoder{1};
 
 SUBSYSTEM_END

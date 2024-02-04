@@ -56,7 +56,7 @@ double ShooterSubsystem::GetVelocityFlyWheel()
 
 void ShooterSubsystem::SetPercentPivot(double percent) 
 {
-    Pivot.SetPosition(percent);
+    Pivot.SetPower(percent);
 }
 
 void ShooterSubsystem::SetPositionPivot(double position)
@@ -69,7 +69,16 @@ void ShooterSubsystem::SetPositionPivot(std::string position)
     Pivot.SetPosition(position); 
 }
 
+double ShooterSubsystem::GetPivotRelativePosition()
+{
+    return Pivot.GetRelativePosition();
+}
 
+double ShooterSubsystem::GetPivotAbsolutePosition()
+{
+    frc::SmartDashboard::PutNumber("ENCODER VALUE", pivotEncoder.GetValue());
+    return (double)pivotEncoder.GetValue() / 4096.0;
+}
 
 std::pair<double, double> ShooterSubsystem::calculateDistanceTravelled(std::pair<double, double> velocity, double time)
 {
