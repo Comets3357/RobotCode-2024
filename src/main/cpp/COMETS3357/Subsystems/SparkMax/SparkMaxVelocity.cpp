@@ -28,7 +28,9 @@ void SparkMaxVelocity::RobotInit()
         #endif
     )
     {
+
         motor.RestoreFactoryDefaults();
+        motor.EnableVoltageCompensation(10);
         motor.SetInverted(config.invertedRelative);
         motor.SetSmartCurrentLimit(config.currentLimit);
         motor.SetIdleMode(config.idleMode);
