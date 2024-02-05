@@ -3,28 +3,62 @@
   "LookupTableConfigs":
   [
     {
-      "Name": "idk",
+      "Name": "AngleLookup",
+      "Data":
+      [
+        [1, 10],
+        [3, 20]
+      ]
+    },
+    {
+      "Name": "KickerWheelLookup",
       "Data":
       [
         [10, 20],
         [30, 10],
         [2, 3]
       ]
+    },
+    {
+      "Name": "FlyWheelLookup",
+      "Data":
+      [
+        [10, 20],
+        [30, 10],
+        [2, 3]
+      ]
+    },
+    {
+      "Name": "VelocityLookup",
+      "Data":
+      [
+        [10, 20],
+        [30, 10],
+        [2, 3]
+      ]
+    },
+    {
+      "Name": "RotationP",
+      "Data":
+      [
+        [0, 5],
+        [10, 5]
+      ]
     }
   ],
   "SparkMaxPositionConfigs": [
     {
-      "AbsolutePositionConversionFactor": 6.2831853072000001,
-      "AbsoluteVelocityConversionFactor": 0.104719755,
-      "AbsoluteZeroOffset": 0,
-      "CurrentLimit": 10,
+      "AbsolutePositionConversionFactor": 360,
+      "AbsoluteVelocityConversionFactor": 1,
+      "AbsoluteZeroOffset": 241.1168921,
+      "CurrentLimit": 40,
       "DefaultRunMode": "ABSOLUTE",
       "ID": 31,
       "IdleMode": "Brake",
-      "InvertedAbsolute": true,
+      "InvertedAbsolute": false,
       "InvertedRelative": false,
-      "MaxSpeed": 1,
-      "MinSpeed": -1,
+      "MaxSpeed": 0.1,
+      "MinSpeed": -0.1,
       "Name": "Pivot",
       "Follow": "NONE",
       "PositionPID": {
@@ -33,8 +67,8 @@
         "I": 0,
         "P": 1
       },
-      "PositionPIDWrappingEnabled": true,
-      "RelativePositionConversionFactor": 1,
+      "PositionPIDWrappingEnabled": false,
+      "RelativePositionConversionFactor": 0.9863013698630137,
       "RelativeVelocityConversionFactor": 1,
       "TurningEncoderPositionPIDMaxInput": 6.2831853072000001,
       "TurningEncoderPositionPIDMinInput": 0,
@@ -44,10 +78,10 @@
         "I": 0,
         "P": 0
       },
-      "ForwardSoftLimitEnabled": false,
-      "ReverseSoftLimitEnabled": false,
-      "ForwardSoftLimit": 0,
-      "ReverseSoftLimit": 0,
+      "ForwardSoftLimitEnabled": true,
+      "ReverseSoftLimitEnabled": true,
+      "ForwardSoftLimit": 90,
+      "ReverseSoftLimit": 35,
       "Positions":
       {
         

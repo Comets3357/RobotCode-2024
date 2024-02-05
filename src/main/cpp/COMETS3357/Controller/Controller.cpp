@@ -205,6 +205,10 @@ bool Controller::LoadControls(picojson::value &controllers)
 
                             SetJoysticks(joystickTriggers, mode);
                         }
+                        else if (controllerType.first == "PlayStation")
+                        {
+                            
+                        }
                     }
                 }
             }

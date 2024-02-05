@@ -138,7 +138,6 @@ namespace COMETS3357
 
         void SetFeedForward(std::function<double(double)> feedforward);
 
-
         void SetPower(double percent);
 
         /**

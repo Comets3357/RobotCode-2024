@@ -14,6 +14,8 @@
 
 #include "COMETS3357/Subsystems/Chassis/MAXSwerveModule.h"
 #include "units/time.h"
+#include <frc/smartdashboard/Field2d.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 #include "COMETS3357/GyroSubsystem.h"
 
 class RobotContainer;
@@ -64,7 +66,7 @@ namespace COMETS3357
     void Drive(units::meters_per_second_t xSpeed,
               units::meters_per_second_t ySpeed, double directionX, double directionY,
               bool fieldRelative, bool rateLimit);
-
+frc::Field2d m_field;
     /**
      * Sets the wheels into an X formation to prevent movement.
      */
@@ -210,7 +212,7 @@ units::meters_per_second_t addingYSpeed{0};
 
     // Odometry class for tracking robot pose
     // 4 defines the number of modules
-    // frc::SwerveDriveOdometry<4> m_odometry;
+    frc::SwerveDriveOdometry<4> m_odometry2;
 
 
     double actualAngle = 0; 

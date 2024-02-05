@@ -13,7 +13,7 @@ double LookupTable::GetValue(double value)
     std::pair<double, double> above = *lookupTable.upper_bound({value, std::numeric_limits<double>::lowest()});
     std::pair<double, double> below = *std::prev(lookupTable.lower_bound({value, std::numeric_limits<double>::lowest()}));
  
-    double slope = (above.second - below.second)/(above.first - below.second);
+    double slope = (above.second - below.second)/(above.first - below.first);
     double angle = ((value - below.first) * slope) + below.second;
  
     return angle;

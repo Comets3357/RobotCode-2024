@@ -11,11 +11,17 @@ ShooterSubsystem::ShooterSubsystem() : COMETS3357::Subsystem("ShooterSubsystem")
 
 void ShooterSubsystem::Periodic(){
     frc::SmartDashboard::PutNumber("Velocity wheels ", FlyWheel.GetRelativeVelocity());
+    frc::SmartDashboard::PutNumber("PIvotAbso", GetPivotAbsolutePosition());
+    // SetPositionPivot(45);
+    
+    Pivot.Periodic();
+
+    frc::SmartDashboard::PutNumber("ANGLE LOOKUP", angleLookup.GetValue(2));
 }
 
 void ShooterSubsystem::SetVelocityFlyWheel(double velocity)
 {
-    FlyWheel.SetVelocity(velocity);
+    FlyWheel.SetVelocity(velocity, flyWheelFFLookup.GetValue(velocity));
 }
 void ShooterSubsystem::SetVelocityFlyWheel(std::string velocity)
 {
@@ -24,7 +30,7 @@ void ShooterSubsystem::SetVelocityFlyWheel(std::string velocity)
 
 void ShooterSubsystem::SetVelocityKickerWheel(double velocity)
 {
-    KickerWheel.SetVelocity(velocity);
+    KickerWheel.SetVelocity(velocity, kickerWheelFFLookup.GetValue(velocity));
 }
 
 void ShooterSubsystem::SetVelocityKickerWheel(std::string velocity)
@@ -76,8 +82,8 @@ double ShooterSubsystem::GetPivotRelativePosition()
 
 double ShooterSubsystem::GetPivotAbsolutePosition()
 {
-    frc::SmartDashboard::PutNumber("ENCODER VALUE", pivotEncoder.GetValue());
-    return (double)pivotEncoder.GetValue() / 4096.0;
+    frc::SmartDashboard::PutNumber("ENCODER VALUE", pivotAbsoluteEncoder.GetOutput());
+    return ((double)pivotAbsoluteEncoder.GetOutput() * 360) - 237.0;
 }
 
 std::pair<double, double> ShooterSubsystem::calculateDistanceTravelled(std::pair<double, double> velocity, double time)

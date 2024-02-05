@@ -6,6 +6,8 @@
 #include "COMETS3357/Subsystems/SparkMax/SparkMaxPosition.h"
 #include "COMETS3357/LookupTable.h"
 #include <frc/AnalogInput.h>
+#include <frc/DutyCycle.h>
+#include <frc/DigitalSource.h>
 
 
 SUBSYSTEM_START(Shooter)
@@ -45,8 +47,12 @@ std::pair<double, double> calculateFinalPosition(std::pair<double, double> initi
 COMETS3357::SparkMaxVelocity KickerWheel{"KickerWheel"}; 
 COMETS3357::SparkMaxVelocity FlyWheel{"FlyWheel"}; 
 COMETS3357::SparkMaxPosition Pivot{"Pivot"}; 
-COMETS3357::LookupTable Table{"AngleLookUp"}; 
+COMETS3357::LookupTable angleLookup{"AngleLookup"}; 
+COMETS3357::LookupTable velocityLookup{"VelocityLookup"}; 
+COMETS3357::LookupTable kickerWheelFFLookup{"KickerWheelLookup"};
+COMETS3357::LookupTable flyWheelFFLookup{"FlyWheelLookup"};
 
-frc::AnalogInput pivotEncoder{1};
+ frc::DigitalInput inputPivot{1};
+ frc::DutyCycle pivotAbsoluteEncoder = frc::DutyCycle{inputPivot};
 
 SUBSYSTEM_END

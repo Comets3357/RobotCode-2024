@@ -36,8 +36,10 @@ namespace COMETS3357
 
         void ZeroGyro();
 
-    private:
         AHRS m_navx;
+
+    private:
+        
         std::shared_ptr<nt::NetworkTable> driveTable;
 
         void CalculatePositions();

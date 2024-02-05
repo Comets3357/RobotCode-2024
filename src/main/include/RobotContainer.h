@@ -39,6 +39,7 @@
 #include "COMETS3357/LookupTable.h"
 
 #include "commands/LegAvoidanceCommand.h"
+#include "commands/TurnToCommand.h"
 
 
 
@@ -68,6 +69,7 @@ class RobotContainer {
   IndexerSubsystem indexer {}; 
   ShooterSubsystem shooter {};
 
+    TurnToCommand turnToCommand{&swerve, &gyro};
   IntakeIndexerCommand intakeIndexer {&indexer}; 
   ShooterCommand shooterCommand {&shooter, &indexer, &swerve};
 
@@ -91,6 +93,9 @@ class RobotContainer {
   frc2::InstantCommand zeroGyro{[this](){gyro.ZeroGyro();}, {&gyro}};
   frc2::InstantCommand shoot{[this](){indexer.SetPercent(0.35);}, {&indexer}};
 
+  frc2::InstantCommand stopTurningTowardsSpeaker{[this](){turnToCommand.Cancel();}, {&swerve}};
+
+
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
       {"ZeroGyro", std::make_shared<frc2::InstantCommand>(zeroGyro)},
@@ -100,7 +105,9 @@ class RobotContainer {
       {"StopIntake", std::make_shared<frc2::InstantCommand>(stopIntake)},
       {"StartShoot", std::make_shared<ShooterCommand>(shooterCommand)},
       {"StopShoot", std::make_shared<frc2::InstantCommand>(stopShoot)},
-      {"Shoot", std::make_shared<frc2::InstantCommand>(shoot)}
+      {"Shoot", std::make_shared<frc2::InstantCommand>(shoot)},
+      {"TurnTowardsSpeaker", std::make_shared<TurnToCommand>(turnToCommand)},
+      {"StopTurnTowardsSpeaker", std::make_shared<frc2::InstantCommand>(stopTurningTowardsSpeaker)}
   };
 
 
