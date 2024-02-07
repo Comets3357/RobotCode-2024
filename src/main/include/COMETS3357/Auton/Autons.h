@@ -16,6 +16,7 @@
 #include <filesystem>
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/geometry/Pose2d.h>
 
 namespace COMETS3357
 {
@@ -54,9 +55,10 @@ namespace COMETS3357
 
         void AutonomousInit();
 
+
     private:
 
-        std::map<std::string, std::unique_ptr<frc2::CommandPtr>> autons;
+        std::map<std::string, std::pair<std::unique_ptr<frc2::CommandPtr>, frc::Pose2d>> autons;
         COMETS3357::SwerveSubsystem* swerveSubsystem;
         frc::SendableChooser<std::string> autoChooser;
         pathplanner::AutoBuilder autoBuilder;

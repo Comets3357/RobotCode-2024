@@ -100,6 +100,10 @@ void SwerveSubsystem::Periodic() {
   m_rearLeft.Periodic();
   m_rearRight.Periodic();
 
+    frc::SmartDashboard::PutNumber("SWERVEX", (double)m_odometry.GetEstimatedPosition().X());
+  frc::SmartDashboard::PutNumber("SWERVEY", (double)m_odometry.GetEstimatedPosition().Y());
+
+
 
   m_odometry.Update(frc::Rotation2d(units::radian_t{gyroSubsystemData->GetEntry("angle").GetDouble(0)}),
                     {m_frontLeft.GetPosition(), m_rearLeft.GetPosition(),
