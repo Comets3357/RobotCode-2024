@@ -10,7 +10,7 @@ ShooterSubsystem::ShooterSubsystem() : COMETS3357::Subsystem("ShooterSubsystem")
     }
 
 void ShooterSubsystem::Periodic(){
-    frc::SmartDashboard::PutNumber("Velocity wheels ", FlyWheel.GetRelativeVelocity());
+    frc::SmartDashboard::PutNumber("Velocity wheels ", KickerWheel.GetRelativeVelocity());
     frc::SmartDashboard::PutNumber("PIvotAbso", GetPivotAbsolutePosition());
     // SetPositionPivot(45);
     
@@ -21,7 +21,7 @@ void ShooterSubsystem::Periodic(){
 
 void ShooterSubsystem::SetVelocityFlyWheel(double velocity)
 {
-    FlyWheel.SetVelocity(velocity, flyWheelFFLookup.GetValue(velocity));
+    FlyWheel.SetVelocity(velocity);
 }
 void ShooterSubsystem::SetVelocityFlyWheel(std::string velocity)
 {
@@ -30,7 +30,7 @@ void ShooterSubsystem::SetVelocityFlyWheel(std::string velocity)
 
 void ShooterSubsystem::SetVelocityKickerWheel(double velocity)
 {
-    KickerWheel.SetVelocity(velocity, kickerWheelFFLookup.GetValue(velocity));
+    KickerWheel.SetVelocity(velocity);
 }
 
 void ShooterSubsystem::SetVelocityKickerWheel(std::string velocity)

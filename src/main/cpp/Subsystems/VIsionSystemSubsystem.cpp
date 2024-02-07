@@ -18,6 +18,9 @@ void VisionSystemSubsystem::Initialize()
     xSub = subsystemData->GetDoubleTopic("X").Subscribe(0.0);
     ySub = subsystemData->GetDoubleTopic("Y").Subscribe(0.0);
     timestampSub = subsystemData->GetDoubleTopic("Timestamp").Subscribe(0.0);
+    rotationSpeedSub = subsystemData->GetDoubleTopic("RotVelocity").Subscribe(0.0);
+    velocitySub = subsystemData->GetDoubleTopic("Velocity").Subscribe(0.0);
+    distanceSub = subsystemData->GetDoubleTopic("Distance").Subscribe(0.0);
     timePublisher = subsystemData->GetDoubleTopic("Time").Publish();
     timePublisher.SetDefault(0.0);
 }
@@ -34,6 +37,12 @@ void VisionSystemSubsystem::Periodic()
     
     if (currentTimestamp != lastTimestamp)
     {
+        double rotationSpeed = subsystemData->GetEntry("RotVelocity").GetDouble(0);
+        double velocity = subsystemData->GetEntry("Velocity").GetDouble(0);
+        double tagDistance = subsystemData->GetEntry("Distance").GetDouble(0);
+
+
+
         lastTimestamp = currentTimestamp;
         // frc::SmartDashboard::PutData("Fielsd", &m_field2);
         frc::Translation2d position{units::meter_t{subsystemData->GetEntry("X").GetDouble(0)}, units::meter_t{subsystemData->GetEntry("Y").GetDouble(0)}};
@@ -69,7 +78,8 @@ void VisionSystemSubsystem::Periodic()
         // {
             // swerveSubsystem->m_odometry.ResetPosition(frc::Rotation2d{units::radian_t{GetSubsystemData("GyroSubsystem")->GetEntry("angle").GetDouble(0)}}, swerveSubsystem->GetPositions(), robotPosition );
         // }
-
+        double positionStandardDev = (tagDistance * 0.001) + (rotationSpeed * 0.01) + (velocity * 0.001);
+        swerveSubsystem->m_odometry.SetVisionMeasurementStdDevs({positionStandardDev,positionStandardDev,1});
         swerveSubsystem->m_odometry.AddVisionMeasurement(robotPosition, units::second_t{currentTimestamp+0.25});
 
         

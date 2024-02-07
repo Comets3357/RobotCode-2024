@@ -28,7 +28,9 @@ SUBSYSTEM_START(VisionSystem)
     nt::DoubleSubscriber ySub;
     nt::DoubleSubscriber timestampSub;
     nt::DoublePublisher timePublisher;
-
+    nt::DoubleSubscriber rotationSpeedSub;
+    nt::DoubleSubscriber velocitySub;
+    nt::DoubleSubscriber distanceSub;
     frc::Field2d m_field;
     frc::Field2d m_field2;
 

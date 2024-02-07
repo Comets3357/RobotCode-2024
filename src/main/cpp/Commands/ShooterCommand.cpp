@@ -26,13 +26,13 @@ void ShooterCommand::Initialize()
 void ShooterCommand::Execute()
 {
     frc::Pose2d pos = swerve->GetPose(); 
-    double distance = sqrt(pow((double)(targetPos.X() - pos.X()), 2) + pow((double)(targetPos.Y() - pos.Y()), 2)); 
+    double distance = sqrt(pow((double)(targetPos.X() - pos.X()), 2) + pow((double)(targetPos.Y() - pos.Y()), 2)) + 0.25; 
     frc::SmartDashboard::PutNumber("Distance From Target", distance);
     double shooterAngle = shooterSubsystem->angleLookup.GetValue(distance);
     double velocity = shooterSubsystem->velocityLookup.GetValue(distance);
     shooterSubsystem->Pivot.SetPosition(shooterAngle); 
     shooterSubsystem->SetVelocityKickerWheel(velocity);
-    shooterSubsystem->SetVelocityFlyWheel(velocity);
+    shooterSubsystem->SetVelocityFlyWheel(-velocity);
 
     frc::SmartDashboard::PutNumber("FLywheel Velocity", shooterSubsystem->GetVelocityFlyWheel());
     // if (shooterSubsystem->GetVelocityFlyWheel() < shooterSubsystem->FlyWheel.config.velocities["ShooterSpeed"] + 100)

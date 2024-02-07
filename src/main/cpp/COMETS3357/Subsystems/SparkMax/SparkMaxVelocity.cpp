@@ -63,7 +63,8 @@ void SparkMaxVelocity::SetVelocity(double velocity)
 
 void SparkMaxVelocity::SetVelocity(double velocity, double feedForward)
 {
-    PIDController.SetReference(velocity, rev::CANSparkMax::ControlType::kVelocity, 0, feedForward);
+    SetVelocityPID(PID{0, 0, 0, feedForward});
+    PIDController.SetReference(velocity, rev::CANSparkMax::ControlType::kVelocity, 0);
 }
 
 void SparkMaxVelocity::SetVelocity(std::string velocity)
