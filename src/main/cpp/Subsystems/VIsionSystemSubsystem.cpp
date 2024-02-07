@@ -35,7 +35,6 @@ void VisionSystemSubsystem::Periodic()
     timePublisher.Set((double)wpi::math::MathSharedStore::GetTimestamp());
     frc::SmartDashboard::PutData("Fielsd", &m_field2);
     
-    swerveSubsystem->ResetOdometry(frc::Pose2d{frc::Translation2d{units::meter_t{0}, units::meter_t{0}}, frc::Rotation2d{units::radian_t{0}}});
 
     if (currentTimestamp != lastTimestamp)
     {
