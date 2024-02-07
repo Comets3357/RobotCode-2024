@@ -5,7 +5,7 @@
 TurnToCommand::TurnToCommand(COMETS3357::SwerveSubsystem* swerveSubsystem, COMETS3357::GyroSubsystem * gyroSubsystem) {
     swerve = swerveSubsystem; 
     gyro = gyroSubsystem;
-    AddRequirements({swerve}); 
+    // AddRequirements({swerve}); 
 }
 
 
@@ -30,7 +30,7 @@ void TurnToCommand::Execute()
 
    double angle = atan2((double)deltaX, (double)deltaY);
    swerve->controllingSwerveRotation = false;
-   swerve->overrideRotation = units::radians_per_second_t{angle - gyro->GetSubsystemData("GyroSubsystem")->GetEntry("angle").GetDouble(0)} * rotationPLookup.GetValue(0);
+   swerve->overrideRotation = units::radians_per_second_t{angle - gyro->GetSubsystemData("GyroSubsystem")->GetEntry("angle").GetDouble(0)} * 1;//rotationPLookup.GetValue(0);
 }
 
 bool TurnToCommand::IsFinished()

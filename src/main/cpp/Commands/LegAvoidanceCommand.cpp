@@ -1,7 +1,6 @@
 #include "Commands/LegAvoidanceCommand.h"
 
 
-
 LegAvoidanceCommand::LegAvoidanceCommand(COMETS3357::SwerveSubsystem *swerve) {
 
 swerveSubsystem = swerve;
@@ -43,37 +42,53 @@ void LegAvoidanceCommand::Execute()
     double robotDirection = (double)swerveSubsystem->GetPose().Rotation().Radians();
 
     double degreeOffset = 1.0;
-    double bottomHypotenuse = 27.4;
+    double bottomHypotenuse = 0.69596/2;
 
 
-    double xPosBottom1 = xPos + sin(robotDirection + degreeOffset) * bottomHypotenuse;
-    double yPosBottom1 = yPos + cos(robotDirection + degreeOffset) * bottomHypotenuse;
-    double xPosBottom2 = xPos + sin(robotDirection - degreeOffset) * bottomHypotenuse;
-    double yPosBottom2 = yPos + cos(robotDirection - degreeOffset) * bottomHypotenuse;
+    double xPosBottom1 = xPos + sin(robotDirection + 3.14159/2) * bottomHypotenuse;
+    double yPosBottom1 = yPos + cos(robotDirection + 3.14159/2) * bottomHypotenuse;
+    double xPosBottom2 = xPos + sin(robotDirection - 3.14159/2) * bottomHypotenuse;
+    double yPosBottom2 = yPos + cos(robotDirection - 3.14159/2) * bottomHypotenuse;
+
+
+
 
     double kConstant = 0.2; 
     double magnitude = sqrt(xSpeedSquared + ySpeedSquared);
   
     
-    //frc::Translation2d triangleTip = frc::Translation2d{units::meter_t{xPos + cos(robotDirection) * kConstant * magnitude}, units::meter_t{yPos + sin(robotDirection) * kConstant * magnitude}}; 
-    //frc::Translation2d bottom1 = frc::Translation2d{units::meter_t{xPosBottom1}, units::meter_t{yPosBottom1}};
-    //frc::Translation2d bottom2 = frc::Translation2d{units::meter_t{xPosBottom2}, units::meter_t{yPosBottom2}};
+    frc::Translation2d triangleTip = frc::Translation2d{units::meter_t{xPos + sin(robotDirection) * magnitude * kConstant}, units::meter_t{yPos + cos(robotDirection) * magnitude * kConstant}}; 
+    frc::Translation2d bottom1 = frc::Translation2d{units::meter_t{xPosBottom1}, units::meter_t{yPosBottom1}};
+    frc::Translation2d bottom2 = frc::Translation2d{units::meter_t{xPosBottom2}, units::meter_t{yPosBottom2}};
 
-    frc::Translation2d triangleTip = frc::Translation2d{units::meter_t{9.68}, units::meter_t{6.88}}; 
-    frc::Translation2d bottom1 = frc::Translation2d{units::meter_t{11.30}, units::meter_t{7.68}};
-    frc::Translation2d bottom2 = frc::Translation2d{units::meter_t{11.38}, units::meter_t{6.33}};
-    //frc::Translation2d const points [6]; 
+    // frc::Translation2d triangleTip = frc::Translation2d{units::meter_t{9.68}, units::meter_t{6.88}}; 
+    // frc::Translation2d bottom1 = frc::Translation2d{units::meter_t{11.30}, units::meter_t{7.68}};
+    // frc::Translation2d bottom2 = frc::Translation2d{units::meter_t{11.38}, units::meter_t{6.33}};
+
+    frc::SmartDashboard::PutData("TriangleTip", &point3Field);
+    frc::SmartDashboard::PutData("bottom1", &bottom1Field);
+    frc::SmartDashboard::PutData("bottom2", &bottom2Field);
+
+    point3Field.SetRobotPose(frc::Pose2d{triangleTip, frc::Rotation2d{units::radian_t{0}}});
+    bottom1Field.SetRobotPose(frc::Pose2d{bottom1, frc::Rotation2d{units::radian_t{0}}});
+    bottom2Field.SetRobotPose(frc::Pose2d{bottom2, frc::Rotation2d{units::radian_t{0}}});
+
+
+
     
-    // frc::Translation2d const redA =  frc::Translation2d{units::meter_t{13.25}, units::meter_t{4.1}}; 
-    // frc::Translation2d const redB =  frc::Translation2d{units::meter_t{10.93}, units::meter_t{5.41}};
-    // frc::Translation2d const redC = frc::Translation2d{units::meter_t{10.93}, units::meter_t{2.8}};
-    // frc::Translation2d const blueA = frc::Translation2d{units::meter_t{3.3}, units::meter_t{4.1}};
-    // frc::Translation2d const blueB = frc::Translation2d{units::meter_t{5.63}, units::meter_t{5.41}};
-    // frc::Translation2d const blueC = frc::Translation2d{units::meter_t{5.63}, units::meter_t{2.80}};
-    frc::Translation2d const testPoint = frc::Translation2d{units::meter_t{13.75}, units::meter_t{6.8}}; 
-    frc::Translation2d const points [] = {testPoint}; 
 
-    //frc::Translation2d const points[] = {redA, redB, redC, blueA, blueB, blueC}; 
+    // frc::Translation2d const points [6]; 
+    
+    frc::Translation2d const redA =  frc::Translation2d{units::meter_t{13.25}, units::meter_t{4.1}}; 
+    frc::Translation2d const redB =  frc::Translation2d{units::meter_t{10.93}, units::meter_t{5.41}};
+    frc::Translation2d const redC = frc::Translation2d{units::meter_t{10.93}, units::meter_t{2.8}};
+    frc::Translation2d const blueA = frc::Translation2d{units::meter_t{3.3}, units::meter_t{4.1}};
+    frc::Translation2d const blueB = frc::Translation2d{units::meter_t{5.63}, units::meter_t{5.41}};
+    frc::Translation2d const blueC = frc::Translation2d{units::meter_t{5.63}, units::meter_t{2.80}};
+    frc::Translation2d const testPoint = frc::Translation2d{units::meter_t{13.75}, units::meter_t{6.8}}; 
+    // frc::Translation2d const points [] = {testPoint}; 
+
+    frc::Translation2d const points[] = {redA, redB, redC, blueA, blueB, blueC}; 
 
     double sideLengthA = (double)bottom1.Distance(bottom2); 
     double sideLengthB = (double)bottom1.Distance(triangleTip); 

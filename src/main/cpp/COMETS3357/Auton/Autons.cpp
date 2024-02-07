@@ -48,7 +48,7 @@ void Autons::AutonomousInit()
 void Autons::LoadAutons()
 {
 
-    // std::string const filePath = frc::filesystem::GetDeployDirectory() + "/pathplanner/";
+    // std::string const filePath = frc::filesystem::GetDeployDirectory() + "/pathplanner/autos/";
     
     // for (const auto& entry : std::filesystem::directory_iterator(filePath))
     // {
@@ -61,17 +61,17 @@ void Autons::LoadAutons()
     //         // std::vector<pathplanner::PathPlannerTrajectory> pathGroup = pathplanner::PathPlanner::loadPathGroup(autonName, {pathplanner::PathConstraints{5_mps, 3.5_mps_sq}});
 
 
-    //         autons[autonName] = std::make_unique<frc2::CommandPtr>(pathplanner::AutoBuilder::buildAuto(autonName));
+    //         autons[autonName] = std::make_unique<frc2::CommandPtr>(pathplanner::AutoBuilder::buildAuto("New Auto"));
 
     //         // autons[autonName] = std::make_unique<frc2::CommandPtr>(autoBuilder.fullAuto(pathGroup));
     //         }
          
     //     }
     // }
+// autons["NewAuto"] = std::make_unique<frc2::CommandPtr>(pathplanner::AutoBuilder::buildAuto("NewAuto"));
+//     autoChooser.AddOption("Potato", "Potato");
 
-    // autoChooser.AddOption("Potato", "Potato");
-
-    // frc::SmartDashboard::PutData("Autonomous Mode", &autoChooser);
+//     frc::SmartDashboard::PutData("Autonomous Mode", &autoChooser);
 
 }
 

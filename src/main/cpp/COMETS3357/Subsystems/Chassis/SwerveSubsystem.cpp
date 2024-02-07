@@ -418,10 +418,10 @@ void SwerveSubsystem::ResetOdometry(frc::Pose2d pose) {
 
 void SwerveSubsystem::DriveXRotate(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot)
 {
-  // if (!controllingSwerveRotation )
-  // {
-  //   rot = overrideRotation;
-  // }
+  if (!controllingSwerveRotation )
+  {
+    rot = overrideRotation;
+  }
   // if (!controllingSwerveMovement)
   // {
   //   xSpeed = overrideXSpeed;
@@ -451,10 +451,10 @@ void SwerveSubsystem::DriveDirectionalRotate(units::meters_per_second_t xSpeed, 
 
 void SwerveSubsystem::DriveCornerTurning(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot)
 {
-  // if (!controllingSwerveRotation )
-  // {
-  //   rot = overrideRotation;
-  // }
+  if (!controllingSwerveRotation )
+  {
+    rot = overrideRotation;
+  }
   // if (!controllingSwerveMovement)
   // {
   //   xSpeed = overrideXSpeed;

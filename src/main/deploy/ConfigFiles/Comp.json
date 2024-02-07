@@ -93,7 +93,7 @@
       },
       "ForwardSoftLimitEnabled": true,
       "ReverseSoftLimitEnabled": true,
-      "ForwardSoftLimit": 90,
+      "ForwardSoftLimit": 109.1,
       "ReverseSoftLimit": 35,
       "Positions":
       {
@@ -355,7 +355,7 @@
       "Follow": "NONE",
       "VelocityPID": {
         "D": 0,
-        "FF": 0.000271,
+        "FF": 0.000671,
         "I": 0,
         "P": 0
       },
@@ -376,7 +376,7 @@
       "Follow": "NONE",
       "VelocityPID": {
         "D": 0,
-        "FF": 0.000271,
+        "FF": 0.000671,
         "I": 0,
         "P": 0
       },
