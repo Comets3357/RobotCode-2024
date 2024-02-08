@@ -30,9 +30,9 @@ void ShooterCommand::Execute()
     frc::SmartDashboard::PutNumber("Distance From Target", distance);
     double shooterAngle = shooterSubsystem->angleLookup.GetValue(distance);
     double velocity = shooterSubsystem->velocityLookup.GetValue(distance);
-    // shooterSubsystem->Pivot.SetPosition(shooterAngle); 
-    shooterSubsystem->SetVelocityKickerWheel(340);
-    shooterSubsystem->SetVelocityFlyWheel(-340);
+    shooterSubsystem->Pivot.SetPosition(shooterAngle); 
+    shooterSubsystem->SetVelocityKickerWheel(velocity);
+    shooterSubsystem->SetVelocityFlyWheel(-velocity);
 
     frc::SmartDashboard::PutNumber("FLywheel Velocity", shooterSubsystem->GetVelocityFlyWheel());
     // if (shooterSubsystem->GetVelocityFlyWheel() < shooterSubsystem->FlyWheel.config.velocities["ShooterSpeed"] + 100)

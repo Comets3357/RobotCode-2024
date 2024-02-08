@@ -355,7 +355,7 @@
       "Follow": "NONE",
       "VelocityPID": {
         "D": 0,
-        "FF": 0.000671,
+        "FF": 0.000271,
         "I": 0,
         "P": 0
       },
@@ -376,7 +376,7 @@
       "Follow": "NONE",
       "VelocityPID": {
         "D": 0,
-        "FF": 0.000671,
+        "FF": 0.000271,
         "I": 0,
         "P": 0
       },
@@ -387,7 +387,7 @@
       }
     },
     {
-      "CurrentLimit": 60,
+      "CurrentLimit": 50,
       "ID": 1,
       "IdleMode": "Brake",
       "InvertedRelative": false,
@@ -407,7 +407,7 @@
       }
     },
     {
-      "CurrentLimit": 60,
+      "CurrentLimit": 50,
       "ID": 3,
       "IdleMode": "Brake",
       "InvertedRelative": false,
@@ -427,7 +427,7 @@
       }
     },
     {
-      "CurrentLimit": 60,
+      "CurrentLimit": 50,
       "ID": 5,
       "IdleMode": "Brake",
       "InvertedRelative": false,
@@ -447,7 +447,7 @@
       }
     },
     {
-      "CurrentLimit": 60,
+      "CurrentLimit": 50,
       "ID": 7,
       "IdleMode": "Brake",
       "InvertedRelative": false,

@@ -122,6 +122,11 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
               units::meters_per_second_t ySpeed, double directionX, double directionY,
               bool fieldRelative, bool rateLimit)
 {
+  if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
+  {
+    directionX *= -1;
+    directionY *= -1;
+  }
   frc::SmartDashboard::PutNumber("Gyro Angle", gyroSubsystemData->GetEntry("angle").GetDouble(0));
   frc::SmartDashboard::PutNumber("Angle Difference", gyroSubsystemData->GetEntry("angle").GetDouble(0) - lastAngle);
 
@@ -272,6 +277,12 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
                            frc::SwerveDriveKinematics<4>* kinematics) {
   double xSpeedCommanded;
   double ySpeedCommanded;
+
+  if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
+  {
+    ySpeed *= -1;
+    xSpeed *= -1;
+  }
 
   
 
