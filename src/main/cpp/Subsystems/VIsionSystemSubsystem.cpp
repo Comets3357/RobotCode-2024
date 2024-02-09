@@ -92,7 +92,7 @@ if (abs(rotationSpeed) < 0.1)
         // {
             // swerveSubsystem->m_odometry.ResetPosition(frc::Rotation2d{units::radian_t{GetSubsystemData("GyroSubsystem")->GetEntry("angle").GetDouble(0)}}, swerveSubsystem->GetPositions(), robotPosition );
         // }
-        double positionStandardDev = (tagDistance * 0.05) + 0.3;
+        double positionStandardDev = (tagDistance * 0.04) + 0.1;
         swerveSubsystem->m_odometry.SetVisionMeasurementStdDevs({positionStandardDev, positionStandardDev, positionStandardDev/2});
 
         double cameraX = -0.25;

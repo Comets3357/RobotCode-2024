@@ -79,14 +79,14 @@ void SparkMaxPosition::RobotInit()
         absoluteEncoder.SetInverted(config.invertedAbsolute);
         absoluteEncoder.SetPositionConversionFactor(config.absolutePositionConversionFactor);
         absoluteEncoder.SetVelocityConversionFactor(config.absoluteVelocityConversionFactor);
-        // if (setAbsPos)
-        // {
-        //     absoluteEncoder.SetZeroOffset(config.absoluteZeroOffset);
-        // }
-        // else
-        // {
-        //     absoluteEncoder.SetZeroOffset(zero);
-        // }
+        if (setAbsPos)
+        {
+            absoluteEncoder.SetZeroOffset(config.absoluteZeroOffset);
+        }
+        else
+        {
+            absoluteEncoder.SetZeroOffset(zero);
+        }
 
 
         PIDController.SetPositionPIDWrappingEnabled(config.positionPIDWrappingEnabled);

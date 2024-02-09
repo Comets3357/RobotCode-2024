@@ -93,7 +93,7 @@
       },
       "ForwardSoftLimitEnabled": true,
       "ReverseSoftLimitEnabled": true,
-      "ForwardSoftLimit": 109.1,
+      "ForwardSoftLimit": 100,
       "ReverseSoftLimit": 35,
       "Positions":
       {

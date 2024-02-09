@@ -13,6 +13,8 @@ void ShooterSubsystem::Periodic(){
     frc::SmartDashboard::PutNumber("Velocity wheels ", KickerWheel.GetRelativeVelocity());
     frc::SmartDashboard::PutNumber("PIvotAbso", GetPivotAbsolutePosition());
     // SetPositionPivot(45);
+
+    frc::SmartDashboard::PutNumber("Pivot ANgle", Pivot.GetAbsolutePosition());
     
     Pivot.Periodic();
 
