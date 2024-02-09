@@ -5,11 +5,6 @@
 
 VisionSystemSubsystem::VisionSystemSubsystem(COMETS3357::SwerveSubsystem* swerve) : COMETS3357::Subsystem("VisionSubsystem"), swerveSubsystem{swerve}//, poseEstimator{&swerve->m_odometry}
 {
-    
-
-    frc::Translation2d position{units::meter_t{subsystemData->GetEntry("X").GetDouble(0)}, units::meter_t{subsystemData->GetEntry("Y").GetDouble(0)}};
-    frc::Rotation2d rotation{units::radian_t{GetSubsystemData("GyroSubsystem")->GetEntry("angle").GetDouble(0)}};
-    frc::Pose2d robotPosition{position, rotation};
 
 }
 
@@ -36,14 +31,14 @@ void VisionSystemSubsystem::Periodic()
     timePublisher.Set((double)wpi::math::MathSharedStore::GetTimestamp());
     frc::SmartDashboard::PutData("Fielsd", &m_field2);
 
-    gyroValues.insert(gyroValues.end(), {(double)wpi::math::MathSharedStore::GetTimestamp(), subsystemData->GetEntry("Timestamp").GetDouble(0)});
+    gyroValues.insert(gyroValues.end(), {(double)wpi::math::MathSharedStore::GetTimestamp(), GetSubsystemData("GyroSubsystem")->GetEntry("angle").GetDouble(0)});
 
     if (gyroValues.size() > 100)
     {
         gyroValues.erase(gyroValues.begin());
     }
     
-
+    
     if (currentTimestamp != lastTimestamp)
     {
 
@@ -51,12 +46,12 @@ void VisionSystemSubsystem::Periodic()
         double velocity = subsystemData->GetEntry("Velocity").GetDouble(0);
         double tagDistance = subsystemData->GetEntry("Distance").GetDouble(0);
         double angleOffset = subsystemData->GetEntry("AngleOffset").GetDouble(0);
-        int ID = (double)subsystemData->GetEntry("ID").GetDouble(0);
+        int ID = (int)subsystemData->GetEntry("ID").GetDouble(0);
 
 
 
         lastTimestamp = currentTimestamp;
-        // frc::SmartDashboard::PutData("Fielsd", &m_field2);
+        
         // frc::Translation2d position{units::meter_t{subsystemData->GetEntry("X").GetDouble(0)}, units::meter_t{subsystemData->GetEntry("Y").GetDouble(0)}};
         // frc::Rotation2d rotation{units::radian_t{GetSubsystemData("GyroSubsystem")->GetEntry("angle").GetDouble(0)}};
 
@@ -73,14 +68,16 @@ void VisionSystemSubsystem::Periodic()
         double slope = (gyroAbove.second - gyroBelow.second)/(gyroAbove.first - gyroBelow.first);
         double gyroAngle = ((currentTimestamp - gyroBelow.first) * slope) + gyroBelow.second;
 
-        double actualAngleOffset =  GetSubsystemData("GyroSubsystem")->GetEntry("angle").GetDouble(0) - angleOffset;
+        double actualAngleOffset =  GetSubsystemData("GyroSubsystem")->GetEntry("angle").GetDouble(0) - angleOffset ;
         double x = cos(actualAngleOffset) * tagDistance + tagPositions[ID].first;
         double y = sin(actualAngleOffset) * tagDistance + tagPositions[ID].second;
 
         frc::Pose2d robotPosition{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, units::radian_t{gyroAngle}};
         
-
+if (abs(rotationSpeed) < 0.1)
+{
         m_field2.SetRobotPose(robotPosition);
+}
 
         if (ResetPose)
         {
@@ -95,23 +92,24 @@ void VisionSystemSubsystem::Periodic()
         // {
             // swerveSubsystem->m_odometry.ResetPosition(frc::Rotation2d{units::radian_t{GetSubsystemData("GyroSubsystem")->GetEntry("angle").GetDouble(0)}}, swerveSubsystem->GetPositions(), robotPosition );
         // }
-        double positionStandardDev = (tagDistance * 0.2) + (rotationSpeed * 1) + (velocity * 0.1);
+        double positionStandardDev = (tagDistance * 0.05) + 0.3;
         swerveSubsystem->m_odometry.SetVisionMeasurementStdDevs({positionStandardDev, positionStandardDev, positionStandardDev/2});
 
         double cameraX = -0.25;
         double cameraY = 0.3;
         double cameraDistance = sqrt(pow(cameraX, 2) + pow(cameraY, 2));
         double angle = atan2(cameraX, cameraY);
-        double newAngle = gyroAngle;
+        double newAngle = angle + 3.14159;
         frc::Translation2d newPos{robotPosition.X() + units::meter_t{cameraDistance * cos(newAngle)}, robotPosition.Y() + units::meter_t(cameraDistance * sin(newAngle))};
         frc::Rotation2d newRotation{units::radian_t{gyroAngle}};
 
 
-        if (abs(rotationSpeed) < 0.5)
-        swerveSubsystem->m_odometry.AddVisionMeasurement(frc::Pose2d{newPos, newRotation}, units::second_t{currentTimestamp-0.25});
+        if (abs( rotationSpeed) < 0.1)
+        swerveSubsystem->m_odometry.AddVisionMeasurement(frc::Pose2d{newPos, newRotation}, units::second_t{(double)wpi::math::MathSharedStore::GetTimestamp()-0.25});
 
         
     }
+frc::SmartDashboard::PutData("Fielsd", &m_field2);
 
     // Do this in either robot or subsystem init
     frc::SmartDashboard::PutData("Field", &m_field);

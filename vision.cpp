@@ -173,8 +173,9 @@ nt::DoublePublisher IDPublisher = table->GetDoubleTopic("ID").Publish();
     // Main loop
     while (true) {
 
+        auto tempend = std::chrono::high_resolution_clock::now();
         double tempTime = inst.GetTable("VisionSubsystem")->GetEntry("Time").GetDouble(0.0);
-        double tempcurrentTime = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count() / 1000.0 + timeOffset;
+        double tempcurrentTime = std::chrono::duration_cast<std::chrono::milliseconds>(tempend-start).count() / 1000.0 + timeOffset;
         if (tempTime < tempcurrentTime)
         {
             timeOffset -= (tempcurrentTime - tempTime);

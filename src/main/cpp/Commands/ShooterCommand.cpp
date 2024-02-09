@@ -15,11 +15,11 @@ void ShooterCommand::Initialize()
     shooterSubsystem->SetVelocityKickerWheel("ShooterSpeed"); 
     if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
     {
-        targetPos = frc::Translation2d{units::meter_t{0}, units::meter_t{5.5}};
+        targetPos = frc::Translation2d{units::meter_t{16.579}, units::meter_t{5.5}};
     }
     else
     {
-        targetPos = frc::Translation2d{units::meter_t{16.579}, units::meter_t{5.5}};
+        targetPos = frc::Translation2d{units::meter_t{0}, units::meter_t{5.5}};
     }
 }
 
