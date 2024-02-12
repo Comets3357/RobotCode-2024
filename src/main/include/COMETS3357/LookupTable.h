@@ -5,16 +5,23 @@
 #include <cmath>
 #include <cstddef>
 #include <set>
+#include <string>
+#include "COMETS3357/Configs/ConfigFiles.h"
 
-class LookupTable
+namespace COMETS3357
 {
 
-    LookupTable();
+    class LookupTable
+    {
+    public:
+        LookupTable(std::string configName);
 
-    std::set<std::pair<double, double>> lookupTable;
+        LookupTableConfig config;
 
-    void AddValues(std::set<std::pair<double, double>> table);
+        std::set<std::pair<double, double>> lookupTable;
 
-    double GetValue(double value);
+        double GetValue(double value);
+
+    };
 
 };

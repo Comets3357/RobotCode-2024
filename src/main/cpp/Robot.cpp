@@ -1,12 +1,13 @@
 #include "Robot.h"
 #include <frc2/command/CommandScheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include "COMETS3357/Configs/ConfigFiles.h"
 
 void Robot::RobotInit() 
 {
 // ConfigFiles::getInstance().LoadConfigFiles("Comp");
 //m_container.timerSubsystem.ResetAndBeginTimer();
-// COMETS3357::SubsystemManager::GetInstance().Init();
+COMETS3357::SubsystemManager::GetInstance().Init();
 }
 
 /**
@@ -28,7 +29,23 @@ void Robot::RobotPeriodic()
  * can use it to reset any subsystem information you want to clear when the
  * robot is disabled.
  */
-void Robot::DisabledInit() {}
+void Robot::DisabledInit() {
+
+  for (auto motor : COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxVelocityConfigs)
+  {
+    motor.second.motor->SetPercent(0);
+  }
+
+  for (auto motor : COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxPercentConfigs)
+  {
+    motor.second.motor->SetPower(0);
+  }
+
+  for (auto motor : COMETS3357::ConfigFiles::getInstance().GetConfigFiles().sparkMaxVelocityConfigs)
+  {
+    motor.second.motor->SetPercent(0);
+  }
+}
 
 void Robot::DisabledPeriodic() 
 {

@@ -16,6 +16,10 @@
 #include <frc/Filesystem.h>
 #include <rev/CANSparkMax.h>
 #include <frc/motorcontrol/PWMSparkMax.h>
+#include <set>
+#include <frc2/command/button/Trigger.h>
+#include <functional>
+#include <frc/DriverStation.h>
 
 
 
@@ -70,6 +74,10 @@ namespace COMETS3357
         std::map<std::string, double> velocities;
     };
 
+    struct LookupTableConfig {
+        std::set<std::pair<double, double>> lookupTableData;
+    };
+
     struct SparkMaxPWMConfig
     {
         frc::PWMSparkMax* motor;
@@ -122,6 +130,7 @@ namespace COMETS3357
         std::map<std::string, SwerveConfig> swerveConfigs;
         std::map<std::string, SwerveModuleConfig> swerveModuleConfigs;
         std::map<std::string, SparkMaxPWMConfig> sparkMaxPWMConfigs;
+        std::map<std::string, LookupTableConfig> lookupTableConfigs;
     };
 
 
