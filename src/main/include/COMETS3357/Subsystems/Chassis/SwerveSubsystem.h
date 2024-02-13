@@ -18,6 +18,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include "COMETS3357/GyroSubsystem.h"
 
+
 class RobotContainer;
 
 
@@ -27,10 +28,12 @@ namespace COMETS3357
   class SwerveSubsystem : public COMETS3357::Subsystem
   {
   public:
-    SwerveSubsystem(std::string configFileName);
+    SwerveSubsystem(std::string configFileName, COMETS3357::GyroSubsystem* gyro);
 
     SwerveConfig configuration;
     std::shared_ptr<nt::NetworkTable> gyroSubsystemData;
+
+    COMETS3357::GyroSubsystem* gyroSubsystem;
 
     
     COMETS3357::MAXSwerveModule m_frontLeft;

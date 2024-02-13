@@ -37,6 +37,8 @@ namespace COMETS3357
         void ZeroGyro();
 
         AHRS m_navx;
+        
+        double angleOffset;
 
     private:
         
@@ -46,7 +48,6 @@ namespace COMETS3357
 
         float robotX, rototY; // experimental
 
-        double angleOffset;
 
     };
 };

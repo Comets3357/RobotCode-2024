@@ -13,10 +13,11 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 using namespace COMETS3357;
 
-SwerveSubsystem::SwerveSubsystem(std::string configFileName)
+SwerveSubsystem::SwerveSubsystem(std::string configFileName, COMETS3357::GyroSubsystem* gyro)
     : configuration{ConfigFiles::getInstance().GetConfigFiles().swerveConfigs[configFileName]},
       COMETS3357::Subsystem("SwerveSubsystem"),
       gyroSubsystemData{GetSubsystemData("GyroSubsystem")},
+        gyroSubsystem{gyro},
       m_frontLeft{configuration.frontLeftModule},
       m_rearLeft{configuration.backLeftModule},
       m_frontRight{configuration.frontRightModule},
@@ -84,6 +85,7 @@ SwerveSubsystem::SwerveSubsystem(std::string configFileName)
                   m_rearLeft.GetPosition(), m_rearRight.GetPosition()},
                  frc::Pose2d{}}
 {
+
     currentKinematic = &kDriveKinematics;
 }
 

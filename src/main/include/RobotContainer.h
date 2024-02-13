@@ -62,9 +62,9 @@ class RobotContainer {
   COMETS3357::TimerSubsystem timer{};
   COMETS3357::GyroSubsystem gyro{};
   COMETS3357::LimelightSubsystem limelight{};
-  COMETS3357::SwerveSubsystem swerve{"Swerve"};
+  COMETS3357::SwerveSubsystem swerve{"Swerve", &gyro};
 
-  VisionSystemSubsystem visionSystem{&swerve};
+  VisionSystemSubsystem visionSystem{&swerve, &gyro};
   IntakeSubsystem intake {}; 
   IndexerSubsystem indexer {}; 
   ShooterSubsystem shooter {};
