@@ -16,6 +16,7 @@
 #include <networktables/DoubleArrayTopic.h>
 #include <cameraserver/CameraServer.h>
 #include <opencv2/opencv.hpp>
+#include <frc/interpolation/TimeInterpolatableBuffer.h>
 
 
 SUBSYSTEM_START(VisionSystem)
@@ -38,18 +39,24 @@ SUBSYSTEM_START(VisionSystem)
 
     frc::Field2d m_field;
     frc::Field2d m_field2;
+
+    frc::Field2d m_field3;
+    frc::Field2d m_field4;
+    frc::Field2d m_field5;
     double currentTimestamp;
 
     frc::Pose2d lastPose;
     bool ResetPose = true;
 
-    std::set<std::pair<double, double>> gyroValues = {};
+    frc::TimeInterpolatableBuffer<double> yawInterpolationBuffer{3_s};
+    frc::TimeInterpolatableBuffer<double> rateInterpolationBuffer{3_s};
+
     std::map<double, std::pair<double, double>> tagPositions =
     {
         {1, {15.0794719999,0.2458719999}},
         {2, {16.185134, 0.883666}},
-        {3, {16.503142, 4.982717999999999}},
-        {4, {16.503142, 5.547867999999999}},
+        {3, {16.579342, 4.982717999999999}},
+        {4, {16.579342, 5.547867999999999}},
         {5, {14.700757999999999, 8.2042}},
         {6, {1.8415, 8.2042}},
         {7, {-0.038099999999999995, 5.547867999999999}},

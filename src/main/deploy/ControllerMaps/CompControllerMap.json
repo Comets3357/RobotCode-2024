@@ -172,7 +172,7 @@
                 "LeftStickX": "NONE",
                 "LeftStickButton": "NONE",
                 "RightStickX": "NONE",
-                "RightStickY": "NONE",
+                "RightStickY": "ManualElevator",
                 "RightStickButton": "NONE",
                 "AButton": "NONE",
                 "BButton": "NONE",

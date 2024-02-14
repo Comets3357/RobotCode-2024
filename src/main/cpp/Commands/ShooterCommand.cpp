@@ -15,18 +15,18 @@ void ShooterCommand::Initialize()
     shooterSubsystem->SetVelocityKickerWheel("ShooterSpeed"); 
     if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
     {
-        targetPos = frc::Translation2d{units::meter_t{0}, units::meter_t{5.5}};
+        targetPos = frc::Translation2d{units::meter_t{16.579}, units::meter_t{5.547867999999999}};
     }
     else
     {
-        targetPos = frc::Translation2d{units::meter_t{16.579}, units::meter_t{5.5}};
+        targetPos = frc::Translation2d{units::meter_t{0}, units::meter_t{5.547867999999999}};
     }
 }
 
 void ShooterCommand::Execute()
 {
     frc::Pose2d pos = swerve->GetPose(); 
-    double distance = sqrt(pow((double)(targetPos.X() - pos.X()), 2) + pow((double)(targetPos.Y() - pos.Y()), 2)) + 0.25; 
+    double distance = sqrt(pow((double)(targetPos.X() - pos.X()), 2) + pow((double)(targetPos.Y() - pos.Y()), 2)); 
     frc::SmartDashboard::PutNumber("Distance From Target", distance);
     double shooterAngle = shooterSubsystem->angleLookup.GetValue(distance);
     double velocity = shooterSubsystem->velocityLookup.GetValue(distance);
