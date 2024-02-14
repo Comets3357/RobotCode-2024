@@ -16,4 +16,6 @@ COMETS3357::GyroSubsystem* gyro;
 COMETS3357::LookupTable rotationPLookup{"RotationP"};
 frc::Translation2d targetPos; 
 
+frc::PIDController turnToPID{1, 0, 0};
+
 COMMAND_END

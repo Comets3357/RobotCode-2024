@@ -14,11 +14,11 @@ void TurnToCommand::Initialize()
 {
     if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
     {
-        targetPos = frc::Translation2d{units::meter_t{0}, units::meter_t{5.5}};
+        targetPos = frc::Translation2d{units::meter_t{16.579}, units::meter_t{5.547867999999999}};
     }
     else
     {
-        targetPos = frc::Translation2d{units::meter_t{16.579}, units::meter_t{5.5}};
+        targetPos = frc::Translation2d{units::meter_t{0}, units::meter_t{5.547867999999999}};
     }
 }
 
@@ -30,7 +30,8 @@ void TurnToCommand::Execute()
 
    double angle = atan2((double)deltaX, (double)deltaY);
    swerve->controllingSwerveRotation = false;
-   swerve->overrideRotation = units::radians_per_second_t{angle - gyro->GetSubsystemData("GyroSubsystem")->GetEntry("angle").GetDouble(0)} * 1;//rotationPLookup.GetValue(0);
+   turnToPID.SetP(1);
+   swerve->overrideRotation = units::radians_per_second_t{turnToPID.Calculate(gyro->GetSubsystemData("GyroSubsystem")->GetEntry("angle").GetDouble(0), angle)};//rotationPLookup.GetValue(0);
 }
 
 bool TurnToCommand::IsFinished()

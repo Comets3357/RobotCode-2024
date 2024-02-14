@@ -76,8 +76,13 @@ frc::SmartDashboard::PutNumber("ASDASD TIME", nt::Now() * 0.000001);
             frc::Translation2d newPos{units::meter_t{x + cameraDistance * cos(newAngle)}, units::meter_t(y + cameraDistance * sin(newAngle))};
             frc::Rotation2d newRotation{units::radian_t{gyroAngle}};
 
+            frc::Pose2d currentPose = swerveSubsystem->m_odometry.GetEstimatedPosition();
+            double realOffset = atan2((double)currentPose.X() - tagPositions[ID].first, (double)currentPose.Y() - tagPositions[ID].second) + angleOffset;
 
-            if (abs(gyroRate) < 0.5)
+            frc::SmartDashboard::PutNumber("GyroError", (gyroAngle - realOffset) * rateInterpolationBuffer.Sample(units::second_t{currentTimestamp}).value());
+
+
+            if (abs(gyroRate) < 0.001)
             swerveSubsystem->m_odometry.AddVisionMeasurement(frc::Pose2d{newPos, newRotation}, units::second_t{currentTimestamp});
             // m_field2.SetRobotPose(frc::Pose2d{newPos, newRotation});
 
