@@ -101,7 +101,7 @@ class RobotContainer {
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
       {"ZeroGyro", std::make_shared<frc2::InstantCommand>(zeroGyro)},
-    {"AVOIDLEG", std::make_shared<frc2::InstantCommand>(avoid)}, // test purposes
+      {"AVOIDLEG", std::make_shared<frc2::InstantCommand>(avoid)}, // test purposes
       {"EjectIntake", std::make_shared<frc2::InstantCommand>(ejectIntake)},
       {"StartIntake", std::make_shared<frc2::InstantCommand>(startIntake)},
       {"StopIntake", std::make_shared<frc2::InstantCommand>(stopIntake)},
@@ -129,7 +129,7 @@ class RobotContainer {
     {"Intake", std::make_shared<frc2::InstantCommand>(startIntake)}
   };
 
-  COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap", };
+  COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap" };
   COMETS3357::Autons autos{&swerve, autonActionMap};
 
   void ConfigureBindings();
