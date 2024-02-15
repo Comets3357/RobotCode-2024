@@ -13,10 +13,11 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 using namespace COMETS3357;
 
-SwerveSubsystem::SwerveSubsystem(std::string configFileName)
+SwerveSubsystem::SwerveSubsystem(std::string configFileName, COMETS3357::GyroSubsystem* gyro)
     : configuration{ConfigFiles::getInstance().GetConfigFiles().swerveConfigs[configFileName]},
       COMETS3357::Subsystem("SwerveSubsystem"),
       gyroSubsystemData{GetSubsystemData("GyroSubsystem")},
+        gyroSubsystem{gyro},
       m_frontLeft{configuration.frontLeftModule},
       m_rearLeft{configuration.backLeftModule},
       m_frontRight{configuration.frontRightModule},
@@ -77,8 +78,14 @@ SwerveSubsystem::SwerveSubsystem(std::string configFileName)
                  frc::Rotation2d(units::radian_t{gyroSubsystemData->GetEntry("angle").GetDouble(0)}),
                  {m_frontLeft.GetPosition(), m_frontRight.GetPosition(),
                   m_rearLeft.GetPosition(), m_rearRight.GetPosition()},
+                 frc::Pose2d{}},
+      m_odometry2{kDriveKinematics,
+                 frc::Rotation2d(units::radian_t{gyroSubsystemData->GetEntry("angle").GetDouble(0)}),
+                 {m_frontLeft.GetPosition(), m_frontRight.GetPosition(),
+                  m_rearLeft.GetPosition(), m_rearRight.GetPosition()},
                  frc::Pose2d{}}
 {
+
     currentKinematic = &kDriveKinematics;
 }
 
@@ -103,6 +110,13 @@ void SwerveSubsystem::Periodic() {
   m_odometry.Update(frc::Rotation2d(units::radian_t{gyroSubsystemData->GetEntry("angle").GetDouble(0)}),
                     {m_frontLeft.GetPosition(), m_rearLeft.GetPosition(),
                      m_frontRight.GetPosition(), m_rearRight.GetPosition()});
+  m_odometry2.Update(frc::Rotation2d(units::radian_t{gyroSubsystemData->GetEntry("angle").GetDouble(0)}),
+                    {m_frontLeft.GetPosition(), m_rearLeft.GetPosition(),
+                     m_frontRight.GetPosition(), m_rearRight.GetPosition()});
+
+  frc::SmartDashboard::PutData("Fielsd2 real", &m_field);
+
+  m_field.SetRobotPose(m_odometry2.GetPose());
   
 }
 
@@ -110,6 +124,11 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
               units::meters_per_second_t ySpeed, double directionX, double directionY,
               bool fieldRelative, bool rateLimit)
 {
+  if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
+  {
+    directionX *= -1;
+    directionY *= -1;
+  }
   frc::SmartDashboard::PutNumber("Gyro Angle", gyroSubsystemData->GetEntry("angle").GetDouble(0));
   frc::SmartDashboard::PutNumber("Angle Difference", gyroSubsystemData->GetEntry("angle").GetDouble(0) - lastAngle);
 
@@ -261,6 +280,14 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
   double xSpeedCommanded;
   double ySpeedCommanded;
 
+  if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
+  {
+    ySpeed *= -1;
+    xSpeed *= -1;
+  }
+
+  
+
   if (rateLimit) {
     // Convert XY to polar for rate limiting
     double inputTranslationDir = atan2(ySpeed.value(), xSpeed.value());
@@ -360,6 +387,12 @@ void SwerveSubsystem::SetModuleStates(
   m_frontRight.SetDesiredState(desiredStates[1]);
   m_rearLeft.SetDesiredState(desiredStates[2]);
   m_rearRight.SetDesiredState(desiredStates[3]);
+
+}
+
+wpi::array<frc::SwerveModulePosition, 4U> SwerveSubsystem::GetPositions()
+{
+  return {m_frontLeft.GetPosition(), m_frontRight.GetPosition(), m_rearLeft.GetPosition(), m_rearRight.GetPosition()};
 }
 
 void SwerveSubsystem::ResetEncoders() {
@@ -393,10 +426,33 @@ void SwerveSubsystem::ResetOdometry(frc::Pose2d pose) {
       {m_frontLeft.GetPosition(), m_frontRight.GetPosition(),
        m_rearLeft.GetPosition(), m_rearRight.GetPosition()},
       pose);
+  m_odometry2.ResetPosition(
+      GetHeading(),
+      {m_frontLeft.GetPosition(), m_frontRight.GetPosition(),
+       m_rearLeft.GetPosition(), m_rearRight.GetPosition()},
+      pose);
 }
 
 void SwerveSubsystem::DriveXRotate(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot)
 {
+  if (!controllingSwerveRotation )
+  {
+    rot = overrideRotation;
+  }
+  // if (!controllingSwerveMovement)
+  // {
+  //   xSpeed = overrideXSpeed;
+  //   ySpeed = overrideYSpeed;
+  // }
+  // if (addingSwerveRotation)
+  // {
+  //   rot += addingRot;
+  // }
+  // if (addingSwerveMovement)
+  // {
+  //   xSpeed += addingXSpeed;
+  //   ySpeed += addingYSpeed;
+  // }
   currentKinematic = &kDriveKinematics;
   Drive(xSpeed, ySpeed, rot, true, true, &kDriveKinematics);
   pickedCorner = false;
@@ -404,6 +460,7 @@ void SwerveSubsystem::DriveXRotate(units::meters_per_second_t xSpeed, units::met
 
 void SwerveSubsystem::DriveDirectionalRotate(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, double directionX, double directionY)
 {
+  
   currentKinematic = &kDriveKinematics;
   Drive(xSpeed, ySpeed, directionX, directionY, true, true);
   pickedCorner = false;
@@ -411,7 +468,24 @@ void SwerveSubsystem::DriveDirectionalRotate(units::meters_per_second_t xSpeed, 
 
 void SwerveSubsystem::DriveCornerTurning(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot)
 {
-
+  if (!controllingSwerveRotation )
+  {
+    rot = overrideRotation;
+  }
+  // if (!controllingSwerveMovement)
+  // {
+  //   xSpeed = overrideXSpeed;
+  //   ySpeed = overrideYSpeed;
+  // }
+  // if (addingSwerveRotation)
+  // {
+  //   rot += addingRot;
+  // }
+  // if (addingSwerveMovement)
+  // {
+  //   xSpeed += addingXSpeed;
+  //   ySpeed += addingYSpeed;
+  // }
   double angleOnDrivebase = atan2(ySpeed.value(), xSpeed.value()) - gyroSubsystemData->GetEntry("angle").GetDouble(0);
     double angleXPortion = sin(angleOnDrivebase);
     double angleYPortion = cos(angleOnDrivebase);

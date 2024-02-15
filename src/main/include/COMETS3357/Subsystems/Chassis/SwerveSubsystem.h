@@ -14,7 +14,10 @@
 
 #include "COMETS3357/Subsystems/Chassis/MAXSwerveModule.h"
 #include "units/time.h"
+#include <frc/smartdashboard/Field2d.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 #include "COMETS3357/GyroSubsystem.h"
+
 
 class RobotContainer;
 
@@ -25,10 +28,12 @@ namespace COMETS3357
   class SwerveSubsystem : public COMETS3357::Subsystem
   {
   public:
-    SwerveSubsystem(std::string configFileName);
+    SwerveSubsystem(std::string configFileName, COMETS3357::GyroSubsystem* gyro);
 
     SwerveConfig configuration;
     std::shared_ptr<nt::NetworkTable> gyroSubsystemData;
+
+    COMETS3357::GyroSubsystem* gyroSubsystem;
 
     
     COMETS3357::MAXSwerveModule m_frontLeft;
@@ -64,7 +69,7 @@ namespace COMETS3357
     void Drive(units::meters_per_second_t xSpeed,
               units::meters_per_second_t ySpeed, double directionX, double directionY,
               bool fieldRelative, bool rateLimit);
-
+frc::Field2d m_field;
     /**
      * Sets the wheels into an X formation to prevent movement.
      */
@@ -100,6 +105,8 @@ namespace COMETS3357
      * @return The turn rate of the robot, in degrees per second
      */
     double GetTurnRate();
+
+    wpi::array<frc::SwerveModulePosition, 4U> GetPositions();
 
     /**
      * Returns the currently-estimated pose of the robot.
@@ -177,6 +184,19 @@ namespace COMETS3357
 
       
     frc::SwerveDrivePoseEstimator<4> m_odometry;
+bool controllingSwerveRotation = true;
+bool controllingSwerveMovement = true;
+
+bool addingSwerveRotation = false;
+bool addingSwerveMovement = false;
+
+units::radians_per_second_t overrideRotation{0};
+units::meters_per_second_t overrideXSpeed{0};
+units::meters_per_second_t overrideYSpeed{0};
+
+units::radians_per_second_t addingRot{0};
+units::meters_per_second_t addingXSpeed{0};
+units::meters_per_second_t addingYSpeed{0};
 
 
   private:
@@ -196,10 +216,8 @@ namespace COMETS3357
 
     // Odometry class for tracking robot pose
     // 4 defines the number of modules
-    // frc::SwerveDriveOdometry<4> m_odometry;
+    frc::SwerveDriveOdometry<4> m_odometry2;
 
-
-    
 
     double actualAngle = 0; 
     double lastAngle = 0; 

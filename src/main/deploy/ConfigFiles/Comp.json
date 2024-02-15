@@ -1,6 +1,146 @@
 {
   "ControllerMap": "CompControllerMap",
+  "LookupTableConfigs":
+  [
+    {
+      "Name": "AngleLookup",
+      "Data":
+      [
+        [1.29,  57],
+        [2.56, 41], 
+        [3.02, 35], 
+        [3.5, 33], 
+        [4.2, 30],
+        [100, 24]
+      ]
+    },
+    {
+      "Name": "KickerWheelLookup",
+      "Data":
+      [
+        [500, 0.0003155],
+        [1000, 0.0003155],
+        [1500, 0.0002415],
+        [2000, 0.000231],
+        [2500, 0.000223],
+        [3000, 0.00022],
+        [3500, 0.00022],
+        [4000, 0.00022]
+      ]
+    },
+    {
+      "Name": "FlyWheelLookup",
+      "Data":
+      [
+        [500, 0.0003155],
+        [1000, 0.0003155],
+        [1500, 0.0002415],
+        [2000, 0.000231],
+        [2500, 0.000223],
+        [3000, 0.00022],
+        [3500, 0.00022],
+        [4000, 0.00022]
+      ]
+    },
+    {
+      "Name": "VelocityLookup",
+      "Data":
+      [
+        [0, 2000],
+        [1000, 2000]
+      ]
+    },
+    {
+      "Name": "RotationP",
+      "Data":
+      [
+        [0, 5],
+        [10, 5]
+      ]
+    }
+  ],
   "SparkMaxPositionConfigs": [
+    {
+      "AbsolutePositionConversionFactor": 360,
+      "AbsoluteVelocityConversionFactor": 1,
+      "AbsoluteZeroOffset": 241.1168921,
+      "CurrentLimit": 40,
+      "DefaultRunMode": "ABSOLUTE",
+      "ID": 31,
+      "IdleMode": "Brake",
+      "InvertedAbsolute": false,
+      "InvertedRelative": false,
+      "MaxSpeed": 1,
+      "MinSpeed": -1,
+      "Name": "Pivot",
+      "Follow": "NONE",
+      "PositionPID": {
+        "D": 0.001,
+        "FF": 0,
+        "I": 0,
+        "P": 0.24
+      },
+      "PositionPIDWrappingEnabled": false,
+      "RelativePositionConversionFactor": 0.9863013698630137,
+      "RelativeVelocityConversionFactor": 1,
+      "TurningEncoderPositionPIDMaxInput": 6.2831853072000001,
+      "TurningEncoderPositionPIDMinInput": 0,
+      "VelocityPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 0
+      },
+      "ForwardSoftLimitEnabled": true,
+      "ReverseSoftLimitEnabled": true,
+      "ForwardSoftLimit": 109.1,
+      "ReverseSoftLimit": 35,
+      "Positions":
+      {
+        
+      }
+    },
+
+    {
+      "AbsolutePositionConversionFactor": 360,
+      "AbsoluteVelocityConversionFactor": 1,
+      "AbsoluteZeroOffset": 241.1168921,
+      "CurrentLimit": 40,
+      "DefaultRunMode": "Relative",
+      "ID": 41,
+      "IdleMode": "Brake",
+      "InvertedAbsolute": false,
+      "InvertedRelative": false,
+      "MaxSpeed": 1,
+      "MinSpeed": -1,
+      "Name": "ElevatorMotor",
+      "Follow": "NONE",
+      "PositionPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 0.1
+      },
+      "PositionPIDWrappingEnabled": false,
+      "RelativePositionConversionFactor": 1,
+      "RelativeVelocityConversionFactor": 1,
+      "TurningEncoderPositionPIDMaxInput": 1,
+      "TurningEncoderPositionPIDMinInput": 0,
+      "VelocityPID": {
+        "D": 0,
+        "FF": 0,
+        "I": 0,
+        "P": 0
+      },
+      "ForwardSoftLimitEnabled": false,
+      "ReverseSoftLimitEnabled": false,
+      "ForwardSoftLimit": 109.1,
+      "ReverseSoftLimit": 35,
+      "Positions":
+      {
+        
+      }
+    },
     
     {
       "AbsolutePositionConversionFactor": 6.2831853072000001,
@@ -168,13 +308,13 @@
       "Name": "IntakeMotor",
       "ID": 11,
       "InvertedRelative": false,
-      "CurrentLimit": 40,
+      "CurrentLimit": 55,
       "IdleMode": "Brake",
       "Follow": "NONE",
       "Percents":
       {
-        "Intake Speed" : -0.85, 
-        "Eject Speed" : 0.85
+        "IntakeSpeed" : -0.8, 
+        "EjectSpeed" : 0.8
       }
     }
   ],
@@ -224,31 +364,96 @@
   "SparkMaxVelocityConfigs": [
     {
       "CurrentLimit": 60,
-      "ID": 1,
+      "ID": 21,
       "IdleMode": "Brake",
       "InvertedRelative": false,
-      "Name": "DriveMotor1",
-      "RelativePositionConversionFactor": 0.0485273613,
-      "RelativeVelocityConversionFactor": 0.00084632602091900004,
+      "Name": "Indexer",
+      "RelativePositionConversionFactor": 1,
+      "RelativeVelocityConversionFactor": 1,
       "Follow": "NONE",
       "VelocityPID": {
         "D": 0,
-        "FF": 0.20817085187419279,
+        "FF": 1,
         "I": 0,
-        "P": 0.040000000000000001
+        "P": 0
       },
       "Velocities":
       {
+        "IndexerSpeed" : 1,
+        "IndexerShootSpeed" : 700,
+        "IndexerEjectSpeed" : -5
 
       }
     },
     {
       "CurrentLimit": 60,
+      "ID": 22,
+      "IdleMode": "Brake",
+      "InvertedRelative": false,
+      "Name": "KickerWheel",
+      "RelativePositionConversionFactor": 1,
+      "RelativeVelocityConversionFactor": 1,
+      "Follow": "NONE",
+      "VelocityPID": {
+        "D": 0,
+        "FF": 0.000271,
+        "I": 0,
+        "P": 0
+      },
+      "Velocities":
+      {
+        "ShooterSpeed": 2500,
+        "IdleSpeed" : 0
+      }
+    },
+    {
+      "CurrentLimit": 60,
+      "ID": 23,
+      "IdleMode": "Brake",
+      "InvertedRelative": false,
+      "Name": "FlyWheel",
+      "RelativePositionConversionFactor": 1,
+      "RelativeVelocityConversionFactor": 1,
+      "Follow": "NONE",
+      "VelocityPID": {
+        "D": 0,
+        "FF": 0.000271,
+        "I": 0,
+        "P": 0
+      },
+      "Velocities":
+      {
+        "ShooterSpeed": -2500,
+        "IdleSpeed" : 0
+      }
+    },
+    {
+      "CurrentLimit": 50,
+      "ID": 1,
+      "IdleMode": "Brake",
+      "InvertedRelative": false,
+      "Name": "DriveMotor1",
+      "RelativePositionConversionFactor": 0.06383706666,
+      "RelativeVelocityConversionFactor": 0.00084632602091900004,
+      "Follow": "NONE",
+      "VelocityPID": {
+        "D": 0,
+        "FF": 0.20817085187419279,
+        "I": 0,
+        "P": 0.040000000000000001
+      },
+      "Velocities":
+      {
+        
+      }
+    },
+    {
+      "CurrentLimit": 50,
       "ID": 3,
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "DriveMotor2",
-      "RelativePositionConversionFactor": 0.0485273613,
+      "RelativePositionConversionFactor": 0.06383706666,
       "RelativeVelocityConversionFactor": 0.00084632602091900004,
       "Follow": "NONE",
       "VelocityPID": {
@@ -263,12 +468,12 @@
       }
     },
     {
-      "CurrentLimit": 60,
+      "CurrentLimit": 50,
       "ID": 5,
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "DriveMotor3",
-      "RelativePositionConversionFactor": 0.0485273613,
+      "RelativePositionConversionFactor": 0.06383706666,
       "RelativeVelocityConversionFactor": 0.00084632602091900004,
       "Follow": "NONE",
       "VelocityPID": {
@@ -283,12 +488,12 @@
       }
     },
     {
-      "CurrentLimit": 60,
+      "CurrentLimit": 50,
       "ID": 7,
       "IdleMode": "Brake",
       "InvertedRelative": false,
       "Name": "DriveMotor4",
-      "RelativePositionConversionFactor": 0.0485273613,
+      "RelativePositionConversionFactor": 0.06383706666,
       "RelativeVelocityConversionFactor": 0.00084632602091900004,
       "Follow": "NONE",
       "VelocityPID": {

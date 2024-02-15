@@ -34,13 +34,20 @@ namespace COMETS3357
         */
         void Periodic() override;
 
-    private:
+        void ZeroGyro();
+
         AHRS m_navx;
+        
+        double angleOffset;
+
+    private:
+        
         std::shared_ptr<nt::NetworkTable> driveTable;
 
         void CalculatePositions();
 
         float robotX, rototY; // experimental
+
 
     };
 };

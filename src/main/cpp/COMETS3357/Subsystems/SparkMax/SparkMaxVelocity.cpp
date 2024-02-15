@@ -17,17 +17,20 @@ void SparkMaxVelocity::RobotInit()
 {
 
     if (
-         #ifdef FORCEINIT
+        #ifdef FORCEINIT
         true
         #else
         motor.GetInverted() != config.invertedRelative || 
         motor.GetIdleMode() != config.idleMode || 
         encoder.GetPositionConversionFactor() != config.relativePositionConversionFactor ||
-        encoder.GetVelocityConversionFactor() != config.relativeVelocityConversionFactor
+        encoder.GetVelocityConversionFactor() != config.relativeVelocityConversionFactor || 
+        motor.IsFollower() != (config.follow == "NONE")
         #endif
     )
     {
+
         motor.RestoreFactoryDefaults();
+        motor.EnableVoltageCompensation(10);
         motor.SetInverted(config.invertedRelative);
         motor.SetSmartCurrentLimit(config.currentLimit);
         motor.SetIdleMode(config.idleMode);
@@ -55,6 +58,12 @@ void SparkMaxVelocity::SetVelocityPID(PID velocityPID)
 
 void SparkMaxVelocity::SetVelocity(double velocity)
 {
+    PIDController.SetReference(velocity, rev::CANSparkMax::ControlType::kVelocity, 0);
+}
+
+void SparkMaxVelocity::SetVelocity(double velocity, double feedForward)
+{
+    SetVelocityPID(PID{0, 0, 0, feedForward});
     PIDController.SetReference(velocity, rev::CANSparkMax::ControlType::kVelocity, 0);
 }
 

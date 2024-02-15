@@ -69,6 +69,8 @@ namespace COMETS3357
         */
         void SetRelativePosition(double position);
 
+        void SetVelocity(double velocity, double feedForward);
+
         COMETS3357::SparkMaxVelocityConfig config;
         rev::CANSparkMax motor;
 

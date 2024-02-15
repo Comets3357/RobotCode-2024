@@ -29,7 +29,7 @@ namespace COMETS3357 {
  */
 class CometsRobot : public frc::IterativeRobotBase {
  public:
-  static constexpr auto kDefaultPeriod = 5_ms;
+  static constexpr auto kDefaultPeriod = 10_ms;
 
   /**
    * Provide an alternate "main loop" via StartCompetition().

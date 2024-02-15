@@ -73,6 +73,7 @@ void Controller::SetJoysticks(std::map<std::string, frc2::Trigger>& joystickTrig
             std::function<void(double, double, double, double)> function = std::get<0>(joystickActionMap[joystickTrigger.first]);
             if (type == "XBOX")
             {
+                
                 (joystickTrigger.second && modeTriggers[mode.first]).WhileTrue(new frc2::RunCommand{[this, sub, function]{function(controller.GetLeftX(),controller.GetLeftY(),controller.GetRightX(),controller.GetRightY());},{sub}});
             }
             else
@@ -93,7 +94,7 @@ void Controller::SetJoysticks(std::map<std::string, frc2::Trigger>& joystickTrig
             modeTriggers[mode.first].OnTrue(new frc2::InstantCommand{[this, sub, function]{sub->SetDefaultCommand(frc2::RunCommand{[this, function]{function(controller.GetLeftX(), controller.GetLeftY(), controller.GetRightX(), controller.GetRightY());},{sub}});},{}});
             if (type == "XBOX")
             {
-                            sub->SetDefaultCommand(frc2::RunCommand{[this, function]{function(controller.GetLeftX(), controller.GetLeftY(), controller.GetRightX(), controller.GetRightY());},{sub}});
+                sub->SetDefaultCommand(frc2::RunCommand{[this, function]{function(controller.GetLeftX(), controller.GetLeftY(), controller.GetRightX(), controller.GetRightY());},{sub}});
 
             }
             else
@@ -139,6 +140,8 @@ void Controller::LoadConfig(picojson::value &controllers)
 
 bool Controller::LoadControls(picojson::value &controllers)
 {
+
+    
     
     if (true)//controller.IsConnected())
     {
@@ -177,6 +180,33 @@ bool Controller::LoadControls(picojson::value &controllers)
                         else if (controllerType.first == "XBOX")
                         {
                             
+                            SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 90;}}, "D-padRight", mode);
+                            SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 180;}}, "D-padDown", mode);
+                            SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 270;}}, "D-padLeft", mode);
+                            SetButton(controller.RightStick(), "RightStickButton", mode);
+                            SetButton(controller.LeftStick(), "LeftStickButton", mode);
+                            SetButton(controller.A(), "AButton", mode);
+                            SetButton(controller.B(), "BButton", mode);
+                            SetButton(controller.X(), "XButton", mode);
+                            SetButton(controller.Y(), "YButton", mode);
+                            SetButton(controller.LeftTrigger(), "LeftTrigger", mode);
+                            SetButton(controller.RightTrigger(), "RightTrigger", mode);
+                            SetButton(controller.LeftBumper(), "LeftBumper", mode);
+                            SetButton(controller.RightBumper(), "RightBumper", mode);
+                            SetButton(controller.Start(), "StartButton", mode);
+                            SetButton(controller.Back(), "BackButton", mode);
+
+                            std::map<std::string, frc2::Trigger> joystickTriggers;
+
+                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetLeftY(), 0.08) != 0;}}, "LeftStickY", mode, joystickTriggers);
+                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetLeftX(), 0.08) != 0;}}, "LeftStickX", mode, joystickTriggers);
+                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRightY(), 0.08) != 0;}}, "RightStickY", mode, joystickTriggers);
+                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRightX(), 0.08) != 0;}}, "RightStickX", mode, joystickTriggers);
+
+                            SetJoysticks(joystickTriggers, mode);
+                        }
+                        else if (controllerType.first == "PlayStation")
+                        {
                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 90;}}, "D-padRight", mode);
                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 180;}}, "D-padDown", mode);
                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 270;}}, "D-padLeft", mode);

@@ -1,5 +1,6 @@
 #include "RobotContainer.h"
 #include <frc2/command/RunCommand.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/button/Trigger.h>
 
 RobotContainer::RobotContainer() 
@@ -36,11 +37,14 @@ void RobotContainer::ConfigureBindings()
   // Schedule `ExampleMethodCommand` when the Xbox controller's B button is
   // pressed, cancelling on release.
  // m_driverController.B().WhileTrue(m_subsystem.ExampleMethodCommand());
+ legAvoidance.Schedule();
 }
 
 
 void RobotContainer::Periodic()
 {
+  legAvoidance.Schedule();
+  frc::SmartDashboard::PutString("MODE", controllerMap.secondary.currentMode);
   
 }
 

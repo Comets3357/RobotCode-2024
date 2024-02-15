@@ -66,6 +66,7 @@ void SparkMaxPosition::RobotInit()
         #endif
    )
     {
+        double zero = absoluteEncoder.GetZeroOffset();
         motor.RestoreFactoryDefaults();
         motor.SetInverted(config.invertedRelative);
         motor.SetSmartCurrentLimit(config.currentLimit);
@@ -78,10 +79,14 @@ void SparkMaxPosition::RobotInit()
         absoluteEncoder.SetInverted(config.invertedAbsolute);
         absoluteEncoder.SetPositionConversionFactor(config.absolutePositionConversionFactor);
         absoluteEncoder.SetVelocityConversionFactor(config.absoluteVelocityConversionFactor);
-        if (setAbsPos)
-        {
-            absoluteEncoder.SetZeroOffset(config.absoluteZeroOffset);
-        }
+        // if (setAbsPos)
+        // {
+        //     absoluteEncoder.SetZeroOffset(config.absoluteZeroOffset);
+        // }
+        // else
+        // {
+        //     absoluteEncoder.SetZeroOffset(zero);
+        // }
 
 
         PIDController.SetPositionPIDWrappingEnabled(config.positionPIDWrappingEnabled);
@@ -184,7 +189,7 @@ void SparkMaxPosition::SetVelocity(double velocity)
 
 void SparkMaxPosition::SetPosition(double position)
 {
-    PIDController.SetReference(position, rev::CANSparkMax::ControlType::kPosition, 1, feedForwardFunction(absoluteEncoderPosition));
+    PIDController.SetReference(position, rev::CANSparkMax::ControlType::kPosition, 1);
 }
 
 void SparkMaxPosition::SetPosition(std::string position)
@@ -221,10 +226,10 @@ void SparkMaxPosition::Periodic()
     
 
     CheckAbsoluteEncoder();
-    if (runMode == POSITION_SPARK_MAX_ABSOLUTE && std::abs(absoluteEncoderPosition - relativeEncoderPosition) < 10)
-    {
-        ZeroRelativeEncoder();
-    }
+    // if (runMode == POSITION_SPARK_MAX_ABSOLUTE && std::abs(absoluteEncoderPosition - relativeEncoderPosition) < 10)
+    // {
+    //     ZeroRelativeEncoder();
+    // }
     
 }
 
