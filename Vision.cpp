@@ -138,7 +138,7 @@ int main() {
             outputBuffer.push_back(angleOffset);
             outputBuffer.push_back((double)frame);
 
-            
+            std::cout << "tag detected" << std::endl;
 
         }
 
