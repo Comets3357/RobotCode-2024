@@ -10,8 +10,8 @@ ShooterSubsystem::ShooterSubsystem(COMETS3357::SwerveSubsystem* swerveSubsystem,
     }
 
 void ShooterSubsystem::Periodic(){
-    frc::SmartDashboard::PutNumber("Velocity wheels ", KickerWheel.GetRelativeVelocity());
-    frc::SmartDashboard::PutNumber("PIvotAbso", GetPivotAbsolutePosition());
+    frc::SmartDashboard::PutNumber("Velocity wheels", KickerWheel.GetRelativeVelocity());
+    frc::SmartDashboard::PutNumber("PivotAbso", GetPivotAbsolutePosition());
     // SetPositionPivot(45);
     
     Pivot.Periodic();
