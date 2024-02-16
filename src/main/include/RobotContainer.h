@@ -40,6 +40,7 @@
 #include "COMETS3357/LookupTable.h"
 
 #include "commands/LegAvoidanceCommand.h"
+#include "commands/SetPointCommand.h"
 
 
 
@@ -72,6 +73,10 @@ class RobotContainer {
 
   IntakeIndexerCommand intakeIndexer {&indexer}; 
   ShooterCommand shooterCommand {&shooter, &indexer, &swerve};
+
+  SetPointCommand subWooferSetpoint{&shooter, &indexer, &swerve, 56};
+  SetPointCommand podiumSetPoint{&shooter, &indexer, &swerve, 38.5};
+  SetPointCommand ampSetPoint{&shooter, &indexer, &swerve, 24};
 
   // Instance command
   LegAvoidanceCommand legAvoidance{&swerve};
@@ -109,7 +114,10 @@ class RobotContainer {
       {"StopShoot", std::make_shared<frc2::InstantCommand>(stopShoot)},
       {"Shoot", std::make_shared<frc2::InstantCommand>(shoot)},
       {"TurnTowardsSpeaker", std::make_shared<frc2::InstantCommand>(turnTowardsSpeaker)},
-      {"StopTurnTowardsSpeaker", std::make_shared<frc2::InstantCommand>(stopTurningTowardsSpeaker)}
+      {"StopTurnTowardsSpeaker", std::make_shared<frc2::InstantCommand>(stopTurningTowardsSpeaker)},
+      {"SubWooferSetpoint", std::make_shared<SetPointCommand>(subWooferSetpoint)},
+      {"PodiumSetpoint", std::make_shared<SetPointCommand>(podiumSetPoint)},
+      {"AmpSetpoint", std::make_shared<SetPointCommand>(ampSetPoint)},
   };
 
 
