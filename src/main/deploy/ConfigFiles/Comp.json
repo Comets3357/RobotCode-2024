@@ -78,7 +78,7 @@
         "D": 0.001,
         "FF": 0,
         "I": 0,
-        "P": 0.24
+        "P": 0.2
       },
       "PositionPIDWrappingEnabled": false,
       "RelativePositionConversionFactor": 0.9863013698630137,
