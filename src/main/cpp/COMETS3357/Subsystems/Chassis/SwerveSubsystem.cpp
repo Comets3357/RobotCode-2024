@@ -435,6 +435,7 @@ void SwerveSubsystem::ResetOdometry(frc::Pose2d pose) {
 
 void SwerveSubsystem::DriveXRotate(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot)
 {
+  frc::SmartDashboard::PutBoolean("controllingSwerveRotation", controllingSwerveRotation);
   if (!controllingSwerveRotation )
   {
     rot = overrideRotation;
@@ -468,6 +469,7 @@ void SwerveSubsystem::DriveDirectionalRotate(units::meters_per_second_t xSpeed, 
 
 void SwerveSubsystem::DriveCornerTurning(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot)
 {
+  frc::SmartDashboard::PutBoolean("controllingSwerveRotation", controllingSwerveRotation);
   if (!controllingSwerveRotation )
   {
     rot = overrideRotation;

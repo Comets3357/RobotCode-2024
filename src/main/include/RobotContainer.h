@@ -99,8 +99,8 @@ class RobotContainer {
   frc2::InstantCommand shoot{[this](){indexer.SetPercent(0.8);}, {&indexer}};
 
 
-  frc2::InstantCommand stopTurningTowardsSpeaker{[this](){shooter.stopTurnToTarget();}, {&swerve}};
-  frc2::InstantCommand turnTowardsSpeaker{[this](){shooter.startTurnToTarget();}, {&swerve}};
+  frc2::InstantCommand stopTurningTowardsSpeaker{[this](){shooter.stopTurnToTarget();}, {}};
+  frc2::InstantCommand turnTowardsSpeaker{[this](){shooter.startTurnToTarget();}, {}};
 
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 

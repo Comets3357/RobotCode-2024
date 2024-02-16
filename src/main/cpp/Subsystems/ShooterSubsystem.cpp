@@ -18,6 +18,8 @@ void ShooterSubsystem::Periodic(){
 
     frc::SmartDashboard::PutNumber("ANGLE LOOKUP", angleLookup.GetValue(2));
 
+    
+
     if (turningTowardsTarget)
     {
         frc::Pose2d robotPosition = swerve->GetPose();
@@ -25,9 +27,9 @@ void ShooterSubsystem::Periodic(){
         units::meter_t deltaY = robotPosition.Y() - targetPos.Y();
 
         double angle = atan2((double)deltaY, (double)deltaX);
-        swerve->controllingSwerveRotation = false;
-        turnToPID.SetP(1);
-        swerve->overrideRotation = units::radians_per_second_t{std::clamp(turnToPID.Calculate((-gyro->m_navx.GetAngle() * 3.14159 / 180) + gyro->angleOffset + (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0 , angle), -0.75, 0.75)};//rotationPLookup.GetValue(0);
+        
+        turnToPID.SetP(0.8);
+        swerve->overrideRotation = units::radians_per_second_t{std::clamp(turnToPID.Calculate((-gyro->m_navx.GetAngle() * 3.14159 / 180) + gyro->angleOffset + ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) , angle), -1.0, 1.0)};//rotationPLookup.GetValue(0);
     }
 }
 
