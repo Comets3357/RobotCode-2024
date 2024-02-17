@@ -115,6 +115,8 @@ frc::Field2d m_field;
      */
     frc::Pose2d GetPose();
 
+    frc::Pose2d GetMovingPose(double time);
+
     /**
      * Resets the odometry to the specified pose.
      *

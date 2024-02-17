@@ -420,6 +420,13 @@ double SwerveSubsystem::GetTurnRate() { return -gyroSubsystemData->GetEntry("ang
 
 frc::Pose2d SwerveSubsystem::GetPose() { return m_odometry.GetEstimatedPosition(); }
 
+frc::Pose2d SwerveSubsystem::GetMovingPose(double time)
+{
+  frc::Pose2d robotPose = m_odometry.GetEstimatedPosition();
+  frc::ChassisSpeeds fieldRelativeSpeeds = frc::ChassisSpeeds::FromRobotRelativeSpeeds(getSpeeds(), robotPose.Rotation());
+  return frc::Pose2d{frc::Translation2d{robotPose.X() + units::meter_t{(double)fieldRelativeSpeeds.vx * time},robotPose.Y() +  units::meter_t{(double)fieldRelativeSpeeds.vy * time}}, frc::Rotation2d{units::radian_t{0}} };
+}
+
 void SwerveSubsystem::ResetOdometry(frc::Pose2d pose) {
   m_odometry.ResetPosition(
       GetHeading(),

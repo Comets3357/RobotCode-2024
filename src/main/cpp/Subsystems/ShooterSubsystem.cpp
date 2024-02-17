@@ -6,7 +6,7 @@ ShooterSubsystem::ShooterSubsystem(COMETS3357::SwerveSubsystem* swerveSubsystem,
 }
     void ShooterSubsystem::Initialize()
     {
-
+        
     }
 
 void ShooterSubsystem::Periodic(){
@@ -22,7 +22,7 @@ void ShooterSubsystem::Periodic(){
 
     if (turningTowardsTarget)
     {
-        frc::Pose2d robotPosition = swerve->GetPose();
+        frc::Pose2d robotPosition = swerve->GetMovingPose(0.25);
         units::meter_t deltaX = robotPosition.X() - targetPos.X();
         units::meter_t deltaY = robotPosition.Y() - targetPos.Y();
 

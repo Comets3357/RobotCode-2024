@@ -46,8 +46,8 @@
       "Name": "VelocityLookup",
       "Data":
       [
-        [0, 2000],
-        [1000, 2000]
+        [0, 3000],
+        [1000, 3000]
       ]
     },
     {
@@ -63,7 +63,7 @@
     {
       "AbsolutePositionConversionFactor": 360,
       "AbsoluteVelocityConversionFactor": 1,
-      "AbsoluteZeroOffset": 241.1168921,
+      "AbsoluteZeroOffset": 264.5,
       "CurrentLimit": 40,
       "DefaultRunMode": "ABSOLUTE",
       "ID": 31,
@@ -93,8 +93,8 @@
       },
       "ForwardSoftLimitEnabled": true,
       "ReverseSoftLimitEnabled": true,
-      "ForwardSoftLimit": 109.1,
-      "ReverseSoftLimit": 35,
+      "ForwardSoftLimit": 100,
+      "ReverseSoftLimit": 18,
       "Positions":
       {
         

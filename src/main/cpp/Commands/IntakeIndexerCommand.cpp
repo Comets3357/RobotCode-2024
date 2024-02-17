@@ -10,7 +10,7 @@ void IntakeIndexerCommand::Initialize()
 {
     if (indexerSubsytem->IsDetected())
     {
-        indexerSubsytem->SetVelocity("IndexerSpeed"); 
+        indexerSubsytem->SetPercent(0.4); 
     }
 }
 
