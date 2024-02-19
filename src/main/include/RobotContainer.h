@@ -102,6 +102,11 @@ class RobotContainer {
   frc2::InstantCommand stopTurningTowardsSpeaker{[this](){shooter.stopTurnToTarget();}, {}};
   frc2::InstantCommand turnTowardsSpeaker{[this](){shooter.startTurnToTarget();}, {}};
 
+  frc2::InstantCommand angleOffsetPositive{[this](){shooter.offset += .25;}, {&shooter}}; 
+  frc2::InstantCommand angleOffsetNegative{[this](){shooter.offset -= .25;}, {&shooter}}; 
+
+  
+
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
@@ -118,6 +123,8 @@ class RobotContainer {
       {"SubWooferSetpoint", std::make_shared<SetPointCommand>(subWooferSetpoint)},
       {"PodiumSetpoint", std::make_shared<SetPointCommand>(podiumSetPoint)},
       {"AmpSetpoint", std::make_shared<SetPointCommand>(ampSetPoint)},
+      {"angleOffsetPositive", std::make_shared<frc2::InstantCommand>()},
+      {"angleOffsetNegative", std::make_shared<frc2::InstantCommand>()}
   };
 
 

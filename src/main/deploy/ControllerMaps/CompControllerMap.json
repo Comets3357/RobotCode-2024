@@ -224,8 +224,8 @@
             {
                 "D-padLeft": "NONE",
                 "D-padRight": "NONE",
-                "D-padUp": "NONE",
-                "D-padDown": "NONE",
+                "D-padUp": "angleOffsetPositive",
+                "D-padDown": "angleOffsetNegative",
                 "LeftStickY": "NONE",
                 "LeftStickX": "NONE",
                 "LeftStickButton": "NONE",
