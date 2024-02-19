@@ -105,7 +105,7 @@ frc::SmartDashboard::PutNumber("ASDASD TIME", nt::Now() * 0.000001);
             }
             else if (ID == 5)
             {
-                m_field5.SetRobotPose(swerveSubsystem->GetMovingPose(0.25));
+                m_field5.SetRobotPose(swerveSubsystem->GetMovingPose(0.3));
             }
         }
         

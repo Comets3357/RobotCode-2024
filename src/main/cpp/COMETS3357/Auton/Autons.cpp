@@ -11,8 +11,8 @@ Autons::Autons(SwerveSubsystem* drivebase, std::vector<std::pair<std::string, st
 {
 
     pathplanner::HolonomicPathFollowerConfig pathFollowerConfig = pathplanner::HolonomicPathFollowerConfig(
-        pathplanner::PIDConstants(15.0, 0.0, 0.0), // Translation constants 
-        pathplanner::PIDConstants(15.0, 0.0, 0.0), // Rotation constants 
+        pathplanner::PIDConstants(9.0, 0.0, 0.0), // Translation constants 
+        pathplanner::PIDConstants(9, 0.0, 0.0), // Rotation constants 
         2_mps,
         0.406_m, // Drive base radius (distance from center to furthest module) 
         pathplanner::ReplanningConfig()

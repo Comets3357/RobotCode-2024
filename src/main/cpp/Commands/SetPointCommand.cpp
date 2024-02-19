@@ -10,6 +10,17 @@ SetPointCommand::SetPointCommand(ShooterSubsystem *shooter, IndexerSubsystem* in
     AddRequirements({shooter}); 
 }
 
+SetPointCommand::SetPointCommand(ShooterSubsystem *shooter, IndexerSubsystem* indexer, COMETS3357::SwerveSubsystem* swerveSubsystem, double angle, double shooterSpeed) {
+    shooterSubsystem = shooter;
+    indexerSubsystem = indexer; 
+    swerve = swerveSubsystem; 
+    setPointAngle = angle;
+    speed = shooterSpeed;
+    useSpeed = true;
+    AddRequirements({shooter}); 
+}
+
+
 void SetPointCommand::Initialize()
 {
     shooterSubsystem->SetVelocityFlyWheel("ShooterSpeed"); 
@@ -28,8 +39,9 @@ void SetPointCommand::Execute()
 {
 
     shooterSubsystem->Pivot.SetPosition(setPointAngle); 
-    shooterSubsystem->SetVelocityKickerWheel(2000);
-    shooterSubsystem->SetVelocityFlyWheel(-2000);
+    shooterSubsystem->SetVelocityKickerWheel(speed);
+    shooterSubsystem->SetVelocityFlyWheel(-speed);
+
 
     frc::SmartDashboard::PutNumber("FLywheel Velocity", shooterSubsystem->GetVelocityFlyWheel());
     // if (shooterSubsystem->GetVelocityFlyWheel() < shooterSubsystem->FlyWheel.config.velocities["ShooterSpeed"] + 100)

@@ -22,7 +22,7 @@ void ShooterSubsystem::Periodic(){
 
     if (turningTowardsTarget)
     {
-        frc::Pose2d robotPosition = swerve->GetMovingPose(0.25);
+        frc::Pose2d robotPosition = swerve->GetMovingPose(0.3);
         units::meter_t deltaX = robotPosition.X() - targetPos.X();
         units::meter_t deltaY = robotPosition.Y() - targetPos.Y();
 

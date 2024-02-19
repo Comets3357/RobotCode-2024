@@ -46,8 +46,8 @@
       "Name": "VelocityLookup",
       "Data":
       [
-        [0, 3000],
-        [1000, 3000]
+        [0, 2000],
+        [1000, 200]
       ]
     },
     {
@@ -78,7 +78,7 @@
         "D": 0.001,
         "FF": 0,
         "I": 0,
-        "P": 0.2
+        "P": 0.1
       },
       "PositionPIDWrappingEnabled": false,
       "RelativePositionConversionFactor": 0.9863013698630137,
