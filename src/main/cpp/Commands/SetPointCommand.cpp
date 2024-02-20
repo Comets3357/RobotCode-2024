@@ -27,7 +27,7 @@ void SetPointCommand::Initialize()
 void SetPointCommand::Execute()
 {
 
-    shooterSubsystem->Pivot.SetPosition(setPointAngle); 
+    shooterSubsystem->Pivot.SetPosition(setPointAngle, shooterSubsystem->offset); 
     shooterSubsystem->SetVelocityKickerWheel(2000);
     shooterSubsystem->SetVelocityFlyWheel(-2000);
 

@@ -123,8 +123,8 @@ class RobotContainer {
       {"SubWooferSetpoint", std::make_shared<SetPointCommand>(subWooferSetpoint)},
       {"PodiumSetpoint", std::make_shared<SetPointCommand>(podiumSetPoint)},
       {"AmpSetpoint", std::make_shared<SetPointCommand>(ampSetPoint)},
-      {"angleOffsetPositive", std::make_shared<frc2::InstantCommand>()},
-      {"angleOffsetNegative", std::make_shared<frc2::InstantCommand>()}
+      {"angleOffsetPositive", std::make_shared<frc2::InstantCommand>(angleOffsetPositive)},
+      {"angleOffsetNegative", std::make_shared<frc2::InstantCommand>(angleOffsetNegative)}
   };
 
 

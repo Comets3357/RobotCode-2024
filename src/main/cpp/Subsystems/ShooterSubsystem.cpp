@@ -17,6 +17,7 @@ void ShooterSubsystem::Periodic(){
     Pivot.Periodic();
 
     frc::SmartDashboard::PutNumber("ANGLE LOOKUP", angleLookup.GetValue(2));
+    frc::SmartDashboard::PutNumber("Angle OFFSET ", offset); 
 
     
 

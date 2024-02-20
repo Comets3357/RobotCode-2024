@@ -183,6 +183,7 @@ bool Controller::LoadControls(picojson::value &controllers)
                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 90;}}, "D-padRight", mode);
                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 180;}}, "D-padDown", mode);
                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 270;}}, "D-padLeft", mode);
+                            SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 0;}}, "D-padUp", mode);
                             SetButton(controller.RightStick(), "RightStickButton", mode);
                             SetButton(controller.LeftStick(), "LeftStickButton", mode);
                             SetButton(controller.A(), "AButton", mode);
