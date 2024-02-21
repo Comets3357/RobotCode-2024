@@ -7,20 +7,13 @@
 #include "COMETS3357/LookupTable.h"
 #include <cmath> 
 #include <frc/DriverStation.h>
-COMMAND_START(SetPoint)
+COMMAND_START(Amp)
 
-SetPointCommand(ShooterSubsystem *shooter, IndexerSubsystem* indexer, COMETS3357::SwerveSubsystem* swerveSubsystem, double angle); 
-SetPointCommand(ShooterSubsystem *shooter, IndexerSubsystem* indexer, COMETS3357::SwerveSubsystem* swerveSubsystem, double angle, double speed); 
+AmpCommand(ShooterSubsystem *shooter, IndexerSubsystem* indexer, COMETS3357::SwerveSubsystem* swerveSubsystem); 
 
 ShooterSubsystem * shooterSubsystem; 
 IndexerSubsystem * indexerSubsystem;
 COMETS3357::SwerveSubsystem * swerve; 
-frc::Translation2d targetPos; 
-
-double setPointAngle;
-double speed;
-
-bool useSpeed = false;
 
 
 COMMAND_END

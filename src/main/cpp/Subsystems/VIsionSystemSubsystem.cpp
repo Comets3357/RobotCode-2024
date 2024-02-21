@@ -92,7 +92,8 @@ frc::SmartDashboard::PutNumber("ASDASD TIME", nt::Now() * 0.000001);
 
 
             // if (abs(gyroRate) < 0.3)
-            swerveSubsystem->m_odometry.AddVisionMeasurement(frc::Pose2d{newPos, newRotation}, time);
+            // if (!frc::DriverStation::IsAutonomousEnabled())
+            // swerveSubsystem->m_odometry.AddVisionMeasurement(frc::Pose2d{newPos, newRotation}, time);
             // m_field2.SetRobotPose(frc::Pose2d{newPos, newRotation});
 
             if (ID == 3)
@@ -105,7 +106,7 @@ frc::SmartDashboard::PutNumber("ASDASD TIME", nt::Now() * 0.000001);
             }
             else if (ID == 5)
             {
-                m_field5.SetRobotPose(swerveSubsystem->GetMovingPose(0.25));
+                m_field5.SetRobotPose(swerveSubsystem->GetMovingPose(0.3));
             }
         }
         

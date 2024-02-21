@@ -1,0 +1,67 @@
+
+[
+    {
+      "x": 1.48,
+      "y": 6.47,
+      "rotation": 180
+    },
+    "AmpSetpoint",
+    {
+      "x": 1.52,
+      "y": 6.47,
+      "rotation": 151.60
+    },
+    
+    {
+      "x": 2.82,
+      "y": 6.75,
+      "rotation": 151.60
+    },
+    "wait 0.1",
+    "Shoot",
+    "Intake",
+    "wait 0.5",
+    "Shoot",
+    "wait 0.5",
+    "Intake",
+    {
+        "x": 2.92,
+        "y": 6.6,
+        "rotation": 141.60
+    },
+    {
+      "x": 2.92,
+      "y": 6.6,
+      "rotation": -90
+    },
+    {
+    "x": 2.92,
+    "y": 4.87,
+    "rotation": -90
+    },
+    {
+      "x": 2.77,
+      "y": 4.87,
+      "rotation": -155
+    },
+    {
+    "x": 2.67,
+    "y": 4.1,
+    "rotation": -155
+    },
+    "StopIntake",
+    "SlowIntake",
+    {
+      "x": 2.87,
+      "y": 3.9,
+      "rotation": -155
+    },
+    "Shoot",
+    "wait 0.1",
+    "Intake",
+    "wait 0.5",
+    "Shoot",
+    "wait 2",
+    "StopShoot",
+    "StopIntake"
+]

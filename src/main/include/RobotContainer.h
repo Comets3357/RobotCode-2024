@@ -41,7 +41,8 @@
 
 #include "commands/LegAvoidanceCommand.h"
 #include "commands/SetPointCommand.h"
-
+#include "commands/AmpCommand.h"
+#include "COMETS3357/Auton/AutonPathCommand.h"
 
 
 
@@ -73,10 +74,12 @@ class RobotContainer {
 
   IntakeIndexerCommand intakeIndexer {&indexer}; 
   ShooterCommand shooterCommand {&shooter, &indexer, &swerve};
+  AmpCommand ampCommand{&shooter, &indexer, &swerve};
 
-  SetPointCommand subWooferSetpoint{&shooter, &indexer, &swerve, 56};
-  SetPointCommand podiumSetPoint{&shooter, &indexer, &swerve, 38.5};
-  SetPointCommand ampSetPoint{&shooter, &indexer, &swerve, 24};
+  SetPointCommand subWooferSetpoint{&shooter, &indexer, &swerve, 56, 2000};
+  SetPointCommand podiumSetPoint{&shooter, &indexer, &swerve, 38.5, 2000};
+  SetPointCommand ampSetPoint{&shooter, &indexer, &swerve, 24, 2000};
+  SetPointCommand midFieldSetpoint{&shooter, &indexer, &swerve, 18, 3500};
 
   // Instance command
   LegAvoidanceCommand legAvoidance{&swerve};
@@ -88,19 +91,31 @@ class RobotContainer {
   frc2::InstantCommand stopIntake{[this](){intake.SetPercent(0); indexer.SetPercent(0);}, {&intake, &indexer}}; 
 
   frc2::InstantCommand startIntake{[this](){intake.SetPercent("IntakeSpeed"); intakeIndexer.Schedule();}, {&intake}}; 
+  frc2::InstantCommand slowIntake{[this](){intake.SetPercent(-0.3); }, {&intake}}; 
 
-  frc2::InstantCommand ejectIntake{[this](){intake.SetPercent("EjectSpeed"); indexer.SetVelocity("IndexerEjectSpeed");}, {&intake}}; 
+  frc2::InstantCommand ejectIntake{[this](){intake.SetPercent("EjectSpeed"); indexer.SetVelocity("IndexerEjectSpeed"); shooter.SetVelocityKickerWheel(-3000); shooter.SetVelocityKickerWheel(3000);}, {&intake}}; 
 
   frc2::InstantCommand stopIndex{[this](){indexer.SetVelocity(0);}, {&indexer}}; 
 
-  frc2::InstantCommand stopShoot{[this](){shooter.SetVelocityKickerWheel(0); shooter.SetVelocityFlyWheel(0); indexer.SetPercent(0); shooter.SetPositionPivot(35);}, {&shooter}}; 
+  frc2::InstantCommand stopShoot{[this](){shooter.SetVelocityKickerWheel(0); shooter.SetVelocityFlyWheel(0); indexer.SetPercent(0);}, {&shooter}}; // shooter.SetPositionPivot(35);}, {&shooter}}; 
 
   frc2::InstantCommand zeroGyro{[this](){gyro.ZeroGyro();}, {&gyro}};
   frc2::InstantCommand shoot{[this](){indexer.SetPercent(1);}, {&indexer}};
 
+  frc2::InstantCommand ampRampUp{[this](){shooter.SetVelocityKickerWheel(1200); shooter.SetVelocityFlyWheel(-1200);}, {&shooter}};
+
 
   frc2::InstantCommand stopTurningTowardsSpeaker{[this](){shooter.stopTurnToTarget();}, {}};
   frc2::InstantCommand turnTowardsSpeaker{[this](){shooter.startTurnToTarget();}, {}};
+
+  frc2::InstantCommand angleOffsetPositive{[this](){shooter.offset += .25;}, {&shooter}}; 
+  frc2::InstantCommand angleOffsetNegative{[this](){shooter.offset -= .25;}, {&shooter}}; 
+  // frc2::SequentialCommandGroup autoSubwooferShoot{subWooferSetpoint, frc2::WaitCommand{2_s}, shoot, frc2::WaitCommand{0.5_s}, stopShoot};
+frc2::InstantCommand autoSubwooferSetpoint{[this](){shooter.SetPositionPivot(40); shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
+
+
+
+
 
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
@@ -116,8 +131,14 @@ class RobotContainer {
       {"TurnTowardsSpeaker", std::make_shared<frc2::InstantCommand>(turnTowardsSpeaker)},
       {"StopTurnTowardsSpeaker", std::make_shared<frc2::InstantCommand>(stopTurningTowardsSpeaker)},
       {"SubWooferSetpoint", std::make_shared<SetPointCommand>(subWooferSetpoint)},
+      {"MidFieldSetpoint", std::make_shared<SetPointCommand>(midFieldSetpoint)},
+      
       {"PodiumSetpoint", std::make_shared<SetPointCommand>(podiumSetPoint)},
       {"AmpSetpoint", std::make_shared<SetPointCommand>(ampSetPoint)},
+      {"AmpPlace", std::make_shared<AmpCommand>(ampCommand)},
+      {"AmpRampUp", std::make_shared<frc2::InstantCommand>(ampRampUp)},
+      {"angleOffsetPositive", std::make_shared<frc2::InstantCommand>(angleOffsetPositive)},
+      {"angleOffsetNegative", std::make_shared<frc2::InstantCommand>(angleOffsetNegative)}
   };
 
 
@@ -132,9 +153,16 @@ class RobotContainer {
    {"ManualElevator", {[this](auto leftX, auto leftAuto, auto rightX, auto rightY){elevator.SetPercent(rightY * 0.5);}, &elevator, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}}
   };
 
-  std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionMap
+std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionMap
   {
-    {"Intake", std::make_shared<frc2::InstantCommand>(startIntake)}
+    {"Intake", std::make_shared<frc2::InstantCommand>(startIntake)},
+    {"idk", std::make_shared<frc2::InstantCommand>(autoSubwooferSetpoint)},
+    {"PodiumSetpoint", std::make_shared<SetPointCommand>(podiumSetPoint)},
+    {"AmpSetpoint", std::make_shared<SetPointCommand>(ampSetPoint)},  
+    {"StopShoot", std::make_shared<frc2::InstantCommand>(stopShoot)},
+    {"Shoot", std::make_shared<frc2::InstantCommand>(shoot)},
+    {"StopIntake", std::make_shared<frc2::InstantCommand>(stopIntake)},
+    {"SlowIntake", std::make_shared<frc2::InstantCommand>(slowIntake)}
   };
 
   COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap" };

@@ -6,7 +6,7 @@ IndexerSubsystem::IndexerSubsystem() : COMETS3357::Subsystem("IndexerSubsystem")
 
 void IndexerSubsystem::Initialize()
 {
-    noteDetector.EnableLimitSwitch(false);
+    // noteDetector.EnableLimitSwitch(true);
 }
 
 void IndexerSubsystem::Periodic() {
@@ -28,5 +28,5 @@ void IndexerSubsystem::SetVelocity(std::string velocity) {
 
 bool IndexerSubsystem::IsDetected()
 {
-    return !noteDetector.Get(); 
+    return noteDetector.Get(); 
 }

@@ -197,6 +197,16 @@ void SparkMaxPosition::SetPosition(std::string position)
     PIDController.SetReference(config.positions[position], rev::CANSparkMax::ControlType::kPosition, 1, feedForwardFunction(absoluteEncoderPosition));
 }
 
+void SparkMaxPosition::SetPosition(double position, double offset)
+{
+    PIDController.SetReference(position + offset, rev::CANSparkMax::ControlType::kPosition, 1);
+}
+
+void SparkMaxPosition::SetPosition(std::string position, double offset)
+{
+    PIDController.SetReference(config.positions[position] + offset, rev::CANSparkMax::ControlType::kPosition, 1, feedForwardFunction(absoluteEncoderPosition));
+}
+
 double SparkMaxPosition::GetRelativePosition()
 {
     return relativeEncoderPosition;

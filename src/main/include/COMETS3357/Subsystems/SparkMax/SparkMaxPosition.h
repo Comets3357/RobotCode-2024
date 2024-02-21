@@ -136,6 +136,11 @@ namespace COMETS3357
 
         void SetPosition(std::string position);
 
+        void SetPosition(double position, double offset);
+
+        void SetPosition(std::string position, double offset);
+        
+
         void SetFeedForward(std::function<double(double)> feedforward);
 
         void SetPower(double percent);

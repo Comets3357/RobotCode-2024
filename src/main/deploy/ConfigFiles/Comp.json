@@ -11,6 +11,8 @@
         [3.02, 35], 
         [3.5, 33], 
         [4.2, 30],
+        [4.42, 28.5],
+        [6.44, 24.5],
         [100, 24]
       ]
     },
@@ -46,8 +48,12 @@
       "Name": "VelocityLookup",
       "Data":
       [
-        [0, 3000],
-        [1000, 3000]
+        [0, 2000],
+        [2.9, 2000],
+        [2.92, 2500],
+        [5.9, 2500],
+        [6, 3000],
+        [1000, 2500]
       ]
     },
     {
@@ -78,7 +84,7 @@
         "D": 0.001,
         "FF": 0,
         "I": 0,
-        "P": 0.2
+        "P": 0.1
       },
       "PositionPIDWrappingEnabled": false,
       "RelativePositionConversionFactor": 0.9863013698630137,
@@ -93,7 +99,7 @@
       },
       "ForwardSoftLimitEnabled": true,
       "ReverseSoftLimitEnabled": true,
-      "ForwardSoftLimit": 100,
+      "ForwardSoftLimit": 105,
       "ReverseSoftLimit": 18,
       "Positions":
       {
