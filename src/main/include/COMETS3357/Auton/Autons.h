@@ -15,6 +15,8 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/geometry/Pose2d.h>
+#include <frc2/command/SequentialCommandGroup.h>
+#include "COMETS3357/Auton/AutonPathCommand.h"
 
 namespace COMETS3357
 {
@@ -41,7 +43,7 @@ namespace COMETS3357
         /**
      * Goes through the auton directory and generates Commands for each auton
      */
-        void LoadAutons();
+        void LoadAutons( std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>>  &actionMap);
 
         /**
          * Runs a selected auton with the auton name
@@ -56,7 +58,7 @@ namespace COMETS3357
 
     private:
 
-        std::map<std::string, std::pair<std::unique_ptr<frc2::CommandPtr>, frc::Pose2d>> autons;
+        std::map<std::string, std::pair<std::unique_ptr<frc2::SequentialCommandGroup>, frc::Pose2d>> autons;
         COMETS3357::SwerveSubsystem* swerveSubsystem;
         frc::SendableChooser<std::string> autoChooser;
         pathplanner::AutoBuilder autoBuilder;

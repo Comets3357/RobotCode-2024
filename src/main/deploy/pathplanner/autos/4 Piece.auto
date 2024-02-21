@@ -2,48 +2,36 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.5082825422286987,
-      "y": 6.970529556274414
+      "x": 15.2,
+      "y": 6.492
     },
-    "rotation": -1.7651053186942613e-27
+    "rotation": 180.0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "named",
+          "type": "path",
           "data": {
-            "name": "Intake"
+            "pathName": "4PiecePath1"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Path turn"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Path 1"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Path 2"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Path 3"
+            "pathName": "4PiecePath2"
           }
         }
       ]
     }
   },
   "folder": null,
-  "choreoAuto": true
+  "choreoAuto": false
 }

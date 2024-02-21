@@ -2,7 +2,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <COMETS3357/Subsystems/SubsystemManager.h>
 
-// #define FORCEINIT
+#define FORCEINIT
 
 using namespace COMETS3357;
 
@@ -18,7 +18,7 @@ void SparkMaxVelocity::RobotInit()
 
     if (
         #ifdef FORCEINIT
-        true
+        false
         #else
         motor.GetInverted() != config.invertedRelative || 
         motor.GetIdleMode() != config.idleMode || 
@@ -37,8 +37,8 @@ void SparkMaxVelocity::RobotInit()
         SetVelocityPID(config.velocityPID);
         encoder.SetPositionConversionFactor(config.relativePositionConversionFactor);
         encoder.SetVelocityConversionFactor(config.relativeVelocityConversionFactor);
-        motor.GetForwardLimitSwitch(rev::SparkLimitSwitch::Type::kNormallyOpen).EnableLimitSwitch(false);
-        motor.GetReverseLimitSwitch(rev::SparkLimitSwitch::Type::kNormallyOpen).EnableLimitSwitch(false);
+        // motor.GetForwardLimitSwitch(rev::SparkLimitSwitch::Type::kNormallyOpen).EnableLimitSwitch(true);
+        // motor.GetReverseLimitSwitch(rev::SparkLimitSwitch::Type::kNormallyOpen).EnableLimitSwitch(true);
 
         if (config.follow != "NONE")
         {
