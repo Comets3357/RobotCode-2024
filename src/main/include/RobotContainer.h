@@ -91,8 +91,9 @@ class RobotContainer {
   frc2::InstantCommand stopIntake{[this](){intake.SetPercent(0); indexer.SetPercent(0);}, {&intake, &indexer}}; 
 
   frc2::InstantCommand startIntake{[this](){intake.SetPercent("IntakeSpeed"); intakeIndexer.Schedule();}, {&intake}}; 
+  frc2::InstantCommand slowIntake{[this](){intake.SetPercent(-0.3); }, {&intake}}; 
 
-  frc2::InstantCommand ejectIntake{[this](){intake.SetPercent("EjectSpeed"); indexer.SetVelocity("IndexerEjectSpeed");}, {&intake}}; 
+  frc2::InstantCommand ejectIntake{[this](){intake.SetPercent("EjectSpeed"); indexer.SetVelocity("IndexerEjectSpeed"); shooter.SetVelocityKickerWheel(-3000); shooter.SetVelocityKickerWheel(3000);}, {&intake}}; 
 
   frc2::InstantCommand stopIndex{[this](){indexer.SetVelocity(0);}, {&indexer}}; 
 
@@ -160,7 +161,8 @@ std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionM
     {"AmpSetpoint", std::make_shared<SetPointCommand>(ampSetPoint)},  
     {"StopShoot", std::make_shared<frc2::InstantCommand>(stopShoot)},
     {"Shoot", std::make_shared<frc2::InstantCommand>(shoot)},
-    {"StopIntake", std::make_shared<frc2::InstantCommand>(stopIntake)}
+    {"StopIntake", std::make_shared<frc2::InstantCommand>(stopIntake)},
+    {"SlowIntake", std::make_shared<frc::InstantCommand>(slowIntake)}
   };
 
   COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap" };
