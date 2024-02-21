@@ -17,6 +17,7 @@ void ShooterSubsystem::Periodic(){
     Pivot.Periodic();
 
     frc::SmartDashboard::PutNumber("ANGLE LOOKUP", angleLookup.GetValue(2));
+    frc::SmartDashboard::PutNumber("Angle OFFSET ", offset); 
 
     
 
@@ -81,13 +82,14 @@ void ShooterSubsystem::SetPercentPivot(double percent)
 
 void ShooterSubsystem::SetPositionPivot(double position)
 {
-    Pivot.SetPosition(position); 
+    Pivot.SetPosition(position, offset); 
 }
 
 void ShooterSubsystem::SetPositionPivot(std::string position)
 {
-    Pivot.SetPosition(position); 
+    Pivot.SetPosition(position, offset); 
 }
+
 
 double ShooterSubsystem::GetPivotRelativePosition()
 {

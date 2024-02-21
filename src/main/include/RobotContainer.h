@@ -107,6 +107,8 @@ class RobotContainer {
   frc2::InstantCommand stopTurningTowardsSpeaker{[this](){shooter.stopTurnToTarget();}, {}};
   frc2::InstantCommand turnTowardsSpeaker{[this](){shooter.startTurnToTarget();}, {}};
 
+  frc2::InstantCommand angleOffsetPositive{[this](){shooter.offset += .25;}, {&shooter}}; 
+  frc2::InstantCommand angleOffsetNegative{[this](){shooter.offset -= .25;}, {&shooter}}; 
   // frc2::SequentialCommandGroup autoSubwooferShoot{subWooferSetpoint, frc2::WaitCommand{2_s}, shoot, frc2::WaitCommand{0.5_s}, stopShoot};
 frc2::InstantCommand autoSubwooferSetpoint{[this](){shooter.SetPositionPivot(40); shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
 
@@ -134,6 +136,8 @@ frc2::InstantCommand autoSubwooferSetpoint{[this](){shooter.SetPositionPivot(40)
       {"AmpSetpoint", std::make_shared<SetPointCommand>(ampSetPoint)},
       {"AmpPlace", std::make_shared<AmpCommand>(ampCommand)},
       {"AmpRampUp", std::make_shared<frc2::InstantCommand>(ampRampUp)}
+      {"angleOffsetPositive", std::make_shared<frc2::InstantCommand>(angleOffsetPositive)},
+      {"angleOffsetNegative", std::make_shared<frc2::InstantCommand>(angleOffsetNegative)}
   };
 
 

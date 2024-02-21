@@ -38,9 +38,9 @@ void SetPointCommand::Initialize()
 void SetPointCommand::Execute()
 {
 
-    shooterSubsystem->Pivot.SetPosition(setPointAngle); 
     shooterSubsystem->SetVelocityKickerWheel(speed);
     shooterSubsystem->SetVelocityFlyWheel(-speed);
+    shooterSubsystem->Pivot.SetPosition(setPointAngle, shooterSubsystem->offset); 
 
 
     frc::SmartDashboard::PutNumber("FLywheel Velocity", shooterSubsystem->GetVelocityFlyWheel());
