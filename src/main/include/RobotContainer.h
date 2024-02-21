@@ -135,7 +135,7 @@ frc2::InstantCommand autoSubwooferSetpoint{[this](){shooter.SetPositionPivot(40)
       {"PodiumSetpoint", std::make_shared<SetPointCommand>(podiumSetPoint)},
       {"AmpSetpoint", std::make_shared<SetPointCommand>(ampSetPoint)},
       {"AmpPlace", std::make_shared<AmpCommand>(ampCommand)},
-      {"AmpRampUp", std::make_shared<frc2::InstantCommand>(ampRampUp)}
+      {"AmpRampUp", std::make_shared<frc2::InstantCommand>(ampRampUp)},
       {"angleOffsetPositive", std::make_shared<frc2::InstantCommand>(angleOffsetPositive)},
       {"angleOffsetNegative", std::make_shared<frc2::InstantCommand>(angleOffsetNegative)}
   };
