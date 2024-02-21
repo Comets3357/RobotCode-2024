@@ -162,7 +162,7 @@ std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionM
     {"StopShoot", std::make_shared<frc2::InstantCommand>(stopShoot)},
     {"Shoot", std::make_shared<frc2::InstantCommand>(shoot)},
     {"StopIntake", std::make_shared<frc2::InstantCommand>(stopIntake)},
-    {"SlowIntake", std::make_shared<frc::InstantCommand>(slowIntake)}
+    {"SlowIntake", std::make_shared<frc2::InstantCommand>(slowIntake)}
   };
 
   COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap" };
