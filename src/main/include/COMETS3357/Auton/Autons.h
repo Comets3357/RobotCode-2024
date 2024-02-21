@@ -17,6 +17,7 @@
 #include <frc/geometry/Pose2d.h>
 #include <frc2/command/SequentialCommandGroup.h>
 #include "COMETS3357/Auton/AutonPathCommand.h"
+#include <frc2/command/Command.h>
 
 namespace COMETS3357
 {
@@ -58,7 +59,7 @@ namespace COMETS3357
 
     private:
 
-        std::map<std::string, std::pair<std::unique_ptr<frc2::SequentialCommandGroup>, frc::Pose2d>> autons;
+        std::map<std::string, std::unique_ptr< frc2::CommandPtr>> autons;
         COMETS3357::SwerveSubsystem* swerveSubsystem;
         frc::SendableChooser<std::string> autoChooser;
         pathplanner::AutoBuilder autoBuilder;

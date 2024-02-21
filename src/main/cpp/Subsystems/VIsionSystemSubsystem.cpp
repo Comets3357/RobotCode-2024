@@ -92,8 +92,8 @@ frc::SmartDashboard::PutNumber("ASDASD TIME", nt::Now() * 0.000001);
 
 
             // if (abs(gyroRate) < 0.3)
-            if (!frc::DriverStation::IsAutonomousEnabled())
-            swerveSubsystem->m_odometry.AddVisionMeasurement(frc::Pose2d{newPos, newRotation}, time);
+            // if (!frc::DriverStation::IsAutonomousEnabled())
+            // swerveSubsystem->m_odometry.AddVisionMeasurement(frc::Pose2d{newPos, newRotation}, time);
             // m_field2.SetRobotPose(frc::Pose2d{newPos, newRotation});
 
             if (ID == 3)

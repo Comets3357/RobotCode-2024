@@ -6,6 +6,7 @@
 #include <COMETS3357/pathplanner/lib/commands/PathPlannerAuto.h>
 #include <COMETS3357/Json/picojson.h>
 #include <frc2/command/InstantCommand.h>
+#include <COMETS3357/pathplanner/lib/auto/CommandUtil.h>
 
 using namespace COMETS3357;
 
@@ -45,8 +46,8 @@ void Autons::RunAuton(std::string autonName)
 {
     if (autons.contains(autonName))
     {
-        swerveSubsystem->ResetOdometry(autons[autonName].second);
-        autons[autonName].first->Schedule();
+        // swerveSubsystem->ResetOdometry(autons[autonName].second);
+        autons[autonName].get()->Schedule();
     }
 }
 
@@ -110,8 +111,11 @@ void Autons::LoadAutons( std::vector<std::pair<std::string, std::shared_ptr<frc2
 
             // autons[autonName].first = std::make_unique<frc2::SequentialCommandGroup>();
             // std::vector<std::unique_ptr<frc2::Command>> commands = {};
-            autons[autonName].first = std::make_unique<frc2::SequentialCommandGroup>();
+            // autons[autonName].first = std::make_unique<frc2::SequentialCommandGroup>();
+            std::vector<frc2::CommandPtr> commands;
             bool start = false;
+
+            frc::Pose2d startPosition;
 
             for (auto& elem : arr) {
                 // check the type of the element
@@ -126,25 +130,15 @@ void Autons::LoadAutons( std::vector<std::pair<std::string, std::shared_ptr<frc2
                     {
                         // autons[autonName].first->AddCommands(AutonPathCommand{swerveSubsystem, 0.5, 0.5, frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, frc::Rotation2d{units::radian_t{rotation * 3.14159 / 180.0}}}});
                         // autons[autonName].first->AddCommands(frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}});
-                        autons[autonName].first->AddCommands(AutonPathCommand{swerveSubsystem, 0.5, 0.5, frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, frc::Rotation2d{units::radian_t{rotation * 3.14159 / 180.0}}}});
-                        autons[autonName].first->AddCommands(frc2::InstantCommand{frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}}});
-                        autons[autonName].first->AddCommands(frc2::InstantCommand{frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}}});
-                        autons[autonName].first->AddCommands(frc2::InstantCommand{frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}}});
-                        autons[autonName].first->AddCommands(frc2::InstantCommand{frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}}});
-                        autons[autonName].first->AddCommands(frc2::InstantCommand{frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}}});
-                        autons[autonName].first->AddCommands(frc2::InstantCommand{frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}}});
-                        autons[autonName].first->AddCommands(frc2::InstantCommand{frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}}});
-                        autons[autonName].first->AddCommands(frc2::InstantCommand{frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}}});
-                        autons[autonName].first->AddCommands(frc2::InstantCommand{frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}}});
-                        autons[autonName].first->AddCommands(frc2::InstantCommand{frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}}});
-                        autons[autonName].first->AddCommands(frc2::InstantCommand{frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}}});
-                        autons[autonName].first->AddCommands(frc2::InstantCommand{frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}}});
-                        autons[autonName].first->AddCommands(frc2::InstantCommand{frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}}});
+                        commands.push_back(pathplanner::CommandUtil::wrappedEventCommand(std::make_shared<AutonPathCommand>(swerveSubsystem, 0.5, 0.5, frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, frc::Rotation2d{units::radian_t{rotation * 3.14159 / 180.0}}})));
+                        commands.push_back(pathplanner::CommandUtil::wrappedEventCommand(std::make_shared<frc2::InstantCommand>(frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}})));
+                       
                     }
                     else
                     {
                         start = true;
-                        autons[autonName].second = frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, frc::Rotation2d{units::radian_t{rotation * 3.14159 / 180.0}}};
+                        startPosition = frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, frc::Rotation2d{units::radian_t{rotation * 3.14159 / 180.0}}};
+                         commands.push_back(pathplanner::CommandUtil::wrappedEventCommand(std::make_shared<frc2::InstantCommand>(frc2::InstantCommand{[startPosition, this](){swerveSubsystem->ResetOdometry(startPosition);}, {swerveSubsystem}})));
                     }
                     
                     // do something with the pose values, such as moving the robot to that position
@@ -158,7 +152,7 @@ void Autons::LoadAutons( std::vector<std::pair<std::string, std::shared_ptr<frc2
                         std::stringstream ss(command);
                         std::string value;
                         ss >> value; ss >> value;
-                        autons[autonName].first->AddCommands(frc2::WaitCommand{units::second_t{stod(value)}});
+                        commands.push_back(pathplanner::CommandUtil::wrappedEventCommand(std::make_shared<frc2::WaitCommand>(units::second_t{stod(value)})));
                     }
                     else
                     {
@@ -166,7 +160,7 @@ void Autons::LoadAutons( std::vector<std::pair<std::string, std::shared_ptr<frc2
                         {
                             if (command == c.first)
                             {
-                                // commands.push_back(c.second);
+                                commands.push_back(pathplanner::CommandUtil::wrappedEventCommand(c.second));
                                 // autons[autonName].first->AddCommands(c.second.get());
                             }
                         }
@@ -179,7 +173,7 @@ void Autons::LoadAutons( std::vector<std::pair<std::string, std::shared_ptr<frc2
                 }
             }
 
-            // frc2::SequentialCommandGroup k{commands}
+            autons[autonName] = std::make_unique<frc2::CommandPtr>(frc2::cmd::Sequence(std::move(commands)));
 
             
 
