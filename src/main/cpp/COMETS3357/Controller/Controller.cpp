@@ -213,16 +213,17 @@ bool Controller::LoadControls(picojson::value &controllers)
                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 270;}}, "D-padLeft", mode);
                             SetButton(controller.RightStick(), "RightStickButton", mode);
                             SetButton(controller.LeftStick(), "LeftStickButton", mode);
-                            SetButton(frc2::Trigger{[this](){return controller.GetRawButton(1);}}, "AButton", mode);
-                            SetButton(frc2::Trigger{[this](){return controller.GetRawButton(2);}}, "BButton", mode);
-                            SetButton(frc2::Trigger{[this](){return controller.GetRawButton(4);}}, "XButton", mode);
-                            SetButton(frc2::Trigger{[this](){return controller.GetRawButton(3);}}, "YButton", mode);
-                            SetButton(controller.LeftTrigger(), "LeftTrigger", mode);
-                            SetButton(controller.RightTrigger(), "RightTrigger", mode);
+                            SetButton(frc2::Trigger{[this](){return controller.GetRawButton(1);}}, "SquareButton", mode);
+                            SetButton(frc2::Trigger{[this](){return controller.GetRawButton(2);}}, "XButton", mode);
+                            SetButton(frc2::Trigger{[this](){return controller.GetRawButton(3);}}, "CircleButton", mode);
+                            SetButton(frc2::Trigger{[this](){return controller.GetRawButton(4);}}, "TriangleButton", mode);
+                            //SetButton(controller.LeftTrigger(), "LeftTrigger", mode);
+                            //SetButton(controller.RightTrigger(), "RightTrigger", mode);
                             SetButton(frc2::Trigger{[this](){return controller.GetRawButton(5);}}, "LeftBumper", mode);
                             SetButton(frc2::Trigger{[this](){return controller.GetRawButton(6);}}, "RightBumper", mode);
                             SetButton(controller.Start(), "StartButton", mode);
                             SetButton(controller.Back(), "BackButton", mode);
+                            
 
                             std::map<std::string, frc2::Trigger> joystickTriggers;
 
@@ -230,8 +231,11 @@ bool Controller::LoadControls(picojson::value &controllers)
                             SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(0), 0.08) != 0;}}, "LeftStickX", mode, joystickTriggers);
                             SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(5), 0.08) != 0;}}, "RightStickY", mode, joystickTriggers);
                             SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(2), 0.08) != 0;}}, "RightStickX", mode, joystickTriggers);
-
+                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(3), 0.08) != 0;}}, "LeftTrigger", mode, joystickTriggers);
+                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(4), 0.08) != 0;}}, "RightTrigger", mode, joystickTriggers);
                             SetJoysticks(joystickTriggers, mode);
+
+                            
                         }
                     }
                 }
