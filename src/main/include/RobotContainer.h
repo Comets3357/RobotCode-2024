@@ -111,7 +111,7 @@ class RobotContainer {
   frc2::InstantCommand angleOffsetPositive{[this](){shooter.offset += .25;}, {&shooter}}; 
   frc2::InstantCommand angleOffsetNegative{[this](){shooter.offset -= .25;}, {&shooter}}; 
   // frc2::SequentialCommandGroup autoSubwooferShoot{subWooferSetpoint, frc2::WaitCommand{2_s}, shoot, frc2::WaitCommand{0.5_s}, stopShoot};
-frc2::InstantCommand autoSubwooferSetpoint{[this](){shooter.SetPositionPivot(40); shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
+  frc2::InstantCommand autoSubwooferSetpoint{[this](){shooter.SetPositionPivot(37); shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
 
 
 
@@ -153,6 +153,9 @@ frc2::InstantCommand autoSubwooferSetpoint{[this](){shooter.SetPositionPivot(40)
    {"ManualElevator", {[this](auto leftX, auto leftAuto, auto rightX, auto rightY){elevator.SetPercent(rightY * 0.5);}, &elevator, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}}
   };
 
+  frc2::InstantCommand print1{[this](){frc::SmartDashboard::PutNumber("Test", 1);}, {}};
+  frc2::InstantCommand print2{[this](){frc::SmartDashboard::PutNumber("Test", 2);}, {}};
+
 std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionMap
   {
     {"Intake", std::make_shared<frc2::InstantCommand>(startIntake)},
@@ -162,7 +165,9 @@ std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionM
     {"StopShoot", std::make_shared<frc2::InstantCommand>(stopShoot)},
     {"Shoot", std::make_shared<frc2::InstantCommand>(shoot)},
     {"StopIntake", std::make_shared<frc2::InstantCommand>(stopIntake)},
-    {"SlowIntake", std::make_shared<frc2::InstantCommand>(slowIntake)}
+    {"SlowIntake", std::make_shared<frc2::InstantCommand>(slowIntake)},
+    {"print1", std::make_shared<frc2::InstantCommand>(print1)},
+    {"print2", std::make_shared<frc2::InstantCommand>(print2)}
   };
 
   COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap" };

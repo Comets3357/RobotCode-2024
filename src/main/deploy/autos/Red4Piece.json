@@ -1,11 +1,11 @@
-
 [
     {
       "x": 15.09,
       "y": 6.47,
       "rotation": 180
     },
-    "AmpSetpoint",
+    "idk",
+    "SlowIntake",
     {
       "x": 15.05,
       "y": 6.47,
@@ -17,28 +17,37 @@
       "y": 6.75,
       "rotation": 151.60
     },
-    "wait 0.1",
-    "Shoot",
-    "Intake",
-    "wait 0.5",
-    "Shoot",
-    "wait 0.5",
-    "Intake",
-    {
+      "wait 0.1",
+      "Shoot",
+      "wait 0.5",
+  
+    [
+      
+      {
+          "x": 13.65,
+          "y": 6.6,
+          "rotation": 141.60
+      },
+      "Intake"
+    ],
+    [
+      
+      {
         "x": 13.65,
         "y": 6.6,
-        "rotation": 141.60
-    },
-    {
-      "x": 13.65,
-      "y": 6.6,
-      "rotation": -90
-    },
-    {
-    "x": 13.65,
-    "y": 4.87,
-    "rotation": -90
-    },
+        "rotation": -90
+      },
+      "Intake"
+    ],
+    [
+      
+      {
+        "x": 13.65,
+        "y": 4.87,
+        "rotation": -90
+      },
+      "Intake"
+    ],
     {
       "x": 13.8,
       "y": 4.87,

@@ -84,7 +84,6 @@ void Robot::TeleopInit()
     m_autonomousCommand->Cancel();
   }
 
-  m_container.autos.AutonomousInit();
 }
 
 /**
