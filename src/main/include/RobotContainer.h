@@ -41,7 +41,6 @@
 
 #include "commands/LegAvoidanceCommand.h"
 #include "commands/SetPointCommand.h"
-#include "commands/AmpCommand.h"
 #include "COMETS3357/Auton/AutonPathCommand.h"
 
 
@@ -74,7 +73,6 @@ class RobotContainer {
 
   IntakeIndexerCommand intakeIndexer {&indexer}; 
   ShooterCommand shooterCommand {&shooter, &indexer, &swerve};
-  AmpCommand ampCommand{&shooter, &indexer, &swerve};
 
   SetPointCommand subWooferSetpoint{&shooter, &indexer, &swerve, 56, 2000};
   SetPointCommand podiumSetPoint{&shooter, &indexer, &swerve, 38.5, 2000};
@@ -135,7 +133,6 @@ class RobotContainer {
       
       {"PodiumSetpoint", std::make_shared<SetPointCommand>(podiumSetPoint)},
       {"AmpSetpoint", std::make_shared<SetPointCommand>(ampSetPoint)},
-      {"AmpPlace", std::make_shared<AmpCommand>(ampCommand)},
       {"AmpRampUp", std::make_shared<frc2::InstantCommand>(ampRampUp)},
       {"angleOffsetPositive", std::make_shared<frc2::InstantCommand>(angleOffsetPositive)},
       {"angleOffsetNegative", std::make_shared<frc2::InstantCommand>(angleOffsetNegative)}
