@@ -2,12 +2,15 @@
   "Clients": {
     "open": true
   },
-  "Connections": {
-    "open": true
-  },
   "NetworkTables Settings": {
-    "mode": "Client (NT4)",
+    "mode": "Server",
     "serverTeam": "3357"
+  },
+  "Server": {
+    "Publishers": {
+      "open": true
+    },
+    "open": true
   },
   "VisionSubsystem@3": {
     "Publishers": {
@@ -27,6 +30,15 @@
     },
     "open": true
   },
+  "example client@1": {
+    "Publishers": {
+      "open": true
+    },
+    "Subscribers": {
+      "open": true
+    },
+    "open": true
+  },
   "outlineviewer@3": {
     "Publishers": {
       "open": true
@@ -38,6 +50,9 @@
   },
   "transitory": {
     "VisionSubsystem": {
+      "open": true
+    },
+    "datatable": {
       "open": true
     }
   }
