@@ -1,4 +1,3 @@
-
 {
     "PrimaryController":
     {
@@ -315,7 +314,7 @@
                 "AButtonPressed": "StartIntake",
                 "BButtonPressed": "EjectIntake",
                 "XButtonPressed": "StartShoot",
-                "YButtonPressed": "AmpRampUp",
+                "YButtonPressed": "NONE",
                 "LeftBumperPressed": "XBOXSemiAutoShift",
                 "RightBumperPressed": "Shoot",
                 "BackButtonPressed": "NONE",
