@@ -10,7 +10,7 @@ IntakeSubsystem();
 
 void SetPercent(double percent); 
 
-void SetPercent(std::string percent); 
+void SetPercent(std::string percent);
 
 COMETS3357::SparkMaxPercent intakeMotor{"IntakeMotor"}; 
 

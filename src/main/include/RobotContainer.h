@@ -43,6 +43,16 @@
 #include "commands/SetPointCommand.h"
 #include "COMETS3357/Auton/AutonPathCommand.h"
 
+#include "Commands/AmpShoot.h"
+#include "Commands/AmpShootStop.h"
+
+#include "Commands/ClimbReset.h"
+
+#include "Commands/Climb.h"
+
+
+
+
 
 
 /**
@@ -79,6 +89,13 @@ class RobotContainer {
   SetPointCommand ampSetPoint{&shooter, &indexer, &swerve, 24, 2000};
   SetPointCommand midFieldSetpoint{&shooter, &indexer, &swerve, 18, 3500};
 
+  AmpShootCommand ampShoot{&shooter, &elevator};
+  AmpShootStopCommand ampShootStop{&shooter, &elevator};
+
+  ClimbResetCommand climbReset{&elevator};
+  ClimbCommand climb{&elevator, &shooter};
+  
+
   // Instance command
   LegAvoidanceCommand legAvoidance{&swerve};
 
@@ -110,6 +127,7 @@ class RobotContainer {
   frc2::InstantCommand angleOffsetNegative{[this](){shooter.offset -= .25;}, {&shooter}}; 
   // frc2::SequentialCommandGroup autoSubwooferShoot{subWooferSetpoint, frc2::WaitCommand{2_s}, shoot, frc2::WaitCommand{0.5_s}, stopShoot};
   frc2::InstantCommand autoSubwooferSetpoint{[this](){shooter.SetPositionPivot(37); shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
+  frc2::InstantCommand climbRetract{[this](){elevator.SetPosition(0); }, {&elevator}};
 
 
 
@@ -136,6 +154,11 @@ class RobotContainer {
       {"AmpRampUp", std::make_shared<frc2::InstantCommand>(ampRampUp)},
       {"angleOffsetPositive", std::make_shared<frc2::InstantCommand>(angleOffsetPositive)},
       {"angleOffsetNegative", std::make_shared<frc2::InstantCommand>(angleOffsetNegative)}
+      {"AmpShoot", std::make_shared<AmpShootCommand>(ampShoot)},
+      {"AmpShootStop", std::make_shared<AmpShootStopCommand>(ampShootStop)},
+      {"Climb", std::make_shared<ClimbCommand>(climb)},
+      {"ClimbRetract", std::make_shared<frc2::InstantCommand>(climbRetract)},
+      {"ClimbReset", std::make_shared<ClimbResetCommand>(climbReset)}
   };
 
 
