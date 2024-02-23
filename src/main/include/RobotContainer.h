@@ -42,6 +42,15 @@
 #include "commands/LegAvoidanceCommand.h"
 #include "commands/SetPointCommand.h"
 
+#include "Commands/AmpShoot.h"
+#include "Commands/AmpShootStop.h"
+
+#include "Commands/ClimbReset.h"
+
+#include "Commands/Climb.h"
+
+
+
 
 
 
@@ -78,6 +87,13 @@ class RobotContainer {
   SetPointCommand podiumSetPoint{&shooter, &indexer, &swerve, 38.5};
   SetPointCommand ampSetPoint{&shooter, &indexer, &swerve, 24};
 
+  AmpShootCommand ampShoot{&shooter, &elevator};
+  AmpShootStopCommand ampShootStop{&shooter, &elevator};
+
+  ClimbResetCommand climbReset{&elevator};
+  ClimbCommand climb{&elevator, &shooter};
+  
+
   // Instance command
   LegAvoidanceCommand legAvoidance{&swerve};
 
@@ -102,6 +118,8 @@ class RobotContainer {
   frc2::InstantCommand stopTurningTowardsSpeaker{[this](){shooter.stopTurnToTarget();}, {}};
   frc2::InstantCommand turnTowardsSpeaker{[this](){shooter.startTurnToTarget();}, {}};
 
+  frc2::InstantCommand climbRetract{[this](){elevator.SetPosition(0); }, {&elevator}};
+
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
@@ -118,6 +136,11 @@ class RobotContainer {
       {"SubWooferSetpoint", std::make_shared<SetPointCommand>(subWooferSetpoint)},
       {"PodiumSetpoint", std::make_shared<SetPointCommand>(podiumSetPoint)},
       {"AmpSetpoint", std::make_shared<SetPointCommand>(ampSetPoint)},
+      {"AmpShoot", std::make_shared<AmpShootCommand>(ampShoot)},
+      {"AmpShootStop", std::make_shared<AmpShootStopCommand>(ampShootStop)},
+      {"Climb", std::make_shared<ClimbCommand>(climb)},
+      {"ClimbRetract", std::make_shared<frc2::InstantCommand>(climbRetract)},
+      {"ClimbReset", std::make_shared<ClimbResetCommand>(climbReset)}
   };
 
 

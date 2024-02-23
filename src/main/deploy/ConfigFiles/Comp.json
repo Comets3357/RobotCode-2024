@@ -119,7 +119,7 @@
         "D": 0,
         "FF": 0,
         "I": 0,
-        "P": 0.1
+        "P": 1
       },
       "PositionPIDWrappingEnabled": false,
       "RelativePositionConversionFactor": 1,

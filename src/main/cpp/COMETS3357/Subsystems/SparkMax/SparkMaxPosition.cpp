@@ -221,7 +221,7 @@ void SparkMaxPosition::Periodic()
 {
 
     absoluteEncoderPosition = absoluteEncoder.GetPosition();
-    relativeEncoderPosition = absoluteEncoder.GetPosition();
+    relativeEncoderPosition = relativeEncoder.GetPosition();
 
     
 

@@ -6,7 +6,7 @@ IndexerSubsystem::IndexerSubsystem() : COMETS3357::Subsystem("IndexerSubsystem")
 
 void IndexerSubsystem::Initialize()
 {
-    noteDetector.EnableLimitSwitch(false);
+   // noteDetector.EnableLimitSwitch(false);
 }
 
 void IndexerSubsystem::Periodic() {
