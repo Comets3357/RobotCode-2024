@@ -33,6 +33,7 @@
 #include "Subsystems/IndexerSubsytem.h"
 #include "Subsystems/ShooterSubsystem.h"
 #include "Subsystems/ElevatorSubsystem.h"
+#include "Subsystems/LEDsSubsystem.h"
 
 #include "Commands/IntakeIndexerCommand.h"
 #include "Commands/ShooterCommand.h"
@@ -43,6 +44,7 @@
 #include "commands/SetPointCommand.h"
 #include "commands/AmpCommand.h"
 #include "COMETS3357/Auton/AutonPathCommand.h"
+
 
 
 
@@ -71,6 +73,7 @@ class RobotContainer {
   IndexerSubsystem indexer {}; 
   ShooterSubsystem shooter {&swerve, &gyro};
   ElevatorSubsystem elevator {};
+  LEDsSubsystem led {}; 
 
   IntakeIndexerCommand intakeIndexer {&indexer}; 
   ShooterCommand shooterCommand {&shooter, &indexer, &swerve};
@@ -99,7 +102,7 @@ class RobotContainer {
 
   frc2::InstantCommand stopShoot{[this](){shooter.SetVelocityKickerWheel(0); shooter.SetVelocityFlyWheel(0); indexer.SetPercent(0);}, {&shooter}}; // shooter.SetPositionPivot(35);}, {&shooter}}; 
 
-  frc2::InstantCommand zeroGyro{[this](){gyro.ZeroGyro();}, {&gyro}};
+  frc2::InstantCommand zeroGyro{[this](){gyro.ZeroGyro(); led.gyroZero = true;}, {&gyro}};
   frc2::InstantCommand shoot{[this](){indexer.SetPercent(1);}, {&indexer}};
 
   frc2::InstantCommand ampRampUp{[this](){shooter.SetVelocityKickerWheel(1200); shooter.SetVelocityFlyWheel(-1200);}, {&shooter}};
@@ -113,7 +116,10 @@ class RobotContainer {
   // frc2::SequentialCommandGroup autoSubwooferShoot{subWooferSetpoint, frc2::WaitCommand{2_s}, shoot, frc2::WaitCommand{0.5_s}, stopShoot};
 frc2::InstantCommand autoSubwooferSetpoint{[this](){shooter.SetPositionPivot(40); shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
 
-
+  frc2::InstantCommand humanPlayerSignalOn{[this](){led.hpSignal = true;}, {&led}}; 
+  frc2::InstantCommand humanPlayerSignalOff{[this](){led.hpSignal = false;}, {&led}}; 
+  frc2::InstantCommand ampSignalOn{[this](){led.ampSignal = true;}, {&led}}; 
+  frc2::InstantCommand ampSignalOff{[this](){led.ampSignal = false;}, {&led}}; 
 
 
 
@@ -138,7 +144,11 @@ frc2::InstantCommand autoSubwooferSetpoint{[this](){shooter.SetPositionPivot(40)
       {"AmpPlace", std::make_shared<AmpCommand>(ampCommand)},
       {"AmpRampUp", std::make_shared<frc2::InstantCommand>(ampRampUp)},
       {"angleOffsetPositive", std::make_shared<frc2::InstantCommand>(angleOffsetPositive)},
-      {"angleOffsetNegative", std::make_shared<frc2::InstantCommand>(angleOffsetNegative)}
+      {"angleOffsetNegative", std::make_shared<frc2::InstantCommand>(angleOffsetNegative)},
+      {"humanPlayerSignalOn", std::make_shared<frc2::InstantCommand>(humanPlayerSignalOn)},
+      {"humanPlayerSignalOff", std::make_shared<frc2::InstantCommand>(humanPlayerSignalOff)},
+      {"ampSignalOn", std::make_shared<frc2::InstantCommand>(ampSignalOn)},
+      {"ampSignalOff", std::make_shared<frc2::InstantCommand>(ampSignalOff)}
   };
 
 

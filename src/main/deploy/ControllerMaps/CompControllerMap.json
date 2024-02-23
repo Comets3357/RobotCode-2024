@@ -321,8 +321,8 @@
                 "BackButtonPressed": "NONE",
                 "StartButtonPressed": "NONE",
                 "XboxButtonPressed": "NONE",
-                "LeftTriggerPressed": "AVOIDLEG",
-                "RightTriggerPressed": "NONE",
+                "LeftTriggerPressed": "humanPlayerSignalOn",
+                "RightTriggerPressed": "ampSignalOn",
                 "D-padLeftReleased": "NONE",
                 "D-padRightReleased": "NONE",
                 "D-padUpReleased": "NONE",
@@ -338,8 +338,8 @@
                 "BackButtonReleased": "NONE",
                 "StartButtonReleased": "NONE",
                 "XboxButtonReleased": "NONE",
-                "LeftTriggerReleased": "NONE",
-                "RightTriggerReleased": "NONE"
+                "LeftTriggerReleased": "humanPlayerSignalOff",
+                "RightTriggerReleased": "ampSignalOff"
             },
             "XBOXSemiAutoShift":
             {
