@@ -268,36 +268,21 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
 }
 
 void SwerveSubsystem::CentricDrive(units::meters_per_second_t xSpeed,
-              units::meters_per_second_t ySpeed, double directionX, double directionY,
-              bool fieldRelative, bool rateLimit)
-{
-  if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
-  {
-    directionX *= -1;
-    directionY *= -1;
-  }
-  double targetAngle = (atan2(directionX, directionY)) + (actualAngle - fmod(actualAngle, (3.14159 * 2)));
-
-  if (targetAngle - actualAngle >= 3.14159)
-  {
-    targetAngle -= (3.14159 * 2);
-  }
-  else if (targetAngle - actualAngle <= -3.14159)
-  {
-    targetAngle += (3.14159 * 2);
-  }
-
-  double speed = sqrt(pow(directionX, 2) + pow(directionY, 2));
-  // rotationController.SetIntegratorRange(-5, 5);
-
-
-
-  units::radians_per_second_t rot = units::radians_per_second_t{std::clamp(rotationController.Calculate(actualAngle, targetAngle), -speed, speed)};
-
-  frc::SmartDashboard::PutNumber("ROTATION AMMOUNT", (double)rot);
-
+                           units::meters_per_second_t ySpeed,
+                           units::radians_per_second_t rot) {
   double xSpeedCommanded;
   double ySpeedCommanded;
+
+ bool fieldRelative = false;
+ bool rateLimit = true; 
+
+  if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
+  {
+    ySpeed *= -1;
+    xSpeed *= -1;
+  }
+
+  
 
   if (rateLimit) {
     // Convert XY to polar for rate limiting
@@ -346,23 +331,13 @@ void SwerveSubsystem::CentricDrive(units::meters_per_second_t xSpeed,
 
     xSpeedCommanded = m_currentTranslationMag * cos(m_currentTranslationDir);
     ySpeedCommanded = m_currentTranslationMag * sin(m_currentTranslationDir);
-    // m_currentRotation = m_rotLimiter.Calculate(rot.value());
+    m_currentRotation = m_rotLimiter.Calculate(rot.value());
 
   } else {
     xSpeedCommanded = xSpeed.value();
     ySpeedCommanded = ySpeed.value();
     m_currentRotation = rot.value();
   }
-
-  if (speed > 0.25)
-  {
-    m_currentRotation = rot.value();
-  }
-  else
-  {
-    m_currentRotation = 0;
-  }
-  
 
   // Convert the commanded speeds into the correct units for the drivetrain
   units::meters_per_second_t xSpeedDelivered =
@@ -372,14 +347,14 @@ void SwerveSubsystem::CentricDrive(units::meters_per_second_t xSpeed,
   units::radians_per_second_t rotDelivered =
       m_currentRotation * configuration.maxTurnSpeed;
 
-  auto states = currentKinematic->ToSwerveModuleStates(
+  auto states = kDriveKinematics.ToSwerveModuleStates(
       fieldRelative
           ? frc::ChassisSpeeds::FromFieldRelativeSpeeds(
                 xSpeedDelivered, ySpeedDelivered, rotDelivered,
                 frc::Rotation2d(units::radian_t{gyroSubsystemData->GetEntry("angle").GetDouble(0)}))
           : frc::ChassisSpeeds{xSpeedDelivered, ySpeedDelivered, rotDelivered});
 
-  currentKinematic->DesaturateWheelSpeeds(&states, configuration.maxSpeed);
+  kDriveKinematics.DesaturateWheelSpeeds(&states, configuration.maxSpeed);
 
   auto [fl, fr, bl, br] = states;
 

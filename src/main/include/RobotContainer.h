@@ -153,12 +153,12 @@ class RobotContainer {
       {"AmpSetpoint", std::make_shared<SetPointCommand>(ampSetPoint)},
       {"AmpRampUp", std::make_shared<frc2::InstantCommand>(ampRampUp)},
       {"angleOffsetPositive", std::make_shared<frc2::InstantCommand>(angleOffsetPositive)},
-      {"angleOffsetNegative", std::make_shared<frc2::InstantCommand>(angleOffsetNegative)}
+      {"angleOffsetNegative", std::make_shared<frc2::InstantCommand>(angleOffsetNegative)},
       {"AmpShoot", std::make_shared<AmpShootCommand>(ampShoot)},
       {"AmpShootStop", std::make_shared<AmpShootStopCommand>(ampShootStop)},
       {"Climb", std::make_shared<ClimbCommand>(climb)},
       {"ClimbRetract", std::make_shared<frc2::InstantCommand>(climbRetract)},
-      {"ClimbReset", std::make_shared<ClimbResetCommand>(climbReset)}
+      {"ClimbReset", std::make_shared<ClimbResetCommand>(climbReset)},
   };
 
 
@@ -170,7 +170,8 @@ class RobotContainer {
    {"ManualShoot", {[this](auto leftX, auto leftY, auto rightX, auto rightY){shooter.SetPercentKickerWheel(leftY); shooter.SetPercentFlyWheel(leftX);}, &shooter, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualIndexer", {[this](auto leftX, auto leftY, auto rightX, auto rightY){indexer.SetPercent(rightY);}, &shooter, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualPivot", {[this](auto leftX, auto leftY, auto rightX, auto rightY){shooter.SetPercentPivot(leftY * -0.2); frc::SmartDashboard::PutNumber("PIVOT ANGLE", shooter.GetPivotRelativePosition()); frc::SmartDashboard::PutNumber("PIVOT ANGLE Absolute", shooter.GetPivotAbsolutePosition());}, &shooter, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
-   {"ManualElevator", {[this](auto leftX, auto leftAuto, auto rightX, auto rightY){elevator.SetPercent(rightY * 0.5);}, &elevator, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}}
+   {"ManualElevator", {[this](auto leftX, auto leftAuto, auto rightX, auto rightY){elevator.SetPercent(rightY * 0.5);}, &elevator, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"CentricDriveCommand", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.CentricDrive(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX});}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
   };
 
   frc2::InstantCommand print1{[this](){frc::SmartDashboard::PutNumber("Test", 1);}, {}};
@@ -187,7 +188,7 @@ std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionM
     {"StopIntake", std::make_shared<frc2::InstantCommand>(stopIntake)},
     {"SlowIntake", std::make_shared<frc2::InstantCommand>(slowIntake)},
     {"print1", std::make_shared<frc2::InstantCommand>(print1)},
-    {"print2", std::make_shared<frc2::InstantCommand>(print2)}
+    {"print2", std::make_shared<frc2::InstantCommand>(print2)},
   };
 
   COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap" };
