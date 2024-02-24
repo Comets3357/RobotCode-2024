@@ -69,6 +69,12 @@ namespace COMETS3357
     void Drive(units::meters_per_second_t xSpeed,
               units::meters_per_second_t ySpeed, double directionX, double directionY,
               bool fieldRelative, bool rateLimit);
+
+    void CentricDrive(units::meters_per_second_t xSpeed,
+                           units::meters_per_second_t ySpeed,
+                           units::radians_per_second_t rot);
+
+    
 frc::Field2d m_field;
     /**
      * Sets the wheels into an X formation to prevent movement.
