@@ -1,5 +1,6 @@
 
 #include "Commands/ClimbReset.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
 ClimbResetCommand::ClimbResetCommand(ElevatorSubsystem* elevator) {
     elevatorSubsystem = elevator;
@@ -17,10 +18,12 @@ void ClimbResetCommand::Execute()
     {
         elevatorSubsystem->SetPosition(0);
     }
+    frc::SmartDashboard::PutBoolean("Limit reached", elevatorSubsystem->ElevatorLimit.Get());
 }
 
 bool ClimbResetCommand::IsFinished()
 {
+    frc::SmartDashboard::PutBoolean("Limit reached", elevatorSubsystem->ElevatorLimit.Get());
     if (elevatorSubsystem->ElevatorLimit.Get())
     {
         elevatorSubsystem->SetPosition(0);
