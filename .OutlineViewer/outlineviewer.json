@@ -3,7 +3,7 @@
     "open": true
   },
   "NetworkTables Settings": {
-    "mode": "Server",
+    "mode": "Client (NT3)",
     "serverTeam": "3357"
   },
   "Server": {
@@ -49,9 +49,6 @@
     "open": true
   },
   "transitory": {
-    "VisionSubsystem": {
-      "open": true
-    },
     "datatable": {
       "open": true
     }

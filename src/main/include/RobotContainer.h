@@ -33,6 +33,7 @@
 #include "Subsystems/IndexerSubsytem.h"
 #include "Subsystems/ShooterSubsystem.h"
 #include "Subsystems/ElevatorSubsystem.h"
+#include "Subsystems/LEDsSubsystem.h"
 
 #include "Commands/IntakeIndexerCommand.h"
 #include "Commands/ShooterCommand.h"
@@ -80,6 +81,7 @@ class RobotContainer {
   IndexerSubsystem indexer {}; 
   ShooterSubsystem shooter {&swerve, &gyro};
   ElevatorSubsystem elevator {};
+  LEDsSubsystem led {&indexer}; 
 
   IntakeIndexerCommand intakeIndexer {&indexer}; 
   ShooterCommand shooterCommand {&shooter, &indexer, &swerve};
@@ -114,7 +116,7 @@ class RobotContainer {
 
   frc2::InstantCommand stopShoot{[this](){shooter.SetVelocityKickerWheel(0); shooter.SetVelocityFlyWheel(0); indexer.SetPercent(0);}, {&shooter}}; // shooter.SetPositionPivot(35);}, {&shooter}}; 
 
-  frc2::InstantCommand zeroGyro{[this](){gyro.ZeroGyro();}, {&gyro}};
+  frc2::InstantCommand zeroGyro{[this](){gyro.ZeroGyro(); led.gyroZero = true;}, {&gyro}};
   frc2::InstantCommand shoot{[this](){indexer.SetPercent(1);}, {&indexer}};
 
   frc2::InstantCommand ampRampUp{[this](){shooter.SetVelocityKickerWheel(1200); shooter.SetVelocityFlyWheel(-1200);}, {&shooter}};
@@ -129,7 +131,10 @@ class RobotContainer {
   frc2::InstantCommand autoSubwooferSetpoint{[this](){shooter.SetPositionPivot(37); shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
   frc2::InstantCommand climbRetract{[this](){elevator.SetPosition(0); }, {&elevator}};
 
-
+  frc2::InstantCommand humanPlayerSignalOn{[this](){led.hpSignal = true;}, {&led}}; 
+  frc2::InstantCommand humanPlayerSignalOff{[this](){led.hpSignal = false;}, {&led}}; 
+  frc2::InstantCommand ampSignalOn{[this](){led.ampSignal = true;}, {&led}}; 
+  frc2::InstantCommand ampSignalOff{[this](){led.ampSignal = false;}, {&led}}; 
 
 
 
@@ -159,6 +164,10 @@ class RobotContainer {
       {"Climb", std::make_shared<ClimbCommand>(climb)},
       {"ClimbRetract", std::make_shared<frc2::InstantCommand>(climbRetract)},
       {"ClimbReset", std::make_shared<ClimbResetCommand>(climbReset)},
+      {"humanPlayerSignalOn", std::make_shared<frc2::InstantCommand>(humanPlayerSignalOn)},
+      {"humanPlayerSignalOff", std::make_shared<frc2::InstantCommand>(humanPlayerSignalOff)},
+      {"ampSignalOn", std::make_shared<frc2::InstantCommand>(ampSignalOn)},
+      {"ampSignalOff", std::make_shared<frc2::InstantCommand>(ampSignalOff)}
   };
 
 

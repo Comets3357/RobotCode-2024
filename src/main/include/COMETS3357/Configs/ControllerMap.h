@@ -18,6 +18,10 @@
 #include <frc/DriverStation.h>
 #include <COMETS3357/Commands/ChangeModeCommand.h>
 #include <frc2/command/RunCommand.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableInstance.h>
+
+
 
 namespace COMETS3357
 {
@@ -70,6 +74,8 @@ namespace COMETS3357
         std::string type;
     };
 
+    
+
 
     class ControllerMap
     {
@@ -84,10 +90,11 @@ namespace COMETS3357
          */
         ControllerMap(std::unordered_map<std::string, std::shared_ptr<frc2::Command>> &buttonActionMap, std::unordered_map<std::string, std::tuple<std::function<void(double, double, double, double)>, frc2::Subsystem*, Controller::JoystickCommandMode>>& joystickActionMap, std::string fileName);
 
-
         Controller primary;
         Controller secondary;
         Controller test;
+
+        
         /**
          * Loads data out of the selected config file and loads the data into a 
          * RobotConfig object which is then distributed out to subsystems
