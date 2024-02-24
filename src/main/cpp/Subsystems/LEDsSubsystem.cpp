@@ -38,7 +38,7 @@ void LEDsSubsystem::Periodic() {
             redPub = table->GetIntegerTopic("rValue").Publish();
             greenPub = table->GetIntegerTopic("gValue").Publish();
             bluePub = table->GetIntegerTopic("bValue").Publish();
-        } 
+        }   
         else 
         {
             LEDsSubsystem::writeLEDs(0,255,0); // red 

@@ -21,13 +21,11 @@ bool hpSignal = false;
 bool ampSignal = false; 
 bool comms = frc::DriverStation::IsDSAttached; 
 
-nt::NetworkTableInstance inst = nt::NetworkTableInstance::GetDefault();
-
 bool enabled = frc::DriverStation::IsEnabled();  
 bool gyroZero = false; 
 
 
-std::shared_ptr< nt::NetworkTable > table = inst.GetTable("datatable");
+std::shared_ptr< nt::NetworkTable > table = nt::NetworkTableInstance::GetDefault().GetTable("datatable");
 
 nt::IntegerPublisher greenPub;
 nt::IntegerPublisher redPub;
