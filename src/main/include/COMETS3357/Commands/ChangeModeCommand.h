@@ -7,6 +7,7 @@
 #include <frc2/command/CommandHelper.h>
 #include <units/length.h>
 #include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableInstance.h>
 
 class ChangeModeCommand : public frc2::CommandHelper<frc2::Command, ChangeModeCommand>
 {

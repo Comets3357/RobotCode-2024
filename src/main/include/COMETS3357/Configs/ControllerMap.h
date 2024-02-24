@@ -18,6 +18,8 @@
 #include <frc/DriverStation.h>
 #include <COMETS3357/Commands/ChangeModeCommand.h>
 #include <frc2/command/RunCommand.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableInstance.h>
 
 
 

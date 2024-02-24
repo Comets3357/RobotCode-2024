@@ -17,7 +17,7 @@ void Controller::SetButton(frc2::Trigger trigger, std::string button, std::pair<
         }
         else if (modeTriggers.contains(mode.second.get(button).get<std::string>()))
         {
-            (trigger && modeTriggers[mode.first]).WhileTrue(new frc2::RunCommand{[this, mode, button] {currentMode = mode.second.get(button).get<std::string>();}, {}});
+            (trigger && modeTriggers[mode.first]).WhileTrue(new frc2::RunCommand{[this, mode, button] {currentMode = mode.second.get(button).get<std::string>(); nt::NetworkTableInstance::GetDefault().GetTable("mode")->GetEntry("mode").SetString(currentMode); }, {}});
         }
     }
 
@@ -29,7 +29,7 @@ void Controller::SetButton(frc2::Trigger trigger, std::string button, std::pair<
         }
         else if (modeTriggers.contains(mode.second.get(button + "Pressed").get<std::string>()))
         {
-            (trigger && modeTriggers[mode.first]).OnTrue(new frc2::InstantCommand{[this, mode, button] {currentMode = mode.second.get(button + "Pressed").get<std::string>();}, {}});
+            (trigger && modeTriggers[mode.first]).OnTrue(new frc2::InstantCommand{[this, mode, button] {currentMode = mode.second.get(button + "Pressed").get<std::string>();  nt::NetworkTableInstance::GetDefault().GetTable("mode")->GetEntry("mode").SetString(currentMode);}, {}});
         }
     }
     if (mode.second.get(button + "Released").get<std::string>() != "NONE")
@@ -40,7 +40,7 @@ void Controller::SetButton(frc2::Trigger trigger, std::string button, std::pair<
         }
         else if (modeTriggers.contains(mode.second.get(button + "Released").get<std::string>()))
         {
-            (trigger && modeTriggers[mode.first]).OnFalse(new frc2::InstantCommand{[this, mode, button] {currentMode = mode.second.get(button + "Released").get<std::string>();}, {}});
+            (trigger && modeTriggers[mode.first]).OnFalse(new frc2::InstantCommand{[this, mode, button] {currentMode = mode.second.get(button + "Released").get<std::string>();  nt::NetworkTableInstance::GetDefault().GetTable("mode")->GetEntry("mode").SetString(currentMode);}, {}});
         }
     }
 }

@@ -1,9 +1,9 @@
 #include "Subsystems/LEDsSubsystem.h"
+#include "Subsystems/IndexerSubsytem.h"
 
-
-LEDsSubsystem::LEDsSubsystem() : COMETS3357::Subsystem("LEDsSubsystem") {
-
-
+LEDsSubsystem::LEDsSubsystem(IndexerSubsystem *indexer) : COMETS3357::Subsystem{"LEDs"}
+{
+    indexerSubsytem = indexer;
 }
 
 
@@ -24,28 +24,25 @@ void LEDsSubsystem::Initialize()
 }
 
 void LEDsSubsystem::Periodic() {
-    while (!enabled) {
-        if (gyroZero)
+
+    enabled = frc::DriverStation::IsEnabled();
+    comms = frc::DriverStation::IsDSAttached();
+
+    if (!enabled) {
+        
+        if (!comms)
         {
-            LEDsSubsystem::writeLEDs(100,255,0); // orange
-            redPub = table->GetIntegerTopic("rValue").Publish();
-            greenPub = table->GetIntegerTopic("gValue").Publish();
-            bluePub = table->GetIntegerTopic("bValue").Publish();
-        } 
-        else if (comms)
-        {
-            LEDsSubsystem::writeLEDs(255,0,0); // green
-            redPub = table->GetIntegerTopic("rValue").Publish();
-            greenPub = table->GetIntegerTopic("gValue").Publish();
-            bluePub = table->GetIntegerTopic("bValue").Publish();
+            writeLEDs(0,255,0); // red 
         }   
+        else if (gyroZero)
+        {
+            writeLEDs(100,255,0); // orange
+        } 
         else 
         {
-            LEDsSubsystem::writeLEDs(0,255,0); // red 
-            redPub = table->GetIntegerTopic("rValue").Publish();
-            greenPub = table->GetIntegerTopic("gValue").Publish();
-            bluePub = table->GetIntegerTopic("bValue").Publish();
+            writeLEDs(255,0,0); // green
         } 
+        
         
         
         
@@ -53,42 +50,27 @@ void LEDsSubsystem::Periodic() {
     }
 
 
-    while (enabled) {
+    if (enabled) {
         std::string mode = nt::NetworkTableInstance::GetDefault().GetTable("mode")->GetEntry("mode").GetString("mode"); 
         if (ampSignal)
         {
-            LEDsSubsystem::writeLEDs(255,255,0); // yellow // signal to activate amp
-            redPub = table->GetIntegerTopic("rValue").Publish();
-            greenPub = table->GetIntegerTopic("gValue").Publish();
-            bluePub = table->GetIntegerTopic("bValue").Publish();
+            writeLEDs(255,255,0); // yellow // signal to activate amp
         } 
         else if (hpSignal)
         {
-            LEDsSubsystem::writeLEDs(0,255,255); // purple // signal to the human player // need to make flashing
-            redPub = table->GetIntegerTopic("rValue").Publish();
-            greenPub = table->GetIntegerTopic("gValue").Publish();
-            bluePub = table->GetIntegerTopic("bValue").Publish();
+            writeLEDs(0,255,255); // purple // signal to the human player // need to make flashing
         }
         else if (mode == "XBOXManual") 
         {
-            LEDsSubsystem::writeLEDs(128,0,128); // teal // manual mode
-            redPub = table->GetIntegerTopic("rValue").Publish();
-            greenPub = table->GetIntegerTopic("gValue").Publish();
-            bluePub = table->GetIntegerTopic("bValue").Publish();
+            writeLEDs(128,0,128); // teal // manual mode
         } 
-        else if (IndexerSubsystem::IsDetected) 
+        else if (!indexerSubsytem->IsDetected()) 
         {
-            LEDsSubsystem::writeLEDs(255,0,0); // green // game piece detection
-            redPub = table->GetIntegerTopic("rValue").Publish();
-            greenPub = table->GetIntegerTopic("gValue").Publish();
-            bluePub = table->GetIntegerTopic("bValue").Publish();
+            writeLEDs(255,0,0); // green // game piece detection
         } 
         else
         {
-            LEDsSubsystem::writeLEDs(100,255,0); // orange // default mode // semi-auto
-            redPub = table->GetIntegerTopic("rValue").Publish();
-            greenPub = table->GetIntegerTopic("gValue").Publish();
-            bluePub = table->GetIntegerTopic("bValue").Publish();
+            writeLEDs(100,255,0); // orange // default mode // semi-auto
         } 
     }
 }

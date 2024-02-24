@@ -72,7 +72,7 @@ class RobotContainer {
   IndexerSubsystem indexer {}; 
   ShooterSubsystem shooter {&swerve, &gyro};
   ElevatorSubsystem elevator {};
-  LEDsSubsystem led {}; 
+  LEDsSubsystem led {&indexer}; 
 
   IntakeIndexerCommand intakeIndexer {&indexer}; 
   ShooterCommand shooterCommand {&shooter, &indexer, &swerve};
