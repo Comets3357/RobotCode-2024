@@ -36,7 +36,7 @@ void LEDsSubsystem::Periodic() {
         }   
         else if (gyroZero)
         {
-            writeLEDs(100,255,0); // orange
+            writeLEDs(50,255,0); // orange
         } 
         else 
         {
@@ -70,7 +70,7 @@ void LEDsSubsystem::Periodic() {
         } 
         else
         {
-            writeLEDs(100,255,0); // orange // default mode // semi-auto
+            writeLEDs(50,255,0); // orange // default mode // semi-auto
         } 
     }
 }

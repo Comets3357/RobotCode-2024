@@ -2,28 +2,39 @@
     {
       "x": 15.23,
       "y": 6.47,
-      "rotation": 180
+      "rotation": 180,
+      "maxVelocity": 0.5,
+      "maxRotation": 0.5
     },
-    "4PieceSetpoint",
+    "4PieceSetpoint3",
     {
       "x": 15.25,
       "y": 6.47,
-      "rotation": 151.60
+      "rotation": 151.60,
+      "maxVelocity": 0.5,
+      "maxRotation": 0.5
     },
     {
       "x": 14.3,
       "y": 6.75,
-      "rotation": 151.60
+      "rotation": 151.60,
+      "maxVelocity": 0.5,
+      "maxRotation": 0.5
     },
+    "wait 0.2",
     "Shoot",
+    "wait 0.5",
+    "4PieceSetpoint2",
     "Intake",
     {
       "x": 13.75,
       "y": 6.75,
-      "rotation": 151.60
+      "rotation": 151.60,
+      "maxVelocity": 0.5,
+      "maxRotation": 0.5
     },
     
-    "wait 0.4",
+    "wait 0.5",
     "4PieceSetpoint",
     
 
@@ -33,7 +44,9 @@
     {
       "x": 13.85,
       "y": 5,
-      "rotation": -150
+      "rotation": -150,
+      "maxVelocity": 0.5,
+      "maxRotation": 0.5
     },
     "IntakeIndexer"
   ],
@@ -41,7 +54,9 @@
     {
       "x": 13.85,
       "y": 5,
-      "rotation": -170
+      "rotation": -170,
+      "maxVelocity": 0.5,
+      "maxRotation": 0.5
     },
   
     "Shoot",
@@ -51,12 +66,16 @@
     {
     "x": 14.2,
     "y": 4.2,
-    "rotation": -165
+    "rotation": -165,
+    "maxVelocity": 0.5,
+    "maxRotation": 0.5
     },
     {
       "x": 13.8,
       "y": 4,
-      "rotation": -155
+      "rotation": -155,
+      "maxVelocity": 0.5,
+      "maxRotation": 0.5
     },
     "Shoot",
     "wait 1",
@@ -65,12 +84,16 @@
     {
       "x": 13.7,
       "y": 2.5,
-      "rotation": -155
+      "rotation": -155,
+      "maxVelocity": 0.5,
+      "maxRotation": 0.5
     },
     {
       "x": 10,
       "y": 4.05,
-      "rotation": -155
+      "rotation": -155,
+      "maxVelocity": 0.5,
+      "maxRotation": 0.5
     }
 
 

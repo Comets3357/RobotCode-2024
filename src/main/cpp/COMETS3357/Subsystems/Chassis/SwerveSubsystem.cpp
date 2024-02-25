@@ -94,6 +94,11 @@ void SwerveSubsystem::Initialize()
   
 }
 
+frc::Pose2d SwerveSubsystem::GetPose2()
+{
+  return m_odometry2.GetPose();
+}
+
 void SwerveSubsystem::Periodic() {
   // Implementation of subsystem periodic method goes here.
 
@@ -117,6 +122,7 @@ void SwerveSubsystem::Periodic() {
   frc::SmartDashboard::PutData("Fielsd2 real", &m_field);
 
   m_field.SetRobotPose(m_odometry2.GetPose());
+
   
 }
 
@@ -519,8 +525,14 @@ frc::Pose2d SwerveSubsystem::GetPose() { return m_odometry.GetEstimatedPosition(
 
 frc::Pose2d SwerveSubsystem::GetMovingPose(double time)
 {
+  
   frc::Pose2d robotPose = m_odometry.GetEstimatedPosition();
+  double deltaTime = (double)wpi::math::MathSharedStore::GetTimestamp() - lastTime;
   frc::ChassisSpeeds fieldRelativeSpeeds = frc::ChassisSpeeds::FromRobotRelativeSpeeds(getSpeeds(), robotPose.Rotation());
+  frc::Pose2d returnPose = frc::Pose2d{frc::Translation2d{robotPose.X() + units::meter_t{(((double)robotPose.X() - (double)lastDeltaPose.X())/deltaTime) * time},robotPose.Y() +  units::meter_t{(((double)robotPose.Y() - (double)lastDeltaPose.Y())/deltaTime) * time}}, frc::Rotation2d{units::radian_t{0}} };
+  lastTime = (double)wpi::math::MathSharedStore::GetTimestamp();
+  lastDeltaPose = m_odometry.GetEstimatedPosition();
+
   return frc::Pose2d{frc::Translation2d{robotPose.X() + units::meter_t{(double)fieldRelativeSpeeds.vx * time},robotPose.Y() +  units::meter_t{(double)fieldRelativeSpeeds.vy * time}}, frc::Rotation2d{units::radian_t{0}} };
 }
 

@@ -50,6 +50,7 @@
 #include "Commands/ClimbReset.h"
 
 #include "Commands/Climb.h"
+#include "Commands/IntakeIndexerAutonCommand.h"
 
 
 
@@ -84,6 +85,7 @@ class RobotContainer {
   LEDsSubsystem led {&indexer}; 
 
   IntakeIndexerCommand intakeIndexer {&indexer}; 
+  IntakeIndexerAutonCommand intakeIndexerAuton{&indexer};
   ShooterCommand shooterCommand {&shooter, &indexer, &swerve};
 
   SetPointCommand subWooferSetpoint{&shooter, &indexer, &swerve, 56};
@@ -117,10 +119,11 @@ class RobotContainer {
   frc2::InstantCommand stopShoot{[this](){shooter.SetVelocityKickerWheel(0); shooter.SetVelocityFlyWheel(0); indexer.SetPercent(0);}, {&shooter}}; 
 
   frc2::InstantCommand zeroGyro{[this](){gyro.ZeroGyro(); led.gyroZero = true;}, {&gyro}};
+
   frc2::InstantCommand shoot{[this](){indexer.SetPercent(1);}, {&indexer}};
 
 
-  frc2::InstantCommand stopTurningTowardsSpeaker{[this](){shooter.stopTurnToTarget();}, {}};
+  frc2::InstantCommand stopTurningTowardsSpeaker{[this](){ shooter.stopTurnToTarget();}, {}};
   frc2::InstantCommand turnTowardsSpeaker{[this](){shooter.startTurnToTarget();}, {}};
 
   frc2::InstantCommand angleOffsetPositive{[this](){shooter.offset += .25;}, {&shooter}}; 
@@ -128,16 +131,20 @@ class RobotContainer {
   // frc2::SequentialCommandGroup autoSubwooferShoot{subWooferSetpoint, frc2::WaitCommand{2_s}, shoot, frc2::WaitCommand{0.5_s}, stopShoot};
   frc2::InstantCommand autoSubwooferSetpoint{[this](){shooter.SetPositionPivot(37); shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
   frc2::InstantCommand climbRetract{[this](){elevator.SetPosition(0); }, {&elevator}};
-  frc2::InstantCommand piece4AutoSetpoint{[this](){shooter.SetPositionPivot(36), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
+  frc2::InstantCommand piece4AutoSetpoint{[this](){shooter.SetPositionPivot(38), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
+  frc2::InstantCommand piece4AutoSetpoint2{[this](){shooter.SetPositionPivot(36), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
+  frc2::InstantCommand piece4AutoSetpoint3{[this](){shooter.SetPositionPivot(38.5), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
+  frc2::InstantCommand midPiece4AutoSetpoint{[this](){shooter.SetPositionPivot(29), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
+
 
   frc2::InstantCommand humanPlayerSignalOn{[this](){led.hpSignal = true;}, {&led}}; 
   frc2::InstantCommand humanPlayerSignalOff{[this](){led.hpSignal = false;}, {&led}}; 
   frc2::InstantCommand ampSignalOn{[this](){led.ampSignal = true;}, {&led}}; 
   frc2::InstantCommand ampSignalOff{[this](){led.ampSignal = false;}, {&led}}; 
-  AutonGyroResetSubsystem gyroResetButton{&zeroGyro};
+  AutonGyroResetSubsystem gyroResetButton{&gyro, &led};
 
 
-
+  
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
@@ -182,14 +189,21 @@ class RobotContainer {
 
   std::vector<std::pair<std::string, std::shared_ptr<frc2::Command>>> autonActionMap
   {
+     {"TurnTowardsSpeaker", std::make_shared<frc2::InstantCommand>(turnTowardsSpeaker)},
+      {"StopTurnTowardsSpeaker", std::make_shared<frc2::InstantCommand>(stopTurningTowardsSpeaker)},
         {"Intake", std::make_shared<frc2::InstantCommand>(startIntakeAuto)},
-        {"IntakeIndexer", std::make_shared<IntakeIndexerCommand>(intakeIndexer)},
+        {"IntakeIndexer", std::make_shared<IntakeIndexerAutonCommand>(intakeIndexerAuton)},
+        {"StartShoot", std::make_shared<ShooterCommand>(shooterCommand)},
     {"4PieceSetpoint", std::make_shared<frc2::InstantCommand>(piece4AutoSetpoint)},
+    {"4PieceSetpoint2", std::make_shared<frc2::InstantCommand>(piece4AutoSetpoint2)},
+    {"4PieceSetpoint3", std::make_shared<frc2::InstantCommand>(piece4AutoSetpoint3)},
+    {"MidPiece4AutoSetpoint", std::make_shared<frc2::InstantCommand>(midPiece4AutoSetpoint)},
     {"PodiumSetpoint", std::make_shared<SetPointCommand>(podiumSetPoint)},
     {"AmpSetpoint", std::make_shared<SetPointCommand>(ampSetPoint)},  
     {"StopShoot", std::make_shared<frc2::InstantCommand>(stopShoot)},
     {"Shoot", std::make_shared<frc2::InstantCommand>(shoot)},
     {"StopIntake", std::make_shared<frc2::InstantCommand>(stopIntake)},
+
   };
 
   COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap" };
