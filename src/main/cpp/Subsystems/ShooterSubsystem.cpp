@@ -23,14 +23,26 @@ void ShooterSubsystem::Periodic(){
 
     if (turningTowardsTarget)
     {
-        frc::Pose2d robotPosition = swerve->GetMovingPose(0.3);
+        frc::Pose2d pos = swerve->GetPose();
+    double distance2 = sqrt(pow((double)(targetPos.X() - pos.X()), 2) + pow((double)(targetPos.Y() - pos.Y()), 2)); 
+    double shooterAngle2 = angleLookup.GetValue(distance2);
+    double velocity2 = cos(shooterAngle2 * 3.14159 / 180) * 19; 
+
+    frc::Pose2d robotPosition = swerve->GetMovingPose(distance2 / velocity2); 
+
+
         units::meter_t deltaX = robotPosition.X() - targetPos.X();
         units::meter_t deltaY = robotPosition.Y() - targetPos.Y();
 
         double angle = atan2((double)deltaY, (double)deltaX);
         
-        turnToPID.SetP(0.8);
+        turnToPID.SetP(0.6);
         swerve->overrideRotation = units::radians_per_second_t{std::clamp(turnToPID.Calculate((-gyro->m_navx.GetAngle() * 3.14159 / 180) + gyro->angleOffset + ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) , angle), -1.0, 1.0)};//rotationPLookup.GetValue(0);
+
+        if (frc::DriverStation::IsAutonomous())
+        {
+            swerve->DriveXRotate(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::angular_velocity::radians_per_second_t{0});
+        }
     }
 }
 
@@ -132,6 +144,7 @@ void ShooterSubsystem::startTurnToTarget()
 
 void ShooterSubsystem::stopTurnToTarget()
 {
+    turningTowardsTarget = false;
     swerve->controllingSwerveRotation = true;
     swerve->overrideRotation = units::radians_per_second_t{0};
 }

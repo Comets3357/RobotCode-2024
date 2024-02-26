@@ -94,6 +94,11 @@ void SwerveSubsystem::Initialize()
   
 }
 
+frc::Pose2d SwerveSubsystem::GetPose2()
+{
+  return m_odometry2.GetPose();
+}
+
 void SwerveSubsystem::Periodic() {
   // Implementation of subsystem periodic method goes here.
 
@@ -117,6 +122,7 @@ void SwerveSubsystem::Periodic() {
   frc::SmartDashboard::PutData("Fielsd2 real", &m_field);
 
   m_field.SetRobotPose(m_odometry2.GetPose());
+
   
 }
 
@@ -124,11 +130,7 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
               units::meters_per_second_t ySpeed, double directionX, double directionY,
               bool fieldRelative, bool rateLimit)
 {
-  if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
-  {
-    directionX *= -1;
-    directionY *= -1;
-  }
+
   frc::SmartDashboard::PutNumber("Gyro Angle", gyroSubsystemData->GetEntry("angle").GetDouble(0));
   frc::SmartDashboard::PutNumber("Angle Difference", gyroSubsystemData->GetEntry("angle").GetDouble(0) - lastAngle);
 
@@ -276,11 +278,7 @@ void SwerveSubsystem::CentricDrive(units::meters_per_second_t xSpeed,
  bool fieldRelative = false;
  bool rateLimit = true; 
 
-  if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
-  {
-    ySpeed *= -1;
-    xSpeed *= -1;
-  }
+
 
   
 
@@ -377,11 +375,7 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
   double xSpeedCommanded;
   double ySpeedCommanded;
 
-  if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
-  {
-    ySpeed *= -1;
-    xSpeed *= -1;
-  }
+
 
   
 
@@ -519,8 +513,14 @@ frc::Pose2d SwerveSubsystem::GetPose() { return m_odometry.GetEstimatedPosition(
 
 frc::Pose2d SwerveSubsystem::GetMovingPose(double time)
 {
+  
   frc::Pose2d robotPose = m_odometry.GetEstimatedPosition();
+  double deltaTime = (double)wpi::math::MathSharedStore::GetTimestamp() - lastTime;
   frc::ChassisSpeeds fieldRelativeSpeeds = frc::ChassisSpeeds::FromRobotRelativeSpeeds(getSpeeds(), robotPose.Rotation());
+  frc::Pose2d returnPose = frc::Pose2d{frc::Translation2d{robotPose.X() + units::meter_t{(((double)robotPose.X() - (double)lastDeltaPose.X())/deltaTime) * time},robotPose.Y() +  units::meter_t{(((double)robotPose.Y() - (double)lastDeltaPose.Y())/deltaTime) * time}}, frc::Rotation2d{units::radian_t{0}} };
+  lastTime = (double)wpi::math::MathSharedStore::GetTimestamp();
+  lastDeltaPose = m_odometry.GetEstimatedPosition();
+
   return frc::Pose2d{frc::Translation2d{robotPose.X() + units::meter_t{(double)fieldRelativeSpeeds.vx * time},robotPose.Y() +  units::meter_t{(double)fieldRelativeSpeeds.vy * time}}, frc::Rotation2d{units::radian_t{0}} };
 }
 
@@ -558,6 +558,12 @@ void SwerveSubsystem::DriveXRotate(units::meters_per_second_t xSpeed, units::met
   //   xSpeed += addingXSpeed;
   //   ySpeed += addingYSpeed;
   // }
+    if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
+  {
+    ySpeed *= -1;
+    xSpeed *= -1;
+  }
+
   currentKinematic = &kDriveKinematics;
   Drive(xSpeed, ySpeed, rot, true, true, &kDriveKinematics);
   pickedCorner = false;
@@ -565,6 +571,11 @@ void SwerveSubsystem::DriveXRotate(units::meters_per_second_t xSpeed, units::met
 
 void SwerveSubsystem::DriveDirectionalRotate(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, double directionX, double directionY)
 {
+    if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
+  {
+    ySpeed *= -1;
+    xSpeed *= -1;
+  }
   
   currentKinematic = &kDriveKinematics;
   Drive(xSpeed, ySpeed, directionX, directionY, true, true);
@@ -592,6 +603,7 @@ void SwerveSubsystem::DriveCornerTurning(units::meters_per_second_t xSpeed, unit
   //   xSpeed += addingXSpeed;
   //   ySpeed += addingYSpeed;
   // }
+  
   double angleOnDrivebase = atan2(ySpeed.value(), xSpeed.value()) - ((-gyroSubsystem->m_navx.GetAngle() * 3.14159 / 180) + gyroSubsystem->angleOffset);
     double angleXPortion = sin(angleOnDrivebase);
     double angleYPortion = cos(angleOnDrivebase);
@@ -612,6 +624,12 @@ void SwerveSubsystem::DriveCornerTurning(units::meters_per_second_t xSpeed, unit
     {
       currentKinematic = &kDriveKinematicsBackRight;
     }
+
+      if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
+  {
+    ySpeed *= -1;
+    xSpeed *= -1;
+  }
 
   Drive(xSpeed, ySpeed, rot, true, true, currentKinematic);
 

@@ -19,6 +19,7 @@
 #include "COMETS3357/GyroSubsystem.h"
 
 
+
 class RobotContainer;
 
 
@@ -99,7 +100,7 @@ frc::Field2d m_field;
      * @return the robot's heading in degrees, from 180 to 180
      */
     units::degree_t GetHeading() const;
-
+frc::Pose2d GetPose2();
     /**
      * Zeroes the heading of the robot.
      */
@@ -238,6 +239,13 @@ units::meters_per_second_t addingYSpeed{0};
     bool pickedCorner = false;
 
     frc::SwerveDriveKinematics<4U>* currentKinematic;
+
+    frc::Pose2d lastDeltaPose = frc::Pose2d{frc::Translation2d{units::meter_t{0}, units::meter_t{0}}, frc::Rotation2d{units::radian_t{0}}};
+    double lastTime = 0;
+
+    frc::Pose2d deltaPose;
+    double deltaTime;
+
 
     
   };
