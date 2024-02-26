@@ -88,9 +88,9 @@ class RobotContainer {
   IntakeIndexerAutonCommand intakeIndexerAuton{&indexer};
   ShooterCommand shooterCommand {&shooter, &indexer, &swerve};
 
-  SetPointCommand subWooferSetpoint{&shooter, &indexer, &swerve, 56};
-  SetPointCommand podiumSetPoint{&shooter, &indexer, &swerve, 38.5};
-  SetPointCommand ampSetPoint{&shooter, &indexer, &swerve, 24};
+  SetPointCommand subWooferSetpoint{&shooter, &indexer, &swerve, 56, 2000};
+  SetPointCommand podiumSetPoint{&shooter, &indexer, &swerve, 38.5, 2000};
+  SetPointCommand ampSetPoint{&shooter, &indexer, &swerve, 24, 2000};
 
   AmpShootCommand ampShoot{&shooter, &elevator};
   AmpShootStopCommand ampShootStop{&shooter, &elevator};
