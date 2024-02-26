@@ -93,7 +93,7 @@ class RobotContainer {
   SetPointCommand ampSetPoint{&shooter, &indexer, &swerve, 24, 2000};
 
   AmpShootCommand ampShoot{&shooter, &elevator};
-  AmpShootStopCommand ampShootStop{&shooter, &elevator};
+  AmpShootStopCommand ampShootStop{&shooter, &elevator, &indexer};
 
   ClimbResetCommand climbReset{&elevator};
   ClimbCommand climb{&elevator, &shooter};
@@ -116,7 +116,7 @@ class RobotContainer {
 
   frc2::InstantCommand stopIndex{[this](){indexer.SetVelocity(0);}, {&indexer}}; 
 
-  frc2::InstantCommand stopShoot{[this](){shooter.SetVelocityKickerWheel(0); shooter.SetVelocityFlyWheel(0); indexer.SetPercent(0);}, {&shooter}}; 
+  frc2::InstantCommand stopShoot{[this](){shooter.SetVelocityKickerWheel(0); shooter.SetVelocityFlyWheel(0); indexer.SetPercent(0); shooter.SetPositionPivot(40);}, {&shooter}}; 
 
   frc2::InstantCommand zeroGyro{[this](){gyro.ZeroGyro(); led.gyroZero = true;}, {&gyro}};
 
@@ -129,7 +129,7 @@ class RobotContainer {
   frc2::InstantCommand angleOffsetPositive{[this](){shooter.offset += .25;}, {&shooter}}; 
   frc2::InstantCommand angleOffsetNegative{[this](){shooter.offset -= .25;}, {&shooter}}; 
   // frc2::SequentialCommandGroup autoSubwooferShoot{subWooferSetpoint, frc2::WaitCommand{2_s}, shoot, frc2::WaitCommand{0.5_s}, stopShoot};
-  frc2::InstantCommand autoSubwooferSetpoint{[this](){shooter.SetPositionPivot(37); shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
+  frc2::InstantCommand autoSubwooferSetpoint{[this](){shooter.SetPositionPivot(56); shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
   frc2::InstantCommand climbRetract{[this](){elevator.SetPosition(0); }, {&elevator}};
   frc2::InstantCommand piece4AutoSetpoint{[this](){shooter.SetPositionPivot(38), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
   frc2::InstantCommand piece4AutoSetpoint2{[this](){shooter.SetPositionPivot(36), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
@@ -198,6 +198,7 @@ class RobotContainer {
     {"4PieceSetpoint2", std::make_shared<frc2::InstantCommand>(piece4AutoSetpoint2)},
     {"4PieceSetpoint3", std::make_shared<frc2::InstantCommand>(piece4AutoSetpoint3)},
     {"MidPiece4AutoSetpoint", std::make_shared<frc2::InstantCommand>(midPiece4AutoSetpoint)},
+    {"1PieceAutoSetpoint", std::make_shared<frc2::InstantCommand>(autoSubwooferSetpoint)},
     {"PodiumSetpoint", std::make_shared<SetPointCommand>(podiumSetPoint)},
     {"AmpSetpoint", std::make_shared<SetPointCommand>(ampSetPoint)},  
     {"StopShoot", std::make_shared<frc2::InstantCommand>(stopShoot)},
