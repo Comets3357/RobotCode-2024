@@ -17,6 +17,6 @@ void SetPercent(double percent);
 
 COMETS3357::SparkMaxVelocity IndexerMotor{"Indexer"}; 
 bool IsDetected(); 
-frc::DigitalInput noteDetector{0}; 
+rev::SparkMaxLimitSwitch noteDetector = IndexerMotor.motor.GetForwardLimitSwitch(rev::CANDigitalInput::LimitSwitchPolarity::kNormallyClosed);
 
 SUBSYSTEM_END

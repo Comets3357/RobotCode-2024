@@ -105,7 +105,7 @@ frc::SmartDashboard::PutNumber("ASDASD TIME", nt::Now() * 0.000001);
             }
             else if (ID == 5)
             {
-                m_field5.SetRobotPose(frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, newRotation});
+                m_field5.SetRobotPose(swerveSubsystem->GetMovingPose(0.3));
             }
         }
         
@@ -119,7 +119,7 @@ frc::SmartDashboard::PutNumber("ASDASD TIME", nt::Now() * 0.000001);
 
     frc::SmartDashboard::PutData("FieldTag3", &m_field3);
     frc::SmartDashboard::PutData("FieldTag4", &m_field4);
-    frc::SmartDashboard::PutData("FieldTag5", &m_field5);
+    frc::SmartDashboard::PutData("MovementPose", &m_field5);
 
     m_field.SetRobotPose(swerveSubsystem->m_odometry.GetEstimatedPosition());
 

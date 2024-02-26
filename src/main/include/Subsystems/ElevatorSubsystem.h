@@ -15,5 +15,6 @@ void SetPosition(double position);
 void SetPosition(std::string position);
 
 COMETS3357::SparkMaxPosition elevatorMotor{"ElevatorMotor"}; 
+rev::SparkMaxLimitSwitch ElevatorLimit = elevatorMotor.motor.GetForwardLimitSwitch(rev::CANDigitalInput::LimitSwitchPolarity::kNormallyClosed);
 
 SUBSYSTEM_END

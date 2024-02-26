@@ -3,7 +3,7 @@
 
 LegAvoidanceCommand::LegAvoidanceCommand(COMETS3357::SwerveSubsystem *swerve) {
 
-swerveSubsystem = swerve;
+    swerveSubsystem = swerve;
     frc::Pose2d pos = swerveSubsystem->GetPose();
     
     // AddRequirements(swerve);
@@ -116,6 +116,8 @@ void LegAvoidanceCommand::Execute()
       // double areaB = HeronsFormula(semiperimeterBeta, distance1, distanceTip, sideLengthB); 
       // double areaC = HeronsFormula(semiperimeterGamma, distanceTip, distance2, sideLengthC); 
 
+      // THIS WAS FREY's AND AIDEN'S (ALSO RYAN AND DEVANSH HELPED) MASTERPIECE OF A CREATION BEFORE HENDRICK RUINED IT // 
+
       double bigTriArea = area((double)triangleTip.X(), (double)triangleTip.Y(), (double)bottom1.X(), (double)bottom1.Y(), (double)bottom2.X(), (double)bottom2.Y()); 
 
       double areaA = area((double)points[i].X(), (double)points[i].Y(), (double)triangleTip.X(), (double)triangleTip.Y(), (double)bottom1.X(), (double)bottom1.Y());
@@ -132,16 +134,26 @@ void LegAvoidanceCommand::Execute()
           if (areaC > areaB) {
             starboardSide = false; 
           }
+          else {
+            starboardSide = true;
+          }
       }
       if (!isClear) {
-        swerveSubsystem->addingSwerveMovement = true;
-        swerveSubsystem->addingXSpeed += units::meters_per_second_t{6};
-        swerveSubsystem->addingYSpeed += units::meters_per_second_t{9};
+        if (starboardSide) {                            // if inside triangle and on the "right" side 
+          swerveSubsystem->addingSwerveMovement = true;
+          swerveSubsystem->addingXSpeed = units::meters_per_second_t{6};
+          swerveSubsystem->addingYSpeed = units::meters_per_second_t{9};
+        } else {                                      
+          swerveSubsystem->addingSwerveMovement = true;
+          swerveSubsystem->addingXSpeed = units::meters_per_second_t{6};
+          swerveSubsystem->addingYSpeed = units::meters_per_second_t{9};
+        }
+        
   
       }
 
     }
-    frc::SmartDashboard::PutBoolean("Is not in Triangle", isClear); 
+    frc::SmartDashboard::PutBoolean("Is in Triangle", isClear); 
     
   
   

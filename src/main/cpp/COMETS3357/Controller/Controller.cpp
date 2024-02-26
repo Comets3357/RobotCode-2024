@@ -17,7 +17,7 @@ void Controller::SetButton(frc2::Trigger trigger, std::string button, std::pair<
         }
         else if (modeTriggers.contains(mode.second.get(button).get<std::string>()))
         {
-            (trigger && modeTriggers[mode.first]).WhileTrue(new frc2::RunCommand{[this, mode, button] {currentMode = mode.second.get(button).get<std::string>();}, {}});
+            (trigger && modeTriggers[mode.first]).WhileTrue(new frc2::RunCommand{[this, mode, button] {currentMode = mode.second.get(button).get<std::string>(); nt::NetworkTableInstance::GetDefault().GetTable("mode")->GetEntry("mode").SetString(currentMode); }, {}});
         }
     }
 
@@ -29,7 +29,7 @@ void Controller::SetButton(frc2::Trigger trigger, std::string button, std::pair<
         }
         else if (modeTriggers.contains(mode.second.get(button + "Pressed").get<std::string>()))
         {
-            (trigger && modeTriggers[mode.first]).OnTrue(new frc2::InstantCommand{[this, mode, button] {currentMode = mode.second.get(button + "Pressed").get<std::string>();}, {}});
+            (trigger && modeTriggers[mode.first]).OnTrue(new frc2::InstantCommand{[this, mode, button] {currentMode = mode.second.get(button + "Pressed").get<std::string>();  nt::NetworkTableInstance::GetDefault().GetTable("mode")->GetEntry("mode").SetString(currentMode);}, {}});
         }
     }
     if (mode.second.get(button + "Released").get<std::string>() != "NONE")
@@ -40,7 +40,7 @@ void Controller::SetButton(frc2::Trigger trigger, std::string button, std::pair<
         }
         else if (modeTriggers.contains(mode.second.get(button + "Released").get<std::string>()))
         {
-            (trigger && modeTriggers[mode.first]).OnFalse(new frc2::InstantCommand{[this, mode, button] {currentMode = mode.second.get(button + "Released").get<std::string>();}, {}});
+            (trigger && modeTriggers[mode.first]).OnFalse(new frc2::InstantCommand{[this, mode, button] {currentMode = mode.second.get(button + "Released").get<std::string>();  nt::NetworkTableInstance::GetDefault().GetTable("mode")->GetEntry("mode").SetString(currentMode);}, {}});
         }
     }
 }
@@ -183,6 +183,7 @@ bool Controller::LoadControls(picojson::value &controllers)
                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 90;}}, "D-padRight", mode);
                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 180;}}, "D-padDown", mode);
                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 270;}}, "D-padLeft", mode);
+                            SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 0;}}, "D-padUp", mode);
                             SetButton(controller.RightStick(), "RightStickButton", mode);
                             SetButton(controller.LeftStick(), "LeftStickButton", mode);
                             SetButton(controller.A(), "AButton", mode);
@@ -210,25 +211,26 @@ bool Controller::LoadControls(picojson::value &controllers)
                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 90;}}, "D-padRight", mode);
                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 180;}}, "D-padDown", mode);
                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 270;}}, "D-padLeft", mode);
+                             SetButton(frc2::Trigger{[this]{return controller.GetPOV() == 0;}}, "D-padUp", mode);
                             SetButton(controller.RightStick(), "RightStickButton", mode);
                             SetButton(controller.LeftStick(), "LeftStickButton", mode);
-                            SetButton(controller.A(), "AButton", mode);
-                            SetButton(controller.B(), "BButton", mode);
-                            SetButton(controller.X(), "XButton", mode);
-                            SetButton(controller.Y(), "YButton", mode);
+                            SetButton(frc2::Trigger{[this](){return controller.GetRawButton(1);}}, "AButton", mode);
+                            SetButton(frc2::Trigger{[this](){return controller.GetRawButton(2);}}, "BButton", mode);
+                            SetButton(frc2::Trigger{[this](){return controller.GetRawButton(4);}}, "XButton", mode);
+                            SetButton(frc2::Trigger{[this](){return controller.GetRawButton(3);}}, "YButton", mode);
                             SetButton(controller.LeftTrigger(), "LeftTrigger", mode);
                             SetButton(controller.RightTrigger(), "RightTrigger", mode);
-                            SetButton(controller.LeftBumper(), "LeftBumper", mode);
-                            SetButton(controller.RightBumper(), "RightBumper", mode);
+                            SetButton(frc2::Trigger{[this](){return controller.GetRawButton(5);}}, "LeftBumper", mode);
+                            SetButton(frc2::Trigger{[this](){return controller.GetRawButton(6);}}, "RightBumper", mode);
                             SetButton(controller.Start(), "StartButton", mode);
                             SetButton(controller.Back(), "BackButton", mode);
 
                             std::map<std::string, frc2::Trigger> joystickTriggers;
 
-                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetLeftY(), 0.08) != 0;}}, "LeftStickY", mode, joystickTriggers);
-                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetLeftX(), 0.08) != 0;}}, "LeftStickX", mode, joystickTriggers);
-                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRightY(), 0.08) != 0;}}, "RightStickY", mode, joystickTriggers);
-                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRightX(), 0.08) != 0;}}, "RightStickX", mode, joystickTriggers);
+                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(1), 0.08) != 0;}}, "LeftStickY", mode, joystickTriggers);
+                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(0), 0.08) != 0;}}, "LeftStickX", mode, joystickTriggers);
+                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(5), 0.08) != 0;}}, "RightStickY", mode, joystickTriggers);
+                            SetJoystickTrigger(frc2::Trigger{[this]{return frc::ApplyDeadband(controller.GetRawAxis(2), 0.08) != 0;}}, "RightStickX", mode, joystickTriggers);
 
                             SetJoysticks(joystickTriggers, mode);
                         }

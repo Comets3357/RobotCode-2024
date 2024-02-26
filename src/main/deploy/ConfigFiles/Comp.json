@@ -6,12 +6,17 @@
       "Name": "AngleLookup",
       "Data":
       [
+        [0,  57],
         [1.29,  57],
         [2.56, 41], 
         [3.02, 35], 
         [3.5, 33], 
-        [4.2, 30],
-        [100, 24]
+        [4, 28],
+        [4.22, 28],
+        [5.25, 24],
+        [5.86, 22.85],
+        [6.7, 22],
+        [100, 22]
       ]
     },
     {
@@ -46,8 +51,12 @@
       "Name": "VelocityLookup",
       "Data":
       [
-        [0, 2000],
-        [1000, 2000]
+        [0, 2500],
+        [3.5, 2500],
+        [3.52, 3000],
+        [5.9, 3000],
+        [6, 3000],
+        [1000, 2500]
       ]
     },
     {
@@ -63,7 +72,7 @@
     {
       "AbsolutePositionConversionFactor": 360,
       "AbsoluteVelocityConversionFactor": 1,
-      "AbsoluteZeroOffset": 241.1168921,
+      "AbsoluteZeroOffset": 264.5,
       "CurrentLimit": 40,
       "DefaultRunMode": "ABSOLUTE",
       "ID": 31,
@@ -78,7 +87,7 @@
         "D": 0.001,
         "FF": 0,
         "I": 0,
-        "P": 0.24
+        "P": 0.125
       },
       "PositionPIDWrappingEnabled": false,
       "RelativePositionConversionFactor": 0.9863013698630137,
@@ -93,8 +102,8 @@
       },
       "ForwardSoftLimitEnabled": true,
       "ReverseSoftLimitEnabled": true,
-      "ForwardSoftLimit": 109.1,
-      "ReverseSoftLimit": 35,
+      "ForwardSoftLimit": 105,
+      "ReverseSoftLimit": 18,
       "Positions":
       {
         
@@ -119,7 +128,7 @@
         "D": 0,
         "FF": 0,
         "I": 0,
-        "P": 0.1
+        "P": 1
       },
       "PositionPIDWrappingEnabled": false,
       "RelativePositionConversionFactor": 1,

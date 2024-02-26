@@ -19,6 +19,7 @@
 #include "COMETS3357/GyroSubsystem.h"
 
 
+
 class RobotContainer;
 
 
@@ -69,6 +70,12 @@ namespace COMETS3357
     void Drive(units::meters_per_second_t xSpeed,
               units::meters_per_second_t ySpeed, double directionX, double directionY,
               bool fieldRelative, bool rateLimit);
+
+    void CentricDrive(units::meters_per_second_t xSpeed,
+                           units::meters_per_second_t ySpeed,
+                           units::radians_per_second_t rot);
+
+    
 frc::Field2d m_field;
     /**
      * Sets the wheels into an X formation to prevent movement.
@@ -93,7 +100,7 @@ frc::Field2d m_field;
      * @return the robot's heading in degrees, from 180 to 180
      */
     units::degree_t GetHeading() const;
-
+frc::Pose2d GetPose2();
     /**
      * Zeroes the heading of the robot.
      */
@@ -114,6 +121,8 @@ frc::Field2d m_field;
      * @return The pose.
      */
     frc::Pose2d GetPose();
+
+    frc::Pose2d GetMovingPose(double time);
 
     /**
      * Resets the odometry to the specified pose.
@@ -230,6 +239,13 @@ units::meters_per_second_t addingYSpeed{0};
     bool pickedCorner = false;
 
     frc::SwerveDriveKinematics<4U>* currentKinematic;
+
+    frc::Pose2d lastDeltaPose = frc::Pose2d{frc::Translation2d{units::meter_t{0}, units::meter_t{0}}, frc::Rotation2d{units::radian_t{0}}};
+    double lastTime = 0;
+
+    frc::Pose2d deltaPose;
+    double deltaTime;
+
 
     
   };
