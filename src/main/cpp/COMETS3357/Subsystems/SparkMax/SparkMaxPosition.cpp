@@ -227,6 +227,11 @@ double SparkMaxPosition::GetAbsoluteVelocity()
     return absoluteEncoder.GetVelocity();
 }
 
+void SparkMaxPosition::SetRelativeEncoderPosition(double pos) 
+{
+    relativeEncoder.SetPosition(pos);
+}
+
 void SparkMaxPosition::Periodic()
 {
 
