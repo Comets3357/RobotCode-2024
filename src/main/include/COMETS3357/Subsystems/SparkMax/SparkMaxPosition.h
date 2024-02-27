@@ -170,6 +170,10 @@ namespace COMETS3357
 
     private:
 
+    double absoluteCheckTimer = 5;
+    double absDeltaPos = 0;
+    double longAbsDeltaPos = 0;
+
         double absoluteEncoderPosition = 0;
         double relativeEncoderPosition = 0;
         COMETS3357::SparkMaxPositionRunMode runMode = POSITION_SPARK_MAX_NONE;

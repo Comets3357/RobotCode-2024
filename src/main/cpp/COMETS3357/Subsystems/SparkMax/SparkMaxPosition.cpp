@@ -264,6 +264,10 @@ void SparkMaxPosition::SetFeedForward(std::function<double(double)> feedforward)
 
 void SparkMaxPosition::CheckAbsoluteEncoder()
 {
+    absDeltaPos = absoluteEncoderPosition - lastDeltaPos;
+    longAbsDeltaPos += abs(absDeltaPos);
+
+    lastDeltaPos = absoluteEncoderPosition;
     // if (runMode != POSITION_SPARK_MAX_ABSOLUTE) {
     //     return;
     // }
