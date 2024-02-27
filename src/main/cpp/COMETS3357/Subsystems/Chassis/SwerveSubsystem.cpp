@@ -131,7 +131,7 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
               bool fieldRelative, bool rateLimit)
 {
 
-  //frc::SmartDashboard::PutNumber("Gyro Angle", gyroSubsystemData->GetEntry("angle").GetDouble(0));
+  frc::SmartDashboard::PutNumber("Gyro Angle", gyroSubsystemData->GetEntry("angle").GetDouble(0));
   //frc::SmartDashboard::PutNumber("Angle Difference", gyroSubsystemData->GetEntry("angle").GetDouble(0) - lastAngle);
 
 

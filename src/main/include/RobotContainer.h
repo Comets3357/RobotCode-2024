@@ -118,7 +118,7 @@ class RobotContainer {
 
   frc2::InstantCommand stopShoot{[this](){shooter.SetVelocityKickerWheel(0); shooter.SetVelocityFlyWheel(0); indexer.SetPercent(0); shooter.SetPositionPivot(40);}, {&shooter}}; 
 
-  frc2::InstantCommand zeroGyro{[this](){gyro.ZeroGyro(); led.gyroZero = true;}, {&gyro}};
+  frc2::InstantCommand zeroGyro{[this](){gyro.ZeroGyro(); led.gyroZero = true; frc::SmartDashboard::PutBoolean("IsGyroZeroed", led.gyroZero);}, {&gyro}};
 
   frc2::InstantCommand shoot{[this](){indexer.SetPercent(1);}, {&indexer}};
 

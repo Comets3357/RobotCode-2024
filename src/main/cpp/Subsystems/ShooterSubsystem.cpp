@@ -110,6 +110,7 @@ double ShooterSubsystem::GetPivotRelativePosition()
 
 double ShooterSubsystem::GetPivotAbsolutePosition()
 {
+    frc::SmartDashboard::PutNumber("Pivot Abs", pivotAbsoluteEncoder.GetOutput());
     return ((double)pivotAbsoluteEncoder.GetOutput() * 360) - 237.0;
 }
 
