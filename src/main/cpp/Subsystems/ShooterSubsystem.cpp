@@ -10,14 +10,14 @@ ShooterSubsystem::ShooterSubsystem(COMETS3357::SwerveSubsystem* swerveSubsystem,
     }
 
 void ShooterSubsystem::Periodic(){
-    frc::SmartDashboard::PutNumber("Velocity wheels", KickerWheel.GetRelativeVelocity());
+    //frc::SmartDashboard::PutNumber("Velocity wheels", KickerWheel.GetRelativeVelocity());
     frc::SmartDashboard::PutNumber("PivotAbso", GetPivotAbsolutePosition());
     // SetPositionPivot(45);
     
     Pivot.Periodic();
 
-    frc::SmartDashboard::PutNumber("ANGLE LOOKUP", angleLookup.GetValue(2));
-    frc::SmartDashboard::PutNumber("Angle OFFSET ", offset); 
+    //frc::SmartDashboard::PutNumber("ANGLE LOOKUP", angleLookup.GetValue(2));
+    //frc::SmartDashboard::PutNumber("Angle OFFSET ", offset); 
 
     
 
@@ -110,7 +110,6 @@ double ShooterSubsystem::GetPivotRelativePosition()
 
 double ShooterSubsystem::GetPivotAbsolutePosition()
 {
-    frc::SmartDashboard::PutNumber("ENCODER VALUE", pivotAbsoluteEncoder.GetOutput());
     return ((double)pivotAbsoluteEncoder.GetOutput() * 360) - 237.0;
 }
 

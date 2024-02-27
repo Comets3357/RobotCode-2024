@@ -42,11 +42,6 @@ void LEDsSubsystem::Periodic() {
         {
             writeLEDs(255,0,0); // green
         } 
-        
-        
-        
-        
-        
     }
 
 

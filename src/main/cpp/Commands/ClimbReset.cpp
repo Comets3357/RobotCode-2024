@@ -14,7 +14,7 @@ void ClimbResetCommand::Initialize()
 
 void ClimbResetCommand::Execute()
 {
-    frc::SmartDashboard::PutBoolean("Limit reached", elevatorSubsystem->ElevatorLimit.Get());
+    //frc::SmartDashboard::PutBoolean("Limit reached", elevatorSubsystem->ElevatorLimit.Get());
     if (elevatorSubsystem->ElevatorLimit.Get())
     {
         elevatorSubsystem->elevatorMotor.SetRelativeEncoderPosition(0);
@@ -23,7 +23,7 @@ void ClimbResetCommand::Execute()
 
 bool ClimbResetCommand::IsFinished()
 {
-    frc::SmartDashboard::PutBoolean("Limit reached", elevatorSubsystem->ElevatorLimit.Get());
+    //frc::SmartDashboard::PutBoolean("Limit reached", elevatorSubsystem->ElevatorLimit.Get());
     if (elevatorSubsystem->ElevatorLimit.Get())
     {
         elevatorSubsystem->elevatorMotor.SetRelativeEncoderPosition(0);

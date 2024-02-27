@@ -38,9 +38,9 @@ Autons::Autons(SwerveSubsystem* drivebase, std::vector<std::pair<std::string, st
         // pathplanner::NamedCommands::registerCommand(actionMap[i].first, actionMap[i].second);
     // }
 
-    frc::SmartDashboard::PutNumber("INTAKE RAN", 0);
+    //frc::SmartDashboard::PutNumber("INTAKE RAN", 0);
 
-        LoadAutons(actionMap);
+      //  LoadAutons(actionMap);
 }
 
 void Autons::RunAuton(std::string autonName)

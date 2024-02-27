@@ -27,9 +27,9 @@ void GyroSubsystem::Periodic()
   
     m_navx.UpdateDisplacement(0, 9.81, 500, true);
 
-    frc::SmartDashboard::PutNumber("Robot Displacement X", m_navx.GetDisplacementX());
-    frc::SmartDashboard::PutNumber("Robot Displacement Y", m_navx.GetDisplacementY());
-    frc::SmartDashboard::PutNumber("Robot Displacement Z", m_navx.GetDisplacementZ());
+    //frc::SmartDashboard::PutNumber("Robot Displacement X", m_navx.GetDisplacementX());
+    //frc::SmartDashboard::PutNumber("Robot Displacement Y", m_navx.GetDisplacementY());
+    //frc::SmartDashboard::PutNumber("Robot Displacement Z", m_navx.GetDisplacementZ());
 }
 
 void GyroSubsystem::ZeroGyro()

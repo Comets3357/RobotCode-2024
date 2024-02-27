@@ -11,6 +11,7 @@ void ElevatorSubsystem::Initialize()
 
 void ElevatorSubsystem::Periodic() {
     elevatorMotor.Periodic();
+    
 }
 
 void ElevatorSubsystem::SetPercent(double percent) {

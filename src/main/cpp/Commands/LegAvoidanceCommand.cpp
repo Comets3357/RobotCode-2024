@@ -65,9 +65,9 @@ void LegAvoidanceCommand::Execute()
     // frc::Translation2d bottom1 = frc::Translation2d{units::meter_t{11.30}, units::meter_t{7.68}};
     // frc::Translation2d bottom2 = frc::Translation2d{units::meter_t{11.38}, units::meter_t{6.33}};
 
-    frc::SmartDashboard::PutData("TriangleTip", &point3Field);
-    frc::SmartDashboard::PutData("bottom1", &bottom1Field);
-    frc::SmartDashboard::PutData("bottom2", &bottom2Field);
+    //frc::SmartDashboard::PutData("TriangleTip", &point3Field);
+    //frc::SmartDashboard::PutData("bottom1", &bottom1Field);
+    //frc::SmartDashboard::PutData("bottom2", &bottom2Field);
 
     point3Field.SetRobotPose(frc::Pose2d{triangleTip, frc::Rotation2d{units::radian_t{0}}});
     bottom1Field.SetRobotPose(frc::Pose2d{bottom1, frc::Rotation2d{units::radian_t{0}}});
@@ -153,7 +153,7 @@ void LegAvoidanceCommand::Execute()
       }
 
     }
-    frc::SmartDashboard::PutBoolean("Is in Triangle", isClear); 
+    //frc::SmartDashboard::PutBoolean("Is in Triangle", isClear); 
     
   
   

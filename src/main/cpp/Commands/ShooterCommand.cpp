@@ -32,16 +32,16 @@ void ShooterCommand::Execute()
 
     pos = swerve->GetMovingPose(distance2 / velocity2); 
     double distance = sqrt(pow((double)(targetPos.X() - pos.X()), 2) + pow((double)(targetPos.Y() - pos.Y()), 2)); 
-    frc::SmartDashboard::PutNumber("Distance From Target", distance);
+    //frc::SmartDashboard::PutNumber("Distance From Target", distance);
    
     double shooterAngle = shooterSubsystem->angleLookup.GetValue(distance);
-     frc::SmartDashboard::PutNumber("angle", shooterAngle);
+    //frc::SmartDashboard::PutNumber("angle", shooterAngle);
     double velocity = shooterSubsystem->velocityLookup.GetValue(distance);
     shooterSubsystem->Pivot.SetPosition(shooterAngle, shooterSubsystem->offset);//shooterAngle); 
     shooterSubsystem->SetVelocityKickerWheel(velocity);
     shooterSubsystem->SetVelocityFlyWheel(-velocity);
 
-    frc::SmartDashboard::PutNumber("FLywheel Velocity", shooterSubsystem->GetVelocityFlyWheel());
+    //frc::SmartDashboard::PutNumber("FLywheel Velocity", shooterSubsystem->GetVelocityFlyWheel());
     // if (shooterSubsystem->GetVelocityFlyWheel() < shooterSubsystem->FlyWheel.config.velocities["ShooterSpeed"] + 100)
     // {
 
