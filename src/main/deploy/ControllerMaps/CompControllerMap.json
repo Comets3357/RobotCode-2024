@@ -416,7 +416,7 @@
                 "YButton": "NONE",
                 "LeftBumper": "NONE",
                 "RightBumper": "NONE",
-                "BackButton": "NONE",
+                "BackButton": "PivotToRelative",
                 "StartButton": "NONE",
                 "XboxButton": "NONE",
                 "LeftTrigger": "NONE",

@@ -20,13 +20,15 @@ void LEDsSubsystem::Initialize()
     redPub = table->GetIntegerTopic("rValue").Publish();
     greenPub = table->GetIntegerTopic("gValue").Publish();
     bluePub = table->GetIntegerTopic("bValue").Publish();
-
+frameSub = table->GetIntegerTopic("Frames").Subscribe(0);
 }
 
 void LEDsSubsystem::Periodic() {
 
     enabled = frc::DriverStation::IsEnabled();
     comms = frc::DriverStation::IsDSAttached();
+
+    frc::SmartDashboard::PutBoolean("LEDPiStatus", frameSub.Get() > 10);
 
     if (!enabled) {
         

@@ -97,6 +97,8 @@ class RobotContainer {
 
   ClimbResetCommand climbReset{&elevator};
   ClimbCommand climb{&elevator, &shooter};
+
+  
   
 
   // Instance command
@@ -132,15 +134,19 @@ class RobotContainer {
   frc2::InstantCommand autoSubwooferSetpoint{[this](){shooter.SetPositionPivot(56); shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
   frc2::InstantCommand climbRetract{[this](){elevator.SetPosition(0); }, {&elevator}};
   frc2::InstantCommand piece4AutoSetpoint{[this](){shooter.SetPositionPivot(38), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
-  frc2::InstantCommand piece4AutoSetpoint2{[this](){shooter.SetPositionPivot(36), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
-  frc2::InstantCommand piece4AutoSetpoint3{[this](){shooter.SetPositionPivot(38.5), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
+  frc2::InstantCommand piece4AutoSetpoint2{[this](){shooter.SetPositionPivot(37), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
+  frc2::InstantCommand piece4AutoSetpoint3{[this](){shooter.SetPositionPivot(40), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
   frc2::InstantCommand midPiece4AutoSetpoint{[this](){shooter.SetPositionPivot(29), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
 
 
   frc2::InstantCommand humanPlayerSignalOn{[this](){led.hpSignal = true;}, {&led}}; 
   frc2::InstantCommand humanPlayerSignalOff{[this](){led.hpSignal = false;}, {&led}}; 
   frc2::InstantCommand ampSignalOn{[this](){led.ampSignal = true;}, {&led}}; 
-  frc2::InstantCommand ampSignalOff{[this](){led.ampSignal = false;}, {&led}}; 
+  frc2::InstantCommand ampSignalOff{[this](){led.ampSignal = false;}, {&led}};
+
+  frc2::InstantCommand pivotRelative{[this](){shooter.pivotInRelative = true; shooter.Pivot.changeRunMode(COMETS3357::SparkMaxPositionRunMode::POSITION_SPARK_MAX_RELATIVE);}, {}};
+
+
   AutonGyroResetSubsystem gyroResetButton{&gyro, &led};
 
 
@@ -171,7 +177,8 @@ class RobotContainer {
       {"humanPlayerSignalOn", std::make_shared<frc2::InstantCommand>(humanPlayerSignalOn)},
       {"humanPlayerSignalOff", std::make_shared<frc2::InstantCommand>(humanPlayerSignalOff)},
       {"ampSignalOn", std::make_shared<frc2::InstantCommand>(ampSignalOn)},
-      {"ampSignalOff", std::make_shared<frc2::InstantCommand>(ampSignalOff)}
+      {"ampSignalOff", std::make_shared<frc2::InstantCommand>(ampSignalOff)},
+      {"PivotToRelative", std::make_shared<frc2::InstantCommand>(pivotRelative)}
   };
 
 

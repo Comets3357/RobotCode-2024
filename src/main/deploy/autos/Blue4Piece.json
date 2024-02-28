@@ -8,7 +8,7 @@
     },
     "4PieceSetpoint3",
     {
-      "x": 1.35,
+      "x": 1.55,
       "y": 6.47,
       "rotation": 28.4,
       "maxVelocity": 0.5,
@@ -16,7 +16,7 @@
     },
     {
       "x": 2.27,
-      "y": 6.75,
+      "y": 6.65,
       "rotation": 28.4,
       "maxVelocity": 0.5,
       "maxRotation": 0.5
@@ -42,7 +42,7 @@
     [
     
     {
-      "x": 2.72,
+      "x": 2.62,
       "y": 5,
       "rotation": -30,
       "maxVelocity": 0.5,
@@ -52,9 +52,9 @@
   ],
   
     {
-      "x": 2.72,
+      "x": 2.62,
       "y": 5,
-      "rotation": -10,
+      "rotation": -5,
       "maxVelocity": 0.5,
       "maxRotation": 0.5
     },
@@ -64,15 +64,15 @@
     "wait 0.3",
     "4PieceSetpoint",
     {
-    "x": 2.37,
-    "y": 4.2,
+    "x": 1.85,
+    "y": 3.8,
     "rotation": -15,
     "maxVelocity": 0.5,
     "maxRotation": 0.5
     },
     {
-      "x": 2.77,
-      "y": 4,
+      "x": 2.47,
+      "y": 3.7,
       "rotation": -25,
       "maxVelocity": 0.5,
       "maxRotation": 0.5
@@ -82,8 +82,8 @@
     "StopShoot",
     "StopIntake",
     {
-      "x": 2.87,
-      "y": 2.5,
+      "x": 2.5,
+      "y": 2.25,
       "rotation": -25,
       "maxVelocity": 0.5,
       "maxRotation": 0.5

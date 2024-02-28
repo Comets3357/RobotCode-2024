@@ -18,6 +18,7 @@ void VisionSystemSubsystem::Initialize()
     
     // prepare subscribers
     tagSub = subsystemData->GetDoubleArrayTopic("TagData").Subscribe({});
+    frameSub = subsystemData->GetDoubleTopic("Frame").Subscribe({});
 
     swerveSubsystem->ResetOdometry(frc::Pose2d{frc::Translation2d{units::meter_t{0}, units::meter_t{0}}, frc::Rotation2d{units::radian_t{0}}});
 }
@@ -35,7 +36,6 @@ void VisionSystemSubsystem::Periodic()
     
     std::vector<double> tagDataBuffer = tagSub.GetAtomic().value;
 
-//frc::SmartDashboard::PutNumber("ASDASD TIME", nt::Now() * 0.000001);
 
     if (tagDataBuffer.size() > 1 && tagDataBuffer[3] > lastTimestamp)
     {
@@ -68,7 +68,7 @@ void VisionSystemSubsystem::Periodic()
             double x = cos(actualAngleOffset) * tagDistance + tagPositions[ID].first;
             double y = sin(actualAngleOffset) * tagDistance + tagPositions[ID].second;
 
-            double positionStandardDev = (tagDistance * 0.02) + abs(gyroRate * 0.05);
+            double positionStandardDev = ((tagDistance * 0.05) * (tagDistance * 0.05)) + abs(gyroRate * 0.05);
             swerveSubsystem->m_odometry.SetVisionMeasurementStdDevs({positionStandardDev, positionStandardDev, positionStandardDev/2});
 
             double cameraX = -0.241 * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
@@ -111,9 +111,11 @@ void VisionSystemSubsystem::Periodic()
         
     }
 
-    //frc::SmartDashboard::PutData("Fielsd", &m_field2);
+    frc::SmartDashboard::PutBoolean("VisionPiStatus", frameSub.Get() > 20);
 
-    frc::SmartDashboard::PutData("Field", &m_field);
+    //frc::SmartDashboard::PutData("Fielsd", &m_field2);
+    m_field.SetRobotPose(swerveSubsystem->m_odometry.GetEstimatedPosition());
+    frc::SmartDashboard::PutData("Robot Position", &m_field);
 
 
 
@@ -121,6 +123,6 @@ void VisionSystemSubsystem::Periodic()
     // frc::SmartDashboard::PutData("FieldTag4", &m_field4);
     // frc::SmartDashboard::PutData("MovementPose", &m_field5);
 
-    m_field.SetRobotPose(swerveSubsystem->m_odometry.GetEstimatedPosition());
+ 
 
 }

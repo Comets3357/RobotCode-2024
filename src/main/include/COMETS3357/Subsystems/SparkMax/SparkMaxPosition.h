@@ -171,6 +171,7 @@ namespace COMETS3357
     private:
 
     double absoluteCheckTimer = 5;
+    double lastDeltaPos;
     double absDeltaPos = 0;
     double longAbsDeltaPos = 0;
 

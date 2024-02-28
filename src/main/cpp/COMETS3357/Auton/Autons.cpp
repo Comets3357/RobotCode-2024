@@ -40,7 +40,7 @@ Autons::Autons(SwerveSubsystem* drivebase, std::vector<std::pair<std::string, st
 
     //frc::SmartDashboard::PutNumber("INTAKE RAN", 0);
 
-      //  LoadAutons(actionMap);
+       LoadAutons(actionMap);
 }
 
 void Autons::RunAuton(std::string autonName)

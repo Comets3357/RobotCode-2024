@@ -239,12 +239,13 @@ void SparkMaxPosition::Periodic()
     relativeEncoderPosition = relativeEncoder.GetPosition();
 
     
-
-    CheckAbsoluteEncoder();
-    // if (runMode == POSITION_SPARK_MAX_ABSOLUTE && std::abs(absoluteEncoderPosition - relativeEncoderPosition) < 10)
-    // {
-    //     ZeroRelativeEncoder();
-    // }
+    // if (runMode == SparkMaxPositionRunMode::POSITION_SPARK_MAX_ABSOLUTE)
+    // CheckAbsoluteEncoder();
+    if (runMode == POSITION_SPARK_MAX_ABSOLUTE)
+    {
+        ZeroRelativeEncoder();
+    }
+    // ZeroRelativeEncoder();
     
 }
 
@@ -268,6 +269,16 @@ void SparkMaxPosition::CheckAbsoluteEncoder()
     longAbsDeltaPos += abs(absDeltaPos);
 
     lastDeltaPos = absoluteEncoderPosition;
+
+    if ((double)wpi::math::MathSharedStore::GetTimestamp() > absoluteCheckTimer)
+    {
+        if (longAbsDeltaPos != 0)
+        {
+            changeRunMode(SparkMaxPositionRunMode::POSITION_SPARK_MAX_RELATIVE);
+        }
+        longAbsDeltaPos = 0;
+        absoluteCheckTimer += 5;
+    }
     // if (runMode != POSITION_SPARK_MAX_ABSOLUTE) {
     //     return;
     // }

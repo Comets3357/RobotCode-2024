@@ -32,6 +32,7 @@ SUBSYSTEM_START(VisionSystem)
     double lastTimestamp = 0;
 
     nt::DoubleArraySubscriber tagSub;
+    nt::DoubleSubscriber frameSub;
 
     nt::DoublePublisher timePublisher;
     nt::DoublePublisher epochPublisher;

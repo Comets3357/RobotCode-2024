@@ -44,7 +44,7 @@ void SetPositionPivot(std::string position);
 double offset = 0; 
 
 
-
+bool pivotInRelative = false;
 
 std::pair<double, double> calculateDistanceTravelled(std::pair<double, double> velocity, double time); 
 

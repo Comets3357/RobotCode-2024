@@ -31,5 +31,6 @@ IndexerSubsystem* indexerSubsytem;
 nt::IntegerPublisher greenPub;
 nt::IntegerPublisher redPub;
 nt::IntegerPublisher bluePub;
+nt::IntegerSubscriber frameSub;
 
 SUBSYSTEM_END
