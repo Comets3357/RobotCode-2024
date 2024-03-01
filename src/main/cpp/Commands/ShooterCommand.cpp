@@ -28,7 +28,7 @@ void ShooterCommand::Execute()
     frc::Pose2d pos = swerve->GetPose();
     double distance2 = sqrt(pow((double)(targetPos.X() - pos.X()), 2) + pow((double)(targetPos.Y() - pos.Y()), 2)); 
     double shooterAngle2 = shooterSubsystem->angleLookup.GetValue(distance2);
-    double velocity2 = cos(shooterAngle2 * 3.14159 / 180) * 14; 
+    double velocity2 = cos(shooterAngle2 * 3.14159 / 180) * 17; 
 
     pos = swerve->GetMovingPose(distance2 / velocity2); 
     double distance = sqrt(pow((double)(targetPos.X() - pos.X()), 2) + pow((double)(targetPos.Y() - pos.Y()), 2)); 

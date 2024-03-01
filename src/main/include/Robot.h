@@ -5,18 +5,13 @@
 #pragma once
 
 #include <optional>
-
 #include <frc/TimedRobot.h>
 #include <frc2/command/CommandPtr.h>
-
 #include "RobotContainer.h"
-
 #include <rev/CANSparkMax.h>
 #include "COMETS3357/Subsystems/Chassis/SwerveSubsystem.h"
-
 #include "COMETS3357/Configs/ConfigFiles.h"
 #include "COMETS3357/Subsystems/SubsystemManager.h"
-
 #include "COMETS3357/CometsRobot/CometsRobot.h"
 
 
@@ -37,9 +32,6 @@ class Robot : public COMETS3357::CometsRobot {
   void SimulationPeriodic() override;
 
  private:
-  // Have it empty by default so that if testing teleop it
-  // doesn't have undefined behavior and potentially crash.
-  std::optional<frc2::CommandPtr> m_autonomousCommand;
 
   RobotContainer m_container;
 };

@@ -72,7 +72,7 @@
     {
       "AbsolutePositionConversionFactor": 360,
       "AbsoluteVelocityConversionFactor": 1,
-      "AbsoluteZeroOffset": 264.5,
+      "AbsoluteZeroOffset": 350.3559885,
       "CurrentLimit": 40,
       "DefaultRunMode": "ABSOLUTE",
       "ID": 31,
@@ -106,7 +106,14 @@
       "ReverseSoftLimit": 18,
       "Positions":
       {
-        
+        "AutonPiece4Setpoint": 38,
+        "AutonPiece4Setpoint2": 40,
+        "AutonPiece4Setpoint3": 42,
+        "AutonPiece4Setpoint4": 29,
+
+        "SubWooferSetpoint": 56,
+        "PodiumSetpoint": 38.5,
+        "AmpSetpoint": 24
       }
     },
 

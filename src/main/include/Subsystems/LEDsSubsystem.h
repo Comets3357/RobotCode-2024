@@ -33,4 +33,7 @@ nt::IntegerPublisher redPub;
 nt::IntegerPublisher bluePub;
 nt::IntegerSubscriber frameSub;
 
+double lastTestTimestamp = 0;
+double lastFrame = 0;
+
 SUBSYSTEM_END

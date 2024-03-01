@@ -85,16 +85,53 @@
       "x": 13.7,
       "y": 2.5,
       "rotation": -155,
+      "maxVelocity": 1,
+      "maxRotation": 0.5
+    },
+    "Intake",
+    {
+      "x": 13.7,
+      "y": 2.5,
+      "rotation": 180,
       "maxVelocity": 0.5,
       "maxRotation": 0.5
     },
+    [
     {
-      "x": 10,
+      "x":7.7,
+      "y": 3.7,
+      "rotation": 180,
+      "maxVelocity": 10.5,
+      "maxRotation": 0.5
+    },
+    "IntakeIndexer"
+  ],
+  "4PieceSetpoint42",
+  [
+    "IntakeIndexer",
+    {
+      "x":11.83,
       "y": 4.05,
-      "rotation": -155,
+      "rotation": 180,
       "maxVelocity": 0.5,
       "maxRotation": 0.5
     }
+  ],
+  "4PieceSetpoint42",
+  [
+    "IntakeIndexer",
+    {
+      "x":11.83,
+      "y": 4.05,
+      "rotation": -170,
+      "maxVelocity": 0.5,
+      "maxRotation": 0.5
+    }
+  ],
+  "Shoot",
+    "wait 1",
+    "StopShoot",
+    "StopIntake"
 
 
 ]

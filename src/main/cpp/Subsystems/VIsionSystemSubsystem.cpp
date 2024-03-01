@@ -71,8 +71,8 @@ void VisionSystemSubsystem::Periodic()
             double positionStandardDev = ((tagDistance * 0.05) * (tagDistance * 0.05)) + abs(gyroRate * 0.05);
             swerveSubsystem->m_odometry.SetVisionMeasurementStdDevs({positionStandardDev, positionStandardDev, positionStandardDev/2});
 
-            double cameraX = -0.241 * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
-            double cameraY = -0.2617 * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
+            double cameraX = -0.2398776 * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
+            double cameraY = -0.257429 * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
             double cameraDistance = sqrt(pow(cameraX, 2) + pow(cameraY, 2));
             double angle = atan2(cameraX, cameraY);
             double newAngle = angle + 3.14159;
@@ -111,11 +111,18 @@ void VisionSystemSubsystem::Periodic()
         
     }
 
-    frc::SmartDashboard::PutBoolean("VisionPiStatus", frameSub.Get() > 20);
+    
 
     //frc::SmartDashboard::PutData("Fielsd", &m_field2);
     m_field.SetRobotPose(swerveSubsystem->m_odometry.GetEstimatedPosition());
     frc::SmartDashboard::PutData("Robot Position", &m_field);
+
+    if ((double)wpi::math::MathSharedStore::GetTimestamp() > lastTestTimestamp)
+    {
+        lastTestTimestamp += 1;
+        frc::SmartDashboard::PutBoolean("VisionPiStatus", frameSub.Get() != lastFrame);
+        lastFrame = frameSub.Get();
+    }
 
 
 

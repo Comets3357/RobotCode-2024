@@ -72,6 +72,9 @@ SUBSYSTEM_START(VisionSystem)
         {16, {4.641342, 3.7132259999999997}}
     };
 
+    double lastTestTimestamp = 0;
+    double lastFrame = 0;
+
     // COMETS3357::PoseEstimator poseEstimator;
 
 SUBSYSTEM_END

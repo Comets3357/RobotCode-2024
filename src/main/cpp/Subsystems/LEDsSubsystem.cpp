@@ -28,7 +28,12 @@ void LEDsSubsystem::Periodic() {
     enabled = frc::DriverStation::IsEnabled();
     comms = frc::DriverStation::IsDSAttached();
 
-    frc::SmartDashboard::PutBoolean("LEDPiStatus", frameSub.Get() > 10);
+    if ((double)wpi::math::MathSharedStore::GetTimestamp() > lastTestTimestamp)
+    {
+        lastTestTimestamp += 1;
+        frc::SmartDashboard::PutBoolean("LEDPiStatus", frameSub.Get() != lastFrame);
+        lastFrame = frameSub.Get();
+    }
 
     if (!enabled) {
         
