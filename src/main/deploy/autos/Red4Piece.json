@@ -64,14 +64,14 @@
     "wait 0.3",
     "4PieceSetpoint",
     {
-    "x": 14.2,
+    "x": 14.3,
     "y": 4.2,
     "rotation": -165,
     "maxVelocity": 0.5,
     "maxRotation": 0.5
     },
     {
-      "x": 13.8,
+      "x": 13.9,
       "y": 4,
       "rotation": -155,
       "maxVelocity": 0.5,

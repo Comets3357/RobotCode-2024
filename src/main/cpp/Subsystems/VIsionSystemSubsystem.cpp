@@ -68,7 +68,7 @@ void VisionSystemSubsystem::Periodic()
             double x = cos(actualAngleOffset) * tagDistance + tagPositions[ID].first;
             double y = sin(actualAngleOffset) * tagDistance + tagPositions[ID].second;
 
-            double positionStandardDev = ((tagDistance * 0.05) * (tagDistance * 0.05)) + abs(gyroRate * 0.05);
+            double positionStandardDev = (tagDistance * 0.04) + abs(gyroRate * 0.05);
             swerveSubsystem->m_odometry.SetVisionMeasurementStdDevs({positionStandardDev, positionStandardDev, positionStandardDev/2});
 
             double cameraX = -0.2398776 * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);

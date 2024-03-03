@@ -15,7 +15,7 @@
       "maxRotation": 0.5
     },
     {
-      "x": 2.27,
+      "x": 2.37,
       "y": 6.65,
       "rotation": 28.4,
       "maxVelocity": 0.5,
@@ -71,7 +71,7 @@
     "maxRotation": 0.5
     },
     {
-      "x": 2.43,
+      "x": 2.6,
       "y": 3.9,
       "rotation": -25,
       "maxVelocity": 0.5,
@@ -105,8 +105,8 @@
     },
     [
     {
-      "x":8.6,
-      "y": 3.7,
+      "x":8.7,
+      "y": 3.4,
       "rotation": 0,
       "maxVelocity": 10.5,
       "maxRotation": 0.5
@@ -117,8 +117,8 @@
   [
     "IntakeIndexer",
     {
-      "x":4.6,
-      "y": 3.8,
+      "x":4.5,
+      "y": 4.3,
       "rotation": 0,
       "maxVelocity": 0.5,
       "maxRotation": 0.5
@@ -128,8 +128,8 @@
   [
     "IntakeIndexer",
     {
-      "x":4.6,
-      "y": 4.1,
+      "x":4.5,
+      "y": 4.3,
       "rotation": -10,
       "maxVelocity": 0.5,
       "maxRotation": 0.5

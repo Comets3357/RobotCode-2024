@@ -28,7 +28,7 @@ void ShooterSubsystem::Periodic(){
     double shooterAngle2 = angleLookup.GetValue(distance2);
     double velocity2 = cos(shooterAngle2 * 3.14159 / 180) * 17; 
 
-    frc::Pose2d robotPosition = swerve->GetMovingPose(distance2 / velocity2); 
+    frc::Pose2d robotPosition = swerve->GetPose(); 
 
 
         units::meter_t deltaX = robotPosition.X() - targetPos.X();

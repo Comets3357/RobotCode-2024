@@ -77,9 +77,9 @@ class RobotContainer {
   IntakeIndexerCommand intakeIndexer {&indexer}; 
   IntakeIndexerAutonCommand intakeIndexerAuton{&indexer};
   ShooterCommand shooterCommand {&shooter, &indexer, &swerve};
-  SetPointCommand subWooferSetpoint{&shooter, &indexer, &swerve, 56, 2000};
+  SetPointCommand subWooferSetpoint{&shooter, &indexer, &swerve, 57, 2000};
   SetPointCommand podiumSetPoint{&shooter, &indexer, &swerve, 38.5, 2000};
-  SetPointCommand ampSetPoint{&shooter, &indexer, &swerve, 24, 2000};
+  SetPointCommand ampSetPoint{&shooter, &indexer, &swerve, 34, 2000};
   AmpShootCommand ampShoot{&shooter, &elevator};
   AmpShootStopCommand ampShootStop{&shooter, &elevator, &indexer};
   ClimbResetCommand climbReset{&elevator};
@@ -101,8 +101,8 @@ class RobotContainer {
   frc2::InstantCommand shoot{[this](){indexer.SetPercent(1);}, {&indexer}};
   frc2::InstantCommand stopTurningTowardsSpeaker{[this](){ shooter.stopTurnToTarget();}, {}};
   frc2::InstantCommand turnTowardsSpeaker{[this](){shooter.startTurnToTarget();}, {}};
-  frc2::InstantCommand angleOffsetPositive{[this](){shooter.offset += .25;}, {&shooter}}; 
-  frc2::InstantCommand angleOffsetNegative{[this](){shooter.offset -= .25;}, {&shooter}}; 
+  frc2::InstantCommand angleOffsetPositive{[this](){shooter.offset += .5;}, {&shooter}}; 
+  frc2::InstantCommand angleOffsetNegative{[this](){shooter.offset -= .5;}, {&shooter}}; 
   frc2::InstantCommand autoSubwooferSetpoint{[this](){shooter.SetPositionPivot(56); shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
   frc2::InstantCommand climbRetract{[this](){elevator.SetPosition(0); }, {&elevator}};
   frc2::InstantCommand humanPlayerSignalOn{[this](){led.hpSignal = true;}, {&led}}; 
@@ -113,8 +113,8 @@ class RobotContainer {
 
   // Autonomous Commands
   frc2::InstantCommand piece4AutoSetpoint{[this](){shooter.SetPositionPivot(40), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
-  frc2::InstantCommand piece4AutoSetpoint2{[this](){shooter.SetPositionPivot(42), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
-  frc2::InstantCommand piece4AutoSetpoint3{[this](){shooter.SetPositionPivot(40), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
+  frc2::InstantCommand piece4AutoSetpoint2{[this](){shooter.SetPositionPivot(40), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
+  frc2::InstantCommand piece4AutoSetpoint3{[this](){shooter.SetPositionPivot(40.5), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
   frc2::InstantCommand piece4AutoSetpoint4{[this](){shooter.SetPositionPivot(28), shooter.SetVelocityKickerWheel(3000); shooter.SetVelocityFlyWheel(-3000);}, {}};
   frc2::InstantCommand midPiece4AutoSetpoint{[this](){shooter.SetPositionPivot(29), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
 
