@@ -48,7 +48,7 @@
     [
     {
         "x": 7.6,
-        "y": 0.85,
+        "y": 0.75,
         "rotation": 180,
         "maxVelocity": 5,
         "maxRotation": 0.5

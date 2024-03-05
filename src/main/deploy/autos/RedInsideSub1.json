@@ -7,10 +7,10 @@
         "maxVelocity": 0.5,
         "maxRotation": 0.5
     },
-    [
-        "StartShoot",
-        "wait 2"
-    ],
+    
+        "1PieceAutoSetpoint",
+        "wait 2",
+    
     "Shoot",
     "wait 1",
     "StopShoot",

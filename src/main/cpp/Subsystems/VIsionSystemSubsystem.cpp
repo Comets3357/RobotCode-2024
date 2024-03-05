@@ -92,7 +92,11 @@ void VisionSystemSubsystem::Periodic()
 
 
             // if (abs(gyroRate) < 0.3)
-            swerveSubsystem->m_odometry.AddVisionMeasurement(frc::Pose2d{newPos, newRotation}, time);
+            if ((double)newPos.X() > 0 && (double)newPos.X() < 17 && (double)newPos.Y() > 0 && (double)newPos.Y() < 17)
+            {
+                swerveSubsystem->m_odometry.AddVisionMeasurement(frc::Pose2d{newPos, newRotation}, time);
+            }
+            
             // m_field2.SetRobotPose(frc::Pose2d{newPos, newRotation});
 
             if (ID == 3)
