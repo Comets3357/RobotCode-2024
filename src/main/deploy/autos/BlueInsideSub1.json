@@ -1,0 +1,37 @@
+[
+
+    {
+        "x": 0.71,
+        "y": 4.41,
+        "rotation": -53.9,
+        "maxVelocity": 0.5,
+        "maxRotation": 0.5
+    },
+    "1PieceAutoSetpoint",
+    "wait 2",
+
+    "Shoot",
+    "wait 1",
+    "StopShoot",
+    {
+        "x": 1.11,
+        "y": 1.62,
+        "rotation": -53.9,
+        "maxVelocity": 0.5,
+        "maxRotation": 0.5
+    },
+    {
+        "x": 1.11,
+        "y": 1.62,
+        "rotation": 0,
+        "maxVelocity": 0.5,
+        "maxRotation": 0.5
+    },
+    {
+        "x": 7.57,
+        "y": 1.2,
+        "rotation": 0,
+        "maxVelocity": 0.5,
+        "maxRotation": 0.5
+    }
+]

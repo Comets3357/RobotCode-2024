@@ -1,0 +1,44 @@
+[
+
+    {
+        "x": 15.86,
+        "y": 6.71,
+        "rotation": 118.42,
+        "maxVelocity": 0.5,
+        "maxRotation": 0.5
+    },
+    "1PieceAutoSetpoint",
+    "wait 2",
+
+    "Shoot",
+    "wait 1",
+    "StopShoot",
+    {
+        "x": 15.46,
+        "y": 7.16,
+        "rotation": 118.42,
+        "maxVelocity": 0.5,
+        "maxRotation": 0.5
+    },
+    {
+        "x": 15.46,
+        "y": 7.16,
+        "rotation": 180,
+        "maxVelocity": 0.5,
+        "maxRotation": 0.5
+    },
+    {
+        "x": 14.48,
+        "y": 7.73,
+        "rotation": 180,
+        "maxVelocity": 0.5,
+        "maxRotation": 0.5
+    },
+    {
+        "x": 9,
+        "y": 7.73,
+        "rotation": 180,
+        "maxVelocity": 0.5,
+        "maxRotation": 0.5
+    }
+]

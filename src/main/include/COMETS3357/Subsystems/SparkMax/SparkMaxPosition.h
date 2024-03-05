@@ -162,11 +162,18 @@ namespace COMETS3357
          */
         void CheckAbsoluteEncoder();
 
+        void SetRelativeEncoderPosition(double pos);
+
         rev::CANSparkMax motor;
         COMETS3357::PID positionPID{};
         COMETS3357::PID velocityPID{};
 
     private:
+
+    double absoluteCheckTimer = 5;
+    double lastDeltaPos;
+    double absDeltaPos = 0;
+    double longAbsDeltaPos = 0;
 
         double absoluteEncoderPosition = 0;
         double relativeEncoderPosition = 0;

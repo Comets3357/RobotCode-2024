@@ -107,8 +107,8 @@ void SwerveSubsystem::Periodic() {
   m_rearLeft.Periodic();
   m_rearRight.Periodic();
 
-    frc::SmartDashboard::PutNumber("SWERVEX", (double)m_odometry.GetEstimatedPosition().X());
-  frc::SmartDashboard::PutNumber("SWERVEY", (double)m_odometry.GetEstimatedPosition().Y());
+    //frc::SmartDashboard::PutNumber("SWERVEX", (double)m_odometry.GetEstimatedPosition().X());
+  //frc::SmartDashboard::PutNumber("SWERVEY", (double)m_odometry.GetEstimatedPosition().Y());
 
 
 
@@ -119,7 +119,7 @@ void SwerveSubsystem::Periodic() {
                     {m_frontLeft.GetPosition(), m_rearLeft.GetPosition(),
                      m_frontRight.GetPosition(), m_rearRight.GetPosition()});
 
-  frc::SmartDashboard::PutData("Fielsd2 real", &m_field);
+  //frc::SmartDashboard::PutData("Fielsd2 real", &m_field);
 
   m_field.SetRobotPose(m_odometry2.GetPose());
 
@@ -132,7 +132,7 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
 {
 
   frc::SmartDashboard::PutNumber("Gyro Angle", gyroSubsystemData->GetEntry("angle").GetDouble(0));
-  frc::SmartDashboard::PutNumber("Angle Difference", gyroSubsystemData->GetEntry("angle").GetDouble(0) - lastAngle);
+  //frc::SmartDashboard::PutNumber("Angle Difference", gyroSubsystemData->GetEntry("angle").GetDouble(0) - lastAngle);
 
 
   double gyroAngle = gyroSubsystemData->GetEntry("angle").GetDouble(0);
@@ -150,7 +150,7 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
     actualAngle += gyroAngle - lastAngle;
   }
 
-  frc::SmartDashboard::PutNumber("ActualRotation", actualAngle);
+  //frc::SmartDashboard::PutNumber("ActualRotation", actualAngle);
 
   lastAngle = gyroAngle;
 
@@ -174,7 +174,7 @@ void SwerveSubsystem::Drive(units::meters_per_second_t xSpeed,
 
   units::radians_per_second_t rot = units::radians_per_second_t{std::clamp(rotationController.Calculate(actualAngle, targetAngle), -speed, speed)};
 
-  frc::SmartDashboard::PutNumber("ROTATION AMMOUNT", (double)rot);
+  //frc::SmartDashboard::PutNumber("ROTATION AMMOUNT", (double)rot);
 
   double xSpeedCommanded;
   double ySpeedCommanded;
@@ -539,7 +539,7 @@ void SwerveSubsystem::ResetOdometry(frc::Pose2d pose) {
 
 void SwerveSubsystem::DriveXRotate(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot)
 {
-  frc::SmartDashboard::PutBoolean("controllingSwerveRotation", controllingSwerveRotation);
+  //frc::SmartDashboard::PutBoolean("controllingSwerveRotation", controllingSwerveRotation);
   if (!controllingSwerveRotation )
   {
     rot = overrideRotation;
@@ -584,7 +584,7 @@ void SwerveSubsystem::DriveDirectionalRotate(units::meters_per_second_t xSpeed, 
 
 void SwerveSubsystem::DriveCornerTurning(units::meters_per_second_t xSpeed, units::meters_per_second_t ySpeed, units::radians_per_second_t rot)
 {
-  frc::SmartDashboard::PutBoolean("controllingSwerveRotation", controllingSwerveRotation);
+  //frc::SmartDashboard::PutBoolean("controllingSwerveRotation", controllingSwerveRotation);
   if (!controllingSwerveRotation )
   {
     rot = overrideRotation;
@@ -607,7 +607,7 @@ void SwerveSubsystem::DriveCornerTurning(units::meters_per_second_t xSpeed, unit
   double angleOnDrivebase = atan2(ySpeed.value(), xSpeed.value()) - ((-gyroSubsystem->m_navx.GetAngle() * 3.14159 / 180) + gyroSubsystem->angleOffset);
     double angleXPortion = sin(angleOnDrivebase);
     double angleYPortion = cos(angleOnDrivebase);
-    frc::SmartDashboard::PutNumber("drivebase heading", angleOnDrivebase * 180 / 3.14159);
+    //frc::SmartDashboard::PutNumber("drivebase heading", angleOnDrivebase * 180 / 3.14159);
     if (angleXPortion <= 0 && angleYPortion >= 0)
     {
       currentKinematic = &kDriveKinematicsFrontLeft;

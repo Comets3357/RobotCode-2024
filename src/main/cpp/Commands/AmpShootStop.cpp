@@ -1,10 +1,11 @@
 
 #include "Commands/AmpShootStop.h"
 
-AmpShootStopCommand::AmpShootStopCommand(ShooterSubsystem* shooter, ElevatorSubsystem* elevator) {
+AmpShootStopCommand::AmpShootStopCommand(ShooterSubsystem* shooter, ElevatorSubsystem* elevator, IndexerSubsystem* indexer) {
     shooterSubsystem = shooter; 
     elevatorSubsystem = elevator;
-    AddRequirements({shooter, elevator}); 
+    indexerSubsystem = indexer;
+    AddRequirements({shooter, elevator, indexer}); 
 }
 
 void AmpShootStopCommand::Initialize()
@@ -19,6 +20,7 @@ void AmpShootStopCommand::Execute()
     if (elevatorSubsystem->elevatorMotor.GetPosition() > -15)
     {
         shooterSubsystem->SetPositionPivot(35);
+        indexerSubsystem->SetPercent(0);
     }
 }
 
@@ -27,6 +29,7 @@ bool AmpShootStopCommand::IsFinished()
     if (elevatorSubsystem->elevatorMotor.GetPosition() > -15)
     {
         shooterSubsystem->SetPositionPivot(35);
+        indexerSubsystem->SetPercent(0);
         return true;
     }
     return false;

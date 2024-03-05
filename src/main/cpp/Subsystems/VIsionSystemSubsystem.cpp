@@ -18,6 +18,7 @@ void VisionSystemSubsystem::Initialize()
     
     // prepare subscribers
     tagSub = subsystemData->GetDoubleArrayTopic("TagData").Subscribe({});
+    frameSub = subsystemData->GetDoubleTopic("Frame").Subscribe({});
 
     swerveSubsystem->ResetOdometry(frc::Pose2d{frc::Translation2d{units::meter_t{0}, units::meter_t{0}}, frc::Rotation2d{units::radian_t{0}}});
 }
@@ -27,7 +28,7 @@ void VisionSystemSubsystem::Periodic()
 
 
     timePublisher.Set((double)wpi::math::MathSharedStore::GetTimestamp());
-    frc::SmartDashboard::PutData("Fielsd", &m_field2);
+    //frc::SmartDashboard::PutData("Fielsd", &m_field2);
 
     // populate gyro history
     yawInterpolationBuffer.AddSample(wpi::math::MathSharedStore::GetTimestamp(), (-gyroSubsystem->m_navx.GetYaw() * 3.14159 / 180.0) + ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) + gyroSubsystem->angleOffset);
@@ -35,7 +36,6 @@ void VisionSystemSubsystem::Periodic()
     
     std::vector<double> tagDataBuffer = tagSub.GetAtomic().value;
 
-frc::SmartDashboard::PutNumber("ASDASD TIME", nt::Now() * 0.000001);
 
     if (tagDataBuffer.size() > 1 && tagDataBuffer[3] > lastTimestamp)
     {
@@ -48,9 +48,9 @@ frc::SmartDashboard::PutNumber("ASDASD TIME", nt::Now() * 0.000001);
         units::time::second_t time = units::time::second_t{(double)wpi::math::MathSharedStore::GetTimestamp() - (nt::Now() - tagSub.GetAtomic().serverTime) * 0.000001f};
 
 
-        frc::SmartDashboard::PutNumber("time aksdhksd ", (double)wpi::math::MathSharedStore::GetTimestamp() - (double)time);
+        //frc::SmartDashboard::PutNumber("time aksdhksd ", (double)wpi::math::MathSharedStore::GetTimestamp() - (double)time);
 
-        frc::SmartDashboard::PutNumber("Timestamp Delta", (double)tagSub.GetAtomic().serverTime);
+        //frc::SmartDashboard::PutNumber("Timestamp Delta", (double)tagSub.GetAtomic().serverTime);
 
         for (int i = 0; i < tagDataBuffer.size(); i+=4)
         {
@@ -68,11 +68,11 @@ frc::SmartDashboard::PutNumber("ASDASD TIME", nt::Now() * 0.000001);
             double x = cos(actualAngleOffset) * tagDistance + tagPositions[ID].first;
             double y = sin(actualAngleOffset) * tagDistance + tagPositions[ID].second;
 
-            double positionStandardDev = (tagDistance * 0.02) + abs(gyroRate * 0.05);
+            double positionStandardDev = (tagDistance * 0.04) + abs(gyroRate * 0.05);
             swerveSubsystem->m_odometry.SetVisionMeasurementStdDevs({positionStandardDev, positionStandardDev, positionStandardDev/2});
 
-            double cameraX = -0.241 * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
-            double cameraY = -0.2617 * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
+            double cameraX = -0.2398776 * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
+            double cameraY = -0.257429 * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
             double cameraDistance = sqrt(pow(cameraX, 2) + pow(cameraY, 2));
             double angle = atan2(cameraX, cameraY);
             double newAngle = angle + 3.14159;
@@ -86,13 +86,17 @@ frc::SmartDashboard::PutNumber("ASDASD TIME", nt::Now() * 0.000001);
             frc::Pose2d currentPose = swerveSubsystem->m_odometry.GetEstimatedPosition();
 
             double realOffset = atan2((double)currentPose.Y() - tagPositions[ID].second, (double)currentPose.X() - tagPositions[ID].first) + angleOffset;
-            frc::SmartDashboard::PutNumber("realoffset", realOffset);
+            //frc::SmartDashboard::PutNumber("realoffset", realOffset);
 
-            frc::SmartDashboard::PutNumber("GyroError", (gyroAngle - realOffset));
+            //frc::SmartDashboard::PutNumber("GyroError", (gyroAngle - realOffset));
 
 
             // if (abs(gyroRate) < 0.3)
-            swerveSubsystem->m_odometry.AddVisionMeasurement(frc::Pose2d{newPos, newRotation}, time);
+            if ((double)newPos.X() > 0 && (double)newPos.X() < 17 && (double)newPos.Y() > 0 && (double)newPos.Y() < 17)
+            {
+                swerveSubsystem->m_odometry.AddVisionMeasurement(frc::Pose2d{newPos, newRotation}, time);
+            }
+            
             // m_field2.SetRobotPose(frc::Pose2d{newPos, newRotation});
 
             if (ID == 3)
@@ -111,16 +115,25 @@ frc::SmartDashboard::PutNumber("ASDASD TIME", nt::Now() * 0.000001);
         
     }
 
-    frc::SmartDashboard::PutData("Fielsd", &m_field2);
+    
 
-    frc::SmartDashboard::PutData("Field", &m_field);
-
-
-
-    frc::SmartDashboard::PutData("FieldTag3", &m_field3);
-    frc::SmartDashboard::PutData("FieldTag4", &m_field4);
-    frc::SmartDashboard::PutData("MovementPose", &m_field5);
-
+    //frc::SmartDashboard::PutData("Fielsd", &m_field2);
     m_field.SetRobotPose(swerveSubsystem->m_odometry.GetEstimatedPosition());
+    frc::SmartDashboard::PutData("Robot Position", &m_field);
+
+    if ((double)wpi::math::MathSharedStore::GetTimestamp() > lastTestTimestamp)
+    {
+        lastTestTimestamp += 1;
+        frc::SmartDashboard::PutBoolean("VisionPiStatus", frameSub.Get() != lastFrame);
+        lastFrame = frameSub.Get();
+    }
+
+
+
+    // frc::SmartDashboard::PutData("FieldTag3", &m_field3);
+    // frc::SmartDashboard::PutData("FieldTag4", &m_field4);
+    // frc::SmartDashboard::PutData("MovementPose", &m_field5);
+
+ 
 
 }

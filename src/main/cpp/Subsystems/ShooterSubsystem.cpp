@@ -10,14 +10,14 @@ ShooterSubsystem::ShooterSubsystem(COMETS3357::SwerveSubsystem* swerveSubsystem,
     }
 
 void ShooterSubsystem::Periodic(){
-    frc::SmartDashboard::PutNumber("Velocity wheels", KickerWheel.GetRelativeVelocity());
+    //frc::SmartDashboard::PutNumber("Velocity wheels", KickerWheel.GetRelativeVelocity());
     frc::SmartDashboard::PutNumber("PivotAbso", GetPivotAbsolutePosition());
     // SetPositionPivot(45);
     
     Pivot.Periodic();
 
-    frc::SmartDashboard::PutNumber("ANGLE LOOKUP", angleLookup.GetValue(2));
-    frc::SmartDashboard::PutNumber("Angle OFFSET ", offset); 
+    //frc::SmartDashboard::PutNumber("ANGLE LOOKUP", angleLookup.GetValue(2));
+    //frc::SmartDashboard::PutNumber("Angle OFFSET ", offset); 
 
     
 
@@ -26,9 +26,9 @@ void ShooterSubsystem::Periodic(){
         frc::Pose2d pos = swerve->GetPose();
     double distance2 = sqrt(pow((double)(targetPos.X() - pos.X()), 2) + pow((double)(targetPos.Y() - pos.Y()), 2)); 
     double shooterAngle2 = angleLookup.GetValue(distance2);
-    double velocity2 = cos(shooterAngle2 * 3.14159 / 180) * 19; 
+    double velocity2 = cos(shooterAngle2 * 3.14159 / 180) * 17; 
 
-    frc::Pose2d robotPosition = swerve->GetMovingPose(distance2 / velocity2); 
+    frc::Pose2d robotPosition = swerve->GetPose(); 
 
 
         units::meter_t deltaX = robotPosition.X() - targetPos.X();
@@ -36,7 +36,7 @@ void ShooterSubsystem::Periodic(){
 
         double angle = atan2((double)deltaY, (double)deltaX);
         
-        turnToPID.SetP(0.6);
+        turnToPID.SetP(0.65);
         swerve->overrideRotation = units::radians_per_second_t{std::clamp(turnToPID.Calculate((-gyro->m_navx.GetAngle() * 3.14159 / 180) + gyro->angleOffset + ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) , angle), -1.0, 1.0)};//rotationPLookup.GetValue(0);
 
         if (frc::DriverStation::IsAutonomous())
@@ -110,7 +110,7 @@ double ShooterSubsystem::GetPivotRelativePosition()
 
 double ShooterSubsystem::GetPivotAbsolutePosition()
 {
-    frc::SmartDashboard::PutNumber("ENCODER VALUE", pivotAbsoluteEncoder.GetOutput());
+    frc::SmartDashboard::PutNumber("Pivot Abs", pivotAbsoluteEncoder.GetOutput());
     return ((double)pivotAbsoluteEncoder.GetOutput() * 360) - 237.0;
 }
 

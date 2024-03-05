@@ -227,6 +227,11 @@ double SparkMaxPosition::GetAbsoluteVelocity()
     return absoluteEncoder.GetVelocity();
 }
 
+void SparkMaxPosition::SetRelativeEncoderPosition(double pos) 
+{
+    relativeEncoder.SetPosition(pos);
+}
+
 void SparkMaxPosition::Periodic()
 {
 
@@ -234,12 +239,13 @@ void SparkMaxPosition::Periodic()
     relativeEncoderPosition = relativeEncoder.GetPosition();
 
     
-
-    CheckAbsoluteEncoder();
-    // if (runMode == POSITION_SPARK_MAX_ABSOLUTE && std::abs(absoluteEncoderPosition - relativeEncoderPosition) < 10)
-    // {
-    //     ZeroRelativeEncoder();
-    // }
+    // if (runMode == SparkMaxPositionRunMode::POSITION_SPARK_MAX_ABSOLUTE)
+    // CheckAbsoluteEncoder();
+    if (runMode == POSITION_SPARK_MAX_ABSOLUTE)
+    {
+        ZeroRelativeEncoder();
+    }
+    // ZeroRelativeEncoder();
     
 }
 
@@ -259,6 +265,20 @@ void SparkMaxPosition::SetFeedForward(std::function<double(double)> feedforward)
 
 void SparkMaxPosition::CheckAbsoluteEncoder()
 {
+    absDeltaPos = absoluteEncoderPosition - lastDeltaPos;
+    longAbsDeltaPos += abs(absDeltaPos);
+
+    lastDeltaPos = absoluteEncoderPosition;
+
+    if ((double)wpi::math::MathSharedStore::GetTimestamp() > absoluteCheckTimer)
+    {
+        if (longAbsDeltaPos != 0)
+        {
+            changeRunMode(SparkMaxPositionRunMode::POSITION_SPARK_MAX_RELATIVE);
+        }
+        longAbsDeltaPos = 0;
+        absoluteCheckTimer += 5;
+    }
     // if (runMode != POSITION_SPARK_MAX_ABSOLUTE) {
     //     return;
     // }

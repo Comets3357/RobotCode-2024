@@ -2,9 +2,11 @@
 #include <frc2/command/CommandScheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include "COMETS3357/Configs/ConfigFiles.h"
+#include <wpinet/PortForwarder.h>
 
 void Robot::RobotInit() 
 {
+  
 // ConfigFiles::getInstance().LoadConfigFiles("Comp");
 //m_container.timerSubsystem.ResetAndBeginTimer();
 COMETS3357::SubsystemManager::GetInstance().Init();
@@ -75,14 +77,8 @@ void Robot::AutonomousPeriodic() {}
 
 void Robot::TeleopInit() 
 {
-  // This makes sure that the autonomous stops running when
-  // teleop starts running. If you want the autonomous to
-  // continue until interrupted by another command, remove
-  // this line or comment it out.
-  if (m_autonomousCommand) 
-  {
-    m_autonomousCommand->Cancel();
-  }
+
+  m_container.autos.Cancel();
 
 }
 

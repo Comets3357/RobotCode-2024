@@ -32,6 +32,7 @@ SUBSYSTEM_START(VisionSystem)
     double lastTimestamp = 0;
 
     nt::DoubleArraySubscriber tagSub;
+    nt::DoubleSubscriber frameSub;
 
     nt::DoublePublisher timePublisher;
     nt::DoublePublisher epochPublisher;
@@ -70,6 +71,9 @@ SUBSYSTEM_START(VisionSystem)
         {15, {4.641342, 4.49834}},
         {16, {4.641342, 3.7132259999999997}}
     };
+
+    double lastTestTimestamp = 0;
+    double lastFrame = 0;
 
     // COMETS3357::PoseEstimator poseEstimator;
 

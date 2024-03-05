@@ -43,7 +43,7 @@ void SetPointCommand::Execute()
     shooterSubsystem->Pivot.SetPosition(setPointAngle, shooterSubsystem->offset); 
 
 
-    frc::SmartDashboard::PutNumber("FLywheel Velocity", shooterSubsystem->GetVelocityFlyWheel());
+    //frc::SmartDashboard::PutNumber("FLywheel Velocity", shooterSubsystem->GetVelocityFlyWheel());
     // if (shooterSubsystem->GetVelocityFlyWheel() < shooterSubsystem->FlyWheel.config.velocities["ShooterSpeed"] + 100)
     // {
 

@@ -11,10 +11,10 @@
         [2.56, 41], 
         [3.02, 35], 
         [3.5, 33], 
-        [4, 28],
-        [4.22, 28],
-        [5.25, 24],
-        [5.86, 22.85],
+        [4, 28.5],
+        [4.22, 28.1],
+        [5.25, 24.4],
+        [5.86, 23],
         [6.7, 22],
         [100, 22]
       ]
@@ -72,7 +72,7 @@
     {
       "AbsolutePositionConversionFactor": 360,
       "AbsoluteVelocityConversionFactor": 1,
-      "AbsoluteZeroOffset": 264.5,
+      "AbsoluteZeroOffset": 350.3559885,
       "CurrentLimit": 40,
       "DefaultRunMode": "ABSOLUTE",
       "ID": 31,
@@ -106,7 +106,14 @@
       "ReverseSoftLimit": 18,
       "Positions":
       {
-        
+        "AutonPiece4Setpoint": 38,
+        "AutonPiece4Setpoint2": 40,
+        "AutonPiece4Setpoint3": 42,
+        "AutonPiece4Setpoint4": 29,
+
+        "SubWooferSetpoint": 56,
+        "PodiumSetpoint": 38.5,
+        "AmpSetpoint": 24
       }
     },
 

@@ -20,13 +20,20 @@ void LEDsSubsystem::Initialize()
     redPub = table->GetIntegerTopic("rValue").Publish();
     greenPub = table->GetIntegerTopic("gValue").Publish();
     bluePub = table->GetIntegerTopic("bValue").Publish();
-
+frameSub = table->GetIntegerTopic("Frames").Subscribe(0);
 }
 
 void LEDsSubsystem::Periodic() {
 
     enabled = frc::DriverStation::IsEnabled();
     comms = frc::DriverStation::IsDSAttached();
+
+    if ((double)wpi::math::MathSharedStore::GetTimestamp() > lastTestTimestamp)
+    {
+        lastTestTimestamp += 1;
+        frc::SmartDashboard::PutBoolean("LEDPiStatus", frameSub.Get() != lastFrame);
+        lastFrame = frameSub.Get();
+    }
 
     if (!enabled) {
         
@@ -42,11 +49,6 @@ void LEDsSubsystem::Periodic() {
         {
             writeLEDs(255,0,0); // green
         } 
-        
-        
-        
-        
-        
     }
 
 

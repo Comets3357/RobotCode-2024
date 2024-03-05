@@ -56,6 +56,8 @@ namespace COMETS3357
 
         void AutonomousInit();
 
+        void Cancel();
+
 
     private:
 

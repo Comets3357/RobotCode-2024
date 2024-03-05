@@ -10,8 +10,8 @@ AmpShootCommand::AmpShootCommand(ShooterSubsystem* shooter, ElevatorSubsystem* e
 void AmpShootCommand::Initialize()
 {
     shooterSubsystem->SetPositionPivot(68);
-    shooterSubsystem->SetVelocityFlyWheel(-825);
-    shooterSubsystem->SetVelocityKickerWheel(825);
+    shooterSubsystem->SetVelocityFlyWheel(-775);
+    shooterSubsystem->SetVelocityKickerWheel(775);
 }
 
 void AmpShootCommand::Execute()
