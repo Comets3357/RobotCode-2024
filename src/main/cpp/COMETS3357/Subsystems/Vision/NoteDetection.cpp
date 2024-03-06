@@ -9,18 +9,31 @@ NoteDetectionSubsystem::NoteDetectionSubsystem(COMETS3357::SwerveSubsystem *swer
     gyroField = gyroPointer;
 }
 
-void NoteDetectionSubsystem::goToNote()
+void NoteDetectionSubsystem::Periodic()
 {
-    double k = 1;
-    if (limelightField->hasTarget()) {
+    if (goingToNote) {
         swerveField -> controllingSwerveRotation = false;
         swerveField -> overrideRotation = std::clamp(limelightField->getX() * k, -0.5, 0.5);
-        swerveField -> controllingSwerveMovement = false;
-        swerveField -> overrideXSpeed = std::clamp(std::sin(gyroField->m_navx.GetYaw() + (limelightPointer->getX() * 3.141592654/180)), 0, 0.5);
-        swerveField -> overrideYSpeed = std::clamp(std::cos(gyroField->m_navx.GetYaw() + (limelightPointer->getX() * 3.141592654/180)), 0, 0.5);
+        if (limelightField->hasTarget()) {
+            swerveField -> controllingSwerveMovement = false;
+            swerveField -> overrideXSpeed = std::clamp(std::sin(gyroField->m_navx.GetYaw() + (limelightPointer->getX() * 3.141592654/180)), -1, 1);
+            swerveField -> overrideYSpeed = std::clamp(std::cos(gyroField->m_navx.GetYaw() + (limelightPointer->getX() * 3.141592654/180)), -1, 1);
+        }
     }
-    
-
 }
 
+void NoteDetectionSubsystem::goToNote()
+{
+    goingToNote = true;   
+}
+
+void NoteDetectionSubsystem::stopGoToNote()
+{   
+    goingToNote = false;
+    swerveField -> overrideXSpeed = 0;
+    swerveField -> overrideYSpeed = 0;
+    swerveField -> overrideRotation = 0;""
+    swerveField -> controllingSwerveMovement = true;
+    swerveField -> controllingSwerveRotation = true;
+}
 

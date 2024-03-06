@@ -6,7 +6,10 @@ NoteDetectionSubsystem(COMETS3357::SwerveSubsystem *swervePointer, COMETS3357::L
 COMETS3357::SwerveSubsystem swerveField;
 COMETS3357::LimelightSubsystem limelightField;
 COMETS3357::GyroSubsystem gyroField;
+bool goingToNote = false;
+double k = 1;
 
 void goToNote();
+void stopGoToNote();
 
 SUBSYSTEM_END
