@@ -40,6 +40,7 @@
 #include "Commands/ClimbReset.h"
 #include "Commands/Climb.h"
 #include "Commands/IntakeIndexerAutonCommand.h"
+#include "COMETS3357/Auton/AutonPathCommand.h"
 
 
 
@@ -73,6 +74,7 @@ class RobotContainer {
   ElevatorSubsystem elevator {};
   LEDsSubsystem led {&indexer}; 
 
+
   // Commands
   IntakeIndexerCommand intakeIndexer {&indexer}; 
   IntakeIndexerAutonCommand intakeIndexerAuton{&indexer};
@@ -86,6 +88,10 @@ class RobotContainer {
   ClimbCommand climb{&elevator, &shooter};
   LegAvoidanceCommand legAvoidance{&swerve};
   AutonGyroResetSubsystem gyroResetButton{&gyro, &led};
+  AutonPathCommand autonPath{&swerve, 69.1, 69.2, frc::Pose2d(units::meter_t(0.69), units::meter_t(69))};
+  
+  
+
 
 
   // Instant Commands
@@ -117,6 +123,16 @@ class RobotContainer {
   frc2::InstantCommand piece4AutoSetpoint3{[this](){shooter.SetPositionPivot(40.5), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
   frc2::InstantCommand piece4AutoSetpoint4{[this](){shooter.SetPositionPivot(28), shooter.SetVelocityKickerWheel(3000); shooter.SetVelocityFlyWheel(-3000);}, {}};
   frc2::InstantCommand midPiece4AutoSetpoint{[this](){shooter.SetPositionPivot(29), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
+  frc2::InstantCommand amp{[this](){
+    if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
+    {
+        frc2::InstantCommand ampAutoAlign{[this](){&swerve, 100, 100, frc::Pose2d{units::meter_t{0}, units::meter_t{0}}}; 
+    }
+    else
+    {
+        
+    }
+  }, {}};
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
