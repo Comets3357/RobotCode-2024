@@ -47,26 +47,34 @@ void AdvancedAutonPathCommand::Execute()
     if (lowestIntersectObstacle != -1)
     {
         frc::Translation2d relativeToObs{lowestIntersectPos.value() - trussPositions[lowestIntersectObstacle]};
-        units::meter_t ratio = radiusLimit / relativeToObs.Distance(frc::Translation2d{0_m, 0_m});
-        frc::Translation2d tangentPos = frc::Translation2d{(relativeToObs.X() * ratio) + trussPositions[lowestIntersectObstacle].X(), (relativeToObs.Y() * ratio) + trussPositions[lowestIntersectObstacle].Y()};
+        units::meter_t ratio = units::meter_t{(double)radiusLimit / (double)relativeToObs.Distance(frc::Translation2d{0_m, 0_m})};
+        frc::Translation2d tangentPos = frc::Translation2d{units::meter_t{((double)relativeToObs.X() * (double)ratio) + (double)trussPositions[lowestIntersectObstacle].X()}, units::meter_t{((double)relativeToObs.Y() * (double)ratio) + (double)trussPositions[lowestIntersectObstacle].Y()}};
 
 
         double rotationSpeed = std::clamp(rotPID.Calculate((double)currentPose.Rotation().Radians()), -rot, rot);
         double angle = atan2((double)currentPose.X() - (double)tangentPos.X(), (double)currentPose.Y() - (double)tangentPos.Y());
-        double robotSpeed = std::clamp(translatePID.Calculate((double)currentPose.Translation().Distance(targetPose.Translation()), 0), -speed, speed);
+        double robotSpeed = -0.25;//std::clamp(translatePID.Calculate((double)currentPose.Translation().Distance(targetPose.Translation()), 0), -speed, speed);
         double movementX = sin(angle) * robotSpeed;
         double movementY = cos(angle) * robotSpeed;//std::clamp(translatePID.Calculate((double)currentPose.Y(), (double)targetPose.Y()), -speed, speed);
         swerve->Drive(units::meters_per_second_t{movementX}, units::meters_per_second_t{movementY}, units::radians_per_second_t{rotationSpeed}, true, true, &swerve->kDriveKinematics);
-        
+         idk = frc::Pose2d{frc::Translation2d{units::meter_t{movementX/50.0 + (double)idk.X()}, units::meter_t{movementY/50 + (double)idk.Y()}}, frc::Rotation2d{units::radian_t{0}}};
+
+            m_field.SetRobotPose(idk);
+    frc::SmartDashboard::PutData("Robot Position2", &m_field);
     }
     else
     {   
         double rotationSpeed = std::clamp(rotPID.Calculate((double)currentPose.Rotation().Radians()), -rot, rot);
         double angle = atan2((double)currentPose.X() - (double)targetPose.X(), (double)currentPose.Y() - (double)targetPose.Y());
-        double robotSpeed = std::clamp(translatePID.Calculate((double)targetPose.Translation().Distance(targetPose.Translation()), 0), -speed, speed);
+        double robotSpeed = -0.25;//std::clamp(translatePID.Calculate((double)targetPose.Translation().Distance(targetPose.Translation()), 0), -speed, speed);
         double movementX = sin(angle) * robotSpeed;
         double movementY = cos(angle) * robotSpeed;//std::clamp(translatePID.Calculate((double)currentPose.Y(), (double)targetPose.Y()), -speed, speed);
         swerve->Drive(units::meters_per_second_t{movementX}, units::meters_per_second_t{movementY}, units::radians_per_second_t{rotationSpeed}, true, true, &swerve->kDriveKinematics);
+
+        idk = frc::Pose2d{frc::Translation2d{units::meter_t{movementX/50.0 + (double)idk.X()}, units::meter_t{movementY/50.0 + (double)idk.Y()}}, frc::Rotation2d{units::radian_t{0}}};
+
+          m_field.SetRobotPose(idk);
+    frc::SmartDashboard::PutData("Robot Position2", &m_field);
     }
 
 }
@@ -74,10 +82,10 @@ void AdvancedAutonPathCommand::Execute()
 std::optional<frc::Translation2d> AdvancedAutonPathCommand::CheckIntersection(frc::Translation2d startPos, frc::Translation2d endPos, frc::Translation2d obstaclePos, units::meter_t rad)
 {
     // Calculate the vector from the start point to the center of the circle
-    frc::Translation2d startToCenter{obstaclePos.X() - startPos.X(), obstaclePos.Y() - startPos.Y()};
+    frc::Translation2d startToCenter{units::meter_t{(double)obstaclePos.X() - (double)startPos.X()}, units::meter_t{(double)obstaclePos.Y() - (double)startPos.Y()}};
 
     // Calculate the vector representing the line segment
-    frc::Translation2d lineVector{endPos.X() - startPos.X(), endPos.Y() - startPos.Y()};
+    frc::Translation2d lineVector{units::meter_t{(double)endPos.X() - (double)startPos.X()}, units::meter_t{(double)endPos.Y() - (double)startPos.Y()}};
 
     // Project the start-to-center vector onto the line segment
     double t = ((double)startToCenter.X() * (double)lineVector.X() + (double)startToCenter.Y() * (double)lineVector.Y()) / 
@@ -85,7 +93,7 @@ std::optional<frc::Translation2d> AdvancedAutonPathCommand::CheckIntersection(fr
 
     t = std::clamp(t, 0.0, 1.0);
 
-    frc::Translation2d intersectionPoint{startPos.X() + units::meter_t{t} * lineVector.X(), startPos.Y() + units::meter_t{t} * lineVector.Y()};
+    frc::Translation2d intersectionPoint{units::meter_t{(double)startPos.X() + t * (double)lineVector.X()}, units::meter_t{(double)startPos.Y() + t * (double)lineVector.Y()}};
 
     if (intersectionPoint.Distance(obstaclePos) <= rad)
     {

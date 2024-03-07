@@ -28,11 +28,15 @@ std::vector<frc::Translation2d> trussPositions =
     {units::meter_t{10.94}, units::meter_t{5.4}}
 };
 
-units::meter_t radiusLimit = 1_m;
+    frc::Field2d m_field;
+
+units::meter_t radiusLimit = 1.25_m;
 
 units::meter_t lowestIntersectDistance;
 std::optional<frc::Translation2d> lowestIntersectPos;
 int lowestIntersectObstacle;
+
+frc::Pose2d idk{frc::Translation2d{16_m, 4_m}, frc::Rotation2d{units::radian_t{0}}};
 
 double rot;
 double speed;
