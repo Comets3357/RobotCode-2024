@@ -53,7 +53,7 @@ void AdvancedAutonPathCommand::Execute()
 
         double rotationSpeed = std::clamp(rotPID.Calculate((double)currentPose.Rotation().Radians()), -rot, rot);
         double angle = atan2((double)currentPose.X() - (double)tangentPos.X(), (double)currentPose.Y() - (double)tangentPos.Y());
-        double robotSpeed = std::clamp(translatePID.Calculate((double)currentPose.Translation().Distance(tangentPos), 0), -speed, speed);
+        double robotSpeed = std::clamp(translatePID.Calculate((double)currentPose.Translation().Distance(targetPose.Translation()), 0), -speed, speed);
         double movementX = sin(angle) * robotSpeed;
         double movementY = cos(angle) * robotSpeed;//std::clamp(translatePID.Calculate((double)currentPose.Y(), (double)targetPose.Y()), -speed, speed);
         swerve->Drive(units::meters_per_second_t{movementX}, units::meters_per_second_t{movementY}, units::radians_per_second_t{rotationSpeed}, true, true, &swerve->kDriveKinematics);
