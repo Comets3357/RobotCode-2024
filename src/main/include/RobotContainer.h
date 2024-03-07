@@ -39,7 +39,8 @@
 
 #include "COMETS3357/LookupTable.h"
 
-#include "commands/LegAvoidanceCommand.h"
+// #include "commands/LegAvoidanceCommand.h"
+#include "COMETS3357/Subsystems/Vision/NoteDetection.h"
 
 
 
@@ -65,6 +66,7 @@ class RobotContainer {
   COMETS3357::SwerveSubsystem swerve{"Swerve", &gyro};
 
   VisionSystemSubsystem visionSystem{&swerve, &gyro};
+
   IntakeSubsystem intake {}; 
   IndexerSubsystem indexer {}; 
   ShooterSubsystem shooter {&swerve, &gyro};
@@ -72,11 +74,12 @@ class RobotContainer {
 
   IntakeIndexerCommand intakeIndexer {&indexer}; 
   ShooterCommand shooterCommand {&shooter, &indexer, &swerve};
+  NoteDetectionSubsystem noteDetection{&swerve, &limelight, &gyro};
 
   // Instance command
-  LegAvoidanceCommand legAvoidance{&swerve};
+  // LegAvoidanceCommand legAvoidance{&swerve};
 
-  frc2::InstantCommand avoid{[this](){legAvoidance.Schedule();}, {&swerve}}; // test purposes
+  // frc2::InstantCommand avoid{[this](){legAvoidance.Schedule();}, {&swerve}}; // test purposes
 
   frc2::InstantCommand ejectIndexer{[this](){indexer.SetVelocity("IndexerEjectSpeed");}, {&indexer}}; 
 
@@ -97,11 +100,17 @@ class RobotContainer {
   frc2::InstantCommand stopTurningTowardsSpeaker{[this](){shooter.stopTurnToTarget();}, {&swerve}};
   frc2::InstantCommand turnTowardsSpeaker{[this](){shooter.startTurnToTarget();}, {&swerve}};
 
+  frc2::InstantCommand noteDetectionStart{[this](){noteDetection.goToNote();},{&noteDetection}};
+  frc2::InstantCommand noteDetectionEnd{[this](){noteDetection.stopGoToNote();},{&noteDetection}};
+  
+
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
       {"ZeroGyro", std::make_shared<frc2::InstantCommand>(zeroGyro)},
-      {"AVOIDLEG", std::make_shared<frc2::InstantCommand>(avoid)}, // test purposes
+      // {"AVOIDLEG", std::make_shared<frc2::InstantCommand>(avoid)}, // test purposes
+      {"NoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionStart)},
+      {"StopNoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionEnd)},
       {"EjectIntake", std::make_shared<frc2::InstantCommand>(ejectIntake)},
       {"StartIntake", std::make_shared<frc2::InstantCommand>(startIntake)},
       {"StopIntake", std::make_shared<frc2::InstantCommand>(stopIntake)},
