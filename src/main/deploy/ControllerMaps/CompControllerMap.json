@@ -159,7 +159,7 @@
                 "StartButtonPressed": "NONE",
                 "XboxButtonPressed": "NONE",
                 "LeftTriggerPressed": "NONE",
-                "RightTriggerPressed": "NONE",
+                "RightTriggerPressed": "ampStart",
                 "D-padLeftReleased": "NONE",
                 "D-padRightReleased": "NONE",
                 "D-padUpReleased": "NONE",
@@ -176,7 +176,7 @@
                 "StartButtonReleased": "NONE",
                 "XboxButtonReleased": "NONE",
                 "LeftTriggerReleased": "NONE",
-                "RightTriggerReleased": "NONE"
+                "RightTriggerReleased": "ampCancel"
             }
         },
 
