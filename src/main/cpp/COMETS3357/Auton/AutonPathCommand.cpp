@@ -30,11 +30,11 @@ void AutonPathCommand::Execute()
     frc::Pose2d currentPose;
     if (visionUsed)
     {
-        frc::Pose2d currentPose = swerve->GetPose();
+        currentPose = swerve->GetPose();
     }
     else
     {
-        frc::Pose2d currentPose = swerve->GetPose2();
+        currentPose = swerve->GetPose2();
     }
     double rotationSpeed = std::clamp(rotPID.Calculate((double)currentPose.Rotation().Radians()), -rot, rot);
     double angle = atan2((double)currentPose.X() - (double)targetPose.X(), (double)currentPose.Y() - (double)targetPose.Y());

@@ -123,8 +123,8 @@ class RobotContainer {
   frc2::InstantCommand piece4AutoSetpoint3{[this](){shooter.SetPositionPivot(40.5), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
   frc2::InstantCommand piece4AutoSetpoint4{[this](){shooter.SetPositionPivot(28), shooter.SetVelocityKickerWheel(3000); shooter.SetVelocityFlyWheel(-3000);}, {}};
   frc2::InstantCommand midPiece4AutoSetpoint{[this](){shooter.SetPositionPivot(29), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
-  AutonPathCommand ampAlignBlue{&swerve, 0.5, .5, frc::Pose2d{frc::Translation2d(units::meter_t{1.85}, units::meter_t{7.79}), frc::Rotation2d{units::radian_t{1.57}}}, true};
-  AutonPathCommand ampAlignRed{&swerve, 0.5, .5, frc::Pose2d{frc::Translation2d(units::meter_t{14.68}, units::meter_t{7.79}), frc::Rotation2d{units::radian_t{1.57}}}, true};
+  AutonPathCommand ampAlignBlue{&swerve, 0.5, .5, frc::Pose2d{frc::Translation2d(units::meter_t{1.85}, units::meter_t{7.65}), frc::Rotation2d{units::radian_t{-1.57}}}, true};
+  AutonPathCommand ampAlignRed{&swerve, 0.5, .5, frc::Pose2d{frc::Translation2d(units::meter_t{14.68}, units::meter_t{7.65}), frc::Rotation2d{units::radian_t{-1.57}}}, true};
   frc2::InstantCommand ampStart{[this](){
     if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
     {
@@ -139,10 +139,16 @@ class RobotContainer {
     if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
     {
       ampAlignRed.Cancel(); 
+      //swerve.Drive(units::velocity::meters_per_second_t{0}, units::velocity::meters_per_second_t{0}, units::angular_velocity::radians_per_second_t{0}, true, true, 0);
+      //swerve.Drive(units::velocity::meters_per_second_t{0}, units::velocity::meters_per_second_t{0}, 0, 0, true, true);
+      swerve.DriveXRotate(units::velocity::meters_per_second_t{0}, units::velocity::meters_per_second_t{0}, units::angular_velocity::radians_per_second_t{0}); 
     }
     else
     {
       ampAlignBlue.Cancel(); 
+      //swerve.Drive(units::velocity::meters_per_second_t{0}, units::velocity::meters_per_second_t{0}, units::angular_velocity::radians_per_second_t{0}, true, true, 0je j);
+      //swerve.Drive(units::velocity::meters_per_second_t{0}, units::velocity::meters_per_second_t{0}, 0, 0, true, true);
+      swerve.DriveXRotate(units::velocity::meters_per_second_t{0}, units::velocity::meters_per_second_t{0}, units::angular_velocity::radians_per_second_t{0}); 
     }
   }, {}};
     
