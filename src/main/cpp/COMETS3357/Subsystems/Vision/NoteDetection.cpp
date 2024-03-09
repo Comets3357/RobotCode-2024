@@ -19,6 +19,11 @@ void NoteDetectionSubsystem::Periodic()
     if (goingToNote) {
         // swerveField -> controllingSwerveRotation = false;
         // swerveField -> overrideRotation = -units::radians_per_second_t{std::clamp(limelightField->getX() * 3.14159 * 0.6 / 180, -0.5, 0.5)};
+
+        double D = h*tan(theta+(limelightField->getY() * 3.14159 / 180));
+        double Distance = D+(gr/2);
+        double y = Distance*std::sin(((-gyroField->m_navx.GetYaw() * 3.14159 / 180.0) +((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) + gyroField->angleOffset) - (limelightField->getX() * 3.141592654/180));
+        double x = Distance*std::cos(((-gyroField->m_navx.GetYaw() * 3.14159 / 180.0) +((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) + gyroField->angleOffset) - (limelightField->getX() * 3.141592654/180));
         if (limelightField->hasTarget()) {
             swerveField -> controllingSwerveMovement = false;
             swerveField -> overrideYSpeed = -units::meters_per_second_t{ std::clamp(std::sin(((-gyroField->m_navx.GetYaw() * 3.14159 / 180.0) +((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) + gyroField->angleOffset) - (limelightField->getX() * 3.141592654/180)), -0.5, 0.5)};

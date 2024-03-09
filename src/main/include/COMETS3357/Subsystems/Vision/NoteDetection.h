@@ -12,7 +12,9 @@ COMETS3357::LimelightSubsystem* limelightField;
 COMETS3357::GyroSubsystem* gyroField;
 
 bool goingToNote = false;
-double k = 0.5;
+double theta = 1.1344530556;
+double gr = .18;
+double h = .32;
 
 void goToNote();
 void stopGoToNote();
