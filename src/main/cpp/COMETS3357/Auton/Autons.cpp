@@ -8,6 +8,7 @@
 #include <frc2/command/InstantCommand.h>
 #include <COMETS3357/pathplanner/lib/auto/CommandUtil.h>
 #include <frc2/command/ParallelRaceGroup.h>
+#include "COMETS3357/Auton/AdvancedAutoPathCommand.h"
 
 using namespace COMETS3357;
 

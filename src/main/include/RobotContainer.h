@@ -42,6 +42,9 @@
 #include "Commands/IntakeIndexerAutonCommand.h"
 #include "COMETS3357/Auton/AutonPathCommand.h"
 
+// #include "commands/LegAvoidanceCommand.h"
+#include "COMETS3357/Subsystems/Vision/NoteDetection.h"
+
 
 
 
@@ -68,6 +71,7 @@ class RobotContainer {
   COMETS3357::SwerveSubsystem swerve{"Swerve", &gyro};
 
   VisionSystemSubsystem visionSystem{&swerve, &gyro};
+
   IntakeSubsystem intake {}; 
   IndexerSubsystem indexer {}; 
   ShooterSubsystem shooter {&swerve, &gyro};
@@ -88,9 +92,7 @@ class RobotContainer {
   ClimbCommand climb{&elevator, &shooter};
   LegAvoidanceCommand legAvoidance{&swerve};
   AutonGyroResetSubsystem gyroResetButton{&gyro, &led};
-  //AutonPathCommand ampAlign{&swerve, 100, 100, frc::Pose2d::Pose2d{frc::Translation2d(units::meter_t{0}, units::meter_t{0}), frc::Rotation2d{0,0}}};
-  
-  
+  NoteDetectionSubsystem noteDetection{&swerve, &limelight, &gyro};
 
 
 
@@ -153,6 +155,10 @@ class RobotContainer {
   }, {}};
     
 
+  frc2::InstantCommand noteDetectionStart{[this](){noteDetection.goToNote();},{&noteDetection}};
+  frc2::InstantCommand noteDetectionEnd{[this](){noteDetection.stopGoToNote();},{&noteDetection}};
+  
+
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
     {"ZeroGyro", std::make_shared<frc2::InstantCommand>(zeroGyro)},
@@ -179,9 +185,10 @@ class RobotContainer {
     {"ampSignalOn", std::make_shared<frc2::InstantCommand>(ampSignalOn)},
     {"ampSignalOff", std::make_shared<frc2::InstantCommand>(ampSignalOff)},
     {"PivotToRelative", std::make_shared<frc2::InstantCommand>(pivotRelative)},
+      {"StopNoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionEnd)},
+      {"NoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionStart)}
     {"ampStart", std::make_shared<frc2::InstantCommand>(ampStart)},
     {"ampCancel", std::make_shared<frc2::InstantCommand>(ampCancel)}
-    
   };
 
 

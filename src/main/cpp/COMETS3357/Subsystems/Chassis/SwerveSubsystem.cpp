@@ -544,11 +544,11 @@ void SwerveSubsystem::DriveXRotate(units::meters_per_second_t xSpeed, units::met
   {
     rot = overrideRotation;
   }
-  // if (!controllingSwerveMovement)
-  // {
-  //   xSpeed = overrideXSpeed;
-  //   ySpeed = overrideYSpeed;
-  // }
+  if (!controllingSwerveMovement)
+  {
+    xSpeed = overrideXSpeed;
+    ySpeed = overrideYSpeed;
+  }
   // if (addingSwerveRotation)
   // {
   //   rot += addingRot;
@@ -589,11 +589,11 @@ void SwerveSubsystem::DriveCornerTurning(units::meters_per_second_t xSpeed, unit
   {
     rot = overrideRotation;
   }
-  // if (!controllingSwerveMovement)
-  // {
-  //   xSpeed = overrideXSpeed;
-  //   ySpeed = overrideYSpeed;
-  // }
+  if (!controllingSwerveMovement)
+  {
+    xSpeed = overrideXSpeed;
+    ySpeed = overrideYSpeed;
+  }
   // if (addingSwerveRotation)
   // {
   //   rot += addingRot;

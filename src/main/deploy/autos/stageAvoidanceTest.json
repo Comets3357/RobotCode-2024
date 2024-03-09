@@ -1,0 +1,16 @@
+[
+    {
+        "x": 16,
+        "y": 4,
+        "rotation": 0,
+        "maxVelocity": 0.25,
+        "maxRotation": 0.5
+      },
+      {
+        "x": 8.32,
+        "y": 4,
+        "rotation": 0,
+        "maxVelocity": 0.25,
+        "maxRotation": 0.5
+      }
+]
