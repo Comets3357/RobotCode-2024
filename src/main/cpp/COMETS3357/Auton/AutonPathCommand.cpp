@@ -4,7 +4,7 @@
 
 #include "COMETS3357/Auton/AutonPathCommand.h"
 
-AutonPathCommand::AutonPathCommand(COMETS3357::SwerveSubsystem* swerveSubsystem, double rotSpeed, double moveSpeed, frc::Pose2d pose) 
+AutonPathCommand::AutonPathCommand(COMETS3357::SwerveSubsystem* swerveSubsystem, double rotSpeed, double moveSpeed, frc::Pose2d pose, bool isVision) 
 {
     swerve = swerveSubsystem;
     translatePID.SetTolerance(0.1);
@@ -17,6 +17,7 @@ AutonPathCommand::AutonPathCommand(COMETS3357::SwerveSubsystem* swerveSubsystem,
     rotPID.SetSetpoint((double)targetPose.Rotation().Radians());
     rotPID.EnableContinuousInput(-3.14159265, 3.14159265);
     AddRequirements({swerve}); 
+    visionUsed = isVision;
 }
 
 void AutonPathCommand::Initialize()
@@ -26,7 +27,15 @@ void AutonPathCommand::Initialize()
 
 void AutonPathCommand::Execute()
 {
-    frc::Pose2d currentPose = swerve->GetPose2();
+    frc::Pose2d currentPose;
+    if (visionUsed)
+    {
+        currentPose = swerve->GetPose();
+    }
+    else
+    {
+        currentPose = swerve->GetPose2();
+    }
     double rotationSpeed = std::clamp(rotPID.Calculate((double)currentPose.Rotation().Radians()), -rot, rot);
     double angle = atan2((double)currentPose.X() - (double)targetPose.X(), (double)currentPose.Y() - (double)targetPose.Y());
     double robotSpeed = std::clamp(translatePID.Calculate((double)currentPose.Translation().Distance(targetPose.Translation()), 0), -speed, speed);

@@ -7,7 +7,7 @@
 
 COMMAND_START(AutonPath)
 
-AutonPathCommand(COMETS3357::SwerveSubsystem *swerveSubsystem, double maxTurn, double maxSpeed, frc::Pose2d pose); 
+AutonPathCommand(COMETS3357::SwerveSubsystem *swerveSubsystem, double maxTurn, double maxSpeed, frc::Pose2d pose, bool isVision); 
 
 COMETS3357::SwerveSubsystem *swerve; 
 
@@ -15,6 +15,7 @@ frc::PIDController translatePID{1, 0, 0};
 frc::PIDController rotPID{1, 0, 0};
 
 frc::Pose2d targetPose;
+bool visionUsed;
 
 double rot;
 double speed;
