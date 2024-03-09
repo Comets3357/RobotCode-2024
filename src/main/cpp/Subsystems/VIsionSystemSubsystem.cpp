@@ -38,6 +38,10 @@ void VisionSystemSubsystem::Periodic()
         frc::SmartDashboard::PutNumber("Timestamp", (double)frc::Timer::GetFPGATimestamp());
     frc::SmartDashboard::PutNumber("Gyro Time", (double)gyroSubsystem->m_navx.GetLastSensorTimestamp());
     
+    frc::SmartDashboard::PutNumber("Timestamp", (double)wpi::math::MathSharedStore::GetTimestamp());
+    frc::SmartDashboard::PutNumber("Gyro Time", (double)gyroSubsystem->m_navx.GetLastSensorTimestamp());
+    
+    
     std::vector<double> tagDataBuffer = tagSub.GetAtomic().value;
 
 
@@ -78,7 +82,7 @@ void VisionSystemSubsystem::Periodic()
             double cameraX = -0.2398776 * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
             double cameraY = -0.257429 * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
             double cameraDistance = sqrt(pow(cameraX, 2) + pow(cameraY, 2));
-            double angle = atan2(cameraY, cameraX);
+            double angle = atan2(cameraX, cameraY);
             double newAngle = angle + (-gyroSubsystem->m_navx.GetYaw() * 3.14159 / 180.0) + ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) + gyroSubsystem->angleOffset;//((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.141592653589 : 0) + ;
 
             

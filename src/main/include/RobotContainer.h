@@ -41,6 +41,9 @@
 #include "Commands/Climb.h"
 #include "Commands/IntakeIndexerAutonCommand.h"
 
+// #include "commands/LegAvoidanceCommand.h"
+#include "COMETS3357/Subsystems/Vision/NoteDetection.h"
+
 
 
 
@@ -67,6 +70,7 @@ class RobotContainer {
   COMETS3357::SwerveSubsystem swerve{"Swerve", &gyro};
 
   VisionSystemSubsystem visionSystem{&swerve, &gyro};
+
   IntakeSubsystem intake {}; 
   IndexerSubsystem indexer {}; 
   ShooterSubsystem shooter {&swerve, &gyro};
@@ -86,6 +90,7 @@ class RobotContainer {
   ClimbCommand climb{&elevator, &shooter};
   LegAvoidanceCommand legAvoidance{&swerve};
   AutonGyroResetSubsystem gyroResetButton{&gyro, &led};
+  NoteDetectionSubsystem noteDetection{&swerve, &limelight, &gyro};
 
 
   // Instant Commands
@@ -118,6 +123,10 @@ class RobotContainer {
   frc2::InstantCommand piece4AutoSetpoint4{[this](){shooter.SetPositionPivot(28), shooter.SetVelocityKickerWheel(3000); shooter.SetVelocityFlyWheel(-3000);}, {}};
   frc2::InstantCommand midPiece4AutoSetpoint{[this](){shooter.SetPositionPivot(29), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
 
+  frc2::InstantCommand noteDetectionStart{[this](){noteDetection.goToNote();},{&noteDetection}};
+  frc2::InstantCommand noteDetectionEnd{[this](){noteDetection.stopGoToNote();},{&noteDetection}};
+  
+
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
     {"ZeroGyro", std::make_shared<frc2::InstantCommand>(zeroGyro)},
@@ -143,7 +152,9 @@ class RobotContainer {
     {"humanPlayerSignalOff", std::make_shared<frc2::InstantCommand>(humanPlayerSignalOff)},
     {"ampSignalOn", std::make_shared<frc2::InstantCommand>(ampSignalOn)},
     {"ampSignalOff", std::make_shared<frc2::InstantCommand>(ampSignalOff)},
-    {"PivotToRelative", std::make_shared<frc2::InstantCommand>(pivotRelative)}
+    {"PivotToRelative", std::make_shared<frc2::InstantCommand>(pivotRelative)},
+      {"StopNoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionEnd)},
+      {"NoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionStart)}
   };
 
 
