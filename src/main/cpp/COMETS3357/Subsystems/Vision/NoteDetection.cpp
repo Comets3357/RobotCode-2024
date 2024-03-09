@@ -17,12 +17,12 @@ void NoteDetectionSubsystem::Initialize()
 void NoteDetectionSubsystem::Periodic()
 {
     if (goingToNote) {
-        swerveField -> controllingSwerveRotation = false;
-        swerveField -> overrideRotation = -units::radians_per_second_t{std::clamp(limelightField->getX() * k, -0.5, 0.5)};
+        // swerveField -> controllingSwerveRotation = false;
+        // swerveField -> overrideRotation = -units::radians_per_second_t{std::clamp(limelightField->getX() * 3.14159 * 0.6 / 180, -0.5, 0.5)};
         if (limelightField->hasTarget()) {
             swerveField -> controllingSwerveMovement = false;
-            swerveField -> overrideYSpeed = -units::meters_per_second_t{ std::clamp(std::sin((gyroField->m_navx.GetYaw() * 3.1415926/180) + (limelightField->getX() * 3.141592654/180)), -1.0, 1.0)};
-            swerveField -> overrideXSpeed = units::meters_per_second_t{ std::clamp(std::cos((gyroField->m_navx.GetYaw() * 3.1415926/180) + (limelightField->getX() * 3.141592654/180)), -1.0, 1.0)};
+            swerveField -> overrideYSpeed = -units::meters_per_second_t{ std::clamp(std::sin(((-gyroField->m_navx.GetYaw() * 3.14159 / 180.0) +((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) + gyroField->angleOffset) - (limelightField->getX() * 3.141592654/180)), -0.5, 0.5)};
+            swerveField -> overrideXSpeed = -units::meters_per_second_t{ std::clamp(std::cos(((-gyroField->m_navx.GetYaw() * 3.14159 / 180.0) +((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) + gyroField->angleOffset) - (limelightField->getX() * 3.141592654/180)), -0.5, 0.5)};
         }
     }
 }
