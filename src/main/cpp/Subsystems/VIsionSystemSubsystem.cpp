@@ -33,6 +33,10 @@ void VisionSystemSubsystem::Periodic()
     yawInterpolationBuffer.AddSample(wpi::math::MathSharedStore::GetTimestamp(), (-gyroSubsystem->m_navx.GetYaw() * 3.14159 / 180.0) + ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) + gyroSubsystem->angleOffset);
     rateInterpolationBuffer.AddSample(wpi::math::MathSharedStore::GetTimestamp(), gyroSubsystem->m_navx.GetRate());
     
+    frc::SmartDashboard::PutNumber("Timestamp", (double)wpi::math::MathSharedStore::GetTimestamp());
+    frc::SmartDashboard::PutNumber("Gyro Time", (double)gyroSubsystem->m_navx.GetLastSensorTimestamp());
+    
+    
     std::vector<double> tagDataBuffer = tagSub.GetAtomic().value;
 
 frc::SmartDashboard::PutNumber("ASDASD TIME", nt::Now() * 0.000001);
