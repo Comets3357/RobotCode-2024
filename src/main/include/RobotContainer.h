@@ -41,6 +41,7 @@
 #include "Commands/Climb.h"
 #include "Commands/IntakeIndexerAutonCommand.h"
 #include "COMETS3357/Auton/AutonPathCommand.h"
+#include "Commands/MiddleNoteDetectionCommand.h"
 
 // #include "commands/LegAvoidanceCommand.h"
 #include "COMETS3357/Subsystems/Vision/NoteDetection.h"
@@ -77,6 +78,8 @@ class RobotContainer {
   ShooterSubsystem shooter {&swerve, &gyro};
   ElevatorSubsystem elevator {};
   LEDsSubsystem led {&indexer}; 
+  AutonGyroResetSubsystem gyroResetButton{&gyro, &led};
+  NoteDetectionSubsystem noteDetection{&swerve, &limelight, &gyro};
 
 
   // Commands
@@ -91,8 +94,7 @@ class RobotContainer {
   ClimbResetCommand climbReset{&elevator};
   ClimbCommand climb{&elevator, &shooter};
   LegAvoidanceCommand legAvoidance{&swerve};
-  AutonGyroResetSubsystem gyroResetButton{&gyro, &led};
-  NoteDetectionSubsystem noteDetection{&swerve, &limelight, &gyro};
+  MiddleNoteDetectionCommand middleNoteDetection{&noteDetection, &swerve, &indexer};
 
 
 
@@ -125,8 +127,9 @@ class RobotContainer {
   frc2::InstantCommand piece4AutoSetpoint3{[this](){shooter.SetPositionPivot(40.5), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
   frc2::InstantCommand piece4AutoSetpoint4{[this](){shooter.SetPositionPivot(28), shooter.SetVelocityKickerWheel(3000); shooter.SetVelocityFlyWheel(-3000);}, {}};
   frc2::InstantCommand midPiece4AutoSetpoint{[this](){shooter.SetPositionPivot(29), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
-  AutonPathCommand ampAlignBlue{&swerve, 0.5, .5, frc::Pose2d{frc::Translation2d(units::meter_t{1.85}, units::meter_t{7.65}), frc::Rotation2d{units::radian_t{-1.57}}}, true};
-  AutonPathCommand ampAlignRed{&swerve, 0.5, .5, frc::Pose2d{frc::Translation2d(units::meter_t{14.68}, units::meter_t{7.65}), frc::Rotation2d{units::radian_t{-1.57}}}, true};
+  AutonPathCommand ampAlignBlue{&swerve, 0.5, .5, frc::Pose2d{frc::Translation2d(units::meter_t{1.85}, units::meter_t{7.65}), frc::Rotation2d{units::radian_t{-1.57}}}, true, 0, 0};
+  AutonPathCommand ampAlignRed{&swerve, 0.5, .5, frc::Pose2d{frc::Translation2d(units::meter_t{14.68}, units::meter_t{7.65}), frc::Rotation2d{units::radian_t{-1.57}}}, true, 0, 0};
+  frc2::InstantCommand resetOdometryWithVision{[this](){/*swerve.ResetOdometry(swerve.GetPose());*/}, {}};
   frc2::InstantCommand ampStart{[this](){
     if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
     {
@@ -155,8 +158,8 @@ class RobotContainer {
   }, {}};
     
 
-  frc2::InstantCommand noteDetectionStart{[this](){noteDetection.goToNote();},{&noteDetection}};
-  frc2::InstantCommand noteDetectionEnd{[this](){noteDetection.stopGoToNote();},{&noteDetection}};
+  frc2::InstantCommand noteDetectionStart{[this](){noteDetection.goToNote();},{}};
+  frc2::InstantCommand noteDetectionEnd{[this](){noteDetection.stopGoToNote();},{}};
   
 
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
@@ -186,7 +189,7 @@ class RobotContainer {
     {"ampSignalOff", std::make_shared<frc2::InstantCommand>(ampSignalOff)},
     {"PivotToRelative", std::make_shared<frc2::InstantCommand>(pivotRelative)},
       {"StopNoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionEnd)},
-      {"NoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionStart)}
+      {"NoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionStart)},
     {"ampStart", std::make_shared<frc2::InstantCommand>(ampStart)},
     {"ampCancel", std::make_shared<frc2::InstantCommand>(ampCancel)}
   };
@@ -223,6 +226,10 @@ class RobotContainer {
     {"StopShoot", std::make_shared<frc2::InstantCommand>(stopShoot)},
     {"Shoot", std::make_shared<frc2::InstantCommand>(shoot)},
     {"StopIntake", std::make_shared<frc2::InstantCommand>(stopIntake)},
+    {"StartNoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionEnd)},
+    {"EndNoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionStart)},
+    {"ResetOdometry", std::make_shared<frc2::InstantCommand>(resetOdometryWithVision)},
+    {"NoteDetectionMiddle", std::make_shared<MiddleNoteDetectionCommand>(middleNoteDetection)},
 
   };
 

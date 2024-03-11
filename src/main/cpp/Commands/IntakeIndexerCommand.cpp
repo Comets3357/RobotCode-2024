@@ -4,6 +4,7 @@
 IntakeIndexerCommand::IntakeIndexerCommand(IndexerSubsystem *indexer) {
     indexerSubsytem = indexer; 
     AddRequirements({indexer}); 
+    SetName("IntakeIndexer");
 }
 
 void IntakeIndexerCommand::Initialize()

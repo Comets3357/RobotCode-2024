@@ -87,13 +87,24 @@ void Autons::LoadAutons( std::vector<std::pair<std::string, std::shared_ptr<frc2
                         double rotation = pose["rotation"].get<double>();
                         double movementSpeed = pose["maxVelocity"].get<double>();
                         double rotationSpeed = pose["maxRotation"].get<double>();
+                        int isAdvanced = (int)pose["avoid"].get<double>();
+                        int isTurnSpeaker = (int)pose["TurnSpeaker"].get<double>();
+                        double endSpeed = pose["EndVelocity"].get<double>();
 
                         if (start)
                         {
             
                             // autons[autonName].first->AddCommands(AutonPathCommand{swerveSubsystem, 0.5, 0.5, frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, frc::Rotation2d{units::radian_t{rotation * 3.14159 / 180.0}}}});
                             // autons[autonName].first->AddCommands(frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}});
-                            commands.push_back(pathplanner::CommandUtil::wrappedEventCommand(std::make_shared<AutonPathCommand>(swerveSubsystem, rotationSpeed, movementSpeed, frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, frc::Rotation2d{units::radian_t{rotation * 3.14159 / 180.0}}}, false)));
+                            // if (isAdvanced)
+                            // {
+                            //     commands.push_back(pathplanner::CommandUtil::wrappedEventCommand(std::make_shared<AdvancedAutonPathCommand>(swerveSubsystem, rotationSpeed, movementSpeed, frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, frc::Rotation2d{units::radian_t{rotation * 3.14159 / 180.0}}})));
+                            // }
+                            // else
+                            {
+                                commands.push_back(pathplanner::CommandUtil::wrappedEventCommand(std::make_shared<AutonPathCommand>(swerveSubsystem, rotationSpeed, movementSpeed, frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, frc::Rotation2d{units::radian_t{rotation * 3.14159 / 180.0}}}, false, isTurnSpeaker, endSpeed)));
+                            }
+                            
                             commands.push_back(pathplanner::CommandUtil::wrappedEventCommand(std::make_shared<frc2::InstantCommand>(frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}})));
                                                     commands.push_back(pathplanner::CommandUtil::wrappedEventCommand(std::make_shared<frc2::InstantCommand>(frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}})));
 
@@ -158,14 +169,23 @@ void Autons::LoadAutons( std::vector<std::pair<std::string, std::shared_ptr<frc2
                                 double rotation = pose["rotation"].get<double>();
                                 double movementSpeed = pose["maxVelocity"].get<double>();
                                 double rotationSpeed = pose["maxRotation"].get<double>();
+                                int isAdvanced = (int)pose["avoid"].get<double>();
+                                int isTurnSpeaker = (int)pose["TurnSpeaker"].get<double>();
+                                double endSpeed = pose["EndVelocity"].get<double>();
 
                                 if (start)
                                 {
                                 
                                     std::vector<frc2::CommandPtr> commands3;
                                 
-                                    commands3.push_back(pathplanner::CommandUtil::wrappedEventCommand(std::make_shared<AutonPathCommand>(swerveSubsystem, rotationSpeed, movementSpeed, frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, frc::Rotation2d{units::radian_t{rotation * 3.14159 / 180.0}}}, false)));
-                                    
+                                    // if (isAdvanced)
+                                    // {
+                                    //     commands.push_back(pathplanner::CommandUtil::wrappedEventCommand(std::make_shared<AdvancedAutonPathCommand>(swerveSubsystem, rotationSpeed, movementSpeed, frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, frc::Rotation2d{units::radian_t{rotation * 3.14159 / 180.0}}})));
+                                    // }
+                                    // else
+                                    // {
+                                        commands3.push_back(pathplanner::CommandUtil::wrappedEventCommand(std::make_shared<AutonPathCommand>(swerveSubsystem, rotationSpeed, movementSpeed, frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, frc::Rotation2d{units::radian_t{rotation * 3.14159 / 180.0}}}, false, isTurnSpeaker, endSpeed)));
+                                    // }                                   
                                     commands3.push_back(pathplanner::CommandUtil::wrappedEventCommand(std::make_shared<frc2::InstantCommand>(frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}})));
                                     commands3.push_back(pathplanner::CommandUtil::wrappedEventCommand(std::make_shared<frc2::InstantCommand>(frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}})));
                                     commands3.push_back(pathplanner::CommandUtil::wrappedEventCommand(std::make_shared<frc2::InstantCommand>(frc2::InstantCommand{[this](){swerveSubsystem->Drive(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0}, true, true, &swerveSubsystem->kDriveKinematics);}, {swerveSubsystem}})));

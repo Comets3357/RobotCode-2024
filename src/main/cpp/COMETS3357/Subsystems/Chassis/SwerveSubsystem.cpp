@@ -119,10 +119,24 @@ void SwerveSubsystem::Periodic() {
                     {m_frontLeft.GetPosition(), m_rearLeft.GetPosition(),
                      m_frontRight.GetPosition(), m_rearRight.GetPosition()});
 
-  //frc::SmartDashboard::PutData("Fielsd2 real", &m_field);
+  frc::SmartDashboard::PutData("Fielsd2 real", &m_field);
 
   m_field.SetRobotPose(m_odometry2.GetPose());
 
+  xInterpolationBuffer.AddSample(wpi::math::MathSharedStore::GetTimestamp(), (double)GetPose().X());
+  yInterpolationBuffer.AddSample(wpi::math::MathSharedStore::GetTimestamp(), (double)GetPose().Y());
+  rotationInterpolationBuffer.AddSample(wpi::math::MathSharedStore::GetTimestamp(), (double)GetPose().Rotation().Radians());
+
+
+}
+
+frc::Pose2d SwerveSubsystem::GetSampledVisionPose(units::second_t time)
+{
+  if (xInterpolationBuffer.Sample(time).has_value() && yInterpolationBuffer.Sample(time).has_value() && rotationInterpolationBuffer.Sample(time).has_value())
+  {
+      return frc::Pose2d{frc::Translation2d{units::meter_t{xInterpolationBuffer.Sample(time).value()}, units::meter_t{yInterpolationBuffer.Sample(time).value()}}, frc::Rotation2d{units::radian_t{rotationInterpolationBuffer.Sample(time).value()}}};
+  }
+  return GetPose();
   
 }
 

@@ -1,7 +1,10 @@
+#pragma once
+
 #include "COMETS3357/Subsystems/Subsystem.h"
 #include "COMETS3357/Subsystems/Chassis/SwerveSubsystem.h"
 #include "COMETS3357/Subsystems/Vision/LimelightSubsystem.h"
 #include "COMETS3357/GyroSubsystem.h"
+
 
 SUBSYSTEM_START(NoteDetection)
 
@@ -17,6 +20,11 @@ double x = 0;
 double theta = 1.1344530556;
 double gr = .18;
 double h = .333;
+
+frc::PIDController translatePID{1, 0, 0};
+frc::PIDController rotPID{1, 0, 0};
+
+bool autonNoteValid = true;
 
 frc::Field2d m_field;
 

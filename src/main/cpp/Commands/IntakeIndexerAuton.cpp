@@ -3,6 +3,7 @@
 
 IntakeIndexerAutonCommand::IntakeIndexerAutonCommand(IndexerSubsystem *indexer) {
     indexerSubsytem = indexer; 
+    SetName("IntakeIntexerCommand");
 }
 
 void IntakeIndexerAutonCommand::Initialize()

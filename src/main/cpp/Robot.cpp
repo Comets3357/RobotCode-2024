@@ -25,6 +25,7 @@ void Robot::RobotPeriodic()
   frc2::CommandScheduler::GetInstance().Run();
   m_container.Periodic();
 
+  frc::SmartDashboard::PutData("Swerve Subsystem", &frc2::CommandScheduler::GetInstance());
   
 }
 

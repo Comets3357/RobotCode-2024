@@ -5,7 +5,10 @@
         "y": 4.41,
         "rotation": -126.05,
         "maxVelocity": 0.5,
-        "maxRotation": 0.5
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
     },
     
         "1PieceAutoSetpoint",
@@ -19,20 +22,29 @@
         "y": 1.62,
         "rotation": -126.05,
         "maxVelocity": 0.5,
-        "maxRotation": 0.5
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
     },
     {
         "x": 15.46,
         "y": 1.62,
         "rotation": 180,
         "maxVelocity": 0.5,
-        "maxRotation": 0.5
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
     },
     {
         "x": 9,
         "y": 1.2,
         "rotation": 180,
         "maxVelocity": 0.5,
-        "maxRotation": 0.5
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
     }
 ]
