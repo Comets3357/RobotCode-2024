@@ -71,10 +71,10 @@ void MiddleNoteDetectionCommand::Execute()
 
 bool MiddleNoteDetectionCommand::IsFinished()
 {
-    frc::Pose2d currentPose = swerve->GetPose();
+    frc::Pose2d currentPose = swerveSubsystem->GetPose();
     if ((sqrt(pow((double)swerveSubsystem->GetPose().Y() - y, 2) + pow((double)swerveSubsystem->GetPose().X() - x, 2)) < 0.1) && gotPosition)
     {
-            swerve->DriveXRotate(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0});
+            swerveSubsystem->DriveXRotate(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0});
 
 return true;
     }
