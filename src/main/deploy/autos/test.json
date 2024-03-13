@@ -1,27 +1,193 @@
 [
-    {
-      "x": 15.23,
-      "y": 6.47,
-      "rotation": 180,
-      "maxVelocity": 0.5,
-      "maxRotation": 0.5,
-      "avoid": 0,
-      "TurnSpeaker": 0,
-      "EndVelocity": 0
-    },
-    
-    [
-        "StartShoot",
         {
-        "x": 10,
+        "x": 15.23,
         "y": 6.47,
         "rotation": 180,
-        "maxVelocity": 0.5,
+        "maxVelocity": 1,
         "maxRotation": 0.5,
         "avoid": 0,
         "TurnSpeaker": 0,
         "EndVelocity": 0
-        }
-        
-    ]
+      },
+[
+      {
+        "x": 14.3,
+        "y": 6.85,
+        "rotation": 145.60,
+        "maxVelocity": 1,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      },
+      "StartShoot"
+    ],
+    [
+      "wait 0.2",
+      "StartShoot"
+    ],
+      "Shoot",
+      "Intake",
+      [
+      {
+        "x": 13.75,
+        "y": 6.9,
+        "rotation": 151.60,
+        "maxVelocity": 1,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      },
+      "StartShoot"
+    ],
+    "Shoot",
+      
+      "wait 0.2",
+
+    {
+        "x": 10,
+        "y": 7.5,
+        "rotation": 180,
+        "maxVelocity": 4,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+    },
+
+[
+  "NoteDetectionMiddle",
+  "IntakeIndexer"
+],
+"piece6AutoSetpoint",
+[
+  {
+      "x": 11.5,
+      "y": 6.8,
+      "rotation": 170,
+      "maxVelocity": 4,
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 1,
+      "EndVelocity": 0
+  },
+  "IntakeIndexer"
+],
+"Shoot",
+  "wait 0.3",
+"StopTurnTowardsSpeaker",
+{
+  "x": 10.16,
+  "y": 6.05,
+  "rotation": 180,
+  "maxVelocity": 4,
+  "maxRotation": 0.5,
+  "avoid": 0,
+  "TurnSpeaker": 0,
+  "EndVelocity": 0
+},
+[
+  "NoteDetectionMiddle",
+  "IntakeIndexer"
+],
+"TurnTowardsSpeaker",
+[
+  {
+      "x": 11,
+      "y": 6.2,
+      "rotation": 180,
+      "maxVelocity": 4,
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 1,
+      "EndVelocity": 3
+  },
+  "IntakeIndexer",
+  "StartShoot"
+],
+[
+  {
+      "x": 13.8,
+      "y": 6.4,
+      "rotation": 180,
+      "maxVelocity": 4,
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 1,
+      "EndVelocity": 0
+  },
+  "IntakeIndexer",
+  "StartShoot"
+],
+[
+  "wait 0.3",
+  "StartShoot"
+  ],
+"Shoot",
+[
+"wait 0.2",
+"StartShoot"
+],
+"StopTurnTowardsSpeaker",
+
+[
+  {
+      "x": 13.7,
+      "y": 6.4,
+      "rotation": 245,
+      "maxVelocity": 4,
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
+  },
+  "IntakeIndexer",
+  "StartShoot"
+],
+
+[
+  {
+      "x": 13.7,
+      "y": 5.32,
+      "rotation": 245,
+      "maxVelocity": 4,
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
+  },
+  "IntakeIndexer"
+],
+"4PieceSetpoint2",
+[
+  {
+      "x": 14,
+      "y": 4.31,
+      "rotation": 200,
+      "maxVelocity": 4,
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
+  },
+  "IntakeIndexer"
+],
+  "Shoot",
+  "wait 0.3",
+
+  "4PieceSetpoint",
+    "NoteDetectionMiddle",
+  
+    {
+        "x": 13.8,
+        "y": 4.21,
+        "rotation": 200,
+        "maxVelocity": 0,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 1,
+        "EndVelocity": 0
+    }
+
 ]

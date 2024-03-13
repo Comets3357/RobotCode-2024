@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <frc2/command/CommandPtr.h>
+#include <frc2/command/CommandPtr.h> 
 #include <frc2/command/button/CommandXboxController.h>
 #include <frc2/command/button/Trigger.h>
 #include <units/acceleration.h>
@@ -94,7 +94,7 @@ class RobotContainer {
   ClimbResetCommand climbReset{&elevator};
   ClimbCommand climb{&elevator, &shooter};
   LegAvoidanceCommand legAvoidance{&swerve};
-  MiddleNoteDetectionCommand middleNoteDetection{&noteDetection, &swerve, &indexer};
+  MiddleNoteDetectionCommand middleNoteDetection{&noteDetection, &swerve, &indexer, &limelight, &gyro};
 
 
 
@@ -122,14 +122,15 @@ class RobotContainer {
   frc2::InstantCommand pivotRelative{[this](){shooter.pivotInRelative = true; shooter.Pivot.changeRunMode(COMETS3357::SparkMaxPositionRunMode::POSITION_SPARK_MAX_RELATIVE);}, {}};
 
   // Autonomous Commands
-  frc2::InstantCommand piece4AutoSetpoint{[this](){shooter.SetPositionPivot(40), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
-  frc2::InstantCommand piece4AutoSetpoint2{[this](){shooter.SetPositionPivot(40), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
+  frc2::InstantCommand piece4AutoSetpoint{[this](){shooter.SetPositionPivot(36), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
+  frc2::InstantCommand piece4AutoSetpoint2{[this](){shooter.SetPositionPivot(40), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
   frc2::InstantCommand piece4AutoSetpoint3{[this](){shooter.SetPositionPivot(40.5), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
   frc2::InstantCommand piece4AutoSetpoint4{[this](){shooter.SetPositionPivot(28), shooter.SetVelocityKickerWheel(3000); shooter.SetVelocityFlyWheel(-3000);}, {}};
+  frc2::InstantCommand piece6AutoSetpoint{[this](){shooter.SetPositionPivot(25), shooter.SetVelocityKickerWheel(3500); shooter.SetVelocityFlyWheel(-3500);}, {}};
   frc2::InstantCommand midPiece4AutoSetpoint{[this](){shooter.SetPositionPivot(29), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
   AutonPathCommand ampAlignBlue{&swerve, 0.5, .5, frc::Pose2d{frc::Translation2d(units::meter_t{1.85}, units::meter_t{7.65}), frc::Rotation2d{units::radian_t{-1.57}}}, true, 0, 0};
   AutonPathCommand ampAlignRed{&swerve, 0.5, .5, frc::Pose2d{frc::Translation2d(units::meter_t{14.68}, units::meter_t{7.65}), frc::Rotation2d{units::radian_t{-1.57}}}, true, 0, 0};
-  frc2::InstantCommand resetOdometryWithVision{[this](){/*swerve.ResetOdometry(swerve.GetPose());*/}, {}};
+  frc2::InstantCommand resetOdometryWithVision{[this](){swerve.ResetOdometry(swerve.GetPose());}, {}};
   frc2::InstantCommand ampStart{[this](){
     if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
     {
@@ -230,7 +231,7 @@ class RobotContainer {
     {"EndNoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionStart)},
     {"ResetOdometry", std::make_shared<frc2::InstantCommand>(resetOdometryWithVision)},
     {"NoteDetectionMiddle", std::make_shared<MiddleNoteDetectionCommand>(middleNoteDetection)},
-
+    {"piece6AutoSetpoint", std::make_shared<frc2::InstantCommand>(piece6AutoSetpoint)}
   };
 
   COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap" };

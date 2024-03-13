@@ -540,12 +540,12 @@ frc::Pose2d SwerveSubsystem::GetMovingPose(double time)
 
 void SwerveSubsystem::ResetOdometry(frc::Pose2d pose) {
   m_odometry.ResetPosition(
-      GetHeading(),
+      pose.Rotation(),
       {m_frontLeft.GetPosition(), m_frontRight.GetPosition(),
        m_rearLeft.GetPosition(), m_rearRight.GetPosition()},
       pose);
   m_odometry2.ResetPosition(
-      GetHeading(),
+      pose.Rotation(),
       {m_frontLeft.GetPosition(), m_frontRight.GetPosition(),
        m_rearLeft.GetPosition(), m_rearRight.GetPosition()},
       pose);

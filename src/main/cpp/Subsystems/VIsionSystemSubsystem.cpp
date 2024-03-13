@@ -49,7 +49,7 @@ void VisionSystemSubsystem::Periodic()
     {
         lastTimestamp = tagDataBuffer[3];
         
-        uint64_t deltaTime = (nt::Now() - tagSub.GetAtomic().time) + 7000;
+        uint64_t deltaTime = (nt::Now() - tagSub.GetAtomic().time);
 
         
     

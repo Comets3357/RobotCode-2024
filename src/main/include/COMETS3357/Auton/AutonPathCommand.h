@@ -22,5 +22,7 @@ double rot;
 double speed;
 int isTurnSpeaker = 0;
 
+int idk = 0;
+
 
 COMMAND_END

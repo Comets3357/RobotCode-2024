@@ -20,9 +20,10 @@ MiddleNoteDetectionCommand::MiddleNoteDetectionCommand(NoteDetectionSubsystem* n
 
 void MiddleNoteDetectionCommand::Initialize()
 {
-    noteDetectionSubsystem->goToNote();
+
     noteDetectionSubsystem->autonNoteValid = true;
     indexerSubsystem->SetPercent(0.4); 
+    rotPID.SetSetpoint((double)swerveSubsystem->GetPose().Rotation().Radians());
 }
 
 void MiddleNoteDetectionCommand::Execute()
@@ -36,14 +37,18 @@ void MiddleNoteDetectionCommand::Execute()
             double Distance = D+(gr/2);
             y = (double)swerveSubsystem->GetPose().Y() + (Distance*std::sin((double)swerveSubsystem->GetSampledVisionPose(time).Rotation().Radians() - (limelightSubsystem->getX() * 3.141592654/180)) + 0.3*std::sin((double)swerveSubsystem->GetSampledVisionPose(time).Rotation().Radians()));
             x = (double)swerveSubsystem->GetPose().X() + (Distance*std::cos((double)swerveSubsystem->GetSampledVisionPose(time).Rotation().Radians() - (limelightSubsystem->getX() * 3.141592654/180)) + 0.3*std::cos((double)swerveSubsystem->GetSampledVisionPose(time).Rotation().Radians()));
+            if (limelightSubsystem->getY() < 0)
             gotPosition = true;
+            frc::SmartDashboard::PutNumber("X", x);
+            frc::SmartDashboard::PutNumber("Y", y);
+            
         }
     }
-    else
-    {
-        frc::Pose2d currentPose = swerveSubsystem->GetPose();
+
+    frc::Pose2d currentPose = swerveSubsystem->GetPose();
         double rotationSpeed = std::clamp(rotPID.Calculate((double)currentPose.Rotation().Radians()), -0.5, 0.5);
-        double angle = atan2((double)currentPose.X() - x, (double)currentPose.Y() -x);
+        double angle = atan2((double)currentPose.X() - x, (double)currentPose.Y() - y);
+        frc::SmartDashboard::PutNumber("angle", angle * 180 / 3.14159);
         double robotSpeed = std::clamp(translatePID.Calculate(sqrt(pow((double)swerveSubsystem->GetPose().Y() - y, 2) + pow((double)swerveSubsystem->GetPose().X() - x, 2)), 0), -1.0, 1.0);
         double movementX = sin(angle) * robotSpeed;
         double movementY = cos(angle) * robotSpeed;//std::clamp(translatePID.Calculate((double)currentPose.Y(), (double)targetPose.Y()), -speed, speed);
@@ -53,7 +58,6 @@ void MiddleNoteDetectionCommand::Execute()
             movementY *= -1;
         }
         swerveSubsystem->DriveXRotate(units::meters_per_second_t{movementX}, units::meters_per_second_t{movementY}, units::radians_per_second_t{rotationSpeed});
-    }
 }
 
 // bool MiddleNoteDetectionCommand::IsFinished()
@@ -72,14 +76,14 @@ void MiddleNoteDetectionCommand::Execute()
 bool MiddleNoteDetectionCommand::IsFinished()
 {
     frc::Pose2d currentPose = swerveSubsystem->GetPose();
-    if ((sqrt(pow((double)swerveSubsystem->GetPose().Y() - y, 2) + pow((double)swerveSubsystem->GetPose().X() - x, 2)) < 0.1) && gotPosition)
+    if (((sqrt(pow((double)swerveSubsystem->GetPose().Y() - y, 2) + pow((double)swerveSubsystem->GetPose().X() - x, 2)) < 0.1) && gotPosition) || !indexerSubsystem->IsDetected())
     {
-            swerveSubsystem->DriveXRotate(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0});
-
-return true;
+        gotPosition = false;
+        swerveSubsystem->DriveXRotate(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0});
+        return true;
     }
     return false;
-}
+}   
 
 void MiddleNoteDetectionCommand::End(bool interrupted)
 {

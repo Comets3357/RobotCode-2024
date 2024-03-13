@@ -1,5 +1,5 @@
 [
-    {
+        {
         "x": 15.23,
         "y": 6.47,
         "rotation": 180,
@@ -9,7 +9,7 @@
         "TurnSpeaker": 0,
         "EndVelocity": 0
       },
-      "4PieceSetpoint3",
+[
       {
         "x": 15.25,
         "y": 6.47,
@@ -20,6 +20,9 @@
         "TurnSpeaker": 0,
         "EndVelocity": 0
       },
+      "StartShoot"
+],
+[
       {
         "x": 14.3,
         "y": 6.75,
@@ -30,11 +33,13 @@
         "TurnSpeaker": 0,
         "EndVelocity": 0
       },
+      "StartShoot"
+    ],
       "wait 0.2",
       "Shoot",
       "wait 0.5",
-      "4PieceSetpoint2",
       "Intake",
+      [
       {
         "x": 13.75,
         "y": 6.75,
@@ -45,6 +50,9 @@
         "TurnSpeaker": 0,
         "EndVelocity": 0
       },
+      "StartShoot"
+    ],
+    "Shoot",
       
       "wait 0.5",
 
@@ -56,7 +64,7 @@
         "maxRotation": 0.5,
         "avoid": 0,
         "TurnSpeaker": 0,
-        "EndVelocity": 2
+        "EndVelocity": 0
     },
     [
         "IntakeIndexer",
