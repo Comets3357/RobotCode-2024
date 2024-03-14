@@ -1,14 +1,35 @@
 
 #include "Commands/AmpExtend.h"
 
-AmpExtendCommand::AmpExtendCommand(AmpSubsystem* amp, ShooterSubsystem* shooter) {
-    AddCommands(
-        frc2::InstantCommand{[shooter](){shooter->SetPercentPivot(50);}, {shooter}},
-        frc2::InstantCommand{[shooter](){shooter->SetVelocityFlyWheel(-1400);}, {shooter}},
-        frc2::InstantCommand{[shooter](){shooter->SetVelocityKickerWheel(1400);}, {shooter}},
-        frc2::WaitUntilCommand([shooter](){return shooter->GetPivotAbsolutePosition() > 47;}),
-        frc2::InstantCommand{[amp](){amp->SetPercent(0.3);}, {amp}},
-        frc2::WaitCommand{1_s},
-        frc2::InstantCommand{[amp](){amp->SetPercent(0);}, {amp}}
-    );
+AmpExtendCommand::AmpExtendCommand(ShooterSubsystem* shooter, AmpSubsystem* amp) {
+    shooterSubsystem = shooter; 
+    ampSubsystem = amp;
+    AddRequirements({shooter, amp}); 
+}
+
+void AmpExtendCommand::Initialize()
+{
+    shooterSubsystem->SetPositionPivot(50);
+    shooterSubsystem->SetVelocityFlyWheel(-1400);
+    shooterSubsystem->SetVelocityKickerWheel(1400);
+}
+
+void AmpExtendCommand::Execute()
+{
+    if (shooterSubsystem->Pivot.GetPosition() > 52 && !alreadySetIt)
+    {
+        ampSubsystem->SetPercent(0.3);
+        time = (double)wpi::math::MathSharedStore::GetTimestamp();
+        alreadySetIt = true;
+    }
+}
+
+bool AmpExtendCommand::IsFinished()
+{
+    return (double)wpi::math::MathSharedStore::GetTimestamp() > time + 1;
+}
+
+void AmpExtendCommand::End(bool interrupted)
+{
+   ampSubsystem->SetPercent(0);
 }
