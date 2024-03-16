@@ -10,8 +10,8 @@ AmpExtendCommand::AmpExtendCommand(ShooterSubsystem* shooter, AmpSubsystem* amp)
 void AmpExtendCommand::Initialize()
 {
     shooterSubsystem->SetPositionPivot(51);
-    shooterSubsystem->SetVelocityFlyWheel(-1600);
-    shooterSubsystem->SetVelocityKickerWheel(1600);
+    shooterSubsystem->SetVelocityFlyWheel(-1200);
+    shooterSubsystem->SetVelocityKickerWheel(1200);
     alreadySetIt = false;
 }
 
@@ -32,5 +32,5 @@ bool AmpExtendCommand::IsFinished()
 
 void AmpExtendCommand::End(bool interrupted)
 {
-   ampSubsystem->SetPercent(0);
+   ampSubsystem->SetPercent(0.05);
 }

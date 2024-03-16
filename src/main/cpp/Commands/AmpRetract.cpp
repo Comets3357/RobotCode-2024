@@ -1,10 +1,11 @@
 
 #include "Commands/AmpRetract.h"
 
-AmpRetractCommand::AmpRetractCommand(ShooterSubsystem* shooter, AmpSubsystem* amp) {
+AmpRetractCommand::AmpRetractCommand(ShooterSubsystem* shooter, AmpSubsystem* amp, IndexerSubsystem* indexer) {
     shooterSubsystem = shooter; 
     ampSubsystem = amp;
-    AddRequirements({shooter, amp}); 
+    indexerSubsystem = indexer;
+    AddRequirements({shooter, amp, indexer}); 
 }
 
 void AmpRetractCommand::Initialize()
@@ -35,5 +36,5 @@ bool AmpRetractCommand::IsFinished()
 
 void AmpRetractCommand::End(bool interrupted)
 {
-   
+   indexerSubsystem->SetPercent(0);
 }

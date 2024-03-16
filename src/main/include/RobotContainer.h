@@ -85,7 +85,7 @@ class RobotContainer {
   SetPointCommand podiumSetPoint{&shooter, &indexer, &swerve, 38.5, 2000};
   SetPointCommand ampSetPoint{&shooter, &indexer, &swerve, 34, 2000};
   AmpExtendCommand ampExtend{&shooter, &amp};
-  AmpRetractCommand ampRetract{&shooter, &amp};
+  AmpRetractCommand ampRetract{&shooter, &amp, &indexer};
   ClimbResetCommand climbReset{&elevator};
   ClimbCommand climb{&elevator, &shooter};
   LegAvoidanceCommand legAvoidance{&swerve};
