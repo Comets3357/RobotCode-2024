@@ -17,7 +17,7 @@ void AmpRetractCommand::Initialize()
 
 void AmpRetractCommand::Execute()
 {
-    if((double)wpi::math::MathSharedStore::GetTimestamp() > time + 1) {
+    if((double)wpi::math::MathSharedStore::GetTimestamp() > time + 0.5) {
         ampSubsystem->SetPercent(0);
         shooterSubsystem->SetPositionPivot(35);
     }
@@ -25,7 +25,7 @@ void AmpRetractCommand::Execute()
 
 bool AmpRetractCommand::IsFinished()
 {
-    if((double)wpi::math::MathSharedStore::GetTimestamp() > time + 1) {
+    if((double)wpi::math::MathSharedStore::GetTimestamp() > time + 0.5) {
         ampSubsystem->SetPercent(0);
         shooterSubsystem->SetPositionPivot(35);
         return true;

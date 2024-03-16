@@ -11,6 +11,6 @@ AmpSubsystem();
 
 void SetPercent(double percent);
 
-COMETS3357::SparkMaxPercent AmpMotor{"Indexer"}; 
+COMETS3357::SparkMaxPercent AmpMotor{"AmpMotor"}; 
 
 SUBSYSTEM_END
