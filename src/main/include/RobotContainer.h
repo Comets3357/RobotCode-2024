@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <frc2/command/CommandPtr.h> 
+#include <frc2/command/CommandPtr.h>
 #include <frc2/command/button/CommandXboxController.h>
 #include <frc2/command/button/Trigger.h>
 #include <units/acceleration.h>
@@ -35,16 +35,13 @@
 #include "commands/LegAvoidanceCommand.h"
 #include "commands/SetPointCommand.h"
 #include "Subsystems/AutonResetGyroButtonSubsystem.h"
-#include "Commands/AmpShoot.h"
-#include "Commands/AmpShootStop.h"
+#include "Commands/AmpExtend.h"
+#include "Commands/AmpRetract.h"
 #include "Commands/ClimbReset.h"
 #include "Commands/Climb.h"
 #include "Commands/IntakeIndexerAutonCommand.h"
 #include "COMETS3357/Auton/AutonPathCommand.h"
-#include "Commands/MiddleNoteDetectionCommand.h"
-
-// #include "commands/LegAvoidanceCommand.h"
-#include "COMETS3357/Subsystems/Vision/NoteDetection.h"
+#include "Subsystems/AmpSubsystem.h"
 
 
 
@@ -72,14 +69,12 @@ class RobotContainer {
   COMETS3357::SwerveSubsystem swerve{"Swerve", &gyro};
 
   VisionSystemSubsystem visionSystem{&swerve, &gyro};
-
   IntakeSubsystem intake {}; 
   IndexerSubsystem indexer {}; 
   ShooterSubsystem shooter {&swerve, &gyro};
   ElevatorSubsystem elevator {};
+  AmpSubsystem amp {};
   LEDsSubsystem led {&indexer}; 
-  AutonGyroResetSubsystem gyroResetButton{&gyro, &led};
-  NoteDetectionSubsystem noteDetection{&swerve, &limelight, &gyro};
 
 
   // Commands
@@ -89,14 +84,14 @@ class RobotContainer {
   SetPointCommand subWooferSetpoint{&shooter, &indexer, &swerve, 57, 2000};
   SetPointCommand podiumSetPoint{&shooter, &indexer, &swerve, 38.5, 2000};
   SetPointCommand ampSetPoint{&shooter, &indexer, &swerve, 34, 2000};
-  AmpShootCommand ampShoot{&shooter, &elevator};
-  AmpShootStopCommand ampShootStop{&shooter, &elevator, &indexer};
+  AmpExtendCommand ampExtend{&shooter, &amp};
+  AmpRetractCommand ampRetract{&shooter, &amp, &indexer};
   ClimbResetCommand climbReset{&elevator};
   ClimbCommand climb{&elevator, &shooter};
   LegAvoidanceCommand legAvoidance{&swerve};
-  MiddleNoteDetectionCommand middleNoteDetection{&noteDetection, &swerve, &indexer, &limelight, &gyro};
-
-
+  AutonGyroResetSubsystem gyroResetButton{&gyro, &led};
+  //AutonPathCommand ampAlign{&swerve, 100, 100, frc::Pose2d::Pose2d{frc::Translation2d(units::meter_t{0}, units::meter_t{0}), frc::Rotation2d{0,0}}};
+  
 
   // Instant Commands
   frc2::InstantCommand avoid{[this](){legAvoidance.Schedule();}, {&swerve}}; // test purposes
@@ -122,15 +117,13 @@ class RobotContainer {
   frc2::InstantCommand pivotRelative{[this](){shooter.pivotInRelative = true; shooter.Pivot.changeRunMode(COMETS3357::SparkMaxPositionRunMode::POSITION_SPARK_MAX_RELATIVE);}, {}};
 
   // Autonomous Commands
-  frc2::InstantCommand piece4AutoSetpoint{[this](){shooter.SetPositionPivot(36), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
-  frc2::InstantCommand piece4AutoSetpoint2{[this](){shooter.SetPositionPivot(40), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
+  frc2::InstantCommand piece4AutoSetpoint{[this](){shooter.SetPositionPivot(40), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
+  frc2::InstantCommand piece4AutoSetpoint2{[this](){shooter.SetPositionPivot(40), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
   frc2::InstantCommand piece4AutoSetpoint3{[this](){shooter.SetPositionPivot(40.5), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
   frc2::InstantCommand piece4AutoSetpoint4{[this](){shooter.SetPositionPivot(28), shooter.SetVelocityKickerWheel(3000); shooter.SetVelocityFlyWheel(-3000);}, {}};
-  frc2::InstantCommand piece6AutoSetpoint{[this](){shooter.SetPositionPivot(25), shooter.SetVelocityKickerWheel(3500); shooter.SetVelocityFlyWheel(-3500);}, {}};
   frc2::InstantCommand midPiece4AutoSetpoint{[this](){shooter.SetPositionPivot(29), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
   AutonPathCommand ampAlignBlue{&swerve, 0.5, .5, frc::Pose2d{frc::Translation2d(units::meter_t{1.85}, units::meter_t{7.65}), frc::Rotation2d{units::radian_t{-1.57}}}, true, 0, 0};
   AutonPathCommand ampAlignRed{&swerve, 0.5, .5, frc::Pose2d{frc::Translation2d(units::meter_t{14.68}, units::meter_t{7.65}), frc::Rotation2d{units::radian_t{-1.57}}}, true, 0, 0};
-  frc2::InstantCommand resetOdometryWithVision{[this](){swerve.ResetOdometry(swerve.GetPose());}, {}};
   frc2::InstantCommand ampStart{[this](){
     if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
     {
@@ -159,10 +152,6 @@ class RobotContainer {
   }, {}};
     
 
-  frc2::InstantCommand noteDetectionStart{[this](){noteDetection.goToNote();},{}};
-  frc2::InstantCommand noteDetectionEnd{[this](){noteDetection.stopGoToNote();},{}};
-  
-
   std::unordered_map<std::string, std::shared_ptr<frc2::Command>> buttonActionMap 
   {
     {"ZeroGyro", std::make_shared<frc2::InstantCommand>(zeroGyro)},
@@ -179,8 +168,8 @@ class RobotContainer {
     {"AmpSetpoint", std::make_shared<SetPointCommand>(ampSetPoint)},
     {"angleOffsetPositive", std::make_shared<frc2::InstantCommand>(angleOffsetPositive)},
     {"angleOffsetNegative", std::make_shared<frc2::InstantCommand>(angleOffsetNegative)},
-    {"AmpShoot", std::make_shared<AmpShootCommand>(ampShoot)},
-    {"AmpShootStop", std::make_shared<AmpShootStopCommand>(ampShootStop)},
+    {"AmpExtend", std::make_shared<frc2::SequentialCommandGroup>(ampExtend)},
+    {"AmpRetract", std::make_shared<frc2::SequentialCommandGroup>(ampRetract)},
     {"Climb", std::make_shared<ClimbCommand>(climb)},
     {"ClimbRetract", std::make_shared<frc2::InstantCommand>(climbRetract)},
     {"ClimbReset", std::make_shared<ClimbResetCommand>(climbReset)},
@@ -189,10 +178,9 @@ class RobotContainer {
     {"ampSignalOn", std::make_shared<frc2::InstantCommand>(ampSignalOn)},
     {"ampSignalOff", std::make_shared<frc2::InstantCommand>(ampSignalOff)},
     {"PivotToRelative", std::make_shared<frc2::InstantCommand>(pivotRelative)},
-      {"StopNoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionEnd)},
-      {"NoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionStart)},
     {"ampStart", std::make_shared<frc2::InstantCommand>(ampStart)},
     {"ampCancel", std::make_shared<frc2::InstantCommand>(ampCancel)}
+    
   };
 
 
@@ -227,11 +215,7 @@ class RobotContainer {
     {"StopShoot", std::make_shared<frc2::InstantCommand>(stopShoot)},
     {"Shoot", std::make_shared<frc2::InstantCommand>(shoot)},
     {"StopIntake", std::make_shared<frc2::InstantCommand>(stopIntake)},
-    {"StartNoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionEnd)},
-    {"EndNoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionStart)},
-    {"ResetOdometry", std::make_shared<frc2::InstantCommand>(resetOdometryWithVision)},
-    {"NoteDetectionMiddle", std::make_shared<MiddleNoteDetectionCommand>(middleNoteDetection)},
-    {"piece6AutoSetpoint", std::make_shared<frc2::InstantCommand>(piece6AutoSetpoint)}
+
   };
 
   COMETS3357::ControllerMap controllerMap{buttonActionMap, joystickActionMap, "CompControllerMap" };

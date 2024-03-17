@@ -332,6 +332,17 @@
         "IntakeSpeed" : -0.8, 
         "EjectSpeed" : 0.8
       }
+    },
+    {
+      "Name": "AmpMotor",
+      "ID": 51,
+      "InvertedRelative": true,
+      "CurrentLimit": 10,
+      "IdleMode": "Brake",
+      "Follow": "NONE",
+      "Percents":
+      {
+      }
     }
   ],
   "SparkMaxPWMConfigs": [],
