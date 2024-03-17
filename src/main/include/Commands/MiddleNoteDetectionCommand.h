@@ -14,7 +14,7 @@
 COMMAND_START(MiddleNoteDetection)
 
 
-MiddleNoteDetectionCommand(NoteDetectionSubsystem *noteDetection, COMETS3357::SwerveSubsystem* swerve, IndexerSubsystem* indexer, COMETS3357::LimelightSubsystem* limelight, COMETS3357::GyroSubsystem* gyro);
+MiddleNoteDetectionCommand(NoteDetectionSubsystem *noteDetection, COMETS3357::SwerveSubsystem* swerve, IndexerSubsystem* indexer, COMETS3357::LimelightSubsystem* limelight, COMETS3357::GyroSubsystem* gyro, frc::Translation2d estimatedGamepiecePose);
 
 NoteDetectionSubsystem* noteDetectionSubsystem;
 IndexerSubsystem* indexerSubsystem;
@@ -32,6 +32,8 @@ frc::PIDController translatePID{1, 0, 0};
 frc::PIDController rotPID{1, 0, 0};
 
 frc::Pose2d targetPose;
+
+frc::Translation2d pose;
 
 
 bool gotPosition = false;

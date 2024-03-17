@@ -1,0 +1,185 @@
+[
+    {
+    "x": 1.34,
+    "y": 6.47,
+    "rotation": 0,
+    "maxVelocity": 1,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  [
+  {
+    "x": 2.07,
+    "y": 6.85,
+    "rotation": 34.4,
+    "maxVelocity": 1,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot"
+  ],
+  [
+  "wait 0.2",
+  "StartShoot"
+  ],
+  "Shoot",
+  "Intake",
+  [
+  {
+    "x": 2.82,
+    "y": 6.9,
+    "rotation": 28.4,
+    "maxVelocity": 1,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot"
+  ],
+  "Shoot",
+  
+  "wait 0.2",
+  
+  {
+    "x": 6.57,
+    "y": 7.5,
+    "rotation": 0,
+    "maxVelocity": 4,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  
+  [
+  "NoteDetectionTop",
+  "IntakeIndexer"
+  ],
+  "piece6AutoSetpoint",
+  [
+  {
+  "x": 5.07,
+  "y": 6.8,
+  "rotation": 10,
+  "maxVelocity": 4,
+  "maxRotation": 0.5,
+  "avoid": 0,
+  "TurnSpeaker": 1,
+  "EndVelocity": 0
+  },
+  "IntakeIndexer",
+  "skipIfNeeded"
+  ],
+  "Shoot",
+  "wait 0.3",
+  "StopTurnTowardsSpeaker",
+  [
+  "NoteDetectionMiddleTop",
+  "IntakeIndexer"
+  ],
+  "TurnTowardsSpeaker",
+  [
+  {
+  "x": 5.57,
+  "y": 6.2,
+  "rotation": 0,
+  "maxVelocity": 4,
+  "maxRotation": 0.5,
+  "avoid": 0,
+  "TurnSpeaker": 1,
+  "EndVelocity": 3
+  },
+  "IntakeIndexer",
+  "StartShoot"
+  ],
+  [
+  {
+  "x": 2.77,
+  "y": 6.4,
+  "rotation": 0,
+  "maxVelocity": 4,
+  "maxRotation": 0.5,
+  "avoid": 0,
+  "TurnSpeaker": 1,
+  "EndVelocity": 0
+  },
+  "IntakeIndexer",
+  "StartShoot"
+  ],
+  [
+  "wait 0.3",
+  "StartShoot",
+  "skipIfNeeded"
+  ],
+  "Shoot",
+  [
+  "wait 0.2",
+  "StartShoot",
+  "skipIfNeeded"
+  ],
+  "StopTurnTowardsSpeaker",
+  
+  [
+  {
+  "x": 2.77,
+  "y": 6.4,
+  "rotation": 205,
+  "maxVelocity": 4,
+  "maxRotation": 0.5,
+  "avoid": 0,
+  "TurnSpeaker": 0,
+  "EndVelocity": 0
+  },
+  "IntakeIndexer",
+  "StartShoot"
+  ],
+  
+  [
+  {
+  "x": 2.77,
+  "y": 5.32,
+  "rotation": 205,
+  "maxVelocity": 4,
+  "maxRotation": 0.5,
+  "avoid": 0,
+  "TurnSpeaker": 0,
+  "EndVelocity": 0
+  },
+  "IntakeIndexer"
+  ],
+  "4PieceSetpoint2",
+  [
+  {
+  "x": 2.57,
+  "y": 4.31,
+  "rotation": 240,
+  "maxVelocity": 4,
+  "maxRotation": 0.5,
+  "avoid": 0,
+  "TurnSpeaker": 0,
+  "EndVelocity": 0
+  },
+  "IntakeIndexer"
+  ],
+  "Shoot",
+  "wait 0.3",
+  
+  "4PieceSetpoint",
+  
+  {
+    "x": 2.77,
+    "y": 4.21,
+    "rotation": 240,
+    "maxVelocity": 0,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 1,
+    "EndVelocity": 0
+  }
+  
+  ]
