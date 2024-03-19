@@ -466,11 +466,7 @@ class RobotContainer {
     {"StartNoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionEnd)},
     {"EndNoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionStart)},
     {"ResetOdometry", std::make_shared<frc2::InstantCommand>(resetOdometryWithVision)},
-    {"NoteDetectionTop", std::make_shared<MiddleNoteDetectionCommand>(middleNoteDetectionTop)},
-    {"NoteDetectionMiddleTop", std::make_shared<MiddleNoteDetectionCommand>(middleNoteDetectionMiddleTop)},
-    {"NoteDetectionMiddle", std::make_shared<MiddleNoteDetectionCommand>(middleNoteDetectionMiddle)},
-    {"NoteDetectionMiddleBottom", std::make_shared<MiddleNoteDetectionCommand>(middleNoteDetectionMiddleBottom)},
-    {"NoteDetectionBottom", std::make_shared<MiddleNoteDetectionCommand>(middleNoteDetectionBottom)},
+    {"NoteDetectionMiddle", std::make_shared<MiddleNoteDetectionCommand>(middleNoteDetectionBottom)},
     {"piece6AutoSetpoint", std::make_shared<frc2::InstantCommand>(piece6AutoSetpoint)},
     {"skipIfNeeded", std::make_shared<SkipGamepieceCommand>(skipGamepiece)}
   };

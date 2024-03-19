@@ -9,7 +9,7 @@ AutonPathCommand::AutonPathCommand(COMETS3357::SwerveSubsystem* swerveSubsystem,
     swerve = swerveSubsystem;
     translatePID.SetTolerance(0.1);
     rotPID.SetTolerance(0.1);
-    translatePID.SetP(0.95);
+    translatePID.SetP(0.7);
     rotPID.SetP(0.6);
     rot = rotSpeed;
     speed = moveSpeed;
@@ -73,7 +73,7 @@ void AutonPathCommand::Execute()
 bool AutonPathCommand::IsFinished()
 {
     frc::Pose2d currentPose = swerve->GetPose();
-    if ((currentPose.Translation().Distance(targetPose.Translation()) < units::meter_t{0.1} && rotPID.AtSetpoint()) || (isTurnSpeaker && currentPose.Translation().Distance(targetPose.Translation()) < units::meter_t{0.1 + (endSpeed / 4)}))
+    if ((currentPose.Translation().Distance(targetPose.Translation()) < units::meter_t{0.1} && rotPID.AtSetpoint()) || (isTurnSpeaker && currentPose.Translation().Distance(targetPose.Translation()) < units::meter_t{0.05 + (endSpeed / 4)}))
     {
             swerve->DriveXRotate(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::radians_per_second_t{0});
     frc::SmartDashboard::PutNumber("End", 0);

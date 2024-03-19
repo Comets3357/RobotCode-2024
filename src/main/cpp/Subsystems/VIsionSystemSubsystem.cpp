@@ -42,7 +42,7 @@ void VisionSystemSubsystem::Periodic()
     frc::SmartDashboard::PutNumber("Gyro Time", (double)gyroSubsystem->m_navx.GetLastSensorTimestamp());
     
     
-    std::vector<double> tagDataBuffer = tagSub.GetAtomic().value;
+    std::vector<double> tagDataBuffer = subsystemData->GetDoubleArrayTopic("TagData").Subscribe({}).GetAtomic().value;
 
 
     if (tagDataBuffer.size() > 1 && tagDataBuffer[3] > lastTimestamp)
@@ -79,8 +79,8 @@ void VisionSystemSubsystem::Periodic()
             double positionStandardDev = (tagDistance * 0.04) + abs(gyroRate * 0.05);
             swerveSubsystem->m_odometry.SetVisionMeasurementStdDevs({positionStandardDev, positionStandardDev, positionStandardDev/2});
 
-            double cameraX = -0.2398776 * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
-            double cameraY = -0.257429 * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
+            double cameraX = -0.2398776;// * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
+            double cameraY = -0.257429;// * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
             double cameraDistance = sqrt(pow(cameraX, 2) + pow(cameraY, 2));
             double angle = atan2(cameraX, cameraY);
             double newAngle = angle + (-gyroSubsystem->m_navx.GetYaw() * 3.14159 / 180.0) + ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) + gyroSubsystem->angleOffset;//((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.141592653589 : 0) + ;
@@ -99,17 +99,18 @@ void VisionSystemSubsystem::Periodic()
             //frc::SmartDashboard::PutNumber("GyroError", (gyroAngle - realOffset));
 
 
-            if (abs(gyroRate) < 0.05)
+            if (abs(gyroRate) < 0.04)
             {
-            if ((double)newPos.X() > 0 && (double)newPos.X() < 17 && (double)newPos.Y() > 0 && (double)newPos.Y() < 17)
-            {
+            // if ((double)newPos.X() > 0 && (double)newPos.X() < 17 && (double)newPos.Y() > 0 && (double)newPos.Y() < 17)
+            // {
+                frc::SmartDashboard::PutNumber("Time", (double)time);
                 swerveSubsystem->m_odometry.AddVisionMeasurement(frc::Pose2d{newPos, newRotation}, time);
-            }
+            // }
             }
             
             // m_field2.SetRobotPose(frc::Pose2d{newPos, newRotation});
-            m_field3.SetRobotPose(frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, newRotation});
-    frc::SmartDashboard::PutData("FieldTag3", &m_field3);
+            m_field3.SetRobotPose(frc::Pose2d{newPos, newRotation});
+    frc::SmartDashboard::PutData("VisionPose", &m_field3);
 
             // if (ID == 3)
             // {
