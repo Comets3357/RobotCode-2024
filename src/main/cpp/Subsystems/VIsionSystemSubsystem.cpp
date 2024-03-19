@@ -44,8 +44,7 @@ void VisionSystemSubsystem::Periodic()
     
     std::vector<double> tagDataBuffer = subsystemData->GetDoubleArrayTopic("TagData").Subscribe({}).GetAtomic().value;
 
-
-    if (tagDataBuffer.size() > 1 && tagDataBuffer[3] > lastTimestamp)
+    if (tagDataBuffer.size() > 1 && (int)tagDataBuffer[3] != (int)lastTimestamp)
     {
         lastTimestamp = tagDataBuffer[3];
         
