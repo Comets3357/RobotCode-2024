@@ -28,8 +28,8 @@ void NoteDetectionSubsystem::Periodic()
     {
          double D = h*tan(theta+(limelightField->getY() * 3.14159 / 180));
             double Distance = D+(gr/2);
-            y = Distance*std::sin((double)swerveField->GetSampledVisionPose(time).Rotation().Radians() - (limelightField->getX() * 3.141592654/180)) + 0.3*std::sin((double)swerveField->GetSampledVisionPose(time).Rotation().Radians());
-            x = Distance*std::cos((double)swerveField->GetSampledVisionPose(time).Rotation().Radians() - (limelightField->getX() * 3.141592654/180)) + 0.3*std::cos((double)swerveField->GetSampledVisionPose(time).Rotation().Radians());
+            y = Distance*std::sin((double)swerveField->GetSampledVisionPose(time).Rotation().Radians() - (limelightField->getX() * 3.141592654/180)) + 0.3*std::sin((double)swerveField->GetSampledVisionPose(time).Rotation().Radians() + ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kBlue) ? 3.14159 : 0));
+            x = Distance*std::cos((double)swerveField->GetSampledVisionPose(time).Rotation().Radians() - (limelightField->getX() * 3.141592654/180)) + 0.3*std::cos((double)swerveField->GetSampledVisionPose(time).Rotation().Radians() + ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kBlue) ? 3.14159 : 0));
             m_field.SetRobotPose(frc::Pose2d{frc::Translation2d{units::meter_t{x + (double)swerveField->GetSampledVisionPose(time).X()}, units::meter_t{y + (double)swerveField->GetSampledVisionPose(time).Y()}}, frc::Rotation2d{units::radian_t{0}}});
 
             frc::SmartDashboard::PutData("GamepiecePosition", &m_field);

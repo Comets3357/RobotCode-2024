@@ -75,7 +75,7 @@ void VisionSystemSubsystem::Periodic()
             double x = cos(actualAngleOffset) * tagDistance + tagPositions[ID].first;
             double y = sin(actualAngleOffset) * tagDistance + tagPositions[ID].second;
 
-            double positionStandardDev = (tagDistance * 0.04) + abs(gyroRate * 0.05);
+            double positionStandardDev = (tagDistance * 0.10) + abs(gyroRate * 0.1);
             swerveSubsystem->m_odometry.SetVisionMeasurementStdDevs({positionStandardDev, positionStandardDev, positionStandardDev/2});
 
             double cameraX = -0.2398776;// * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
@@ -98,7 +98,7 @@ void VisionSystemSubsystem::Periodic()
             //frc::SmartDashboard::PutNumber("GyroError", (gyroAngle - realOffset));
 
 
-            if (abs(gyroRate) < 0.04)
+            if (abs(gyroRate) < 0.03)
             {
             // if ((double)newPos.X() > 0 && (double)newPos.X() < 17 && (double)newPos.Y() > 0 && (double)newPos.Y() < 17)
             // {

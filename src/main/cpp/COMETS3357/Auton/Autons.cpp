@@ -86,7 +86,7 @@ void Autons::LoadAutons( std::vector<std::pair<std::string, std::shared_ptr<frc2
                         double y = pose["y"].get<double>();
                         double rotation = pose["rotation"].get<double>();
                         double movementSpeed = pose["maxVelocity"].get<double>();
-                        frc::SmartDashboard::PutNumber("movementSpeed From Json" + autonName, movementSpeed);
+                        // frc::SmartDashboard::PutNumber("movementSpeed From Json" + autonName, movementSpeed);
                         double rotationSpeed = pose["maxRotation"].get<double>();
                         int isAdvanced = (int)pose["avoid"].get<double>();
                         int isTurnSpeaker = (int)pose["TurnSpeaker"].get<double>();

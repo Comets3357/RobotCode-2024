@@ -52,7 +52,7 @@
 [
 {
   "x": 8.7,
-  "y": 7.4,
+  "y": 7.2,
   "rotation": 0,
   "maxVelocity": 1,
   "maxRotation": 0.75,
@@ -104,7 +104,7 @@
 ],
 [
 {
-  "x": 3.27,
+  "x": 3.4,
   "y": 5.54,
   "rotation": 0,
   "maxVelocity": 0.5,
@@ -142,7 +142,7 @@
 ],
 [
 {
-  "x": 2.7,
+  "x": 2.85,
   "y": 4.0,
   "rotation": -25,
   "maxVelocity": 0.5,

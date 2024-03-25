@@ -9,7 +9,7 @@ AmpExtendCommand::AmpExtendCommand(ShooterSubsystem* shooter, AmpSubsystem* amp)
 
 void AmpExtendCommand::Initialize()
 {
-    shooterSubsystem->SetPositionPivot(51);
+    shooterSubsystem->SetPositionPivot(50);
     shooterSubsystem->SetVelocityFlyWheel(-1200);
     shooterSubsystem->SetVelocityKickerWheel(1200);
     alreadySetIt = false;

@@ -319,8 +319,8 @@ class RobotContainer {
   IntakeIndexerAutonCommand intakeIndexerAuton{&indexer};
   ShooterCommand shooterCommand {&shooter, &indexer, &swerve};
   SetPointCommand subWooferSetpoint{&shooter, &indexer, &swerve, 57, 2000};
-  SetPointCommand podiumSetPoint{&shooter, &indexer, &swerve, 38.5, 2000};
-  SetPointCommand ampSetPoint{&shooter, &indexer, &swerve, 34, 2000};
+  SetPointCommand podiumSetPoint{&shooter, &indexer, &swerve, 36.5, 2000};
+  SetPointCommand ampSetPoint{&shooter, &indexer, &swerve, 32, 2000};
   AmpExtendCommand ampExtend{&shooter, &amp};
   AmpRetractCommand ampRetract{&shooter, &amp, &indexer};
   ClimbResetCommand climbReset{&elevator};
@@ -366,7 +366,7 @@ class RobotContainer {
   frc2::InstantCommand midPiece4AutoSetpoint{[this](){shooter.SetPositionPivot(29), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
   AutonPathCommand ampAlignBlue{&swerve, 0.5, .5, frc::Pose2d{frc::Translation2d(units::meter_t{1.85}, units::meter_t{7.65}), frc::Rotation2d{units::radian_t{-1.57}}}, true, 0, 0};
   AutonPathCommand ampAlignRed{&swerve, 0.5, .5, frc::Pose2d{frc::Translation2d(units::meter_t{14.68}, units::meter_t{7.65}), frc::Rotation2d{units::radian_t{-1.57}}}, true, 0, 0};
-  frc2::InstantCommand resetOdometryWithVision{[this](){swerve.ResetOdometry(swerve.GetPose());}, {}};
+  frc2::InstantCommand resetOdometryWithVision{[this](){swerve.ResetOdometry(swerve.GetPose2());}, {}};
   frc2::InstantCommand ampStart{[this](){
     if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
     {
@@ -428,14 +428,15 @@ class RobotContainer {
     {"StopNoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionEnd)},
     {"NoteDetection", std::make_shared<frc2::InstantCommand>(noteDetectionStart)},
     {"ampStart", std::make_shared<frc2::InstantCommand>(ampStart)},
-    {"ampCancel", std::make_shared<frc2::InstantCommand>(ampCancel)}
+    {"ampCancel", std::make_shared<frc2::InstantCommand>(ampCancel)},
+    {"ResetOdometry", std::make_shared<frc2::InstantCommand>(resetOdometryWithVision)},
   };
 
 
   std::unordered_map<std::string, std::tuple<std::function<void(double, double, double, double)>, frc2::Subsystem*, COMETS3357::Controller::JoystickCommandMode>> joystickActionMap
   {
-   {"SwerveDefaultCommand", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.DriveCornerTurning(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX});}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
-   {"SwerveDefaultCommandDirectional", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.DriveXRotate(-units::meters_per_second_t{leftY}, -units::meters_per_second_t{leftX}, -units::radians_per_second_t{rightX});}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"SwerveDefaultCommand", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.DriveCornerTurning(-units::meters_per_second_t{leftY*1.5}, -units::meters_per_second_t{leftX*1.5}, -units::radians_per_second_t{rightX});}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
+   {"SwerveDefaultCommandDirectional", {[this](auto leftX, auto leftY, auto rightX, auto rightY){swerve.DriveXRotate(-units::meters_per_second_t{leftY*1.5}, -units::meters_per_second_t{leftX*1.5}, -units::radians_per_second_t{rightX});}, &swerve, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualIntake", {[this](auto leftX, auto leftY, auto rightX, auto rightY){intake.SetPercent(leftY);}, &intake, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualShoot", {[this](auto leftX, auto leftY, auto rightX, auto rightY){shooter.SetPercentKickerWheel(leftY); shooter.SetPercentFlyWheel(leftX);}, &shooter, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},
    {"ManualIndexer", {[this](auto leftX, auto leftY, auto rightX, auto rightY){indexer.SetPercent(rightY);}, &shooter, COMETS3357::Controller::JoystickCommandMode::JOYSTICK_DEADZONE_COMMAND}},

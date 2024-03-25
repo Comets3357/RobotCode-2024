@@ -9,6 +9,7 @@
 #include "Subsystems/IndexerSubsytem.h"
 #include "Commands/IntakeIndexerCommand.h"
 #include "COMETS3357/Configs/ControllerMap.h"
+#include <frc/AddressableLED.h>
 
 
 SUBSYSTEM_START(LEDs)
@@ -32,6 +33,10 @@ nt::IntegerPublisher greenPub;
 nt::IntegerPublisher redPub;
 nt::IntegerPublisher bluePub;
 nt::IntegerSubscriber frameSub;
+
+frc::AddressableLED m_led{9};
+std::array<frc::AddressableLED::LEDData, 50> ledBuffer;
+
 
 double lastTestTimestamp = 0;
 double lastFrame = 0;

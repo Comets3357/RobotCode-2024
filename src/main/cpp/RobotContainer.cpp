@@ -8,6 +8,7 @@ RobotContainer::RobotContainer()
   // Initialize all of your commands and subsystems here
   // Configure the button bindings
   ConfigureBindings();
+  limelight.setLEDMode(1);
 
 }
 
