@@ -1,0 +1,208 @@
+[
+  
+  {
+    "x": 1.34,
+    "y": 6.47,
+    "rotation": 0,
+    "maxVelocity": 0.5,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  
+  [
+  {
+    "x": 2.27,
+    "y": 6.85,
+    "rotation": 28.40,
+    "maxVelocity": 0.5,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot"
+  ],
+  "wait 0.2",
+  "Shoot",
+  "wait 0.1",
+  "Intake",
+  [
+  {
+    "x": 2.82,
+    "y": 6.95,
+    "rotation": 28.40,
+    "maxVelocity": 0.5,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot"
+  ],
+  [
+    "wait 0.2",
+    "StartShoot"
+  ],
+  "Shoot",
+  [
+  "wait 0.1",
+  "StartShoot"
+  ],
+  [
+  {
+    "x": 8.47,
+    "y": 7.34,
+    "rotation": 0,
+    "maxVelocity": 1,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot",
+  "IntakeIndexer"
+],[
+  
+  {
+    "x": 5.07,
+    "y": 6.71,
+    "rotation": 13.12,
+    "maxVelocity": 1,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot",
+  "IntakeIndexer"
+
+],
+[
+  "wait 0.1",
+  "StartShoot",
+  "IntakeIndexer"
+],
+"Shoot",
+[
+  "wait 0.2",
+  "StartShoot"
+],
+[
+  
+  {
+    "x": 8.5,
+    "y": 5.7,
+    "rotation": 0,
+    "maxVelocity": 1,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot",
+  "IntakeIndexer"
+
+],
+[
+  
+  {
+    "x": 2.91,
+    "y": 7,
+    "rotation": 21,
+    "maxVelocity": 1,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot",
+  "IntakeIndexer"
+
+],
+[
+"wait 0.1",
+"StartShoot",
+"IntakeIndexer"
+],
+"Shoot",
+[
+  "wait 0.2",
+  "StartShoot"
+],
+  [
+  {
+    "x": 3.07,
+    "y": 5.5,
+    "rotation": 270,
+    "maxVelocity": 0.47,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot",
+  "IntakeIndexer"
+  ],
+  [
+  {
+    "x": 3.07,
+    "y": 5.5,
+    "rotation": 0,
+    "maxVelocity": 0.5,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot",
+  "IntakeIndexer"
+  ],
+  [
+  "wait 0.1",
+  "StartShoot",
+  "IntakeIndexer"
+  ],
+  "Shoot",
+  [
+  "wait 0.2",
+  "StartShoot"
+  ],
+  [
+  {
+    "x": 2.32,
+    "y": 4.3,
+    "rotation": 330,
+    "maxVelocity": 0.5,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot",
+  "IntakeIndexer"
+  ],
+  [
+  {
+    "x": 2.77,
+    "y": 4.0,
+    "rotation": 330,
+    "maxVelocity": 0.5,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot",
+  "IntakeIndexer"
+  ],
+  [
+"wait 0.2",
+"StartShoot",
+"IntakeIndexer"
+  ],
+  "Shoot",
+  "StartShoot"
+  
+  ]
