@@ -1,0 +1,117 @@
+[
+  
+    {
+      "x": 1.46,
+      "y": 7.61,
+      "rotation": 270,
+      "maxVelocity": 0.4,
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
+    },
+    "4PieceSetpoint3",
+    [
+    "StartShoot",
+    {
+        "x": 4,
+        "y": 7.62,
+        "rotation": 270,
+        "maxVelocity": 0.4,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      }
+    ],
+      {
+        "x": 4.05,
+        "y": 7.12,
+        "rotation": 25,
+        "maxVelocity": 0.4,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      },
+    "wait 0.3",
+    "Shoot",
+    "wait 0.1",
+    "Intake", 
+    [
+        {
+          "x": 8.47,
+          "y": 6.5,
+          "rotation": 0,
+          "maxVelocity": 1,
+          "maxRotation": 0.5,
+          "avoid": 0,
+          "TurnSpeaker": 0,
+          "EndVelocity": 0
+        },
+        "StartShoot",
+        "IntakeIndexer"
+      ],[
+        
+        {
+          "x": 5.07,
+          "y": 6.71,
+          "rotation": 13.12,
+          "maxVelocity": 1,
+          "maxRotation": 0.5,
+          "avoid": 0,
+          "TurnSpeaker": 0,
+          "EndVelocity": 0
+        },
+        "StartShoot",
+        "IntakeIndexer"
+      
+      ],
+      [
+        "wait 0.1",
+        "StartShoot",
+        "IntakeIndexer"
+      ],
+      "Shoot",
+      [
+        "wait 0.2",
+        "StartShoot"
+      ],
+      [
+        
+        {
+          "x": 8.5,
+          "y": 4.5,
+          "rotation": 0,
+          "maxVelocity": 1,
+          "maxRotation": 0.5,
+          "avoid": 0,
+          "TurnSpeaker": 0,
+          "EndVelocity": 0
+        },
+        "StartShoot",
+        "IntakeIndexer"
+      
+      ],
+      [
+        
+        {
+          "x": 2.91,
+          "y": 7,
+          "rotation": 21,
+          "maxVelocity": 1,
+          "maxRotation": 0.5,
+          "avoid": 0,
+          "TurnSpeaker": 0,
+          "EndVelocity": 0
+        },
+        "StartShoot",
+        "IntakeIndexer"
+      
+      ],
+      [
+      "wait 0.1",
+      "StartShoot",
+      "IntakeIndexer"
+      ]
+]

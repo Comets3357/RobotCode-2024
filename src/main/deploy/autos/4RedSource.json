@@ -1,0 +1,50 @@
+[
+    {
+        "x": 15.39,
+        "y": 2.15,
+        "rotation": 180,
+        "maxVelocity": 0.5,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+    }, 
+    "red4SourceSetPoint1",
+    {
+        "x": 12.47,
+        "y": 1.87,
+        "rotation": 30.86,
+        "maxVelocity": 0.5,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+    }, 
+    "wait 0.2",
+    "Shoot",
+    "wait 0.5",
+    "Intake",
+    {
+        "x": 8.29,
+        "y": 0.78,
+        "rotation": 180,
+        "maxVelocity": 0.5,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+    }, 
+    "StopIntake",
+    "IntakeIndexer",
+    "red4SourceSetPoint1",
+    {
+        "x": 8.29,
+        "y": 0.78,
+        "rotation": 180,
+        "maxVelocity": 0.5,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+    }
+]
