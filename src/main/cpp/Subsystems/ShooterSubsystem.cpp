@@ -137,6 +137,23 @@ void ShooterSubsystem::startTurnToTarget()
     turnToPID.EnableContinuousInput(-3.14159 + gyro->angleOffset, 3.14159 + gyro->angleOffset);
     turningTowardsTarget = true;
     swerve->controllingSwerveRotation = false;
+
+}
+
+void ShooterSubsystem::startTurnPassZone()
+{
+    if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
+    {
+        passPos = frc::Translation2d{units::meter_t{8.50}, units::meter_t{8.25}};
+    }
+    else
+    {
+        passPos = frc::Translation2d{units::meter_t{0}, units::meter_t{0}};     // to be changed 
+    }
+    turnToPID.EnableContinuousInput(-3.14159 + gyro->angleOffset, 3.14159 + gyro->angleOffset);
+    turningTowardsTarget = true;
+    swerve->controllingSwerveRotation = false;
+    
 }
 
 void ShooterSubsystem::stopTurnToTarget()

@@ -6,43 +6,34 @@ SourceShootCommand::SourceShootCommand(ShooterSubsystem *shooter, IndexerSubsyst
     swerve = swerveSubsystem; 
     AddRequirements({shooter}); 
     SetName("Shoot Command");
-    
-    cycle = 0; 
 }
 
 void SourceShootCommand::Initialize()
 {
-    if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kBlue){
-       // if (swerve->GetPose().X > )
+    frc::Translation2d targetPos; 
+    if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed){
+       targetPos = frc::Translation2d{units::meter_t{8.5}, units::meter_t{8.25}};
     } else {
-
+        targetPos = frc::Translation2d{units::meter_t{0}, units::meter_t{0}};   // change value
     }
 }
 
 void SourceShootCommand::Execute()
 {
-    if (cycle == 0) {
 
-    } else if (cycle == 1){
-        shooterSubsystem->Pivot.SetPosition(37, shooterSubsystem->offset);
-        shooterSubsystem->SetVelocityFlyWheel(1000);
-        shooterSubsystem->SetVelocityKickerWheel(1000); 
-    } else if (cycle == 2){
-       
-    } else if (cycle == 3){
+    frc::Pose2d pos = swerve->GetPose();
+    //frc::Translation2d targetPos = frc::Translation2d{units::meter_t{8.5}, units::meter_t{8.25}};
 
-    }
+    double distance = sqrt(pow((double)(targetPos.X() - pos.X()), 2) + pow((double)(targetPos.Y() - pos.Y()), 2)); 
+    double velocity = shooterSubsystem->SourceSpeed.GetValue(distance); 
+    shooterSubsystem->Pivot.SetPosition(shooterSubsystem->SourceAngle.GetValue(distance), shooterSubsystem->offset);
+    shooterSubsystem->SetVelocityFlyWheel(-velocity);
+    shooterSubsystem->SetVelocityKickerWheel(velocity); 
     
 }
 
 bool SourceShootCommand::IsFinished()
 {
-    // if (shooterSubsystem->GetVelocityFlyWheel() < shooterSubsystem->FlyWheel.config.velocities["ShooterSpeed"] + 100)
-    // {
-    //         indexerSubsystem->SetPercent(0.35);
-    //         return true;
-    // }
-
     return false;
 }
 

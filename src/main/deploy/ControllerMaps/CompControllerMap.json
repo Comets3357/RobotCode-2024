@@ -42,7 +42,7 @@
                 "BackButtonPressed": "NONE",
                 "StartButtonPressed": "NONE",
                 "XboxButtonPressed": "NONE",
-                "LeftTriggerPressed": "NONE",
+                "LeftTriggerPressed": "turnTowardsPassZone",
                 "RightTriggerPressed": "ampStart",
                 "D-padLeftReleased": "NONE",
                 "D-padRightReleased": "NONE",
@@ -59,7 +59,7 @@
                 "BackButtonReleased": "NONE",
                 "StartButtonReleased": "NONE",
                 "XboxButtonReleased": "NONE",
-                "LeftTriggerReleased": "NONE",
+                "LeftTriggerReleased": "StopTurnTowardsSpeaker",
                 "RightTriggerReleased": "ampCancel"
             },
             "XBOXSemiAutoRobotCentric":
@@ -430,7 +430,7 @@
                 "AButtonPressed": "SubWooferSetpoint",
                 "BButtonPressed": "AmpSetpoint",
                 "XButtonPressed": "PodiumSetpoint",
-                "YButtonPressed": "MidFieldSetpoint",
+                "YButtonPressed": "SourceShoot",
                 "LeftBumperPressed": "NONE",
                 "RightBumperPressed": "Shoot",
                 "BackButtonPressed": "NONE",
