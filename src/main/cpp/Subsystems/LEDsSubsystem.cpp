@@ -4,8 +4,8 @@
 LEDsSubsystem::LEDsSubsystem(IndexerSubsystem *indexer) : COMETS3357::Subsystem{"LEDs"}
 {
     indexerSubsytem = indexer;
-        m_led.SetLength(50);
-        m_led.SetData(ledBuffer);
+    m_led.SetLength(60);
+    m_led.SetData(ledBuffer);
     m_led.Start();
 }
 
@@ -31,12 +31,6 @@ void LEDsSubsystem::Initialize()
 }
 
 void LEDsSubsystem::Periodic() {
-
-    for (int i = 0; i < 50; i++) {
-                ledBuffer[i].SetRGB(0, 255, 0);
-            }
-            m_led.SetData(ledBuffer);
-
     enabled = frc::DriverStation::IsEnabled();
     comms = frc::DriverStation::IsDSAttached();
 
@@ -52,7 +46,7 @@ void LEDsSubsystem::Periodic() {
         if (!comms)
         {
             writeLEDs(0,255,0); // red 
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 60; i++) {
                 ledBuffer[i].SetRGB(0, 255, 0);
             }
             m_led.SetData(ledBuffer);
@@ -60,7 +54,7 @@ void LEDsSubsystem::Periodic() {
         else if (gyroZero)
         {
             writeLEDs(50,255,0); // orange
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 60; i++) {
                 ledBuffer[i].SetRGB(50, 255, 0);
             }
             m_led.SetData(ledBuffer);
@@ -68,7 +62,7 @@ void LEDsSubsystem::Periodic() {
         else 
         {
             writeLEDs(255,0,0); // green
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 60; i++) {
                 ledBuffer[i].SetRGB(255, 0, 0);
             }
             m_led.SetData(ledBuffer);
@@ -81,7 +75,7 @@ void LEDsSubsystem::Periodic() {
         if (ampSignal)
         {
             writeLEDs(255,255,0); // yellow // signal to activate amp
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 60; i++) {
                 ledBuffer[i].SetRGB(255, 255, 0);
             }
             m_led.SetData(ledBuffer);
@@ -89,7 +83,7 @@ void LEDsSubsystem::Periodic() {
         else if (hpSignal)
         {
             writeLEDs(0,255,255); // purple // signal to the human player // need to make flashing
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 60; i++) {
                 ledBuffer[i].SetRGB(0, 255, 255);
             }
             m_led.SetData(ledBuffer);
@@ -97,7 +91,7 @@ void LEDsSubsystem::Periodic() {
         else if (mode == "XBOXManual") 
         {
             writeLEDs(128,0,128); // teal // manual mode
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 60; i++) {
                 ledBuffer[i].SetRGB(128, 0, 129);
             }
             m_led.SetData(ledBuffer);
@@ -105,7 +99,7 @@ void LEDsSubsystem::Periodic() {
         else if (!indexerSubsytem->IsDetected()) 
         {
             writeLEDs(255,0,0); // green // game piece detection
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 60; i++) {
                 ledBuffer[i].SetRGB(255, 0, 0);
             }
             m_led.SetData(ledBuffer);
@@ -113,7 +107,7 @@ void LEDsSubsystem::Periodic() {
         else
         {
             writeLEDs(50,255,0); // orange // default mode // semi-auto
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 60; i++) {
                 ledBuffer[i].SetRGB(50, 255, 0);
             }
             m_led.SetData(ledBuffer);

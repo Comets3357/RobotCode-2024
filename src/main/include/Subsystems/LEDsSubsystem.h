@@ -35,7 +35,7 @@ nt::IntegerPublisher bluePub;
 nt::IntegerSubscriber frameSub;
 
 frc::AddressableLED m_led{9};
-std::array<frc::AddressableLED::LEDData, 50> ledBuffer;
+std::array<frc::AddressableLED::LEDData, 60> ledBuffer;
 
 
 double lastTestTimestamp = 0;
