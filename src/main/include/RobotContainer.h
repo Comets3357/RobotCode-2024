@@ -369,11 +369,13 @@ class RobotContainer {
   frc2::InstantCommand piece4AutoSetpoint2{[this](){shooter.SetPositionPivot(40), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
   frc2::InstantCommand piece4AutoSetpoint3{[this](){shooter.SetPositionPivot(40.5), shooter.SetVelocityKickerWheel(2000); shooter.SetVelocityFlyWheel(-2000);}, {}};
   frc2::InstantCommand piece4AutoSetpoint4{[this](){shooter.SetPositionPivot(28), shooter.SetVelocityKickerWheel(3000); shooter.SetVelocityFlyWheel(-3000);}, {}};
-  frc2::InstantCommand piece6AutoSetpoint{[this](){shooter.SetPositionPivot(25), shooter.SetVelocityKickerWheel(3500); shooter.SetVelocityFlyWheel(-3500);}, {}};
   frc2::InstantCommand piece4AmpAutoSetpoint{[this](){shooter.SetPositionPivot(22), shooter.SetVelocityKickerWheel(2700); shooter.SetVelocityFlyWheel(-2700);}, {}};
-  frc2::InstantCommand piece4AmpStageAutoSetpoint{[this](){shooter.SetPositionPivot(35), shooter.SetVelocityKickerWheel(3000); shooter.SetVelocityFlyWheel(-3000);}, {}};
-  
-  frc2::InstantCommand red4SourceSetPoint1{[this](){shooter.SetPositionPivot(36), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
+  frc2::InstantCommand piece4SourceAutoSetPoint{[this](){shooter.SetPositionPivot(36), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
+  frc2::InstantCommand piece6AutoSetpoint{[this](){shooter.SetPositionPivot(29), shooter.SetVelocityKickerWheel(3000); shooter.SetVelocityFlyWheel(-3000);}, {}};
+  frc2::InstantCommand piece4SourceAutoSetpoint{[this](){shooter.SetPositionPivot(22), shooter.SetVelocityKickerWheel(3500); shooter.SetVelocityFlyWheel(-3500);}, {}};
+
+
+
   
   frc2::InstantCommand midPiece4AutoSetpoint{[this](){shooter.SetPositionPivot(29), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
   AutonPathCommand ampAlignBlue{&swerve, 0.5, .5, frc::Pose2d{frc::Translation2d(units::meter_t{1.85}, units::meter_t{7.65}), frc::Rotation2d{units::radian_t{-1.57}}}, true, 0, 0};
@@ -472,6 +474,8 @@ class RobotContainer {
     {"4PieceSetpoint3", std::make_shared<frc2::InstantCommand>(piece4AutoSetpoint3)},
     {"4PieceSetpoint4", std::make_shared<frc2::InstantCommand>(piece4AutoSetpoint4)},
     {"4PieceAmpSetpoint", std::make_shared<frc2::InstantCommand>(piece4AmpAutoSetpoint)},
+    {"6PieceSetpoint", std::make_shared<frc2::InstantCommand>(piece6AutoSetpoint)},
+    {"4PieceSourceSetpoint", std::make_shared<frc2::InstantCommand>(piece4SourceAutoSetpoint)},
     {"MidPiece4AutoSetpoint", std::make_shared<frc2::InstantCommand>(midPiece4AutoSetpoint)},
     {"1PieceAutoSetpoint", std::make_shared<frc2::InstantCommand>(autoSubwooferSetpoint)},
     {"PodiumSetpoint", std::make_shared<SetPointCommand>(podiumSetPoint)},

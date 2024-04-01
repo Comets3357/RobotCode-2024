@@ -1,5 +1,5 @@
 [
-  
+  "4PieceSourceSetpoint",
   {
     "x": 1.46,
     "y": 1.45,
@@ -10,12 +10,11 @@
     "TurnSpeaker": 0,
     "EndVelocity": 0
   },
-  
   [
   {
     "x": 4.57,
     "y": 0.75,
-    "rotation": 316.34,
+    "rotation": 314.34,
     "maxVelocity": 0.7,
     "maxRotation": 0.5,
     "avoid": 0,

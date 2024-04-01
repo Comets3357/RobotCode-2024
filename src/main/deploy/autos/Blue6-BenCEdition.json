@@ -14,7 +14,7 @@
   [
   {
     "x": 2.27,
-    "y": 6.85,
+    "y": 6.87,
     "rotation": 28.40,
     "maxVelocity": 0.5,
     "maxRotation": 0.5,
@@ -31,7 +31,7 @@
   [
   {
     "x": 2.82,
-    "y": 6.95,
+    "y": 6.98,
     "rotation": 28.40,
     "maxVelocity": 0.5,
     "maxRotation": 0.5,
@@ -50,10 +50,11 @@
   "wait 0.1",
   "StartShoot"
   ],
+  "6PieceSetpoint",
   [
   {
-    "x": 8.47,
-    "y": 7.34,
+    "x": 8.6,
+    "y": 7.4,
     "rotation": 0,
     "maxVelocity": 1,
     "maxRotation": 0.5,
@@ -67,7 +68,7 @@
   
   {
     "x": 5.07,
-    "y": 6.71,
+    "y": 6.68,
     "rotation": 13.12,
     "maxVelocity": 1,
     "maxRotation": 0.5,
@@ -89,11 +90,12 @@
   "wait 0.2",
   "StartShoot"
 ],
+"6PieceSetpoint",
 [
   
   {
     "x": 8.5,
-    "y": 5.7,
+    "y": 5.73,
     "rotation": 0,
     "maxVelocity": 1,
     "maxRotation": 0.5,
