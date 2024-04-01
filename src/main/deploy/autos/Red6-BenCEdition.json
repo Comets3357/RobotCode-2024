@@ -63,7 +63,9 @@
   },
   "StartShoot",
   "IntakeIndexer"
-],[
+],
+"6PieceSetpoint",
+[
   
   {
     "x": 11.5,
