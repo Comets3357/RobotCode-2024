@@ -53,6 +53,7 @@ std::pair<double, double> calculateFinalPosition(std::pair<double, double> initi
 
 void startTurnToTarget();
 void stopTurnToTarget();
+void startTurnPassZone(); 
 
 bool turningTowardsTarget = false;
 
@@ -63,12 +64,16 @@ COMETS3357::LookupTable angleLookup{"AngleLookup"};
 COMETS3357::LookupTable velocityLookup{"VelocityLookup"}; 
 COMETS3357::LookupTable kickerWheelFFLookup{"KickerWheelLookup"};
 COMETS3357::LookupTable flyWheelFFLookup{"FlyWheelLookup"};
+COMETS3357::LookupTable SourceSpeed{"SourceShootVelocity"};
+COMETS3357::LookupTable SourceAngle{"SourceShootAngle"};
+
 
  frc::DigitalInput inputPivot{1};
  frc::DutyCycle pivotAbsoluteEncoder = frc::DutyCycle{inputPivot};
 
 COMETS3357::LookupTable rotationPLookup{"RotationP"};
 frc::Translation2d targetPos; 
+frc::Translation2d passPos; 
 
 frc::PIDController turnToPID{1, 0, 0};
 

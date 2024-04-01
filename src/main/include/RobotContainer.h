@@ -276,6 +276,7 @@
 // #include "commands/LegAvoidanceCommand.h"
 #include "COMETS3357/Subsystems/Vision/NoteDetection.h"
 #include "Commands/MiddleNoteDetectionCommand.h"
+#include "Commands/SourceShootCommand.h"
 
 
 
@@ -305,6 +306,8 @@ class RobotContainer {
   VisionSystemSubsystem visionSystem{&swerve, &gyro};
   AmpSubsystem amp {};
 
+  
+
   IntakeSubsystem intake {}; 
   IndexerSubsystem indexer {}; 
   ShooterSubsystem shooter {&swerve, &gyro};
@@ -331,6 +334,8 @@ class RobotContainer {
   MiddleNoteDetectionCommand middleNoteDetectionMiddle{&noteDetection, &swerve, &indexer, &limelight, &gyro, frc::Translation2d{8.3_m, 4.12_m}};
   MiddleNoteDetectionCommand middleNoteDetectionMiddleTop{&noteDetection, &swerve, &indexer, &limelight, &gyro, frc::Translation2d{8.3_m, 5.76_m}};
   MiddleNoteDetectionCommand middleNoteDetectionTop{&noteDetection, &swerve, &indexer, &limelight, &gyro, frc::Translation2d{8.3_m, 7.43_m}};
+  SourceShootCommand sourceShoot{&shooter, &indexer, &swerve}; 
+  
 
 
 
@@ -356,6 +361,8 @@ class RobotContainer {
   frc2::InstantCommand ampSignalOn{[this](){led.ampSignal = true;}, {&led}}; 
   frc2::InstantCommand ampSignalOff{[this](){led.ampSignal = false;}, {&led}};
   frc2::InstantCommand pivotRelative{[this](){shooter.pivotInRelative = true; shooter.Pivot.changeRunMode(COMETS3357::SparkMaxPositionRunMode::POSITION_SPARK_MAX_RELATIVE);}, {}};
+  frc2::InstantCommand turnTowardsPassZone{[this](){shooter.startTurnPassZone();}, {}};
+  
 
   // Autonomous Commands
   frc2::InstantCommand piece4AutoSetpoint{[this](){shooter.SetPositionPivot(36), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
@@ -435,6 +442,9 @@ class RobotContainer {
     {"ampStart", std::make_shared<frc2::InstantCommand>(ampStart)},
     {"ampCancel", std::make_shared<frc2::InstantCommand>(ampCancel)},
     {"ResetOdometry", std::make_shared<frc2::InstantCommand>(resetOdometryWithVision)},
+    {"SourceShoot", std::make_shared<SourceShootCommand>(sourceShoot)}, 
+    {"turnTowardsPassZone", std::make_shared<frc2::InstantCommand>(turnTowardsPassZone)}
+
   };
 
 

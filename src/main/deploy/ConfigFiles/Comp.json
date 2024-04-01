@@ -66,6 +66,32 @@
         [0, 5],
         [10, 5]
       ]
+    }, 
+    {
+      "Name": "SourceShootAngle",
+      "Data": 
+      [
+        [7, 58.25],
+        [8,58.25],
+        [9,58.25],
+        [10,58.25],
+        [11, 58.25],
+        [12, 58.25],
+        [100, 58.25]
+      ]
+    },
+    {
+      "Name": "SourceShootVelocity",
+      "Data": 
+      [
+        [7, 1900],
+        [8,1975],
+        [9, 2050],
+        [10,2200],
+        [11,2450],
+        [12,2580],
+        [100, 2580]
+      ]
     }
   ],
   "SparkMaxPositionConfigs": [
@@ -110,7 +136,6 @@
         "AutonPiece4Setpoint2": 40,
         "AutonPiece4Setpoint3": 42,
         "AutonPiece4Setpoint4": 29,
-
         "SubWooferSetpoint": 56,
         "PodiumSetpoint": 38.5,
         "AmpSetpoint": 24
