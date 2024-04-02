@@ -100,7 +100,7 @@
                 "BackButtonPressed": "NONE",
                 "StartButtonPressed": "NONE",
                 "XboxButtonPressed": "NONE",
-                "LeftTriggerPressed": "NONE",
+                "LeftTriggerPressed": "turnTowardsPassZone",
                 "RightTriggerPressed": "NONE",
                 "D-padLeftReleased": "NONE",
                 "D-padRightReleased": "NONE",
@@ -117,7 +117,7 @@
                 "BackButtonReleased": "NONE",
                 "StartButtonReleased": "NONE",
                 "XboxButtonReleased": "NONE",
-                "LeftTriggerReleased": "NONE",
+                "LeftTriggerReleased": "StopTurnTowardsSpeaker",
                 "RightTriggerReleased": "NONE"
             },
             "XBOXSemiAutoDirectional":
@@ -158,7 +158,7 @@
                 "BackButtonPressed": "NONE",
                 "StartButtonPressed": "NONE",
                 "XboxButtonPressed": "NONE",
-                "LeftTriggerPressed": "NONE",
+                "LeftTriggerPressed": "turnTowardsPassZone",
                 "RightTriggerPressed": "ampStart",
                 "D-padLeftReleased": "NONE",
                 "D-padRightReleased": "NONE",
@@ -175,7 +175,7 @@
                 "BackButtonReleased": "NONE",
                 "StartButtonReleased": "NONE",
                 "XboxButtonReleased": "NONE",
-                "LeftTriggerReleased": "NONE",
+                "LeftTriggerReleased": "StopTurnTowardsSpeaker",
                 "RightTriggerReleased": "ampCancel"
             }
         },

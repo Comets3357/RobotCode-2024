@@ -75,6 +75,8 @@ COMETS3357::LookupTable rotationPLookup{"RotationP"};
 frc::Translation2d targetPos; 
 frc::Translation2d passPos; 
 
+int xOffset = -1;
+
 frc::PIDController turnToPID{1, 0, 0};
 
 COMETS3357::SwerveSubsystem* swerve;

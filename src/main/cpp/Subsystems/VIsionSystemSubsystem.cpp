@@ -19,7 +19,7 @@ void VisionSystemSubsystem::Initialize()
     
     // prepare subscribers
     tagSub = subsystemData->GetDoubleArrayTopic("TagData").Subscribe({});
-    frameSub = subsystemData->GetDoubleTopic("Frame").Subscribe({});
+    frameSub = subsystemData->GetDoubleTopic("Frame").Subscribe(0);
 
     swerveSubsystem->ResetOdometry(frc::Pose2d{frc::Translation2d{units::meter_t{0}, units::meter_t{0}}, frc::Rotation2d{units::radian_t{0}}});
 }
@@ -139,6 +139,8 @@ void VisionSystemSubsystem::Periodic()
         frc::SmartDashboard::PutBoolean("VisionPiStatus", frameSub.Get() != lastFrame);
         lastFrame = frameSub.Get();
     }
+
+    frc::SmartDashboard::PutNumber("idk2", frameSub.Get());
 
 
 

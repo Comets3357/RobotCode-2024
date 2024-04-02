@@ -137,18 +137,38 @@ void ShooterSubsystem::startTurnToTarget()
     turnToPID.EnableContinuousInput(-3.14159 + gyro->angleOffset, 3.14159 + gyro->angleOffset);
     turningTowardsTarget = true;
     swerve->controllingSwerveRotation = false;
-
+    
 }
 
 void ShooterSubsystem::startTurnPassZone()
 {
+    frc::Pose2d robotPose = swerve->GetPose();
+    xOffset++;
+    if (xOffset > 2) xOffset = 0;
     if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
     {
-        passPos = frc::Translation2d{units::meter_t{8.50}, units::meter_t{8.25}};
+  
+        if ((double)robotPose.X() > 5)
+        {
+            targetPos = frc::Translation2d{units::meter_t{14.66}, units::meter_t{6.86}};
+        }
+        else
+        {
+            targetPos = frc::Translation2d{units::meter_t{9}, units::meter_t{7}};
+        }
+        targetPos = frc::Translation2d{units::meter_t{(double)targetPos.X() + (0.4 * xOffset)}, units::meter_t{(double)targetPos.Y()}};
     }
     else
     {
-        passPos = frc::Translation2d{units::meter_t{0}, units::meter_t{0}};     // to be changed 
+        if ((double)robotPose.X() < 12)
+        {
+            targetPos = frc::Translation2d{units::meter_t{1.91}, units::meter_t{6.86}};
+        }
+        else
+        {
+            targetPos = frc::Translation2d{units::meter_t{7.61}, units::meter_t{7}};
+        }
+        targetPos = frc::Translation2d{units::meter_t{(double)targetPos.X() - (0.4 * xOffset)}, units::meter_t{(double)targetPos.Y()}};
     }
     turnToPID.EnableContinuousInput(-3.14159 + gyro->angleOffset, 3.14159 + gyro->angleOffset);
     turningTowardsTarget = true;

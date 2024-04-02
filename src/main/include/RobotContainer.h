@@ -334,7 +334,7 @@ class RobotContainer {
   MiddleNoteDetectionCommand middleNoteDetectionMiddle{&noteDetection, &swerve, &indexer, &limelight, &gyro, frc::Translation2d{8.3_m, 4.12_m}};
   MiddleNoteDetectionCommand middleNoteDetectionMiddleTop{&noteDetection, &swerve, &indexer, &limelight, &gyro, frc::Translation2d{8.3_m, 5.76_m}};
   MiddleNoteDetectionCommand middleNoteDetectionTop{&noteDetection, &swerve, &indexer, &limelight, &gyro, frc::Translation2d{8.3_m, 7.43_m}};
-  SourceShootCommand sourceShoot{&shooter, &indexer, &swerve}; 
+  SourceShootCommand sourceShoot{&shooter, &indexer, &swerve};//, &intake}; 
   
 
 
@@ -348,6 +348,8 @@ class RobotContainer {
   frc2::InstantCommand ejectIntake{[this](){intake.SetPercent("EjectSpeed"); indexer.SetVelocity("IndexerEjectSpeed");}, {&intake}}; 
   frc2::InstantCommand stopIndex{[this](){indexer.SetVelocity(0);}, {&indexer}}; 
   frc2::InstantCommand stopShoot{[this](){shooter.SetVelocityKickerWheel(0); shooter.SetVelocityFlyWheel(0); indexer.SetPercent(0); shooter.SetPositionPivot(40);}, {&shooter}}; 
+ // frc2::InstantCommand stopShootAndIntake{[this](){shooter.SetVelocityKickerWheel(0); shooter.SetVelocityFlyWheel(0); indexer.SetPercent(0); shooter.SetPositionPivot(40); intake.SetPercent(0); indexer.SetPercent(0);}, {&shooter}}; 
+  
   frc2::InstantCommand zeroGyro{[this](){gyro.ZeroGyro(); led.gyroZero = true; frc::SmartDashboard::PutBoolean("IsGyroZeroed", led.gyroZero);}, {&gyro}};
   frc2::InstantCommand shoot{[this](){indexer.SetPercent(1);}, {&indexer}};
   frc2::InstantCommand stopTurningTowardsSpeaker{[this](){ shooter.stopTurnToTarget();}, {}};
@@ -445,7 +447,8 @@ class RobotContainer {
     {"ampCancel", std::make_shared<frc2::InstantCommand>(ampCancel)},
     {"ResetOdometry", std::make_shared<frc2::InstantCommand>(resetOdometryWithVision)},
     {"SourceShoot", std::make_shared<SourceShootCommand>(sourceShoot)}, 
-    {"turnTowardsPassZone", std::make_shared<frc2::InstantCommand>(turnTowardsPassZone)}
+    {"turnTowardsPassZone", std::make_shared<frc2::InstantCommand>(turnTowardsPassZone)},
+    //{"StopShootAndIntake", std::make_shared<frc2::InstantCommand>(stopShootAndIntake)},
 
   };
 

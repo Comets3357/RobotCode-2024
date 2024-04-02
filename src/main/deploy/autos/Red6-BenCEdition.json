@@ -135,11 +135,11 @@
 ],
   [
   {
-    "x": 13.5,
-    "y": 5.54,
+    "x": 13.4,
+    "y": 5.45,
     "rotation": 270,
     "maxVelocity": 0.5,
-    "maxRotation": 0.5,
+    "maxRotation": 0.45,
     "avoid": 0,
     "TurnSpeaker": 0,
     "EndVelocity": 0
@@ -149,8 +149,8 @@
   ],
   [
   {
-    "x": 13.5,
-    "y": 5.54,
+    "x": 13.4,
+    "y": 5.45,
     "rotation": 180,
     "maxVelocity": 0.5,
     "maxRotation": 0.5,
