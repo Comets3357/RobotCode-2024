@@ -342,7 +342,7 @@
             "DefaultMode": "XBOXSemiAuto",
             "XBOXSemiAuto":
             {
-                "D-padLeft": "ClimbMode",
+                "D-padLeft": "NONE",
                 "D-padRight": "NONE",
                 "D-padUp": "NONE",
                 "D-padDown": "NONE",
@@ -357,7 +357,7 @@
                 "XButton": "NONE",
                 "YButton": "NONE",
                 "LeftBumper": "NONE",
-                "RightBumper": "NONE",
+                "RightBumper": "Shoot",
                 "BackButton": "NONE",
                 "StartButton": "NONE",
                 "XboxButton": "NONE",
@@ -365,8 +365,8 @@
                 "RightTrigger": "NONE",
                 "D-padLeftPressed": "NONE",
                 "D-padRightPressed": "NONE",
-                "D-padUpPressed": "XBOXManual",
-                "D-padDownPressed": "NONE",
+                "D-padUpPressed": "angleOffsetPositive",
+                "D-padDownPressed": "angleOffsetNegative",
                 "LeftStickButtonPressed": "NONE",
                 "RightStickButtonPressed": "NONE",
                 "AButtonPressed": "StartIntake",
@@ -415,7 +415,7 @@
                 "XButton": "NONE",
                 "YButton": "NONE",
                 "LeftBumper": "NONE",
-                "RightBumper": "NONE",
+                "RightBumper": "Shoot",
                 "BackButton": "PivotToRelative",
                 "StartButton": "NONE",
                 "XboxButton": "NONE",
@@ -423,8 +423,8 @@
                 "RightTrigger": "NONE",
                 "D-padLeftPressed": "NONE",
                 "D-padRightPressed": "NONE",
-                "D-padUpPressed": "angleOffsetPositive",
-                "D-padDownPressed": "angleOffsetNegative",
+                "D-padUpPressed": "XBOXManual",
+                "D-padDownPressed": "NONE",
                 "LeftStickButtonPressed": "NONE",
                 "RightStickButtonPressed": "NONE",
                 "AButtonPressed": "SubWooferSetpoint",
@@ -517,7 +517,7 @@
 
             "XBOXManualShift":
             {
-                "D-padLeft": "NONE",
+                "D-padLeft": "XBOXSemiAuto",
                 "D-padRight": "NONE",
                 "D-padUp": "NONE",
                 "D-padDown": "NONE",

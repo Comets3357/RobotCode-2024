@@ -42,7 +42,7 @@
   "StartShoot"
   ],
   [
-    "wait 0.2",
+    "wait 0.25",
     "StartShoot"
   ],
   "Shoot",

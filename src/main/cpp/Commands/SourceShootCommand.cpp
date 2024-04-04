@@ -1,9 +1,9 @@
 #include "Commands/SourceShootCommand.h"
 
-SourceShootCommand::SourceShootCommand(ShooterSubsystem *shooter, IndexerSubsystem* indexer, COMETS3357::SwerveSubsystem* swerveSubsystem){//, IntakeSubsystem* intake) {
+SourceShootCommand::SourceShootCommand(ShooterSubsystem *shooter, IndexerSubsystem* indexer, COMETS3357::SwerveSubsystem* swerveSubsystem, IntakeSubsystem* intake) {
     shooterSubsystem = shooter;
     indexerSubsystem = indexer; 
-    // intakeSubsystem = intake;
+    intakeSubsystem = intake;
     swerve = swerveSubsystem; 
     AddRequirements({shooter}); 
     SetName("Shoot Command");
@@ -42,15 +42,17 @@ void SourceShootCommand::Initialize()
 
 void SourceShootCommand::Execute()
 {
-    // intakeSubsystem->SetPercent("IntakeSpeed");
-    // if (indexerSubsystem->IsDetected())
-    // {
-    //     indexerSubsystem->SetPercent(0.4); 
-    // }
-    // else
-    // {
-    //     indexerSubsystem->SetPercent(0); 
-    // }
+    intakeSubsystem->SetPercent("IntakeSpeed");
+    if (indexerSubsystem->IsDetected())
+    {
+        indexerSubsystem->SetPercent(0.4); 
+        indexerAlreadySet = false;
+    }
+    else if (!indexerAlreadySet)
+    {
+        indexerSubsystem->SetPercent(0); 
+        indexerAlreadySet = true;
+    }
     frc::Pose2d pos = swerve->GetPose();
     //frc::Translation2d targetPos = frc::Translation2d{units::meter_t{8.5}, units::meter_t{8.25}};
 
