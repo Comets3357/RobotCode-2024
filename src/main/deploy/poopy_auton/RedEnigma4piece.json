@@ -1,0 +1,147 @@
+[
+  
+  {
+    "x": 15.23,
+    "y": 6.47,
+    "rotation": 180,
+    "maxVelocity": 0.5,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  
+  [
+  {
+    "x": 14.3,
+    "y": 6.75,
+    "rotation": 151.60,
+    "maxVelocity": 0.5,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot"
+  ],
+  "wait 0.2",
+  "Shoot",
+  "wait 0.1",
+  "Intake",
+  [
+  {
+    "x": 13.75,
+    "y": 6.95,
+    "rotation": 151.60,
+    "maxVelocity": 0.5,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot"
+  ],
+  [
+    "wait 0.2",
+    "StartShoot"
+  ],
+  "Shoot",
+  [
+  "wait 0.1",
+  "StartShoot"
+  ],
+  [
+  {
+    "x": 8.1,
+    "y": 7.48,
+    "rotation": 180,
+    "maxVelocity": 1,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot",
+  "IntakeIndexer"
+],
+"6PieceSetpoint",
+[
+  
+  {
+    "x": 11.5,
+    "y": 6.71,
+    "rotation": 166.88,
+    "maxVelocity": 1,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot",
+  "IntakeIndexer"
+
+],
+[
+  "wait 0.1",
+  "StartShoot",
+  "IntakeIndexer"
+],
+"Shoot",
+[
+  "wait 0.2",
+  "StartShoot"
+],
+[
+  
+  {
+    "x": 8.1,
+    "y": 5.45,
+    "rotation": 180,
+    "maxVelocity": 1,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot",
+  "IntakeIndexer"
+
+],
+[
+  
+  {
+    "x": 13.66,
+    "y": 7,
+    "rotation": 159,
+    "maxVelocity": 1,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  },
+  "StartShoot",
+  "IntakeIndexer"
+
+],
+[
+"wait 0.1",
+"StartShoot",
+"IntakeIndexer"
+],
+"Shoot",
+[
+  "wait 0.2",
+  "StartShoot"
+],
+  {
+    "x": 8.1,
+    "y": 6,
+    "rotation": 180,
+    "maxVelocity": 1,
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
+  }
+  
+  ]

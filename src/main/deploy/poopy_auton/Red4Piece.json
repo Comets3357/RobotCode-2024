@@ -4,7 +4,10 @@
       "y": 6.47,
       "rotation": 180,
       "maxVelocity": 0.5,
-      "maxRotation": 0.5
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
     },
     "4PieceSetpoint3",
     {
@@ -12,14 +15,20 @@
       "y": 6.47,
       "rotation": 151.60,
       "maxVelocity": 0.5,
-      "maxRotation": 0.5
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
     },
     {
       "x": 14.3,
       "y": 6.75,
       "rotation": 151.60,
       "maxVelocity": 0.5,
-      "maxRotation": 0.5
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
     },
     "wait 0.2",
     "Shoot",
@@ -31,7 +40,10 @@
       "y": 6.75,
       "rotation": 151.60,
       "maxVelocity": 0.5,
-      "maxRotation": 0.5
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
     },
     
     "wait 0.5",
@@ -46,7 +58,10 @@
       "y": 5,
       "rotation": -150,
       "maxVelocity": 0.5,
-      "maxRotation": 0.5
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
     },
     "IntakeIndexer"
   ],
@@ -56,7 +71,10 @@
       "y": 5,
       "rotation": -170,
       "maxVelocity": 0.5,
-      "maxRotation": 0.5
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
     },
   
     "Shoot",
@@ -68,14 +86,20 @@
     "y": 4.2,
     "rotation": -165,
     "maxVelocity": 0.5,
-    "maxRotation": 0.5
+    "maxRotation": 0.5,
+    "avoid": 0,
+    "TurnSpeaker": 0,
+    "EndVelocity": 0
     },
     {
       "x": 13.9,
       "y": 4,
       "rotation": -155,
       "maxVelocity": 0.5,
-      "maxRotation": 0.5
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
     },
     "Shoot",
     "wait 1",
@@ -86,7 +110,10 @@
       "y": 2.5,
       "rotation": -155,
       "maxVelocity": 1,
-      "maxRotation": 0.5
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
     },
     "Intake",
     {
@@ -94,7 +121,10 @@
       "y": 2.5,
       "rotation": 180,
       "maxVelocity": 0.5,
-      "maxRotation": 0.5
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
     },
     [
     {
@@ -102,7 +132,10 @@
       "y": 3.7,
       "rotation": 180,
       "maxVelocity": 10.5,
-      "maxRotation": 0.5
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
     },
     "IntakeIndexer"
   ],
@@ -114,7 +147,10 @@
       "y": 4.05,
       "rotation": 180,
       "maxVelocity": 0.5,
-      "maxRotation": 0.5
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
     }
   ],
   "4PieceSetpoint42",
@@ -125,7 +161,10 @@
       "y": 4.05,
       "rotation": -170,
       "maxVelocity": 0.5,
-      "maxRotation": 0.5
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
     }
   ],
   "Shoot",

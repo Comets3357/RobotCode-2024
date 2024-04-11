@@ -35,7 +35,8 @@
       "/SmartDashboard/Fielsd": "Field2d",
       "/SmartDashboard/Fielsd2 real": "Field2d",
       "/SmartDashboard/MovementPose": "Field2d",
-      "/SmartDashboard/Robot Position": "Field2d"
+      "/SmartDashboard/Robot Position": "Field2d",
+      "/SmartDashboard/Swerve Subsystem": "Scheduler"
     }
   },
   "NetworkTables": {

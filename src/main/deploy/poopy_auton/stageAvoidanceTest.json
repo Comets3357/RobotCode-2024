@@ -1,0 +1,22 @@
+[
+    {
+        "x": 16,
+        "y": 4,
+        "rotation": 180,
+        "maxVelocity": 0.75,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      },
+      {
+        "x": 8.32,
+        "y": 4,
+        "rotation": 180,
+        "maxVelocity": 0.75,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      }
+]

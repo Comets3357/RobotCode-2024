@@ -10,7 +10,7 @@ void IndexerSubsystem::Initialize()
 }
 
 void IndexerSubsystem::Periodic() {
-    frc::SmartDashboard::PutBoolean("ISDETECTED", IsDetected());
+    frc::SmartDashboard::PutBoolean("ISDETECTED", !IsDetected());
 }
 
 void IndexerSubsystem::SetPercent(double percent)

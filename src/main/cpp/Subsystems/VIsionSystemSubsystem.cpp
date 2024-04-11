@@ -5,6 +5,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include <hal/HAL.h>
 
 
 VisionSystemSubsystem::VisionSystemSubsystem(COMETS3357::SwerveSubsystem* swerve, COMETS3357::GyroSubsystem* gyro) : COMETS3357::Subsystem("VisionSubsystem"), gyroSubsystem{gyro}, swerveSubsystem{swerve}//, poseEstimator{&swerve->m_odometry}
@@ -18,7 +19,7 @@ void VisionSystemSubsystem::Initialize()
     
     // prepare subscribers
     tagSub = subsystemData->GetDoubleArrayTopic("TagData").Subscribe({});
-    frameSub = subsystemData->GetDoubleTopic("Frame").Subscribe({});
+    frameSub = subsystemData->GetDoubleTopic("Frame").Subscribe(0);
 
     swerveSubsystem->ResetOdometry(frc::Pose2d{frc::Translation2d{units::meter_t{0}, units::meter_t{0}}, frc::Rotation2d{units::radian_t{0}}});
 }
@@ -33,15 +34,21 @@ void VisionSystemSubsystem::Periodic()
     // populate gyro history
     yawInterpolationBuffer.AddSample(wpi::math::MathSharedStore::GetTimestamp(), (-gyroSubsystem->m_navx.GetYaw() * 3.14159 / 180.0) + ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) + gyroSubsystem->angleOffset);
     rateInterpolationBuffer.AddSample(wpi::math::MathSharedStore::GetTimestamp(), gyroSubsystem->m_navx.GetRate());
+
+        frc::SmartDashboard::PutNumber("Timestamp", (double)frc::Timer::GetFPGATimestamp());
+    frc::SmartDashboard::PutNumber("Gyro Time", (double)gyroSubsystem->m_navx.GetLastSensorTimestamp());
     
-    std::vector<double> tagDataBuffer = tagSub.GetAtomic().value;
+    frc::SmartDashboard::PutNumber("Timestamp", (double)wpi::math::MathSharedStore::GetTimestamp());
+    frc::SmartDashboard::PutNumber("Gyro Time", (double)gyroSubsystem->m_navx.GetLastSensorTimestamp());
+    
+    
+    std::vector<double> tagDataBuffer = subsystemData->GetDoubleArrayTopic("TagData").Subscribe({}).GetAtomic().value;
 
-
-    if (tagDataBuffer.size() > 1 && tagDataBuffer[3] > lastTimestamp)
+    if (tagDataBuffer.size() > 1 && (int)tagDataBuffer[3] != (int)lastTimestamp)
     {
         lastTimestamp = tagDataBuffer[3];
         
-        uint64_t deltaTime = nt::Now() - tagSub.GetAtomic().time;
+        uint64_t deltaTime = (nt::Now() - tagSub.GetAtomic().time);
 
         
     
@@ -65,17 +72,25 @@ void VisionSystemSubsystem::Periodic()
             int ID = (int)tagDataBuffer[i];
 
             double actualAngleOffset =  (-gyroSubsystem->m_navx.GetYaw() * 3.14159 / 180.0) - angleOffset +((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) + gyroSubsystem->angleOffset;
+            if (!frc::DriverStation::IsAutonomous())
+            {
+                actualAngleOffset = gyroAngle - angleOffset;
+            }
             double x = cos(actualAngleOffset) * tagDistance + tagPositions[ID].first;
             double y = sin(actualAngleOffset) * tagDistance + tagPositions[ID].second;
 
-            double positionStandardDev = (tagDistance * 0.04) + abs(gyroRate * 0.05);
+            double positionStandardDev = (tagDistance * 0.10) + abs(gyroRate * 0.1);
+            if (!frc::DriverStation::IsAutonomous())
+            {
+                positionStandardDev = (tagDistance * 0.20) + abs(gyroRate * 0.2);
+            }
             swerveSubsystem->m_odometry.SetVisionMeasurementStdDevs({positionStandardDev, positionStandardDev, positionStandardDev/2});
 
-            double cameraX = -0.2398776 * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
-            double cameraY = -0.257429 * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
+            double cameraX = -0.2398776;// * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
+            double cameraY = -0.257429;// * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
             double cameraDistance = sqrt(pow(cameraX, 2) + pow(cameraY, 2));
             double angle = atan2(cameraX, cameraY);
-            double newAngle = angle + 3.14159;
+            double newAngle = angle + (-gyroSubsystem->m_navx.GetYaw() * 3.14159 / 180.0) + ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) + gyroSubsystem->angleOffset;//((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.141592653589 : 0) + ;
 
             
 
@@ -90,27 +105,40 @@ void VisionSystemSubsystem::Periodic()
 
             //frc::SmartDashboard::PutNumber("GyroError", (gyroAngle - realOffset));
 
-
-            // if (abs(gyroRate) < 0.3)
-            if ((double)newPos.X() > 0 && (double)newPos.X() < 17 && (double)newPos.Y() > 0 && (double)newPos.Y() < 17)
+            if (frc::DriverStation::IsAutonomous())
             {
+            if (abs(gyroRate) < 0.03)
+            {
+            // if ((double)newPos.X() > 0 && (double)newPos.X() < 17 && (double)newPos.Y() > 0 && (double)newPos.Y() < 17)
+            // {
+                frc::SmartDashboard::PutNumber("Time", (double)time);
                 swerveSubsystem->m_odometry.AddVisionMeasurement(frc::Pose2d{newPos, newRotation}, time);
+            // }
+            }
+            }
+            else
+            {
+                frc::SmartDashboard::PutNumber("Time", (double)time);
+                swerveSubsystem->m_odometry.AddVisionMeasurement(frc::Pose2d{newPos, newRotation}, time);
+            // }
             }
             
             // m_field2.SetRobotPose(frc::Pose2d{newPos, newRotation});
+            m_field3.SetRobotPose(frc::Pose2d{newPos, newRotation});
+    frc::SmartDashboard::PutData("VisionPose", &m_field3);
 
-            if (ID == 3)
-            {
-                m_field3.SetRobotPose(frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, newRotation});
-            }
-            else if (ID == 4)
-            {
-                m_field4.SetRobotPose(frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, newRotation});
-            }
-            else if (ID == 5)
-            {
-                m_field5.SetRobotPose(swerveSubsystem->GetMovingPose(0.3));
-            }
+            // if (ID == 3)
+            // {
+            //     m_field3.SetRobotPose(frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, newRotation});
+            // }
+            // else if (ID == 4)
+            // {
+            //     m_field4.SetRobotPose(frc::Pose2d{frc::Translation2d{units::meter_t{x}, units::meter_t{y}}, newRotation});
+            // }
+            // else if (ID == 5)
+            // {
+            //     m_field5.SetRobotPose(swerveSubsystem->GetMovingPose(0.3));
+            // }
         }
         
     }
@@ -128,9 +156,11 @@ void VisionSystemSubsystem::Periodic()
         lastFrame = frameSub.Get();
     }
 
+    frc::SmartDashboard::PutNumber("idk2", frameSub.Get());
 
 
-    // frc::SmartDashboard::PutData("FieldTag3", &m_field3);
+
+
     // frc::SmartDashboard::PutData("FieldTag4", &m_field4);
     // frc::SmartDashboard::PutData("MovementPose", &m_field5);
 

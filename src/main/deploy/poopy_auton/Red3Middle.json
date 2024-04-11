@@ -1,0 +1,138 @@
+[
+    {
+      "x": 15.13,
+      "y": 1.5,
+      "rotation": 180,
+      "maxVelocity": 0.5,
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
+    },
+    [
+      {
+        "x": 13.22,
+        "y": 3.02,
+        "rotation": -139,
+        "maxVelocity": 0.5,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      },
+      "StartShoot"
+    ],
+    [
+    "wait 0.2",
+    "StartShoot"
+    ],
+    "Shoot",
+    [
+      "wait 0.3",
+      "StartShoot"
+    ],
+    {
+      "x": 10.85,
+      "y": 1.79,
+      "rotation": 180,
+      "maxVelocity": 1,
+      "maxRotation": 0.5,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
+    },
+    "Intake",
+    [
+      {
+        "x": 8.0,
+        "y": 2.7,
+        "rotation": 180,
+        "maxVelocity": 1,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      },
+      "IntakeIndexer"
+    ],
+    [
+      {
+        "x": 10.5,
+        "y": 3.91,
+        "rotation": 180,
+        "maxVelocity": 1,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      },
+      "IntakeIndexer",
+      "StartShoot"
+    ],
+    [
+      {
+        "x": 12,
+        "y": 4.65,
+        "rotation": -170,
+        "maxVelocity": 1,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      },
+      "IntakeIndexer",
+      "StartShoot"
+    ],
+    [
+      "wait 0.5",
+      "StartShoot"
+    ],
+    "Shoot",
+    [
+      "wait 0.2",
+      "StartShoot"
+    ],
+    "Intake",
+    [
+      {
+        "x": 8,
+        "y": 4.35,
+        "rotation": -170,
+        "maxVelocity": 1,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      },
+      "IntakeIndexer",
+      "StartShoot"
+    ],
+    [
+      {
+        "x": 12.08,
+        "y": 4.65,
+        "rotation": -170,
+        "maxVelocity": 1,
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      },
+      "IntakeIndexer",
+      "StartShoot"
+    ],
+    [
+      "wait 0.5",
+      "StartShoot"
+    ],
+    "Shoot",
+    [
+      "wait 0.2",
+      "StartShoot"
+    ],
+    "StopIntake",
+    "StopShoot"
+
+
+
+]

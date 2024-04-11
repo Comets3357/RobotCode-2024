@@ -1,0 +1,165 @@
+[
+  {
+  "x": 1.34,
+  "y": 6.47,
+  "rotation": 0,
+  "maxVelocity": 0.5,
+  "maxRotation": 0.5,
+  "avoid": 0,
+  "TurnSpeaker": 0,
+  "EndVelocity": 0
+},
+
+[
+{
+  "x": 2.27,
+  "y": 6.95,
+  "rotation": 28.4,
+  "maxVelocity": 0.5,
+  "maxRotation": 0.5,
+  "avoid": 0,
+  "TurnSpeaker": 0,
+  "EndVelocity": 0
+},
+"StartShoot"
+],
+"wait 0.5",
+"Shoot",
+"wait 0.2",
+"Intake",
+[
+{
+  "x": 2.82,
+  "y": 6.95,
+  "rotation": 28.4,
+  "maxVelocity": 0.5,
+  "maxRotation": 0.5,
+  "avoid": 0,
+  "TurnSpeaker": 0,
+  "EndVelocity": 0
+},
+"StartShoot"
+],
+[
+  "wait 0.2",
+  "StartShoot"
+],
+"Shoot",
+[
+"wait 0.3",
+"StartShoot"
+],
+[
+{
+  "x": 8.7,
+  "y": 7.2,
+  "rotation": 0,
+  "maxVelocity": 1,
+  "maxRotation": 0.75,
+  "avoid": 0,
+  "TurnSpeaker": 0,
+  "EndVelocity": 0
+},
+"StartShoot",
+"IntakeIndexer"
+],[
+
+{
+  "x": 2.91,
+  "y": 6.6,
+  "rotation": 0,
+  "maxVelocity": 1,
+  "maxRotation": 0.5,
+  "avoid": 0,
+  "TurnSpeaker": 0,
+  "EndVelocity": 0
+},
+"StartShoot",
+"IntakeIndexer"
+
+],
+[
+{
+  "x": 1.84,
+  "y": 5.51,
+  "rotation": 0,
+  "maxVelocity": 0.5,
+  "maxRotation": 0.5,
+  "avoid": 0,
+  "TurnSpeaker": 0,
+  "EndVelocity": 0
+},
+"StartShoot",
+"IntakeIndexer"
+],
+[
+"wait 0.2",
+"StartShoot",
+"IntakeIndexer"
+],
+"Shoot",
+[
+"wait 0.5",
+"StartShoot"
+],
+[
+{
+  "x": 3.4,
+  "y": 5.54,
+  "rotation": 0,
+  "maxVelocity": 0.5,
+  "maxRotation": 0.5,
+  "avoid": 0,
+  "TurnSpeaker": 0,
+  "EndVelocity": 0
+},
+"StartShoot",
+"IntakeIndexer"
+],
+[
+"wait 0.3",
+"StartShoot",
+"IntakeIndexer"
+],
+"Shoot",
+[
+"wait 0.5",
+"StartShoot"
+],
+[
+{
+  "x": 2.22,
+  "y": 4.3,
+  "rotation": -25,
+  "maxVelocity": 0.5,
+  "maxRotation": 0.5,
+  "avoid": 0,
+  "TurnSpeaker": 0,
+  "EndVelocity": 0
+},
+"StartShoot",
+"IntakeIndexer"
+],
+[
+{
+  "x": 2.85,
+  "y": 4.0,
+  "rotation": -25,
+  "maxVelocity": 0.5,
+  "maxRotation": 0.5,
+  "avoid": 0,
+  "TurnSpeaker": 0,
+  "EndVelocity": 0
+},
+"StartShoot",
+"IntakeIndexer"
+],
+[
+"wait 0.2",
+"StartShoot",
+"IntakeIndexer"
+],
+"Shoot",
+"StartShoot"
+
+]

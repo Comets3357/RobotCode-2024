@@ -1,13 +1,16 @@
 [
+    "4PieceSourceSetpoint",
     {
         "x": 0,
         "y": 0,
         "rotation": 0,
         "maxVelocity": 0.5,
-        "maxRotation": 0.5
+        "maxRotation": 0.5,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
     },
-    "1PieceAutoSetpoint",
-    "wait 1",
+    "wait 2",
     "Shoot",
     "wait 1",
     "StopShoot"

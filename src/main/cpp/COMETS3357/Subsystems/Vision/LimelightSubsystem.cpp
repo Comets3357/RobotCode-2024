@@ -11,7 +11,7 @@ LimelightSubsystem::LimelightSubsystem() : COMETS3357::Subsystem("LimelightSubsy
 void LimelightSubsystem::Periodic()
 {
     frc::SmartDashboard::PutNumber("LIMELIGHT X", getX());
-    setLEDMode(0);
+ 
 }
 
 double LimelightSubsystem::getX() {

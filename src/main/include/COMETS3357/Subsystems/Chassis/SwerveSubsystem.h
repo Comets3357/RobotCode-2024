@@ -207,6 +207,7 @@ units::radians_per_second_t addingRot{0};
 units::meters_per_second_t addingXSpeed{0};
 units::meters_per_second_t addingYSpeed{0};
 
+    frc::Pose2d GetSampledVisionPose(units::second_t time);
 
   private:
     // Components (e.g. motor controllers and sensors) should generally be
@@ -246,6 +247,9 @@ units::meters_per_second_t addingYSpeed{0};
     frc::Pose2d deltaPose;
     double deltaTime;
 
+    frc::TimeInterpolatableBuffer<double> xInterpolationBuffer{3_s};
+    frc::TimeInterpolatableBuffer<double> yInterpolationBuffer{3_s};
+    frc::TimeInterpolatableBuffer<double> rotationInterpolationBuffer{3_s};
 
     
   };

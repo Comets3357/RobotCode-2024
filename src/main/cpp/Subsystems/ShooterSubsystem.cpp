@@ -28,7 +28,7 @@ void ShooterSubsystem::Periodic(){
     double shooterAngle2 = angleLookup.GetValue(distance2);
     double velocity2 = cos(shooterAngle2 * 3.14159 / 180) * 17; 
 
-    frc::Pose2d robotPosition = swerve->GetPose(); 
+    frc::Pose2d robotPosition = swerve->GetMovingPose(distance2 / velocity2); 
 
 
         units::meter_t deltaX = robotPosition.X() - targetPos.X();
@@ -36,13 +36,10 @@ void ShooterSubsystem::Periodic(){
 
         double angle = atan2((double)deltaY, (double)deltaX);
         
-        turnToPID.SetP(0.65);
-        swerve->overrideRotation = units::radians_per_second_t{std::clamp(turnToPID.Calculate((-gyro->m_navx.GetAngle() * 3.14159 / 180) + gyro->angleOffset + ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) , angle), -1.0, 1.0)};//rotationPLookup.GetValue(0);
+        turnToPID.SetP(0.8);
+        swerve->overrideRotation = units::radians_per_second_t{std::clamp(turnToPID.Calculate((-gyro->m_navx.GetAngle() * 3.14159 / 180) + gyro->angleOffset + ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) , angle), -0.4, 0.4)};//rotationPLookup.GetValue(0);
 
-        if (frc::DriverStation::IsAutonomous())
-        {
-            swerve->DriveXRotate(units::meters_per_second_t{0}, units::meters_per_second_t{0}, units::angular_velocity::radians_per_second_t{0});
-        }
+  
     }
 }
 
@@ -140,6 +137,43 @@ void ShooterSubsystem::startTurnToTarget()
     turnToPID.EnableContinuousInput(-3.14159 + gyro->angleOffset, 3.14159 + gyro->angleOffset);
     turningTowardsTarget = true;
     swerve->controllingSwerveRotation = false;
+    
+}
+
+void ShooterSubsystem::startTurnPassZone()
+{
+    frc::Pose2d robotPose = swerve->GetPose();
+    xOffset++;
+    if (xOffset > 2) xOffset = 0;
+    if (frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed)
+    {
+  
+        if ((double)robotPose.X() > 5)
+        {
+            targetPos = frc::Translation2d{units::meter_t{14.66}, units::meter_t{6.86}};
+        }
+        else
+        {
+            targetPos = frc::Translation2d{units::meter_t{9}, units::meter_t{7}};
+        }
+        targetPos = frc::Translation2d{units::meter_t{(double)targetPos.X() + (0.4 * xOffset)}, units::meter_t{(double)targetPos.Y()}};
+    }
+    else
+    {
+        if ((double)robotPose.X() < 12)
+        {
+            targetPos = frc::Translation2d{units::meter_t{1.91}, units::meter_t{6.86}};
+        }
+        else
+        {
+            targetPos = frc::Translation2d{units::meter_t{7.61}, units::meter_t{7}};
+        }
+        targetPos = frc::Translation2d{units::meter_t{(double)targetPos.X() - (0.4 * xOffset)}, units::meter_t{(double)targetPos.Y()}};
+    }
+    turnToPID.EnableContinuousInput(-3.14159 + gyro->angleOffset, 3.14159 + gyro->angleOffset);
+    turningTowardsTarget = true;
+    swerve->controllingSwerveRotation = false;
+    
 }
 
 void ShooterSubsystem::stopTurnToTarget()

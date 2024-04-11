@@ -16,7 +16,7 @@ void ClimbCommand::Execute()
 {
     if (shooterSubsystem->Pivot.GetPosition() > 75)
     {
-        elevatorSubsystem->SetPosition(-120);
+        elevatorSubsystem->SetPosition(-135);
     }
 }
 
@@ -24,7 +24,7 @@ bool ClimbCommand::IsFinished()
 {
     if (shooterSubsystem->Pivot.GetPosition() > 75)
     {
-        elevatorSubsystem->SetPosition(-120);
+        elevatorSubsystem->SetPosition(-135);
         return true;
     }
     return false;

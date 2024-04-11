@@ -18,6 +18,7 @@ SetPointCommand::SetPointCommand(ShooterSubsystem *shooter, IndexerSubsystem* in
     speed = shooterSpeed;
     useSpeed = true;
     AddRequirements({shooter}); 
+    SetName("SetPointCommand");
 }
 
 
