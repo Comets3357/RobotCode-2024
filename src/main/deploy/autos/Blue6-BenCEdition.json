@@ -69,7 +69,7 @@
   {
     "x": 5.07,
     "y": 6.68,
-    "rotation": 13.12,
+    "rotation": 11.12,
     "maxVelocity": 1,
     "maxRotation": 0.5,
     "avoid": 0,
@@ -137,8 +137,8 @@
     "x": 3.07,
     "y": 5.5,
     "rotation": 270,
-    "maxVelocity": 0.47,
-    "maxRotation": 0.5,
+    "maxVelocity": 0.5,
+    "maxRotation": 0.45,
     "avoid": 0,
     "TurnSpeaker": 0,
     "EndVelocity": 0

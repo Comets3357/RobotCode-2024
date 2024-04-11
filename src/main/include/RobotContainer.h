@@ -375,8 +375,8 @@ class RobotContainer {
   frc2::InstantCommand piece4SourceAutoSetPoint{[this](){shooter.SetPositionPivot(36), shooter.SetVelocityKickerWheel(2500); shooter.SetVelocityFlyWheel(-2500);}, {}};
   frc2::InstantCommand piece6AutoSetpoint{[this](){shooter.SetPositionPivot(29), shooter.SetVelocityKickerWheel(3000); shooter.SetVelocityFlyWheel(-3000);}, {}};
   frc2::InstantCommand piece4SourceAutoSetpoint{[this](){shooter.SetPositionPivot(22), shooter.SetVelocityKickerWheel(3500); shooter.SetVelocityFlyWheel(-3500);}, {}};
-  frc2::InstantCommand piece4SourceAutoSetpoint2{[this](){shooter.SetPositionPivot(22.8), shooter.SetVelocityKickerWheel(3000); shooter.SetVelocityFlyWheel(-3000);}, {}};
-  frc2::InstantCommand piece4SourceAutoSetpoint3{[this](){shooter.SetPositionPivot(28), shooter.SetVelocityKickerWheel(3000); shooter.SetVelocityFlyWheel(-3000);}, {}};
+  frc2::InstantCommand piece4SourceAutoSetpoint2{[this](){shooter.SetPositionPivot(22.35), shooter.SetVelocityKickerWheel(3000); shooter.SetVelocityFlyWheel(-3000);}, {}};
+  frc2::InstantCommand piece4SourceAutoSetpoint3{[this](){shooter.SetPositionPivot(28.3), shooter.SetVelocityKickerWheel(3000); shooter.SetVelocityFlyWheel(-3000);}, {}};
 
 
 

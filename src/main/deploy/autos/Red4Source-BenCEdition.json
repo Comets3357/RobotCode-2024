@@ -15,7 +15,7 @@
   {
     "x": 12,
     "y": 0.8,
-    "rotation": 223.66,
+    "rotation": 225.66,
     "maxVelocity": 0.7,
     "maxRotation": 0.5,
     "avoid": 0,
@@ -24,14 +24,14 @@
   },
   "StartShoot"
   ],
-  "wait 0.3",
+  "wait 0.2",
   "Shoot",
-  "wait 0.1",
+  "wait 0.2",
   "Intake",
   [
   {
     "x": 7.6,
-    "y": 0.7,
+    "y": 0.5,
     "rotation": 200,
     "maxVelocity": 1,
     "maxRotation": 0.5,
@@ -73,7 +73,7 @@
   
   {
     "x": 7.7,
-    "y": 2.82,
+    "y": 2.92,
     "rotation": 180,
     "maxVelocity": 1,
     "maxRotation": 0.5,

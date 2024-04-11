@@ -72,10 +72,18 @@ void VisionSystemSubsystem::Periodic()
             int ID = (int)tagDataBuffer[i];
 
             double actualAngleOffset =  (-gyroSubsystem->m_navx.GetYaw() * 3.14159 / 180.0) - angleOffset +((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) + gyroSubsystem->angleOffset;
+            if (!frc::DriverStation::IsAutonomous())
+            {
+                actualAngleOffset = gyroAngle - angleOffset;
+            }
             double x = cos(actualAngleOffset) * tagDistance + tagPositions[ID].first;
             double y = sin(actualAngleOffset) * tagDistance + tagPositions[ID].second;
 
             double positionStandardDev = (tagDistance * 0.10) + abs(gyroRate * 0.1);
+            if (!frc::DriverStation::IsAutonomous())
+            {
+                positionStandardDev = (tagDistance * 0.20) + abs(gyroRate * 0.2);
+            }
             swerveSubsystem->m_odometry.SetVisionMeasurementStdDevs({positionStandardDev, positionStandardDev, positionStandardDev/2});
 
             double cameraX = -0.2398776;// * ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 1 : -1);
@@ -97,11 +105,19 @@ void VisionSystemSubsystem::Periodic()
 
             //frc::SmartDashboard::PutNumber("GyroError", (gyroAngle - realOffset));
 
-
+            if (frc::DriverStation::IsAutonomous())
+            {
             if (abs(gyroRate) < 0.03)
             {
             // if ((double)newPos.X() > 0 && (double)newPos.X() < 17 && (double)newPos.Y() > 0 && (double)newPos.Y() < 17)
             // {
+                frc::SmartDashboard::PutNumber("Time", (double)time);
+                swerveSubsystem->m_odometry.AddVisionMeasurement(frc::Pose2d{newPos, newRotation}, time);
+            // }
+            }
+            }
+            else
+            {
                 frc::SmartDashboard::PutNumber("Time", (double)time);
                 swerveSubsystem->m_odometry.AddVisionMeasurement(frc::Pose2d{newPos, newRotation}, time);
             // }
