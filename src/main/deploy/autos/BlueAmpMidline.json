@@ -1,9 +1,9 @@
 [
   
     {
-      "x": 15.1,
+      "x": 1.47,
       "y": 6.93,
-      "rotation": 0,
+      "rotation": 180,
       "maxVelocity": 1,
       "maxRotation": 0.5,
       "avoid": 0,
@@ -11,9 +11,9 @@
       "EndVelocity": 0
     },
     {
-      "x": 10.75,
+      "x": 5.82,
       "y": 6.93,
-      "rotation": 0,
+      "rotation": 180,
       "maxVelocity": 1,
       "maxRotation": 0.5,
       "avoid": 0,
@@ -22,9 +22,9 @@
     },
     [
       {
-        "x": 8.31,
+        "x": 8.26,
         "y": 7.42,
-        "rotation": 333.87,
+        "rotation": 26.13,
         "maxVelocity": 1,
         "maxRotation": 0.5,
         "avoid": 0,
@@ -35,9 +35,9 @@
     ],
     [
       {
-        "x": 11.4,
+        "x": 5.17,
         "y": 7.15,
-        "rotation": 349.98,
+        "rotation": 190.02,
         "maxVelocity": 1,
         "maxRotation": 0.5,
         "avoid": 0,
@@ -51,9 +51,9 @@
       "wait 0.1",
     [
       {
-        "x": 8.3,
+        "x": 8.27,
         "y": 5.79,
-        "rotation": 31.91,
+        "rotation": 148.09,
         "maxVelocity": 1,
         "maxRotation": 0.5,
         "avoid": 0,
@@ -64,9 +64,9 @@
     ],
     [
       {
-        "x": 11.4,
+        "x": 5.17,
         "y": 7.15,
-        "rotation": 349.98,
+        "rotation": 20.04,
         "maxVelocity": 1,
         "maxRotation": 0.5,
         "avoid": 0,
@@ -80,9 +80,9 @@
       "wait 0.1",
     [    
       {
-        "x": 8.4,
+        "x": 8.17,
         "y": 4.48,
-        "rotation": 72.26,
+        "rotation": 107.74,
         "maxVelocity": 1,
         "maxRotation": 0.5,
         "avoid": 0,
@@ -93,9 +93,9 @@
     ],
     [
       {
-        "x": 11.4,
+        "x": 5.17,
         "y": 7.15,
-        "rotation": 349.98,
+        "rotation": 190.02,
         "maxVelocity": 1,
         "maxRotation": 0.5,
         "avoid": 0,
@@ -108,9 +108,9 @@
       "Shoot",
       "wait 0.1",
     {
-      "x": 8.74,
+      "x": 7.83,
       "y": 7.36,
-      "rotation": 0,
+      "rotation": 180,
       "maxVelocity": 1,
       "maxRotation": 0.5,
       "avoid": 0,
