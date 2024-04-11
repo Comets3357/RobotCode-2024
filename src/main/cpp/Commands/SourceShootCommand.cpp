@@ -42,6 +42,7 @@ void SourceShootCommand::Initialize()
 
 void SourceShootCommand::Execute()
 {
+    
     intakeSubsystem->SetPercent("IntakeSpeed");
     if (indexerSubsystem->IsDetected())
     {
@@ -66,6 +67,7 @@ void SourceShootCommand::Execute()
 
 bool SourceShootCommand::IsFinished()
 {
+
     return false;
 }
 
