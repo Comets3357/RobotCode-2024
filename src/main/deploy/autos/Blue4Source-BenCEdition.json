@@ -14,7 +14,7 @@
   {
     "x": 4.57,
     "y": 0.7,
-    "rotation": 311.34,
+    "rotation": 314.34,
     "maxVelocity": 0.7,
     "maxRotation": 0.5,
     "avoid": 0,
@@ -47,7 +47,7 @@
   {
     "x": 4.82,
     "y": 1.63,
-    "rotation": 315.42,
+    "rotation": 317.42,
     "maxVelocity": 1,
     "maxRotation": 0.5,
     "avoid": 0,
@@ -90,7 +90,7 @@
   {
     "x": 4.48,
     "y": 4.8,
-    "rotation": 355,
+    "rotation": 352,
     "maxVelocity": 1,
     "maxRotation": 0.5,
     "avoid": 0,

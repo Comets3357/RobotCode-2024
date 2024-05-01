@@ -37,7 +37,7 @@ void ShooterSubsystem::Periodic(){
         double angle = atan2((double)deltaY, (double)deltaX);
         
         turnToPID.SetP(0.8);
-        swerve->overrideRotation = units::radians_per_second_t{std::clamp(turnToPID.Calculate((-gyro->m_navx.GetAngle() * 3.14159 / 180) + gyro->angleOffset + ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) , angle), -0.4, 0.4)};//rotationPLookup.GetValue(0);
+        swerve->overrideRotation = units::radians_per_second_t{std::clamp(turnToPID.Calculate((-gyro->m_navx.GetAngle() * 3.14159 / 180) + gyro->angleOffset + ((frc::DriverStation::GetAlliance() == frc::DriverStation::Alliance::kRed) ? 3.14159 : 0) , angle), -0.6, 0.6)};//rotationPLookup.GetValue(0);
 
   
     }
