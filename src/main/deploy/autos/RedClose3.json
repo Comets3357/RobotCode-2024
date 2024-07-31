@@ -1,0 +1,102 @@
+[
+  
+    {
+      "x": 15.24,
+      "y": 5.56,
+      "rotation": 180,
+      "maxVelocity": 0.3,
+      "maxRotation": 0.3,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
+    },
+    "Intake",
+    [
+    "StartShoot",
+    "wait 1.5"
+    ],
+    "Shoot",
+    "wait 0.5",
+    "StopShoot",
+    {
+      "x": 13.67,
+      "y": 4.35,
+      "rotation": 209,
+      "maxVelocity": 0.3,
+      "maxRotation": 0.3,
+      "avoid": 0,
+      "TurnSpeaker": 0,
+      "EndVelocity": 0
+    },
+    [
+    {
+        "x": 15.24,
+        "y": 5.56,
+        "rotation": 180,
+        "maxVelocity": 0.3,
+        "maxRotation": 0.3,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      },
+      "StartShoot"
+    ],
+      "wait 0.5",
+      "Shoot",
+      "wait 1",
+      {
+        "x": 13.78,
+        "y": 5.54,
+        "rotation": 180,
+        "maxVelocity": 0.3,
+        "maxRotation": 0.3,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      },
+      [
+      {
+        "x": 15.24,
+        "y": 5.56,
+        "rotation": 180,
+        "maxVelocity": 0.3,
+        "maxRotation": 0.3,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      },
+      "StartShoot"
+      ],
+      "wait 0.5",
+      "Shoot",
+      "wait 1",
+      "StopShoot",
+      {
+        "x": 13.95,
+        "y": 6.81,
+        "rotation": 144.78,
+        "maxVelocity": 0.3,
+        "maxRotation": 0.3,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      },
+      [
+      {
+        "x": 15.24,
+        "y": 5.56,
+        "rotation": 180,
+        "maxVelocity": 0.3,
+        "maxRotation": 0.3,
+        "avoid": 0,
+        "TurnSpeaker": 0,
+        "EndVelocity": 0
+      },
+      "StartShoot"
+    ],
+      "wait 0.5",
+      "Shoot",
+      "wait 1",
+      "StopShoot"
+
+    ]
