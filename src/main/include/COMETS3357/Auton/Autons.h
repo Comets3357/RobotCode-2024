@@ -5,8 +5,8 @@
 #include <frc/trajectory/TrajectoryUtil.h>
 #include "COMETS3357/Subsystems/Chassis/SwerveSubsystem.h"
 #include <frc2/command/WaitCommand.h>
-#include "COMETS3357/pathplanner/lib/auto/AutoBuilder.h"
-#include "COMETS3357/pathplanner/lib/util/PathPlannerLogging.h"
+//#include "COMETS3357/pathplanner/lib/auto/AutoBuilder.h"
+//#include "COMETS3357/pathplanner/lib/util/PathPlannerLogging.h"
 #include <map>
 #include <string>
 #include <vector>
@@ -64,7 +64,7 @@ namespace COMETS3357
         std::map<std::string, std::unique_ptr< frc2::CommandPtr>> autons;
         COMETS3357::SwerveSubsystem* swerveSubsystem;
         frc::SendableChooser<std::string> autoChooser;
-        pathplanner::AutoBuilder autoBuilder;
+        // pathplanner::AutoBuilder autoBuilder;
 
     };
 
